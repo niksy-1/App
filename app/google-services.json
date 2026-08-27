@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "24022442368",
+    "project_id": "widget-33ff3",
+    "storage_bucket": "widget-33ff3.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:24022442368:android:47a3ea711ca671edab2165",
+        "android_client_info": {
+          "package_name": "com.nikhil.app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCSkJD2qRwA7Zd27gmE7ywM4GbtbJwCkgM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
