@@ -26,6 +26,8 @@ class RadarController {
                 .await()
             Log.d("RadarController", "Ping sent successfully via Cloud Function.")
             true
+        } catch (e: kotlinx.coroutines.CancellationException) {
+            throw e
         } catch (e: Exception) {
             Log.e("RadarController", "Failed to trigger Cloud Function", e)
             false
@@ -49,8 +51,36 @@ class RadarController {
             }
     }
 
+    // 1b. Send a "Remind to Charge" nudge via Cloud Function (sendTargetNotification)
+    suspend fun sendBatteryReminder(targetToken: String, message: String): Boolean {
+        val data = hashMapOf(
+            "targetToken" to targetToken,
+            "action" to "REMIND_CHARGE",
+            "message" to message
+        )
+        return try {
+            Log.d("RadarController", "Calling sendTargetNotification Cloud Function for: $targetToken")
+            functions
+                .getHttpsCallable("sendTargetNotification")
+                .call(data)
+                .await()
+            Log.d("RadarController", "Reminder sent successfully via Cloud Function.")
+            true
+        } catch (e: kotlinx.coroutines.CancellationException) {
+            throw e
+        } catch (e: Exception) {
+            Log.e("RadarController", "Failed to trigger sendTargetNotification Cloud Function", e)
+            false
+        }
+    }
+
     // 2. Start Real-Time Firestore Listener (Flow version)
-    fun observeTargetLocation(targetToken: String): Flow<TargetLocation?> = callbackFlow {
+    // minTimestamp: when set (e.g. to the moment a ping was sent), snapshots whose
+    // "timestamp" field predates it are ignored client-side. This is what prevents
+    // a stale cached/local document from satisfying a caller's `.first()` before the
+    // freshly-uploaded location has actually arrived.
+    fun observeTargetLocation(targetToken: String, minTimestamp: Long = 0L): Flow<TargetLocation?> = callbackFlow {
+        Log.d("RadarController", "Registering Firestore listener for locations/$targetToken (minTimestamp=$minTimestamp) at ${System.currentTimeMillis()}")
         val registration = db.collection("locations")
             .document(targetToken)
             .addSnapshotListener { snapshot, error ->
@@ -68,11 +98,19 @@ class RadarController {
                     val batteryPercent = snapshot.getLong("batteryPercent")?.toInt() ?: -1
                     val isCharging = snapshot.getBoolean("isCharging") ?: false
 
-                    Log.d("RadarController", "Target updated: Lat=$lat, Lng=$lng, Battery=$batteryPercent%")
+                    if (timestamp < minTimestamp) {
+                        Log.d("RadarController", "Ignoring stale snapshot (ts=$timestamp < minTimestamp=$minTimestamp, diff=${minTimestamp - timestamp}ms)")
+                        return@addSnapshotListener
+                    }
+
+                    Log.d("RadarController", "Target updated at ${System.currentTimeMillis()} (doc ts=$timestamp): Lat=$lat, Lng=$lng, Battery=$batteryPercent%")
                     trySend(TargetLocation(lat, lng, accuracy, timestamp, batteryPercent, isCharging))
                 }
             }
-        awaitClose { registration.remove() }
+        awaitClose {
+            Log.d("RadarController", "Removing Firestore listener for locations/$targetToken")
+            registration.remove()
+        }
     }
 
     data class TargetLocation(

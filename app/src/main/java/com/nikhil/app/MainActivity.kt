@@ -32,7 +32,9 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.core.content.ContextCompat
 import androidx.glance.appwidget.updateAll
 import com.google.android.gms.location.LocationServices
@@ -53,10 +55,10 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-        
+
         // Ensure periodic sync is scheduled
         RefreshWorker.schedulePeriodicSync(this)
-        
+
         setContent {
             RadarTheme {
                 LocationPermissionWrapper {
@@ -118,10 +120,10 @@ fun MainNavigationWrapper() {
                 setToolbarColor(android.graphics.Color.BLACK)
                 setToolbarWidgetColor(android.graphics.Color.WHITE)
                 setToolbarTitle("Crop for Widget")
-                setActiveControlsWidgetColor(0xFFDB2777.toInt())
+                setActiveControlsWidgetColor(0xFFC97B8C.toInt())
                 setRootViewBackgroundColor(android.graphics.Color.BLACK)
             }
-            
+
             cropImageLauncher.launch(
                 UCrop.of(sourceUri, destinationUri)
                     .withAspectRatio(2f, 1f)
@@ -180,9 +182,9 @@ fun MainNavigationWrapper() {
                     }
                     Spacer(modifier = Modifier.height(16.dp))
                     HorizontalDivider()
-                    
+
                     Text("Widget Background", style = MaterialTheme.typography.titleMedium)
-                    
+
                     Row(
                         modifier = Modifier.fillMaxWidth(),
                         verticalAlignment = Alignment.CenterVertically,
@@ -191,7 +193,7 @@ fun MainNavigationWrapper() {
                         Text("Use Image Background", style = MaterialTheme.typography.bodyMedium)
                         Switch(
                             checked = useBgImage,
-                            onCheckedChange = { 
+                            onCheckedChange = {
                                 useBgImage = it
                                 sharedPrefs.edit().putBoolean("use_bg_image", it).apply()
                                 scope.launch { RadarWidget().updateAll(context) }
@@ -208,8 +210,8 @@ fun MainNavigationWrapper() {
                             Text("Change Background Image")
                         }
                     } else {
-                        var hexInput by remember { 
-                            val currentBg = sharedPrefs.getInt("widget_bg_color", 0xFFFCE7F3.toInt())
+                        var hexInput by remember {
+                            val currentBg = sharedPrefs.getInt("widget_bg_color", 0xFF180F16.toInt())
                             mutableStateOf("%06X".format(0xFFFFFF and currentBg))
                         }
 
@@ -218,32 +220,32 @@ fun MainNavigationWrapper() {
                             onValueChange = { input ->
                                 val filtered = input.filter { it.isDigit() || it.uppercaseChar() in 'A'..'F' }.take(6)
                                 hexInput = filtered
-                                    if (filtered.length == 6) {
-                                        try {
-                                            val colorInt = android.graphics.Color.parseColor("#$filtered")
-                                            sharedPrefs.edit()
-                                                .putInt("widget_bg_color", colorInt)
-                                                .putBoolean("use_bg_image", false)
-                                                .apply()
-                                            useBgImage = false
-                                            scope.launch { RadarWidget().updateAll(context) }
-                                        } catch (e: Exception) {
-                                            Log.e("MainActivity", "Invalid hex color", e)
-                                        }
+                                if (filtered.length == 6) {
+                                    try {
+                                        val colorInt = android.graphics.Color.parseColor("#$filtered")
+                                        sharedPrefs.edit()
+                                            .putInt("widget_bg_color", colorInt)
+                                            .putBoolean("use_bg_image", false)
+                                            .apply()
+                                        useBgImage = false
+                                        scope.launch { RadarWidget().updateAll(context) }
+                                    } catch (e: Exception) {
+                                        Log.e("MainActivity", "Invalid hex color", e)
                                     }
+                                }
                             },
                             label = { Text("Background Hex (#)") },
-                            placeholder = { Text("FCE7F3") },
+                            placeholder = { Text("180F16") },
                             modifier = Modifier.fillMaxWidth(),
                             singleLine = true,
                             prefix = { Text("#") }
                         )
 
                         val colors = listOf(
-                            Color(0xFFFCE7F3) to "Light Pink",
-                            Color(0xFFF472B6) to "Deep Pink",
-                            Color(0xFF1E293B) to "Dark Slate",
-                            Color(0xFFFFFFFF) to "Classic"
+                            Color(0xFF180F16) to "Plum Black",
+                            Color(0xFF3D1F2B) to "Wine",
+                            Color(0xFF362A42) to "Lavender Dusk",
+                            Color(0xFFF5EDE6) to "Parchment"
                         )
                         Row(
                             modifier = Modifier.fillMaxWidth(),
@@ -268,15 +270,6 @@ fun MainNavigationWrapper() {
                                 )
                             }
                         }
-                    }
-                    
-                    Spacer(modifier = Modifier.height(16.dp))
-                    Button(
-                        onClick = { scope.launch { RadarWidget().updateAll(context) } },
-                        modifier = Modifier.fillMaxWidth(),
-                        colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.tertiary)
-                    ) {
-                        Text("Force Update Widget")
                     }
                 }
             }
@@ -329,6 +322,24 @@ fun LocationPermissionWrapper(content: @Composable () -> Unit) {
     val launcher = rememberLauncherForActivityResult(contract = ActivityResultContracts.RequestMultiplePermissions()) { permissions ->
         hasPermission = permissions[Manifest.permission.ACCESS_FINE_LOCATION] == true
     }
+
+    // POST_NOTIFICATIONS is a separate runtime permission on API 33+, needed for the
+    // "Remind to Charge" heads-up alert to actually display on the receiving device.
+    // It's independent of location, so request it opportunistically without gating
+    // the rest of the UI on it — a denial here shouldn't block using the radar.
+    val notificationLauncher = rememberLauncherForActivityResult(
+        contract = ActivityResultContracts.RequestPermission()
+    ) { /* no-op: RadarMessagingService checks the permission again before posting */ }
+
+    LaunchedEffect(Unit) {
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.TIRAMISU &&
+            ContextCompat.checkSelfPermission(context, Manifest.permission.POST_NOTIFICATIONS)
+            != PackageManager.PERMISSION_GRANTED
+        ) {
+            notificationLauncher.launch(Manifest.permission.POST_NOTIFICATIONS)
+        }
+    }
+
     if (hasPermission) {
         content()
     } else {
@@ -356,6 +367,7 @@ fun PairingScreen(modifier: Modifier = Modifier, partnerToken: String) {
     var lastPingTime by remember { mutableStateOf("") }
     var targetLocation by remember { mutableStateOf<Pair<Double, Double>?>(null) }
     var relativeAngle by remember { mutableFloatStateOf(0f) }
+    var reminderStatus by remember { mutableStateOf("") }
 
     DisposableEffect(Unit) { onDispose { radarController.stopListening() } }
 
@@ -398,6 +410,29 @@ fun PairingScreen(modifier: Modifier = Modifier, partnerToken: String) {
         if (batteryStatus.isNotEmpty()) {
             Text(text = batteryStatus, style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
         }
+        Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+            TextButton(
+                onClick = {
+                    if (partnerToken.isEmpty()) {
+                        reminderStatus = "Error: Set a Target ID first."
+                        return@TextButton
+                    }
+                    reminderStatus = "Sending..."
+                    scope.launch {
+                        val sent = radarController.sendBatteryReminder(
+                            partnerToken,
+                            "Your partner asked you to plug in your phone."
+                        )
+                        reminderStatus = if (sent) "Reminder sent." else "Failed to send reminder."
+                    }
+                }
+            ) {
+                Text("Remind ⚡")
+            }
+            if (reminderStatus.isNotEmpty()) {
+                Text(text = reminderStatus, style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.7f))
+            }
+        }
         if (lastPingTime.isNotEmpty()) {
             Text(text = lastPingTime, style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.7f))
         }
@@ -420,15 +455,25 @@ fun PairingScreen(modifier: Modifier = Modifier, partnerToken: String) {
                     }
                 },
                 modifier = Modifier.weight(1f),
-                colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.error)
-            ) { Text("Ping / Locate") }
-            
-            Button(
-                onClick = { scope.launch { RadarWidget().updateAll(context) } },
-                modifier = Modifier.weight(0.6f),
-                colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.tertiary)
+                contentPadding = PaddingValues(horizontal = 8.dp, vertical = 10.dp),
+                colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.primary, contentColor = MaterialTheme.colorScheme.onPrimary)
             ) {
-                Text("Sync Widget")
+                Text("Ping / Locate", maxLines = 1, overflow = TextOverflow.Ellipsis, fontSize = 13.sp)
+            }
+
+            Button(
+                onClick = {
+                    if (partnerToken.isEmpty()) {
+                        pingStatus = "Error: Open Menu to set Target ID."
+                    } else {
+                        RefreshWorker.enqueue(context)
+                    }
+                },
+                modifier = Modifier.weight(1f),
+                contentPadding = PaddingValues(horizontal = 8.dp, vertical = 10.dp),
+                colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.secondary, contentColor = MaterialTheme.colorScheme.onSecondary)
+            ) {
+                Text("Sync Widget", maxLines = 1, overflow = TextOverflow.Ellipsis, fontSize = 13.sp)
             }
 
             if (targetLocation != null) {
@@ -439,8 +484,12 @@ fun PairingScreen(modifier: Modifier = Modifier, partnerToken: String) {
                         val mapIntent = Intent(Intent.ACTION_VIEW, gmmIntentUri)
                         context.startActivity(mapIntent)
                     },
-                    modifier = Modifier.weight(0.5f)
-                ) { Text("Maps") }
+                    modifier = Modifier.weight(1f),
+                    contentPadding = PaddingValues(horizontal = 8.dp, vertical = 10.dp),
+                    colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.tertiary, contentColor = MaterialTheme.colorScheme.onTertiary)
+                ) {
+                    Text("Maps", maxLines = 1, overflow = TextOverflow.Ellipsis, fontSize = 13.sp)
+                }
             }
         }
     }
@@ -449,7 +498,7 @@ fun PairingScreen(modifier: Modifier = Modifier, partnerToken: String) {
 private fun formatRelativeTime(timestamp: Long): String {
     val now = System.currentTimeMillis()
     val diff = now - timestamp
-    
+
     return when {
         diff < TimeUnit.MINUTES.toMillis(1) -> "Just now"
         diff < TimeUnit.HOURS.toMillis(1) -> "${TimeUnit.MILLISECONDS.toMinutes(diff)}m ago"

@@ -12,32 +12,40 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.platform.LocalContext
 
 private val DarkColorScheme = darkColorScheme(
-    primary = Purple80,
-    secondary = PurpleGrey80,
-    tertiary = Pink80
+    primary = WineGlow,
+    onPrimary = PlumBlack,
+    secondary = LavenderMist,
+    onSecondary = PlumBlack,
+    tertiary = DustyCoral,
+    onTertiary = PlumBlack,
+    background = PlumBlack,
+    onBackground = MoonlightText,
+    surface = PlumSurface,
+    onSurface = MoonlightText
 )
 
 private val LightColorScheme = lightColorScheme(
-    primary = Purple40,
-    secondary = PurpleGrey40,
-    tertiary = Pink40
-
-    /* Other default colors to override
-    background = Color(0xFFFFFBFE),
-    surface = Color(0xFFFFFBFE),
-    onPrimary = Color.White,
-    onSecondary = Color.White,
-    onTertiary = Color.White,
-    onBackground = Color(0xFF1C1B1F),
-    onSurface = Color(0xFF1C1B1F),
-    */
+    primary = WineDeep,
+    onPrimary = Parchment,
+    secondary = LavenderDusk,
+    onSecondary = Parchment,
+    tertiary = CoralWarm,
+    onTertiary = Parchment,
+    background = Parchment,
+    onBackground = InkPlum,
+    surface = ParchmentSurface,
+    onSurface = InkPlum
 )
 
 @Composable
 fun RadarTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
-    // Dynamic color is available on Android 12+
-    dynamicColor: Boolean = true,
+    // Dynamic color (Material You) derives the whole palette from the user's
+    // wallpaper on Android 12+, which silently overrides everything defined
+    // above — that's what was making the app look like generic system
+    // default rather than anything intentional. Defaulting this to false so
+    // the custom palette actually renders.
+    dynamicColor: Boolean = false,
     content: @Composable () -> Unit
 ) {
     val colorScheme = when {

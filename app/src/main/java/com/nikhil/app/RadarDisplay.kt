@@ -37,32 +37,32 @@ fun RadarDisplay(
             val center = Offset(size.width / 2, size.height / 2)
             val radius = size.minDimension / 2
 
-            // Radar Ring Graphics
+            // Radar Ring Graphics — dusty lavender rings instead of slate blue
             drawCircle(
-                color = Color(0xFF1E293B),
+                color = Color(0xFF4A3B57),
                 radius = radius,
                 style = Stroke(width = 4.dp.toPx())
             )
             drawCircle(
-                color = Color(0xFF334155),
+                color = Color(0xFF5C4A6B),
                 radius = radius * 0.65f,
                 style = Stroke(width = 2.dp.toPx())
             )
             drawCircle(
-                color = Color(0xFF475569),
+                color = Color(0xFF6E5A80),
                 radius = radius * 0.35f,
                 style = Stroke(width = 2.dp.toPx())
             )
 
             // Crosshairs
             drawLine(
-                color = Color(0xFF334155),
+                color = Color(0xFF4A3B57),
                 start = Offset(center.x, 0f),
                 end = Offset(center.x, size.height),
                 strokeWidth = 2.dp.toPx()
             )
             drawLine(
-                color = Color(0xFF334155),
+                color = Color(0xFF4A3B57),
                 start = Offset(0f, center.y),
                 end = Offset(size.width, center.y),
                 strokeWidth = 2.dp.toPx()
@@ -81,12 +81,12 @@ fun RadarDisplay(
 
                     drawPath(
                         path = arrowPath,
-                        color = Color(0xFFFF3366) // Tracking neon red/pink
+                        color = Color(0xFFC97B8C) // Wine glow, tracking
                     )
 
                     // Glow center pin
                     drawCircle(
-                        color = Color(0xFFFF3366),
+                        color = Color(0xFFC97B8C),
                         radius = 8.dp.toPx(),
                         center = center
                     )
@@ -94,7 +94,7 @@ fun RadarDisplay(
             } else {
                 // Standby Idle Blip
                 drawCircle(
-                    color = Color(0xFF64748B),
+                    color = Color(0xFF8B7B96),
                     radius = 6.dp.toPx(),
                     center = center
                 )

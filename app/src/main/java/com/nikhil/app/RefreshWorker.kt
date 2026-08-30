@@ -61,7 +61,7 @@ class RefreshWorker(
     override suspend fun doWork(): Result {
         val isPeriodic = inputData.getBoolean("is_periodic", false)
         Log.d("RefreshWorker", "Worker started execution. Periodic: $isPeriodic")
-        
+
         val prefs = context.getSharedPreferences("RadarPrefs", Context.MODE_PRIVATE)
         val targetToken = prefs.getString("PARTNER_FCM_TOKEN", "") ?: ""
 
@@ -72,24 +72,37 @@ class RefreshWorker(
 
         val controller = RadarController()
         val fusedClient = LocationServices.getFusedLocationProviderClient(context)
+        val workStart = System.currentTimeMillis()
+        fun elapsed() = "${System.currentTimeMillis() - workStart}ms"
 
         try {
-            // 1. Immediate Ping
+            // 1. Immediate Ping — record the moment we asked, so we can tell a fresh
+            // Firestore write apart from whatever the target's doc already contained.
+            val pingStartTime = System.currentTimeMillis()
+            Log.d("RefreshWorker", "[${elapsed()}] Sending ping to target...")
             val pingSuccess = controller.requestTargetLocation(targetToken)
+            Log.d("RefreshWorker", "[${elapsed()}] Ping call returned: success=$pingSuccess")
             if (!pingSuccess) {
                 updateWidgetStatus("Ping failed")
                 return Result.failure()
             }
 
-            // 2. Wait for target coordinates
-            val targetLoc = withTimeoutOrNull(15.seconds) {
-                controller.observeTargetLocation(targetToken).first()
+            // 2. Wait for target coordinates. minTimestamp guarantees we don't resolve
+            // on a stale cached snapshot that predates this ping. 20s gives headroom
+            // for the target device's fast lastLocation write plus network variance —
+            // see RadarMessagingService.fetchAndUploadLocation() for the matching
+            // fast-path optimization on the sending side.
+            Log.d("RefreshWorker", "[${elapsed()}] Waiting for target's Firestore snapshot (timeout=20s)...")
+            val targetLoc = withTimeoutOrNull(20.seconds) {
+                controller.observeTargetLocation(targetToken, minTimestamp = pingStartTime).first()
             }
 
             if (targetLoc == null) {
+                Log.w("RefreshWorker", "[${elapsed()}] Timed out waiting for target's location update.")
                 updateWidgetStatus("Target timed out")
                 return Result.failure()
             }
+            Log.d("RefreshWorker", "[${elapsed()}] Target location received: lat=${targetLoc.latitude}, lng=${targetLoc.longitude}")
 
             // 3. Location Optimization: Grab lastLocation first for instant response
             val hasLocationPermission = ContextCompat.checkSelfPermission(
@@ -97,38 +110,69 @@ class RefreshWorker(
             ) == PackageManager.PERMISSION_GRANTED
 
             if (!hasLocationPermission) {
+                Log.e("RefreshWorker", "[${elapsed()}] ACCESS_FINE_LOCATION not granted.")
                 updateWidgetStatus("Loc Permission Denied")
                 return Result.failure()
             }
 
+            // Grab lastLocation cheaply first and push it right away so the widget
+            // moves off "Pinging target..." promptly — a fresh high-accuracy fix can
+            // take 10s+ (see the target-side note in RadarMessagingService), and
+            // leaving the widget on stale status text for that whole stretch reads as
+            // stuck/broken even though the ping itself already succeeded.
+            Log.d("RefreshWorker", "[${elapsed()}] Requesting own lastLocation...")
             val lastLoc = fusedClient.lastLocation.await()
             if (lastLoc != null) {
-                Log.d("RefreshWorker", "Using lastLocation for instant update.")
-                processLocationUpdate(lastLoc, targetLoc)
+                Log.d("RefreshWorker", "[${elapsed()}] Using lastLocation as an immediate interim update.")
+                writeLocationPrefs(lastLoc, targetLoc)
+                RadarWidget().updateAll(context)
+            } else {
+                Log.w("RefreshWorker", "[${elapsed()}] Own lastLocation was null.")
             }
 
-            // 4. Get fresh location for high accuracy
+            // 4. Get fresh location for high accuracy — this refines the interim
+            // lastLocation-based update above with a more precise fix, once it's
+            // ready. The widget already shows something useful by this point.
+            Log.d("RefreshWorker", "[${elapsed()}] Requesting own fresh high-accuracy location...")
             val cts = CancellationTokenSource()
             val myLoc = fusedClient.getCurrentLocation(Priority.PRIORITY_HIGH_ACCURACY, cts.token).await()
 
+            var pushed = false
             if (myLoc != null) {
-                processLocationUpdate(myLoc, targetLoc)
+                Log.d("RefreshWorker", "[${elapsed()}] Fresh own location received.")
+                writeLocationPrefs(myLoc, targetLoc)
+                pushed = true
             } else if (lastLoc == null) {
-                updateWidgetStatus("GPS fix failed")
+                Log.e("RefreshWorker", "[${elapsed()}] Both lastLocation and fresh GPS fix failed.")
+                writeStatusPrefs("GPS fix failed")
+            } else {
+                Log.d("RefreshWorker", "[${elapsed()}] Fresh fix was null; keeping the lastLocation fallback already written.")
+                // We already have lastLoc's data written to prefs; push it now since
+                // no fresher fix arrived.
+                pushed = true
             }
+            if (pushed) RadarWidget().updateAll(context)
+            Log.d("RefreshWorker", "[${elapsed()}] doWork() completed. pushed=$pushed")
 
+        } catch (e: kotlinx.coroutines.CancellationException) {
+            // Cooperative cancellation (e.g. this run was superseded) is not a
+            // real failure — rethrow rather than reporting a misleading status.
+            Log.w("RefreshWorker", "[${elapsed()}] Work was cancelled — not reporting as a failure.")
+            throw e
         } catch (e: Exception) {
-            Log.e("RefreshWorker", "Error during widget refresh", e)
-            updateWidgetStatus("Refresh error")
-            return Result.failure()
-        } finally {
+            Log.e("RefreshWorker", "[${elapsed()}] Error during widget refresh", e)
+            writeStatusPrefs("Refresh error")
             RadarWidget().updateAll(context)
+            return Result.failure()
         }
 
         return Result.success()
     }
 
-    private suspend fun processLocationUpdate(myLoc: android.location.Location, targetLoc: RadarController.TargetLocation) {
+    // Writes distance/status/target fields to prefs WITHOUT touching the widget UI.
+    // Call RadarWidget().updateAll(context) once, separately, when you actually want
+    // the host to redraw — see doWork() above.
+    private fun writeLocationPrefs(myLoc: android.location.Location, targetLoc: RadarController.TargetLocation) {
         val prefs = context.getSharedPreferences("RadarPrefs", Context.MODE_PRIVATE)
         val (dist, _) = RadarController.computeRelativeBearingAndDistance(
             currentLocation = myLoc,
@@ -138,7 +182,7 @@ class RefreshWorker(
         )
 
         val distString = if (dist < 1000) "%.1f m".format(dist) else "%.2f km".format(dist / 1000)
-        
+
         val timeFormat = java.text.SimpleDateFormat("h:mm a", java.util.Locale.getDefault())
         val statusString = "Updated at ${timeFormat.format(java.util.Date())}"
 
@@ -151,26 +195,39 @@ class RefreshWorker(
             .putBoolean("last_widget_is_charging", targetLoc.isCharging)
             .putLong("last_success_timestamp", System.currentTimeMillis())
             .apply()
-        
-        // Immediate UI push
-        RadarWidget().updateAll(context)
     }
 
-    private suspend fun updateWidgetStatus(status: String) {
+    private fun writeStatusPrefs(status: String) {
         context.getSharedPreferences("RadarPrefs", Context.MODE_PRIVATE)
             .edit()
             .putString("last_widget_status", status)
             .apply()
+    }
+
+    private suspend fun updateWidgetStatus(status: String) {
+        writeStatusPrefs(status)
         RadarWidget().updateAll(context)
     }
 
     companion object {
+        // Unique work: KEEP (not REPLACE) — if the button is tapped again while a
+        // ping is already in flight, the new request is simply dropped rather than
+        // cancelling the run that's already partway through a network round trip.
+        // REPLACE was cancelling in-flight Cloud Function calls and widget renders
+        // mid-flight (surfacing as JobCancellationException), which is what made
+        // both the ping and the widget's background render feel flaky — a stray
+        // repeat tap could tear down a run that would otherwise have succeeded.
         fun enqueue(context: Context) {
-            Log.d("RefreshWorker", "Enqueuing Expedited RefreshWorker.")
+            Log.d("RefreshWorker", "Enqueuing Expedited RefreshWorker (unique, KEEP).")
             val request = OneTimeWorkRequestBuilder<RefreshWorker>()
                 .setExpedited(OutOfQuotaPolicy.RUN_AS_NON_EXPEDITED_WORK_REQUEST)
+                .setInputData(androidx.work.workDataOf("is_periodic" to false))
                 .build()
-            WorkManager.getInstance(context).enqueue(request)
+            WorkManager.getInstance(context).enqueueUniqueWork(
+                "RadarOneTimeRefresh",
+                androidx.work.ExistingWorkPolicy.KEEP,
+                request
+            )
         }
 
         fun schedulePeriodicSync(context: Context) {
