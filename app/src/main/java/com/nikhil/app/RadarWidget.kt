@@ -111,6 +111,8 @@ class RadarWidget : GlanceAppWidget() {
         val isCharging = prefs.getBoolean("last_widget_is_charging", false)
         val targetLat = prefs.getString("last_widget_lat", "") ?: ""
         val targetLng = prefs.getString("last_widget_lng", "") ?: ""
+        val lastNote = prefs.getString("last_widget_note", "") ?: ""
+        val showDist = prefs.getBoolean("show_distance", true)
         val batteryIcon = if (isCharging) "⚡" else "🔋"
         val batteryText = if (battery != -1) "$batteryIcon $battery%" else ""
 
@@ -129,7 +131,9 @@ class RadarWidget : GlanceAppWidget() {
                     verticalAlignment = Alignment.CenterVertically
                 ) {
                     Column(modifier = GlanceModifier.defaultWeight()) {
-                        Text(text = lastDist, style = TextStyle(fontSize = 18.sp, fontWeight = FontWeight.Bold, color = primaryProvider))
+                        if (showDist) {
+                            Text(text = lastDist, style = TextStyle(fontSize = 18.sp, fontWeight = FontWeight.Bold, color = primaryProvider))
+                        }
                         if (batteryText.isNotEmpty()) {
                             Text(
                                 text = batteryText,
@@ -154,9 +158,13 @@ class RadarWidget : GlanceAppWidget() {
                     verticalAlignment = Alignment.CenterVertically,
                     horizontalAlignment = Alignment.CenterHorizontally
                 ) {
-                    Text(text = "Target Distance", style = TextStyle(fontSize = 12.sp, color = secondaryProvider))
+                    if (showDist) {
+                        Text(text = "Target Distance", style = TextStyle(fontSize = 12.sp, color = secondaryProvider))
+                    }
                     Row(verticalAlignment = Alignment.CenterVertically) {
-                        Text(text = lastDist, style = TextStyle(fontSize = 24.sp, fontWeight = FontWeight.Bold, color = primaryProvider))
+                        if (showDist) {
+                            Text(text = lastDist, style = TextStyle(fontSize = 24.sp, fontWeight = FontWeight.Bold, color = primaryProvider))
+                        }
                         if (batteryText.isNotEmpty()) {
                             Spacer(modifier = GlanceModifier.width(12.dp))
                             Text(
@@ -167,6 +175,13 @@ class RadarWidget : GlanceAppWidget() {
                         }
                     }
                     Text(text = lastStatus, style = TextStyle(fontSize = 12.sp, color = secondaryProvider))
+                    if (lastNote.isNotEmpty()) {
+                        Text(
+                            text = "\"$lastNote\"",
+                            style = TextStyle(fontSize = 13.sp, color = primaryProvider),
+                            modifier = GlanceModifier.padding(top = 4.dp)
+                        )
+                    }
                     Spacer(modifier = GlanceModifier.height(8.dp))
                     Row(modifier = GlanceModifier.fillMaxWidth()) {
                         Button(text = "Ping Target", onClick = actionRunCallback<RefreshWidgetCallback>(), modifier = GlanceModifier.defaultWeight())
@@ -185,7 +200,9 @@ class RadarWidget : GlanceAppWidget() {
                     verticalAlignment = Alignment.CenterVertically,
                     horizontalAlignment = Alignment.CenterHorizontally
                 ) {
-                    Text(text = lastDist, style = TextStyle(fontSize = 18.sp, fontWeight = FontWeight.Bold, color = primaryProvider))
+                    if (showDist) {
+                        Text(text = lastDist, style = TextStyle(fontSize = 18.sp, fontWeight = FontWeight.Bold, color = primaryProvider))
+                    }
                     if (batteryText.isNotEmpty()) {
                         Text(
                             text = batteryText,
@@ -302,7 +319,7 @@ class RemindWidgetCallback : ActionCallback {
 
         val sent = RadarController().sendBatteryReminder(
             targetToken,
-            "Please charge phone"
+            "Please plug in your phone 🥺"
         )
 
         prefs.edit { putString("last_widget_status", if (sent) "Reminder sent." else "Reminder failed.") }

@@ -2,7 +2,9 @@ package com.nikhil.app
 import android.location.Location
 import android.util.Log
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.Filter
 import com.google.firebase.firestore.ListenerRegistration
+import com.google.firebase.firestore.Query
 import com.google.firebase.functions.FirebaseFunctions
 import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.flow.Flow
@@ -97,14 +99,15 @@ class RadarController {
                     val timestamp = snapshot.getLong("timestamp") ?: 0L
                     val batteryPercent = snapshot.getLong("batteryPercent")?.toInt() ?: -1
                     val isCharging = snapshot.getBoolean("isCharging") ?: false
+                    val note = snapshot.getString("note")
 
                     if (timestamp < minTimestamp) {
                         Log.d("RadarController", "Ignoring stale snapshot (ts=$timestamp < minTimestamp=$minTimestamp, diff=${minTimestamp - timestamp}ms)")
                         return@addSnapshotListener
                     }
 
-                    Log.d("RadarController", "Target updated at ${System.currentTimeMillis()} (doc ts=$timestamp): Lat=$lat, Lng=$lng, Battery=$batteryPercent%")
-                    trySend(TargetLocation(lat, lng, accuracy, timestamp, batteryPercent, isCharging))
+                    Log.d("RadarController", "Target updated at ${System.currentTimeMillis()} (doc ts=$timestamp): Lat=$lat, Lng=$lng, Battery=$batteryPercent%, Note=$note")
+                    trySend(TargetLocation(lat, lng, accuracy, timestamp, batteryPercent, isCharging, note))
                 }
             }
         awaitClose {
@@ -119,7 +122,8 @@ class RadarController {
         val accuracy: Float,
         val timestamp: Long,
         val batteryPercent: Int = -1,
-        val isCharging: Boolean = false
+        val isCharging: Boolean = false,
+        val note: String? = null
     )
 
     // 2. Start Real-Time Firestore Listener
@@ -156,6 +160,89 @@ class RadarController {
         listenerRegistration?.remove()
         listenerRegistration = null
     }
+
+    suspend fun updateMyNote(myToken: String, partnerToken: String, note: String) {
+        if (myToken.isEmpty() || myToken.startsWith("Fetching") || myToken.startsWith("Failed")) return
+        if (note.isBlank()) return
+
+        try {
+            // 1. Update current status in "locations"
+            db.collection("locations")
+                .document(myToken)
+                .set(hashMapOf("note" to note.take(100)), com.google.firebase.firestore.SetOptions.merge())
+                .await()
+
+            // 2. Add to history in "notes"
+            if (partnerToken.isNotEmpty()) {
+                val historyEntry = hashMapOf(
+                    "senderId" to myToken,
+                    "targetId" to partnerToken,
+                    "text" to note.take(100),
+                    "timestamp" to System.currentTimeMillis()
+                )
+                db.collection("notes").add(historyEntry).await()
+            }
+            Log.d("RadarController", "Note updated and historized for $myToken")
+        } catch (e: Exception) {
+            Log.e("RadarController", "Failed to update note", e)
+        }
+    }
+
+    fun observeNoteHistory(myToken: String, partnerToken: String): Flow<List<NoteRecord>> = callbackFlow {
+        val myT = myToken.trim()
+        val partnerT = partnerToken.trim()
+
+        if (myT.isEmpty() || partnerT.isEmpty() || myT.startsWith("Fetching")) {
+            trySend(emptyList())
+            return@callbackFlow
+        }
+
+        // Simplest "active" read: Listen to the notes collection sorted by time.
+        // We filter for the specific sender/receiver in Kotlin to avoid complex
+        // index requirements that often cause missing data or flickering.
+        val registration = db.collection("notes")
+            .orderBy("timestamp", Query.Direction.DESCENDING)
+            .limit(100)
+            .addSnapshotListener { snapshot, error ->
+                if (error != null) {
+                    Log.e("RadarController", "History listener failed: ${error.message}")
+                    return@addSnapshotListener
+                }
+
+                val records = snapshot?.documents?.mapNotNull { doc ->
+                    val s = doc.getString("senderId") ?: ""
+                    val t = doc.getString("targetId") ?: ""
+
+                    // Only include notes that belong to this specific pair
+                    if ((s == myT && t == partnerT) || (s == partnerT && t == myT)) {
+                        doc.toNoteRecord()
+                    } else null
+                } ?: emptyList()
+
+                trySend(records)
+            }
+
+        awaitClose { registration.remove() }
+    }
+
+    private fun com.google.firebase.firestore.DocumentSnapshot.toNoteRecord(): NoteRecord? {
+        val text = getString("text") ?: return null
+        val senderId = getString("senderId") ?: return null
+        val timestamp = when (val ts = get("timestamp")) {
+            is Long -> ts
+            is com.google.firebase.Timestamp -> ts.toDate().time
+            is Number -> ts.toLong()
+            else -> null
+        } ?: return null
+        return NoteRecord(id, senderId, text, timestamp)
+    }
+
+    data class NoteRecord(
+        val id: String,
+        val senderId: String,
+        val text: String,
+        val timestamp: Long
+    )
 
     // 3. Compute Distance & Bearing
     companion object {

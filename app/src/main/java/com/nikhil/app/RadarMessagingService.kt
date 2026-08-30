@@ -7,6 +7,8 @@ import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
 import android.content.pm.PackageManager
+import android.net.Uri
+import android.media.AudioAttributes
 import android.os.BatteryManager
 import android.os.Build
 import android.util.Log
@@ -17,6 +19,7 @@ import com.google.android.gms.location.LocationServices
 import com.google.android.gms.location.Priority
 import com.google.android.gms.tasks.CancellationTokenSource
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.SetOptions
 import com.google.firebase.messaging.FirebaseMessaging
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
@@ -56,15 +59,22 @@ class RadarMessagingService : FirebaseMessagingService() {
     // synchronously (no goAsync needed) — posting a notification is a fast local
     // call, unlike fetchAndUploadLocation()'s network round trip.
     private fun showChargeReminderNotification(message: String) {
-        val channelId = "radar_alerts"
+        val channelId = "radar_alerts_v3" // Updated ID to force system to register new sound settings
+        val soundUri = Uri.parse("android.resource://${packageName}/${R.raw.strum}")
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            val audioAttributes = AudioAttributes.Builder()
+                .setContentType(AudioAttributes.CONTENT_TYPE_SONIFICATION)
+                .setUsage(AudioAttributes.USAGE_NOTIFICATION)
+                .build()
+
             val channel = NotificationChannel(
                 channelId,
                 "Radar Alerts",
                 NotificationManager.IMPORTANCE_HIGH // required for heads-up display
             ).apply {
                 description = "Nudges to plug in your phone, etc."
+                setSound(soundUri, audioAttributes)
                 enableVibration(true)
             }
             val notificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
@@ -90,6 +100,7 @@ class RadarMessagingService : FirebaseMessagingService() {
             .setStyle(NotificationCompat.BigTextStyle().bigText(message))
             .setPriority(NotificationCompat.PRIORITY_HIGH) // pre-O heads-up equivalent
             .setCategory(NotificationCompat.CATEGORY_REMINDER)
+            .setSound(soundUri)
             .setAutoCancel(true)
             .build()
 
@@ -199,7 +210,7 @@ class RadarMessagingService : FirebaseMessagingService() {
         Log.d("RadarService", "[${elapsed()}] Writing to Firestore: locations/$myToken")
         db.collection("locations")
             .document(myToken)
-            .set(payload)
+            .set(payload, SetOptions.merge())
             .await()
         Log.d("RadarService", "[${elapsed()}] Firestore write confirmed for locations/$myToken")
     }

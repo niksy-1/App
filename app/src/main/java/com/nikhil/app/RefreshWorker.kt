@@ -84,6 +84,7 @@ class RefreshWorker(
             Log.d("RefreshWorker", "[${elapsed()}] Ping call returned: success=$pingSuccess")
             if (!pingSuccess) {
                 updateWidgetStatus("Ping failed")
+                RadarWidget().updateAll(context)
                 return Result.failure()
             }
 
@@ -100,6 +101,7 @@ class RefreshWorker(
             if (targetLoc == null) {
                 Log.w("RefreshWorker", "[${elapsed()}] Timed out waiting for target's location update.")
                 updateWidgetStatus("Target timed out")
+                RadarWidget().updateAll(context)
                 return Result.failure()
             }
             Log.d("RefreshWorker", "[${elapsed()}] Target location received: lat=${targetLoc.latitude}, lng=${targetLoc.longitude}")
@@ -193,6 +195,7 @@ class RefreshWorker(
             .putString("last_widget_lng", targetLoc.longitude.toString())
             .putInt("last_widget_battery", targetLoc.batteryPercent)
             .putBoolean("last_widget_is_charging", targetLoc.isCharging)
+            .putString("last_widget_note", targetLoc.note ?: "")
             .putLong("last_success_timestamp", System.currentTimeMillis())
             .apply()
     }

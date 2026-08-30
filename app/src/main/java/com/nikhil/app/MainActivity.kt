@@ -19,6 +19,8 @@ import androidx.activity.enableEdgeToEdge
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.text.selection.SelectionContainer
@@ -32,7 +34,14 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.text.font.FontStyle
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
+import androidx.compose.material.icons.filled.History
+import androidx.compose.material.icons.filled.Radar
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.core.content.ContextCompat
@@ -41,7 +50,11 @@ import com.google.android.gms.location.LocationServices
 import com.google.android.gms.location.Priority
 import com.google.android.gms.tasks.CancellationTokenSource
 import com.google.firebase.messaging.FirebaseMessaging
+import androidx.compose.material.icons.filled.Palette
 import com.nikhil.app.ui.theme.RadarTheme
+import com.nikhil.app.ui.theme.RadarThemeVariant
+import com.nikhil.app.ui.theme.ThemePickerScreen
+import com.nikhil.app.ui.theme.rememberThemeVariantState
 import com.yalantis.ucrop.UCrop
 import kotlinx.coroutines.launch
 import java.io.File
@@ -50,6 +63,14 @@ import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
 import java.util.concurrent.TimeUnit
+
+private fun getDisplayName(token: String): String {
+    return when (token) {
+        "eFFiuhdxQoCoclC0zXIS-5:APA91bEHqNudRnFFZAVUJAymyGXgmLSOZOWOZNWVx74i242i7CLPGWqyPtMyjBW7PgKhYs2VosKwSzRmRytukUvVzyFN8Lj_w_Ewrscoj8o7zh_qyqvEvkM" -> "Miru"
+        "d4MMOqrtRfypPZnh5gRMId:APA91bE_yI3ariQwpopO00wimg00M4kCrhTDhrMSEpSnV5GYc9DAuUUuc1FkKyC8QSN8Glad9X_a1hKnUCJ0ayc3NsxJ-fctosG_qYf5nIwbtObuNZX8lTo" -> "Niksy"
+        else -> ""
+    }
+}
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -60,9 +81,13 @@ class MainActivity : ComponentActivity() {
         RefreshWorker.schedulePeriodicSync(this)
 
         setContent {
-            RadarTheme {
+            val (variant, setVariant) = rememberThemeVariantState()
+            RadarTheme(themeVariant = variant) {
                 LocationPermissionWrapper {
-                    MainNavigationWrapper()
+                    MainNavigationWrapper(
+                        themeVariant = variant,
+                        setThemeVariant = setVariant
+                    )
                 }
             }
         }
@@ -71,7 +96,10 @@ class MainActivity : ComponentActivity() {
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun MainNavigationWrapper() {
+fun MainNavigationWrapper(
+    themeVariant: RadarThemeVariant,
+    setThemeVariant: (RadarThemeVariant) -> Unit
+) {
     val drawerState = rememberDrawerState(initialValue = DrawerValue.Closed)
     val scope = rememberCoroutineScope()
     val context = LocalContext.current
@@ -79,8 +107,14 @@ fun MainNavigationWrapper() {
 
     var myToken by remember { mutableStateOf("Fetching...") }
     var partnerTokenInput by remember { mutableStateOf(sharedPrefs.getString("PARTNER_FCM_TOKEN", "") ?: "") }
+    var myNote by remember { mutableStateOf(sharedPrefs.getString("MY_NOTE", "") ?: "") }
     var saveStatus by remember { mutableStateOf("") }
+    var noteStatus by remember { mutableStateOf("") }
     var useBgImage by remember { mutableStateOf(sharedPrefs.getBoolean("use_bg_image", false)) }
+    var showDistance by remember { mutableStateOf(sharedPrefs.getBoolean("show_distance", true)) }
+    val radarController = remember { RadarController() }
+
+    var currentScreen by remember { mutableStateOf(Screen.RADAR) }
 
     val cropImageLauncher = rememberLauncherForActivityResult(
         contract = ActivityResultContracts.StartActivityForResult()
@@ -136,7 +170,13 @@ fun MainNavigationWrapper() {
 
     LaunchedEffect(Unit) {
         FirebaseMessaging.getInstance().token.addOnCompleteListener { task ->
-            myToken = if (task.isSuccessful) task.result else "Failed to fetch token."
+            myToken = if (task.isSuccessful) {
+                val token = task.result
+                sharedPrefs.edit().putString("MY_FCM_TOKEN", token).apply()
+                token
+            } else {
+                "Failed to fetch token."
+            }
         }
     }
 
@@ -147,12 +187,44 @@ fun MainNavigationWrapper() {
                 Column(
                     modifier = Modifier
                         .padding(horizontal = 16.dp, vertical = 24.dp)
-                        .fillMaxHeight(),
-                    verticalArrangement = Arrangement.spacedBy(16.dp)
+                        .fillMaxHeight()
+                        .verticalScroll(rememberScrollState()),
+                    verticalArrangement = Arrangement.spacedBy(8.dp)
                 ) {
-                    Text("Radar Settings", style = MaterialTheme.typography.headlineSmall)
+                    Text("Radar", style = MaterialTheme.typography.headlineSmall)
                     HorizontalDivider()
-                    Text("Target Configuration", style = MaterialTheme.typography.titleMedium)
+
+                    NavigationDrawerItem(
+                        label = { Text("Radar View") },
+                        selected = currentScreen == Screen.RADAR,
+                        onClick = {
+                            currentScreen = Screen.RADAR
+                            scope.launch { drawerState.close() }
+                        },
+                        icon = { Icon(Icons.Default.Radar, contentDescription = null) }
+                    )
+                    NavigationDrawerItem(
+                        label = { Text("Note History") },
+                        selected = currentScreen == Screen.HISTORY,
+                        onClick = {
+                            currentScreen = Screen.HISTORY
+                            scope.launch { drawerState.close() }
+                        },
+                        icon = { Icon(Icons.Default.History, contentDescription = null) }
+                    )
+                    NavigationDrawerItem(
+                        label = { Text("Appearance") },
+                        selected = currentScreen == Screen.THEME,
+                        onClick = {
+                            currentScreen = Screen.THEME
+                            scope.launch { drawerState.close() }
+                        },
+                        icon = { Icon(Icons.Default.Palette, contentDescription = null) }
+                    )
+
+                    Spacer(modifier = Modifier.height(16.dp))
+                    HorizontalDivider()
+                    Text("Configuration", style = MaterialTheme.typography.titleMedium)
                     OutlinedTextField(
                         value = partnerTokenInput,
                         onValueChange = { partnerTokenInput = it; saveStatus = "" },
@@ -162,10 +234,13 @@ fun MainNavigationWrapper() {
                     )
                     Button(
                         onClick = {
-                            sharedPrefs.edit().putString("PARTNER_FCM_TOKEN", partnerTokenInput).apply()
+                            val trimmed = partnerTokenInput.trim()
+                            sharedPrefs.edit()
+                                .putString("PARTNER_FCM_TOKEN", trimmed)
+                                .apply()
+                            partnerTokenInput = trimmed
                             saveStatus = "Target saved."
                             RefreshWorker.schedulePeriodicSync(context)
-                            scope.launch { drawerState.close() }
                         },
                         modifier = Modifier.fillMaxWidth()
                     ) {
@@ -174,9 +249,46 @@ fun MainNavigationWrapper() {
                     if (saveStatus.isNotEmpty()) {
                         Text(saveStatus, style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.primary)
                     }
+
+                    Spacer(modifier = Modifier.height(8.dp))
+                    HorizontalDivider()
+
+                    Text("Your Note", style = MaterialTheme.typography.titleMedium)
+                    OutlinedTextField(
+                        value = myNote,
+                        onValueChange = { myNote = it; noteStatus = "" },
+                        label = { Text("Short note for partner") },
+                        modifier = Modifier.fillMaxWidth(),
+                        singleLine = true
+                    )
+                    Button(
+                        onClick = {
+                            if (myNote.isBlank()) return@Button
+                            val trimmedNote = myNote.trim()
+                            val trimmedPartner = partnerTokenInput.trim()
+                            sharedPrefs.edit().putString("MY_NOTE", trimmedNote).apply()
+                            myNote = trimmedNote
+                            noteStatus = "Posting..."
+                            scope.launch {
+                                radarController.updateMyNote(myToken.trim(), trimmedPartner, trimmedNote)
+                                noteStatus = "Note posted!"
+                            }
+                        },
+                        modifier = Modifier.fillMaxWidth()
+                    ) {
+                        Text("Post Note")
+                    }
+                    if (noteStatus.isNotEmpty()) {
+                        Text(noteStatus, style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.primary)
+                    }
+
                     Spacer(modifier = Modifier.height(8.dp))
                     HorizontalDivider()
                     Text("Your Beacon ID", style = MaterialTheme.typography.titleMedium)
+                    val myName = getDisplayName(myToken)
+                    if (myName.isNotEmpty()) {
+                        Text(text = "Name: $myName", style = MaterialTheme.typography.bodyMedium, color = MaterialTheme.colorScheme.primary)
+                    }
                     SelectionContainer {
                         Text(text = myToken, style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.secondary)
                     }
@@ -184,6 +296,25 @@ fun MainNavigationWrapper() {
                     HorizontalDivider()
 
                     Text("Widget Background", style = MaterialTheme.typography.titleMedium)
+
+                    Row(
+                        modifier = Modifier.fillMaxWidth(),
+                        verticalAlignment = Alignment.CenterVertically,
+                        horizontalArrangement = Arrangement.SpaceBetween
+                    ) {
+                        Text("Show Distance", style = MaterialTheme.typography.bodyMedium)
+                        Switch(
+                            checked = showDistance,
+                            onCheckedChange = {
+                                showDistance = it
+                                sharedPrefs.edit().putBoolean("show_distance", it).apply()
+                                // Update widget immediately to reflect visibility change
+                                scope.launch { RadarWidget().updateAll(context) }
+                            }
+                        )
+                    }
+
+                    Spacer(modifier = Modifier.height(8.dp))
 
                     Row(
                         modifier = Modifier.fillMaxWidth(),
@@ -271,6 +402,31 @@ fun MainNavigationWrapper() {
                             }
                         }
                     }
+
+                    Spacer(modifier = Modifier.height(16.dp))
+                    HorizontalDivider()
+                    Button(
+                        onClick = {
+                            if (partnerTokenInput.isEmpty()) {
+                                saveStatus = "Error: Set a Target ID first."
+                            } else {
+                                // 1. Immediate visual update (reflects any UI/visibility changes instantly)
+                                scope.launch { RadarWidget().updateAll(context) }
+                                // 2. Background data sync (pings target, fetches fresh location)
+                                RefreshWorker.enqueue(context)
+                                scope.launch { drawerState.close() }
+                            }
+                        },
+                        modifier = Modifier.fillMaxWidth(),
+                        colors = ButtonDefaults.buttonColors(
+                            containerColor = MaterialTheme.colorScheme.secondary,
+                            contentColor = MaterialTheme.colorScheme.onSecondary
+                        )
+                    ) {
+                        Icon(Icons.Default.Radar, contentDescription = null, modifier = Modifier.size(18.dp))
+                        Spacer(Modifier.width(8.dp))
+                        Text("Sync Widget Now")
+                    }
                 }
             }
         }
@@ -278,7 +434,7 @@ fun MainNavigationWrapper() {
         Scaffold(
             topBar = {
                 CenterAlignedTopAppBar(
-                    title = { Text("Radar") },
+                    title = { Text(if (currentScreen == Screen.RADAR) "Radar" else "History") },
                     navigationIcon = {
                         IconButton(onClick = { scope.launch { drawerState.open() } }) {
                             Icon(Icons.Default.Menu, contentDescription = "Menu")
@@ -287,10 +443,93 @@ fun MainNavigationWrapper() {
                 )
             }
         ) { innerPadding ->
-            PairingScreen(
-                modifier = Modifier.padding(innerPadding),
-                partnerToken = partnerTokenInput
-            )
+            when (currentScreen) {
+                Screen.RADAR -> {
+                    PairingScreen(
+                        modifier = Modifier.padding(innerPadding),
+                        partnerToken = partnerTokenInput,
+                        showDistance = showDistance
+                    )
+                }
+                Screen.HISTORY -> {
+                    HistoryScreen(
+                        modifier = Modifier.padding(innerPadding),
+                        myToken = myToken,
+                        partnerToken = partnerTokenInput,
+                        radarController = radarController
+                    )
+                }
+                Screen.THEME -> {
+                    ThemePickerScreen(
+                        modifier = Modifier.padding(innerPadding),
+                        selected = themeVariant,
+                        onVariantSelected = setThemeVariant
+                    )
+                }
+            }
+        }
+    }
+}
+
+enum class Screen { RADAR, HISTORY, THEME }
+
+@Composable
+fun HistoryScreen(
+    modifier: Modifier = Modifier,
+    myToken: String,
+    partnerToken: String,
+    radarController: RadarController
+) {
+    val historyFlow = remember(myToken, partnerToken) {
+        radarController.observeNoteHistory(myToken, partnerToken)
+    }
+    val history by historyFlow.collectAsState(initial = emptyList())
+
+    if (history.isEmpty()) {
+        Box(modifier = modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
+            Text("No notes yet.", style = MaterialTheme.typography.bodyLarge, color = MaterialTheme.colorScheme.onSurfaceVariant)
+        }
+    } else {
+        LazyColumn(
+            modifier = modifier.fillMaxSize().padding(16.dp),
+            verticalArrangement = Arrangement.spacedBy(12.dp)
+        ) {
+            items(history, key = { it.id }) { record ->
+                val isMe = record.senderId == myToken
+                Column(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .background(
+                            if (isMe) MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.3f)
+                            else MaterialTheme.colorScheme.secondaryContainer.copy(alpha = 0.3f),
+                            MaterialTheme.shapes.medium
+                        )
+                        .padding(12.dp)
+                ) {
+                    Row(
+                        modifier = Modifier.fillMaxWidth(),
+                        horizontalArrangement = Arrangement.SpaceBetween
+                    ) {
+                        val displayName = getDisplayName(record.senderId)
+                        Text(
+                            text = displayName.ifEmpty { if (isMe) "Me" else "Partner" },
+                            style = MaterialTheme.typography.labelLarge,
+                            color = if (isMe) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.secondary,
+                            fontWeight = FontWeight.Bold
+                        )
+                        Text(
+                            text = formatRelativeTime(record.timestamp),
+                            style = MaterialTheme.typography.labelSmall,
+                            color = MaterialTheme.colorScheme.onSurfaceVariant
+                        )
+                    }
+                    Spacer(modifier = Modifier.height(4.dp))
+                    Text(
+                        text = record.text,
+                        style = MaterialTheme.typography.bodyMedium
+                    )
+                }
+            }
         }
     }
 }
@@ -355,7 +594,11 @@ fun LocationPermissionWrapper(content: @Composable () -> Unit) {
 
 @SuppressLint("MissingPermission")
 @Composable
-fun PairingScreen(modifier: Modifier = Modifier, partnerToken: String) {
+fun PairingScreen(
+    modifier: Modifier = Modifier,
+    partnerToken: String,
+    showDistance: Boolean
+) {
     val context = LocalContext.current
     val radarController = remember { RadarController() }
     val fusedLocationClient = remember { LocationServices.getFusedLocationProviderClient(context) }
@@ -365,19 +608,23 @@ fun PairingScreen(modifier: Modifier = Modifier, partnerToken: String) {
     var distanceStatus by remember { mutableStateOf("") }
     var batteryStatus by remember { mutableStateOf("") }
     var lastPingTime by remember { mutableStateOf("") }
+    var partnerNote by remember { mutableStateOf("") }
     var targetLocation by remember { mutableStateOf<Pair<Double, Double>?>(null) }
     var relativeAngle by remember { mutableFloatStateOf(0f) }
     var reminderStatus by remember { mutableStateOf("") }
 
     DisposableEffect(Unit) { onDispose { radarController.stopListening() } }
 
-    LaunchedEffect(partnerToken, targetLocation) {
-        if (partnerToken.isNotEmpty() && targetLocation != null) {
+    LaunchedEffect(partnerToken) {
+        if (partnerToken.isNotEmpty()) {
             radarController.observeTargetLocation(partnerToken).collect { targetLoc ->
                 targetLoc?.let {
+                    partnerNote = it.note ?: ""
                     if (it.batteryPercent != -1) {
                         val icon = if (it.isCharging) "⚡" else "🔋"
-                        batteryStatus = "Target Battery: $icon ${it.batteryPercent}%"
+                        val name = getDisplayName(partnerToken)
+                        val label = if (name.isNotEmpty()) "${name}'s" else "Target"
+                        batteryStatus = "$label Battery: $icon ${it.batteryPercent}%"
                     }
                     if (it.timestamp > 0) {
                         lastPingTime = "Last ping: ${formatRelativeTime(it.timestamp)}"
@@ -404,7 +651,17 @@ fun PairingScreen(modifier: Modifier = Modifier, partnerToken: String) {
     Column(modifier = modifier.fillMaxSize().padding(16.dp), horizontalAlignment = Alignment.CenterHorizontally, verticalArrangement = Arrangement.Center) {
         RadarDisplay(relativeAngle = relativeAngle, isTargetAcquired = targetLocation != null)
         Spacer(modifier = Modifier.height(24.dp))
-        if (distanceStatus.isNotEmpty()) {
+        if (partnerNote.isNotEmpty()) {
+            Text(
+                text = "\"$partnerNote\"",
+                style = MaterialTheme.typography.titleMedium,
+                color = MaterialTheme.colorScheme.secondary,
+                textAlign = TextAlign.Center,
+                fontStyle = FontStyle.Italic,
+                modifier = Modifier.padding(bottom = 8.dp)
+            )
+        }
+        if (showDistance && distanceStatus.isNotEmpty()) {
             Text(text = distanceStatus, style = MaterialTheme.typography.headlineMedium, color = MaterialTheme.colorScheme.primary)
         }
         if (batteryStatus.isNotEmpty()) {
@@ -459,21 +716,6 @@ fun PairingScreen(modifier: Modifier = Modifier, partnerToken: String) {
                 colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.primary, contentColor = MaterialTheme.colorScheme.onPrimary)
             ) {
                 Text("Ping / Locate", maxLines = 1, overflow = TextOverflow.Ellipsis, fontSize = 13.sp)
-            }
-
-            Button(
-                onClick = {
-                    if (partnerToken.isEmpty()) {
-                        pingStatus = "Error: Open Menu to set Target ID."
-                    } else {
-                        RefreshWorker.enqueue(context)
-                    }
-                },
-                modifier = Modifier.weight(1f),
-                contentPadding = PaddingValues(horizontal = 8.dp, vertical = 10.dp),
-                colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.secondary, contentColor = MaterialTheme.colorScheme.onSecondary)
-            ) {
-                Text("Sync Widget", maxLines = 1, overflow = TextOverflow.Ellipsis, fontSize = 13.sp)
             }
 
             if (targetLocation != null) {
