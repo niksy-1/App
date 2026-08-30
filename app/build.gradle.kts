@@ -60,4 +60,12 @@ dependencies {
     implementation("androidx.compose.material:material-icons-extended")
     implementation("androidx.appcompat:appcompat:1.6.1")
     implementation("com.github.yalantis:ucrop:2.2.8")
+
+    // Downloadable Fonts API — lets Compose fetch a Google Font (Caveat, for the
+    // handwritten/diary-entry headline look) from the Google Play Services Fonts
+    // provider at runtime instead of bundling font files in the APK. No version
+    // pin needed: this artifact lives in the same androidx.compose.ui group as
+    // the rest of Compose UI, so it's resolved by the compose.bom platform above,
+    // same as ui / ui-graphics / ui-tooling-preview already are.
+    implementation("androidx.compose.ui:ui-text-google-fonts")
 }

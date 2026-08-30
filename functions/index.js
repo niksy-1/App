@@ -54,7 +54,7 @@ exports.sendTargetNotification = onCall(async (request) => {
   const safeMessage =
     typeof rawMessage === "string" && rawMessage.trim().length > 0 ?
       rawMessage.trim().slice(0, 200) :
-      "Please charge your phone.";
+      "Please plug in your phone 🥺";
 
   const message = {
     data: {

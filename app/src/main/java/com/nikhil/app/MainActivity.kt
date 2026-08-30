@@ -421,7 +421,7 @@ fun PairingScreen(modifier: Modifier = Modifier, partnerToken: String) {
                     scope.launch {
                         val sent = radarController.sendBatteryReminder(
                             partnerToken,
-                            "Your partner asked you to plug in your phone."
+                            "Please plug in your phone 🥺"
                         )
                         reminderStatus = if (sent) "Reminder sent." else "Failed to send reminder."
                     }

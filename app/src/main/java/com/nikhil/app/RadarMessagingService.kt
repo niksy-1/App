@@ -43,7 +43,7 @@ class RadarMessagingService : FirebaseMessagingService() {
             "REMIND_CHARGE" -> {
                 Log.d("RadarService", "Action 'REMIND_CHARGE' identified. Showing alert...")
                 val message = remoteMessage.data["message"]?.takeIf { it.isNotBlank() }
-                    ?: "Please charge your phone 🥺"
+                    ?: "Please plug in your phone 🥺"
                 showChargeReminderNotification(message)
             }
             else -> {
@@ -64,7 +64,7 @@ class RadarMessagingService : FirebaseMessagingService() {
                 "Radar Alerts",
                 NotificationManager.IMPORTANCE_HIGH // required for heads-up display
             ).apply {
-                description = "Nudges from your partner, like battery reminders."
+                description = "Nudges to plug in your phone, etc."
                 enableVibration(true)
             }
             val notificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
