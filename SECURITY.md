@@ -1,1 +1,99 @@
-¨¥yÛhr·šµë-­æ¦}Ó©z¶­Š‰ç¢Ú^®h­µçEj)^vÚ­æ­zËky©Ÿtê^­«b¢yè¶—«š+myÑZŠW¶‡+y«^²ÚŞjgİ:—«jØ¨z-¥êæŠÛ^tŒI…‘…ÈÍ•ÕÉ¥Ñä…¹É½±±½ÕĞ()¥É•‰…Í”ÁÉ½©•Ğèİ¥‘•Ğ´ÌÍ™˜Í€¸Q¡•Í”…É”ÁÉ½Ñ½ÑåÁ”M•ÕÉ¥ÑäIÕ±•ÌÙ…±¥‘…Ñ•)……¥¹ÍĞÑ¡”¡•­•µ¥¸•µÕ±…Ñ½ÈÑ•ÍÑÌìÉ•Ù¥•ÜÑ¡•´‰•™½É”‰É½…‘±äÍ¡…É¥¹œÑ¡”…ÁÀ¸((ŒŒUÍ¥¹œÑ¡”ÕÁ‘…Ñ•…ÁÀ((Ä¸%¹ÍÑ…±°Ñ¡”ÕÁ‘…Ñ•¹‘É½¥…ÁÀ½¸‰½Ñ Á¡½¹•Ì¸=Á•¹¥¹œ¥ĞÉ•…Ñ•Ì½ÈÉ•ÍÑ½É•Ì(€€…¸…¹½¹åµ½ÕÌ¥É•‰…Í”…½Õ¹Ğ…¹É•¥ÍÑ•ÉÌ¥ÑÌÁÉ¥Ù…Ñ”¹½Ñ¥™¥…Ñ¥½¸Ñ½­•¸¸(È¸=Á•¸Ñ¡”µ•¹Ô…¹•á¡…¹”€¨©e½ÕÈ	•…½¸%¨¨Ù…±Õ•Ì¸Q¡•Í”…É”…ÕÑ¡•¹Ñ¥…Ñ•(€€…½Õ¹Ğ%Ì°¹½ĞÑ¡”½±4Ñ½­•¹Ì¸(Ì¸… Á•ÉÍ½¸•¹Ñ•ÉÌÑ¡”½Ñ¡•ÈÌ%…¹Ñ…ÁÌ€¨©ÁÁÉ½Ù”A…ÉÑ¹•È¨¨¸M¡…É¥¹œ‰•½µ•Ì(€€…Ñ¥Ù”½¹±äİ¡•¸‰½Ñ …ÁÁÉ½Ù…±Ìµ…Ñ ¸Q¡”™½É•É½Õ¹…ÁÀ¡•­ÌÑ¡¥ÌÍÑ…ÑÕÌ(€€•Ù•ÉäÑ•¸Í•½¹‘Ì¸(Ğ¸€¨©MÑ½ÀM¡…É¥¹œ¨¨É•µ½Ù•Ìå½ÕÈ…ÁÁÉ½Ù…°¸Q¡”‰…­•¹¥µµ•‘¥…Ñ•±ä‘•¹¥•Ì™ÕÑÕÉ”(€€Á…ÉÑ¹•È±½…Ñ¥½¸½¡¥ÍÑ½ÉäÉ•…‘Ì…¹¹½Ñ¥™¥…Ñ¥½¹Ì¸AÉ•Ù¥½ÕÍ±ä‘½İ¹±½…‘•‘…Ñ„°(€€ÍÉ••¹Í¡½ÑÌ°…¹¹½Ñ¥™¥…Ñ¥½¹Ì…±É•…‘ä¥¸™±¥¡Ğ…¹¹½Ğ‰”É•…±±•¸()¸…¹½¹åµ½ÕÌ¥‘•¹Ñ¥Ñä‰•±½¹ÌÑ¼Ñ¡¥Ì…ÁÀ¥¹ÍÑ…±±…Ñ¥½¸¸±•…É¥¹œ…ÁÀ‘…Ñ„½È)É•¥¹ÍÑ…±±¥¹œ…¸±½Í”¥Ğì•á¡…¹”¹•Ü%Ì…¹…ÁÁÉ½Ù”……¥¸¸	…­ÕÀ½‘•Ù¥”)ÑÉ…¹Í™•È½˜Ñ¡”…ÁÀÌÁÉ¥Ù…Ñ”ÍÑ…Ñ”¥Ì‘¥Í…‰±•¸Q¡•É”¥Ì¹¼…½Õ¹ĞµÉ•½Ù•Éä)™±½Ü¥¸Ñ¡¥ÌÙ•ÉÍ¥½¸¸((ŒŒ•ÍÌµ½‘•°()ğA…Ñ ğI•…ğ]É¥Ñ”ğ)ğ€´´´ğ€´´´ğ€´´´ğ)ğ‘•Ù¥•½Õ¹ÑÌ½íÕ¥‘õ€ğ=İ¹•È½¹±äì‰…­•¹É•Í½±Ù•ÌÑ½­•¸ğ=İ¹•È½¹±ä°Ù…±¥‘…Ñ•Ñ½­•¸…¹Í•ÉÙ•ÈÑ¥µ•ÍÑ…µÀğ)ğÁ…¥É¥¹ÁÁÉ½Ù…±Ì½íÕ¥‘õ€ğ=İ¹•È½¹±äğ=İ¹•È…ÁÁÉ½Ù•Ì½¹”½Ñ¡•ÈU%°½È‘•±•Ñ•Ì…ÁÁÉ½Ù…°ğ)ğ±½…Ñ¥½¹ÍXÈ½íÕ¥‘õ€ğ=İ¹•È½ÈµÕÑÕ…±±ä…ÁÁÉ½Ù•Á…ÉÑ¹•ÈìÍ¥¹±”µ‘½Õµ•¹ĞÉ•…‘Ìğ=İ¹•È½¹±ä°‰½Õ¹‘•™¥•±‘Ì…¹Í•ÉÙ•ÈÑ¥µ•ÍÑ…µÁÌğ)ğÁ…¥É9½Ñ•Ì½í…ô½Á…ÉÑ¹•ÉÌ½í‰ô½•¹ÑÉ¥•Ì½í¥‘õ€ğ	½Ñ …ÁÁÉ½Ù•Á…ÉÑ¹•ÉÌì¡¥ÍÑ½ÉäÅÕ•É¥•Ì±¥µ¥Ñ•Ñ¼€ÄÀÀğÕÑ¡•¹Ñ¥…Ñ•Í•¹‘•ÈÉ•…Ñ•Ì¥µµÕÑ…‰±”¹½Ñ•Ì™½ÈÑ¡”Á…¥Èğ)ğ¹½Ñ¥™¥…Ñ¥½¹1¥µ¥ÑÌ½íÕ¥‘õ€ğ	…­•¹½¹±äğ	…­•¹ÑÉ…¹Í…Ñ¥½¸½¹±äğ)ğ1•…ä±½…Ñ¥½¹Í€°¹½Ñ•Í€°…¹•Ù•Éä½Ñ¡•ÈÁ…Ñ ğ•¹¥•ğ•¹¥•ğ()A…¥È%Ì…É”Í½ÉÑ•±•á¥½É…Á¡¥…±±ä‰äÑ¡”…ÁÀ¸Q¡”Á…¥ÈÁ…É•¹ĞÁ…Ñ¡Ì…É”)¹…µ•ÍÁ…•Ì°¹½Ğ‘½Õµ•¹ÑÌì¥¹‘•Á•¹‘•¹Ğ…ÁÁÉ½Ù…°‘½Õµ•¹ÑÌÁÉ½Ù¥‘”…ÕÑ¡½É¥é…Ñ¥½¸¸)Mİ¥Ñ¡¥¹œ½ÈÉ•µ½Ù¥¹œ•¥Ñ¡•È…ÁÁÉ½Ù…°•¹‘Ì…•ÍÌÑ¼Ñ¡”ÁÉ•Ù¥½ÕÌÁ…¥ÈÌ¹½Ñ•Ì¸)I•…ÁÁÉ½Ù¥¹œÑ¡”Í…µ”Á…¥ÈÉ•ÍÑ½É•Ì…•ÍÌÑ¼Ñ¡…ĞÁ…¥ÈÌÁÉ•Ù¥½ÕÌ¹½Ñ•Ì¸()Q¡”…ÁÀÅÕ•É¥•Ì¹½Ñ•Ìİ¥Ñ¡¥¸½¹”Á…¥ÈÌÁ…Ñ ÕÍ¥¹œÑ¥µ•ÍÑ…µÀ‘•Í•¹‘¥¹œ…¹„)±¥µ¥Ğ½˜€ÄÀÀì¥Ğ¹¼±½¹•È‘½İ¹±½…‘Ì½Ñ¡•ÈÕÍ•ÉÌœ¹½Ñ•Ì™½È±½…°™¥±Ñ•É¥¹œ¸)I•…‘Ì¥¹½É”…¡”µ½¹±äÍ¹…ÁÍ¡½ÑÌ¸1½…Ñ¥½¸¹½Ñ•Ìµ…ä‰”İÉ¥ÑÑ•¸‰•™½É”„AL)™¥à•á¥ÍÑÌ¸=¹”…¹äAL™¥•±¥ÌÁÉ•Í•¹Ğ°Ñ¡”•¹Ñ¥É”±½…Ñ¥½¸™¥•±É½ÕÀ¥Ì)É•ÅÕ¥É•…¹Ù…±¥‘…Ñ•½¸•Ù•ÉäİÉ¥Ñ”¸()Q¡”…±±…‰±”™Õ¹Ñ¥½¹Ì…ÕÑ¡•¹Ñ¥…Ñ”…±±•ÉÌ°¡•¬‰½Ñ …ÁÁÉ½Ù…±Ì°É•Í½±Ù”Ñ¡”)É•¥Á¥•¹ĞÌÁÉ¥Ù…Ñ”4Ñ½­•¸½¸Ñ¡”Í•ÉÙ•È°…¹•¹™½É”„Á•ÈµÍ•¹‘•ÈÑ•¸µÍ•½¹)¹½Ñ¥™¥…Ñ¥½¸¥¹Ñ•ÉÙ…°¥¸„ÑÉ…¹Í…Ñ¥½¸¸Q¡”É••¥Ù¥¹œ…ÁÀ¡•­ÌÑ¡”¥¹Ñ•¹‘•)U%…¹¥ÑÌÕÉÉ•¹Ğ…ÁÁÉ½Ù•Á…ÉÑ¹•È‰•™½É”…Ñ¥¹œ½¸Ñ¡”µ•ÍÍ…”¸¥É•ÍÑ½É”)ÉÕ±•Ì…±½¹”…¹¹½ĞÁÉ½Ñ•Ğ‘µ¥¸M,½Á•É…Ñ¥½¹Ì°Í¼Ñ¡•Í”¡•­Ì…É”•áÁ±¥¥Ğ¸((ŒŒ5¥É…Ñ¥½¸()Q¡”½É¥¥¹…°±¥Ù”ÉÕ±•Ì…±±½İ•…±°É•…‘Ì…¹İÉ¥Ñ•ÌÕ¹Ñ¥°M•ÁÑ•µ‰•È€ÈØ°€ÈÀÈØ¸)Q¡•¥È±½…°‰…­ÕÀ¥Ì€¹Í•ÕÉ¥Ñäµ±½…°½½É¥¥¹…°µ™¥É•ÍÑ½É”¹ÉÕ±•Í€€¡¥Ğµ¥¹½É•¤¸)¼¹½ĞÉ•ÍÑ½É”Ñ¡½Í”ÁÕ‰±¥ŒÉÕ±•Ì…Ì„É½ÕÑ¥¹”É½±±‰…¬¸()=±…ÁÀ‰Õ¥±‘Ì‘¼¹½Ğ…ÕÑ¡•¹Ñ¥…Ñ”…¹…É”¥¹½µÁ…Ñ¥‰±”İ¥Ñ Ñ¡”¹•ÜÉÕ±•Ì…¹)…±±…‰±”A$¸	½Ñ ‘•Ù¥•ÌµÕÍĞÕÁÉ…‘”…¹Á…¥È……¥¸¸1•…ä‘…Ñ„¥ÌÁÉ•Í•ÉÙ•)½¸Ñ¡”Í•ÉÙ•È‰ÕĞ‘•¹¥•Ñ¼±¥•¹ÑÌ¸%Ğ¥Ì¹½Ğ…ÕÑ½µ…Ñ¥…±±ä…ÍÍ¥¹•Ñ¼„¹•Ü)…½Õ¹ĞèÁ½ÍÍ•ÍÍ¥½¸½˜…¸½±‘•Ù¥”Ñ½­•¸¥Ì¹½ĞÁÉ½½˜½˜½İ¹•ÉÍ¡¥À¸¹ä™ÕÑÕÉ”)¡¥ÍÑ½Éäµ¥É…Ñ¥½¸µÕÍĞ•ÍÑ…‰±¥Í ½İ¹•ÉÍ¡¥ÀÑ¡É½Õ „ÑÉÕÍÑ•ÁÉ½•ÍÌ¸((ŒŒI•ÁÉ½‘Õ”Ù…±¥‘…Ñ¥½¸()UÍ”9½‘”¹©Ì€ÈĞ…¹)…Ù„€ÈÄ½È¹•İ•Èè()Í )¹Á´¤)¹Á´€´µÁÉ•™¥à™Õ¹Ñ¥½¹Ì¤)¹Á´€´µÁÉ•™¥à™Õ¹Ñ¥½¹ÌÉÕ¸±¥¹Ğ)¹Á´ÉÕ¸Ñ•ÍĞéÉÕ±•Ì)¹Áà€µä™¥É•‰…Í”µÑ½½±Í±…Ñ•ÍĞ‘•Á±½ä€´µ½¹±ä™¥É•ÍÑ½É”éÉÕ±•Ì€´µ‘ÉäµÉÕ¸€´µÁÉ½©•Ğİ¥‘•Ğ´ÌÍ™˜Ì)‰…Í É…‘±•Ü€é…ÁÀé½µÁ¥±••‰Õ-½Ñ±¥¸€´µ¹¼µ‘…•µ½¸)€()Q¡”Ñ•ÍÑÌÕÍ”‘•µ¼µÉ…‘…ÈµÍ•ÕÉ¥Ñå€°É•ÅÕ¥É”Ñ¡”±½…°•µÕ±…Ñ½È°…¹‘¼¹½ĞÍ•¹)É•…°4¹½Ñ¥™¥…Ñ¥½¹Ì¸Q¡•ä½Ù•È±•¥Ñ¥µ…Ñ”½İ¹•È½Á…¥È…•ÍÌ°½ÕÑÍ¥‘•ÉÌ°)½¹”µÍ¥‘•…ÁÁÉ½Ù…°°É•Ù½…Ñ¥½¸°™½É•½İ¹•ÉÍ¡¥À°ÍÑÉ¥ĞÍ¡•µ…Ì°µ¥ÍÍ¥¹œ™¥•±‘Ì°)ÑåÁ”½¹™ÕÍ¥½¸°±…É”ÍÑÉ¥¹Ì°É…¹”Ù¥½±…Ñ¥½¹Ì°Ñ¥µ•ÍÑ…µÀµ…¹¥ÁÕ±…Ñ¥½¸°)ÁÉ¥Ù…Ñ”Ñ½­•¸¥Í½±…Ñ¥½¸°½±±•Ñ¥½¸ÅÕ•É¥•Ì°±•…äÁ…Ñ¡Ì°…¹…±±…‰±”…‰ÕÍ”¸()½È„½½É‘¥¹…Ñ•‰…­•¹É½±±½ÕĞ…™Ñ•ÈÙ…±¥‘…Ñ¥½¸è()Í )¹Áà€µä™¥É•‰…Í”µÑ½½±Í±…Ñ•ÍĞ‘•Á±½ä€´µ½¹±ä…ÕÑ ±™¥É•ÍÑ½É”éÉÕ±•Ì±™Õ¹Ñ¥½¹Ì€´µÁÉ½©•Ğİ¥‘•Ğ´ÌÍ™˜Ì)€()	•™½É”‘¥ÍÑÉ¥‰ÕÑ¥¹œİ¥‘•±ä°Ù•É¥™äÑ¡”Ñİ¼µÁ¡½¹”™±½ÜèÉ•¥ÍÑ•È°Á…¥È½¸‰½Ñ )Á¡½¹•Ì°Á¥¹œ°Á½ÍĞ½É•…¹½Ñ•Ì°É•Ù½­”½¸•¥Ñ¡•ÈÁ¡½¹”°…¹½¹™¥É´Ñ¡…ĞÑ¡”½Ñ¡•È)Á¡½¹”…¸¹¼±½¹•È™•Ñ Í¡…É•‘…Ñ„½ÈÍ•¹É•ÅÕ•ÍÑÌ¸	…­É½Õ¹•á•ÕÑ¥½¸°)¹½Ñ¥™¥…Ñ¥½¸Á•Éµ¥ÍÍ¥½¹Ì°…¹Ñ½­•¸É•™É•Í …±Í¼¹••‘•Ù¥”Ñ•ÍÑ¥¹œ¸()I•™•É•¹•Ìèm…¹½¹åµ½ÕÌ¹‘É½¥…ÕÑ¡•¹Ñ¥…Ñ¥½¹t¡¡ÑÑÁÌè¼½™¥É•‰…Í”¹½½±”¹½´½‘½Ì½…ÕÑ ½…¹‘É½¥½…¹½¹åµ½ÕÌµ…ÕÑ ¤°)mÉÕ±•Ì•µÕ±…Ñ½ÈÑ•ÍÑ¥¹t¡¡ÑÑÁÌè¼½™¥É•‰…Í”¹½½±”¹½´½‘½Ì½™¥É•ÍÑ½É”½Í•ÕÉ¥Ñä½Ñ•ÍĞµÉÕ±•Ìµ•µÕ±…Ñ½È¤°)mÅÕ•Éä…ÕÑ¡½É¥é…Ñ¥½¹t¡¡ÑÑÁÌè¼½™¥É•‰…Í”¹½½±”¹½´½‘½Ì½™¥É•ÍÑ½É”½Í•ÕÉ¥Ñä½ÉÕ±•ÌµÅÕ•Éä¤¸(
+Failed to create stream fd: Operation not permitted
+Failed to create stream fd: Operation not permitted
+Failed to create stream fd: Operation not permitted
+# Radar security and rollout
+
+Firebase project: `widget-33ff3`. These are prototype Security Rules validated
+against the checked-in emulator tests; review them before broadly sharing the app.
+
+## Using the updated app
+
+1. Install the updated Android app on both phones. Opening it creates or restores
+   an anonymous Firebase account and registers its private notification token.
+2. Open the menu and exchange **Your Beacon ID** values. These are authenticated
+   account IDs, not the old FCM tokens.
+3. Each person enters the other's ID and taps **Approve Partner**. Sharing becomes
+   active only when both approvals match. The foreground app checks this status
+   every ten seconds.
+4. **Stop Sharing** removes your approval. The backend immediately denies future
+   partner location/history reads and notifications. Previously downloaded data,
+   screenshots, and notifications already in flight cannot be recalled.
+
+An anonymous identity belongs to this app installation. Clearing app data or
+reinstalling can lose it; exchange new IDs and approve again. Backup/device
+transfer of the app's private state is disabled. There is no account-recovery
+flow in this version.
+
+## Access model
+
+| Path | Read | Write |
+| --- | --- | --- |
+| `deviceAccounts/{uid}` | Owner only; backend resolves token | Owner only, validated token and server timestamp |
+| `pairingApprovals/{uid}` | Owner only | Owner approves one other UID, or deletes approval |
+| `locationsV2/{uid}` | Owner or mutually approved partner; single-document reads | Owner only, bounded fields and server timestamps |
+| `pairNotes/{a}/partners/{b}/entries/{id}` | Both approved partners; history queries limited to 100 | Authenticated sender creates immutable notes for the pair |
+| `notificationLimits/{uid}` | Backend only | Backend transaction only |
+| Legacy `locations`, `notes`, and every other path | Denied | Denied |
+
+Pair IDs are sorted lexicographically by the app. The pair parent paths are
+namespaces, not documents; independent approval documents provide authorization.
+Switching or removing either approval ends access to the previous pair's notes.
+Reapproving the same pair restores access to that pair's previous notes.
+
+The app queries notes within one pair's path using timestamp descending and a
+limit of 100; it no longer downloads other users' notes for local filtering.
+Reads ignore cache-only snapshots. Location notes may be written before a GPS
+fix exists. Once any GPS field is present, the entire location field group is
+required and validated on every write.
+
+The callable functions authenticate callers, check both approvals, resolve the
+recipient's private FCM token on the server, and enforce a per-sender ten-second
+notification interval in a transaction. The receiving app checks the intended
+UID and its current approved partner before acting on the message. Firestore
+rules alone cannot protect Admin SDK operations, so these checks are explicit.
+
+## Migration
+
+The original live rules allowed all reads and writes until September 26, 2026.
+Their local backup is `.security-local/original-firestore.rules` (git-ignored).
+Do not restore those public rules as a routine rollback.
+
+Old app builds do not authenticate and are incompatible with the new rules and
+callable API. Both devices must upgrade and pair again. Legacy data is preserved
+on the server but denied to clients. It is not automatically assigned to a new
+account: possession of an old device token is not proof of ownership. Any future
+history migration must establish ownership through a trusted process.
+
+## Reproduce validation
+
+Use Node.js 24 and Java 21 or newer:
+
+```sh
+npm ci
+npm --prefix functions ci
+npm --prefix functions run lint
+npm run test:rules
+npx -y firebase-tools@latest deploy --only firestore:rules --dry-run --project widget-33ff3
+bash gradlew :app:compileDebugKotlin --no-daemon
+```
+
+The tests use `demo-radar-security`, require the local emulator, and do not send
+real FCM notifications. They cover legitimate owner/pair access, outsiders,
+one-sided approval, revocation, forged ownership, strict schemas, missing fields,
+type confusion, large strings, range violations, timestamp manipulation,
+private token isolation, collection queries, legacy paths, and callable abuse.
+
+For a coordinated backend rollout after validation:
+
+```sh
+npx -y firebase-tools@latest deploy --only auth,firestore:rules,functions --project widget-33ff3
+```
+
+Before distributing widely, verify the two-phone flow: register, pair on both
+phones, ping, post/read notes, revoke on either phone, and confirm that the other
+phone can no longer fetch shared data or send requests. Background execution,
+notification permissions, and token refresh also need device testing.
+
+References: [anonymous Android authentication](https://firebase.google.com/docs/auth/android/anonymous-auth),
+[rules emulator testing](https://firebase.google.com/docs/firestore/security/test-rules-emulator),
+[query authorization](https://firebase.google.com/docs/firestore/security/rules-query).

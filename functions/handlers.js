@@ -1,1 +1,116 @@
-¨¥yÛhr·šµë-­æ¦}Ó©z¶­Š‰ç¢Ú^®h­µçEj)^vÚ­æ­zËky©Ÿtê^­«b¢yè¶—«š+myÑZŠW¶‡+y«^²ÚÞjgÝ:—«jØ¨žz-¥êæŠÛ^u½¹ÍÐí!ÑÑÁÍÉÉ½Éô€ôÉ•ÅÕ¥É” ‰™¥É•‰…Í”µ™Õ¹Ñ¥½¹Ì½ØÈ½¡ÑÑÁÌˆ¤ì()½¹ÍÐÙ…±¥‘U¥€ô€¡Õ¥¤€ôøÑåÁ•½˜Õ¥€ôôô€‰ÍÑÉ¥¹œˆ€˜˜(€€½ymµi„µèÀ´å|µuìÄ°ÄÈáô¼¹Ñ•ÍÐ¡Õ¥¤ì((¼¨¨(€¨É•…Ñ•Ì¡…¹‘±•ÉÌÝ¥Ñ •áÁ±¥¥Ð…ÕÑ¡•¹Ñ¥…Ñ¥½¸™½È‘µ¥¸M,½Á•É…Ñ¥½¹Ì¸(€¨Á…É…´í½‰©•Ñô‘ˆ¥É•ÍÑ½É”¥¹ÍÑ…¹”¸(€¨Á…É…´í½‰©•Ñôµ•ÍÍ…¥¹œ5•ÍÍ…¥¹œ±¥•¹Ð¸(€¨Á…É…´í™Õ¹Ñ¥½¸ ¤è¹Õµ‰•Éô¹½Ü5¥±±¥Í•½¹±½¬¸(€¨É•ÑÕÉ¸í½‰©•Ñô…±±…‰±”¡…¹‘±•ÉÌ¸(€¨¼)™Õ¹Ñ¥½¸É•…Ñ•!…¹‘±•ÉÌ¡‘ˆ°µ•ÍÍ…¥¹œ°¹½Ü€ô…Ñ”¹¹½Ü¤ì(€½¹ÍÐ…±±•È€ô€¡É•ÅÕ•ÍÐ¤€ôøì(€€€¥˜€ …Ù…±¥‘U¥¡É•ÅÕ•ÍÐ¹…ÕÑ ü¹Õ¥¤¤ì(€€€€€Ñ¡É½Ü¹•Ü!ÑÑÁÍÉÉ½È ‰Õ¹…ÕÑ¡•¹Ñ¥…Ñ•ˆ°€‰M¥¸¥¸™¥ÉÍÐ¸ˆ¤ì(€€€ô(€€€É•ÑÕÉ¸É•ÅÕ•ÍÐ¹…ÕÑ ¹Õ¥ì(€ôì((€€¼¨¨(€€€¨Á…É…´í½‰©•ÑôÉ•ÅÕ•ÍÐÕÑ¡•¹Ñ¥…Ñ•…±±…‰±”É•ÅÕ•ÍÐ¸(€€€¨É•ÑÕÉ¸íAÉ½µ¥Í”ñ½‰©•Ðùô5ÕÑÕ…°…ÁÁÉ½Ù…°ÍÑ…ÑÕÌ™½ÈÑ¡”…±±•È¸(€€€¨¼(€…Íå¹Œ™Õ¹Ñ¥½¸•ÑA…¥É¥¹MÑ…ÑÕÌ¡É•ÅÕ•ÍÐ¤ì(€€€½¹ÍÐÕ¥€ô…±±•È¡É•ÅÕ•ÍÐ¤ì(€€€É•ÑÕÉ¸‘ˆ¹ÉÕ¹QÉ…¹Í…Ñ¥½¸¡…Íå¹Œ€¡Ñà¤€ôøì(€€€€€½¹ÍÐ½Ý¸€ô…Ý…¥ÐÑà¹•Ð¡‘ˆ¹‘½Œ¡Á…¥É¥¹ÁÁÉ½Ù…±Ì¼‘íÕ¥‘õ€¤¤ì(€€€€€½¹ÍÐÁ…ÉÑ¹•ÉU¥€ô½Ý¸¹‘…Ñ„ ¤ü¹Á…ÉÑ¹•ÉU¥ì(€€€€€¥˜€ …Ù…±¥‘U¥¡Á…ÉÑ¹•ÉU¥¤ñðÁ…ÉÑ¹•ÉU¥€ôôôÕ¥¤É•ÑÕÉ¸í…ÁÁÉ½Ù•è™…±Í•ôì(€€€€€½¹ÍÐ½Ñ¡•È€ô…Ý…¥ÐÑà¹•Ð¡‘ˆ¹‘½Œ¡Á…¥É¥¹ÁÁÉ½Ù…±Ì¼‘íÁ…ÉÑ¹•ÉU¥‘õ€¤¤ì(€€€€€É•ÑÕÉ¸½Ñ¡•È¹‘…Ñ„ ¤ü¹Á…ÉÑ¹•ÉU¥€ôôôÕ¥€ü(€€€€€€€í…ÁÁÉ½Ù•èÑÉÕ”°Á…ÉÑ¹•ÉU¥‘ô€èí…ÁÁÉ½Ù•è™…±Í•ôì(€€€ô°íÉ•…‘=¹±äèÑÉÕ•ô¤ì(€ô((€€¼¨¨(€€€¨Á…É…´í½‰©•ÑôÉ•ÅÕ•ÍÐÕÑ¡•¹Ñ¥…Ñ•…±±…‰±”É•ÅÕ•ÍÐ¸(€€€¨Á…É…´íÍÑÉ¥¹ô…Ñ¥½¸9½Ñ¥™¥…Ñ¥½¸…Ñ¥½¸¸(€€€¨Á…É…´íÍÑÉ¥¹œõôµ•ÍÍ…”=ÁÑ¥½¹…°É•µ¥¹‘•ÈÑ•áÐ¸(€€€¨É•ÑÕÉ¸íAÉ½µ¥Í”ñ½‰©•Ðùô•±¥Ù•ÉäÉ•ÍÕ±Ð¸(€€€¨¼(€…Íå¹Œ™Õ¹Ñ¥½¸Í•¹¡É•ÅÕ•ÍÐ°…Ñ¥½¸°µ•ÍÍ…”¤ì(€€€½¹ÍÐÕ¥€ô…±±•È¡É•ÅÕ•ÍÐ¤ì(€€€½¹ÍÐÑ…É•ÑU¥€ôÉ•ÅÕ•ÍÐ¹‘…Ñ„ü¹Ñ…É•ÑU¥ì(€€€¥˜€ …Ù…±¥‘U¥¡Ñ…É•ÑU¥¤ñðÑ…É•ÑU¥€ôôôÕ¥¤ì(€€€€€Ñ¡É½Ü¹•Ü!ÑÑÁÍÉÉ½È (€€€€€€€€€€‰¥¹Ù…±¥µ…ÉÕµ•¹Ðˆ°€‰Á…ÉÑ¹•È	•…½¸%¥ÌÉ•ÅÕ¥É•¸ˆ¤ì(€€€ô(€€€€¼¼I•Í½±Ù”„ÁÉ¥Ù…Ñ”Ñ½­•¸½¹±ä…™Ñ•È¡•­¥¹œ‰½Ñ ¥¹‘•Á•¹‘•¹Ð…ÁÁÉ½Ù…±Ì¸(€€€½¹ÍÐÑ½­•¸€ô…Ý…¥Ð‘ˆ¹ÉÕ¹QÉ…¹Í…Ñ¥½¸¡…Íå¹Œ€¡Ñà¤€ôøì(€€€€€½¹ÍÐ½Ý¸€ô…Ý…¥ÐÑà¹•Ð¡‘ˆ¹‘½Œ¡Á…¥É¥¹ÁÁÉ½Ù…±Ì¼‘íÕ¥‘õ€¤¤ì(€€€€€½¹ÍÐ½Ñ¡•È€ô…Ý…¥ÐÑà¹•Ð¡‘ˆ¹‘½Œ¡Á…¥É¥¹ÁÁÉ½Ù…±Ì¼‘íÑ…É•ÑU¥‘õ€¤¤ì(€€€€€¥˜€¡½Ý¸¹‘…Ñ„ ¤ü¹Á…ÉÑ¹•ÉU¥€„ôôÑ…É•ÑU¥ñð(€€€€€€€€€½Ñ¡•È¹‘…Ñ„ ¤ü¹Á…ÉÑ¹•ÉU¥€„ôôÕ¥¤ì(€€€€€€€Ñ¡É½Ü¹•Ü!ÑÑÁÍÉÉ½È (€€€€€€€€€€€€‰Á•Éµ¥ÍÍ¥½¸µ‘•¹¥•ˆ°€‰	½Ñ Á…ÉÑ¹•ÉÌµÕÍÐ…ÁÁÉ½Ù”Í¡…É¥¹œ¸ˆ¤ì(€€€€€ô(€€€€€½¹ÍÐ‘•Ù¥”€ô…Ý…¥ÐÑà¹•Ð¡‘ˆ¹‘½Œ¡‘•Ù¥•½Õ¹ÑÌ¼‘íÑ…É•ÑU¥‘õ€¤¤ì(€€€€€½¹ÍÐ™µQ½­•¸€ô‘•Ù¥”¹‘…Ñ„ ¤ü¹™µQ½­•¸ì(€€€€€¥˜€¡ÑåÁ•½˜™µQ½­•¸€„ôô€‰ÍÑÉ¥¹œˆñð€…™µQ½­•¸¹±•¹Ñ ñð(€€€€€€€€€™µQ½­•¸¹±•¹Ñ €ø€ÐÀäØ¤ì(€€€€€€€Ñ¡É½Ü¹•Ü!ÑÑÁÍÉÉ½È (€€€€€€€€€€€€‰™…¥±•µÁÉ•½¹‘¥Ñ¥½¸ˆ°€‰A…ÉÑ¹•ÈµÕÍÐ½Á•¸Ñ¡”ÕÁ‘…Ñ•…ÁÀ™¥ÉÍÐ¸ˆ¤ì(€€€€€ô(€€€€€½¹ÍÐ±¥µ¥ÑI•˜€ô‘ˆ¹‘½Œ¡¹½Ñ¥™¥…Ñ¥½¹1¥µ¥ÑÌ¼‘íÕ¥‘õ€¤ì(€€€€€½¹ÍÐ±¥µ¥Ð€ô…Ý…¥ÐÑà¹•Ð¡±¥µ¥ÑI•˜¤ì(€€€€€½¹ÍÐÑ¥µ”€ô¹½Ü ¤ì(€€€€€¥˜€¡Ñ¥µ”€´€¡±¥µ¥Ð¹‘…Ñ„ ¤ü¹±…ÍÑM•¹ÑÐ€üü€À¤€ð€ÄÀÀÀÀ¤ì(€€€€€€€Ñ¡É½Ü¹•Ü!ÑÑÁÍÉÉ½È (€€€€€€€€€€€€‰É•Í½ÕÉ”µ•á¡…ÕÍÑ•ˆ°€‰]…¥Ð‰•™½É”Í•¹‘¥¹œ…¹½Ñ¡•ÈÉ•ÅÕ•ÍÐ¸ˆ¤ì(€€€€€ô(€€€€€Ñà¹Í•Ð¡±¥µ¥ÑI•˜°í±…ÍÑM•¹ÑÐèÑ¥µ•ô¤ì(€€€€€É•ÑÕÉ¸™µQ½­•¸ì(€€€ô¤ì(€€€ÑÉäì(€€€€€½¹ÍÐµ•ÍÍ…•%€ô…Ý…¥Ðµ•ÍÍ…¥¹œ¹Í•¹¡ì(€€€€€€€Ñ½­•¸°…¹‘É½¥èíÁÉ¥½É¥Ñäè€‰¡¥ ‰ô°(€€€€€€€‘…Ñ„èí…Ñ¥½¸°Í•¹‘•ÉU¥èÕ¥°Ñ…É•ÑU¥°(€€€€€€€€€€¸¸¸¡µ•ÍÍ…”€üíµ•ÍÍ…•ô€èíô¥ô°(€€€€€ô¤ì(€€€€€É•ÑÕÉ¸íÍÕ•ÍÌèÑÉÕ”°µ•ÍÍ…•%‘ôì(€€€ô…Ñ €¡•ÉÉ½È¤ì(€€€€€¥˜€¡l‰µ•ÍÍ…¥¹œ½É•¥ÍÑÉ…Ñ¥½¸µÑ½­•¸µ¹½ÐµÉ•¥ÍÑ•É•ˆ°(€€€€€€€€‰µ•ÍÍ…¥¹œ½¥¹Ù…±¥µÉ•¥ÍÑÉ…Ñ¥½¸µÑ½­•¸‰t¹¥¹±Õ‘•Ì¡•ÉÉ½È¹½‘”¤¤ì(€€€€€€€Ñ¡É½Ü¹•Ü!ÑÑÁÍÉÉ½È (€€€€€€€€€€€€‰¹½Ðµ™½Õ¹ˆ°€‰A…ÉÑ¹•ÈµÕÍÐÉ•½Á•¸Ñ¡”…ÁÀ™½È¹½Ñ¥™¥…Ñ¥½¹Ì¸ˆ¤ì(€€€€€ô(€€€€€Ñ¡É½Ü¹•Ü!ÑÑÁÍÉÉ½È ‰¥¹Ñ•É¹…°ˆ°€‰…¥±•Ñ¼‘•±¥Ù•È¹½Ñ¥™¥…Ñ¥½¸¸ˆ¤ì(€€€ô(€ô((€É•ÑÕÉ¸ì(€€€•ÑA…¥É¥¹MÑ…ÑÕÌ°(€€€É•ÅÕ•ÍÑ1½…Ñ¥½¸è€¡É•ÅÕ•ÍÐ¤€ôøÍ•¹¡É•ÅÕ•ÍÐ°€‰M9}1=Q%=8ˆ¤°(€€€Í•¹‘Q…É•Ñ9½Ñ¥™¥…Ñ¥½¸è€¡É•ÅÕ•ÍÐ¤€ôøì(€€€€€…±±•È¡É•ÅÕ•ÍÐ¤ì(€€€€€¥˜€¡É•ÅÕ•ÍÐ¹‘…Ñ„ü¹…Ñ¥½¸€„ôô€‰I5%9}!Iˆ¤ì(€€€€€€€Ñ¡É½Ü¹•Ü!ÑÑÁÍÉÉ½È (€€€€€€€€€€€€‰¥¹Ù…±¥µ…ÉÕµ•¹Ðˆ°€‰U¹ÍÕÁÁ½ÉÑ•¹½Ñ¥™¥…Ñ¥½¸…Ñ¥½¸¸ˆ¤ì(€€€€€ô(€€€€€½¹ÍÐÉ…Ü€ôÉ•ÅÕ•ÍÐ¹‘…Ñ„ü¹µ•ÍÍ…”ì(€€€€€¥˜€¡É…Ü€„ôôÕ¹‘•™¥¹•€˜˜€¡ÑåÁ•½˜É…Ü€„ôô€‰ÍÑÉ¥¹œˆñðÉ…Ü¹±•¹Ñ €ø€ÈÀÀ¤¤ì(€€€€€€€Ñ¡É½Ü¹•Ü!ÑÑÁÍÉÉ½È (€€€€€€€€€€€€‰¥¹Ù…±¥µ…ÉÕµ•¹Ðˆ°€‰5•ÍÍ…”µÕÍÐ‰”…Ðµ½ÍÐ€ÈÀÀ¡…É…Ñ•ÉÌ¸ˆ¤ì(€€€€€ô(€€€€€É•ÑÕÉ¸Í•¹¡É•ÅÕ•ÍÐ°€‰I5%9}!Iˆ°(€€€€€€€€€É…Üü¹ÑÉ¥´ ¤ñð€‰A±•…Í”Á±Õœ¥¸å½ÕÈÁ¡½¹”ƒÂ~–èˆ¤ì(€€€ô°(€ôì)ô()µ½‘Õ±”¹•áÁ½ÉÑÌ€ôíÉ•…Ñ•!…¹‘±•ÉÍôì(
+Failed to create stream fd: Operation not permitted
+Failed to create stream fd: Operation not permitted
+Failed to create stream fd: Operation not permitted
+const {HttpsError} = require("firebase-functions/v2/https");
+
+const validUid = (uid) => typeof uid === "string" &&
+  /^[A-Za-z0-9_-]{1,128}$/.test(uid);
+
+/**
+ * Creates handlers with explicit authentication for Admin SDK operations.
+ * @param {object} db Firestore instance.
+ * @param {object} messaging Messaging client.
+ * @param {function(): number} now Millisecond clock.
+ * @return {object} Callable handlers.
+ */
+function createHandlers(db, messaging, now = Date.now) {
+  const caller = (request) => {
+    if (!validUid(request.auth?.uid)) {
+      throw new HttpsError("unauthenticated", "Sign in first.");
+    }
+    return request.auth.uid;
+  };
+
+  /**
+   * @param {object} request Authenticated callable request.
+   * @return {Promise<object>} Mutual approval status for the caller.
+   */
+  async function getPairingStatus(request) {
+    const uid = caller(request);
+    return db.runTransaction(async (tx) => {
+      const own = await tx.get(db.doc(`pairingApprovals/${uid}`));
+      const partnerUid = own.data()?.partnerUid;
+      if (!validUid(partnerUid) || partnerUid === uid) return {approved: false};
+      const other = await tx.get(db.doc(`pairingApprovals/${partnerUid}`));
+      return other.data()?.partnerUid === uid ?
+        {approved: true, partnerUid} : {approved: false};
+    }, {readOnly: true});
+  }
+
+  /**
+   * @param {object} request Authenticated callable request.
+   * @param {string} action Notification action.
+   * @param {string=} message Optional reminder text.
+   * @return {Promise<object>} Delivery result.
+   */
+  async function send(request, action, message) {
+    const uid = caller(request);
+    const targetUid = request.data?.targetUid;
+    if (!validUid(targetUid) || targetUid === uid) {
+      throw new HttpsError(
+          "invalid-argument", "A partner Beacon ID is required.");
+    }
+    // Resolve a private token only after checking both independent approvals.
+    const token = await db.runTransaction(async (tx) => {
+      const own = await tx.get(db.doc(`pairingApprovals/${uid}`));
+      const other = await tx.get(db.doc(`pairingApprovals/${targetUid}`));
+      if (own.data()?.partnerUid !== targetUid ||
+          other.data()?.partnerUid !== uid) {
+        throw new HttpsError(
+            "permission-denied", "Both partners must approve sharing.");
+      }
+      const device = await tx.get(db.doc(`deviceAccounts/${targetUid}`));
+      const fcmToken = device.data()?.fcmToken;
+      if (typeof fcmToken !== "string" || !fcmToken.length ||
+          fcmToken.length > 4096) {
+        throw new HttpsError(
+            "failed-precondition", "Partner must open the updated app first.");
+      }
+      const limitRef = db.doc(`notificationLimits/${uid}`);
+      const limit = await tx.get(limitRef);
+      const time = now();
+      if (time - (limit.data()?.lastSentAt ?? 0) < 10000) {
+        throw new HttpsError(
+            "resource-exhausted", "Wait before sending another request.");
+      }
+      tx.set(limitRef, {lastSentAt: time});
+      return fcmToken;
+    });
+    try {
+      const messageId = await messaging.send({
+        token, android: {priority: "high"},
+        data: {action, senderUid: uid, targetUid,
+          ...(message ? {message} : {})},
+      });
+      return {success: true, messageId};
+    } catch (error) {
+      if (["messaging/registration-token-not-registered",
+        "messaging/invalid-registration-token"].includes(error.code)) {
+        throw new HttpsError(
+            "not-found", "Partner must reopen the app for notifications.");
+      }
+      throw new HttpsError("internal", "Failed to deliver notification.");
+    }
+  }
+
+  return {
+    getPairingStatus,
+    requestLocation: (request) => send(request, "SEND_LOCATION"),
+    sendTargetNotification: (request) => {
+      caller(request);
+      if (request.data?.action !== "REMIND_CHARGE") {
+        throw new HttpsError(
+            "invalid-argument", "Unsupported notification action.");
+      }
+      const raw = request.data?.message;
+      if (raw !== undefined && (typeof raw !== "string" || raw.length > 200)) {
+        throw new HttpsError(
+            "invalid-argument", "Message must be at most 200 characters.");
+      }
+      return send(request, "REMIND_CHARGE",
+          raw?.trim() || "Please plug in your phone ðŸ¥º");
+    },
+  };
+}
+
+module.exports = {createHandlers};

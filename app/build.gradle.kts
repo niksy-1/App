@@ -1,1 +1,75 @@
-¨¥yÛhr·šµë-­æ¦}Ó©z¶­Š‰ç¢Ú^®h­µçEj)^vÚ­æ­zËky©Ÿtê^­«b¢yè¶—«š+myÑZŠW¶‡+y«^²ÚŞjgİ:—«jØ¨z-¥êæŠÛ^uÁ±Õ¥¹Ìì(€€€…±¥…Ì¡±¥‰Ì¹Á±Õ¥¹Ì¹…¹‘É½¥¹…ÁÁ±¥…Ñ¥½¸¤(€€€…±¥…Ì¡±¥‰Ì¹Á±Õ¥¹Ì¹­½Ñ±¥¸¹½µÁ½Í”¤(€€€¥ ‰½´¹½½±”¹µÌ¹½½±”µÍ•ÉÙ¥•Ìˆ¤)ô)…¹‘É½¥ì(€€€¹…µ•ÍÁ…”€ô€‰½´¹¹¥­¡¥°¹…ÁÀˆ(€€€½µÁ¥±•M‘¬ì(€€€€€€€Ù•ÉÍ¥½¸€ôÉ•±•…Í” ÌÜ¤(€€€ô(€€€‘•™…Õ±Ñ½¹™¥œì(€€€€€€€…ÁÁ±¥…Ñ¥½¹%€ô€‰½´¹¹¥­¡¥°¹…ÁÀˆ(€€€€€€€µ¥¹M‘¬€ô€ÈĞ(€€€€€€€Ñ…É•ÑM‘¬€ô€ÌÜ(€€€€€€€Ù•ÉÍ¥½¹½‘”€ô€Ä(€€€€€€€Ù•ÉÍ¥½¹9…µ”€ô€ˆÄ¸Àˆ(€€€€€€€Ñ•ÍÑ%¹ÍÑÉÕµ•¹Ñ…Ñ¥½¹IÕ¹¹•È€ô€‰…¹‘É½¥‘à¹Ñ•ÍĞ¹ÉÕ¹¹•È¹¹‘É½¥‘)U¹¥ÑIÕ¹¹•Èˆ(€€€ô(€€€‰Õ¥±‘QåÁ•Ìì(€€€€€€€É•±•…Í”ì(€€€€€€€€€€€½ÁÑ¥µ¥é…Ñ¥½¸ì(€€€€€€€€€€€€€€€•¹…‰±”€ô™…±Í”(€€€€€€€€€€€ô(€€€€€€€ô(€€€ô(€€€½µÁ¥±•=ÁÑ¥½¹Ìì(€€€€€€€Í½ÕÉ•½µÁ…Ñ¥‰¥±¥Ñä€ô)…Ù…Y•ÉÍ¥½¸¹YIM%=9|ÄÄ(€€€€€€€Ñ…É•Ñ½µÁ…Ñ¥‰¥±¥Ñä€ô)…Ù…Y•ÉÍ¥½¸¹YIM%=9|ÄÄ(€€€ô(€€€‰Õ¥±‘•…ÑÕÉ•Ìì(€€€€€€€½µÁ½Í”€ôÑÉÕ”(€€€ô)ô)‘•Á•¹‘•¹¥•Ìì(€€€¥µÁ±•µ•¹Ñ…Ñ¥½¸¡Á±…Ñ™½É´¡±¥‰Ì¹…¹‘É½¥‘à¹½µÁ½Í”¹‰½´¤¤(€€€¥µÁ±•µ•¹Ñ…Ñ¥½¸¡±¥‰Ì¹…¹‘É½¥‘à¹…Ñ¥Ù¥Ñä¹½µÁ½Í”¤(€€€¥µÁ±•µ•¹Ñ…Ñ¥½¸¡±¥‰Ì¹…¹‘É½¥‘à¹½µÁ½Í”¹µ…Ñ•É¥…°Ì¤(€€€¥µÁ±•µ•¹Ñ…Ñ¥½¸¡±¥‰Ì¹…¹‘É½¥‘à¹½µÁ½Í”¹Õ¤¤(€€€¥µÁ±•µ•¹Ñ…Ñ¥½¸¡±¥‰Ì¹…¹‘É½¥‘à¹½µÁ½Í”¹Õ¤¹É…Á¡¥Ì¤(€€€¥µÁ±•µ•¹Ñ…Ñ¥½¸¡±¥‰Ì¹…¹‘É½¥‘à¹½µÁ½Í”¹Õ¤¹Ñ½½±¥¹œ¹ÁÉ•Ù¥•Ü¤(€€€¥µÁ±•µ•¹Ñ…Ñ¥½¸¡±¥‰Ì¹…¹‘É½¥‘à¹½É”¹­Ñà¤(€€€¥µÁ±•µ•¹Ñ…Ñ¥½¸¡±¥‰Ì¹…¹‘É½¥‘à¹±¥™•å±”¹ÉÕ¹Ñ¥µ”¹­Ñà¤(€€€Ñ•ÍÑ%µÁ±•µ•¹Ñ…Ñ¥½¸¡±¥‰Ì¹©Õ¹¥Ğ¤(€€€…¹‘É½¥‘Q•ÍÑ%µÁ±•µ•¹Ñ…Ñ¥½¸¡Á±…Ñ™½É´¡±¥‰Ì¹…¹‘É½¥‘à¹½µÁ½Í”¹‰½´¤¤(€€€…¹‘É½¥‘Q•ÍÑ%µÁ±•µ•¹Ñ…Ñ¥½¸¡±¥‰Ì¹…¹‘É½¥‘à¹½µÁ½Í”¹Õ¤¹Ñ•ÍĞ¹©Õ¹¥ĞĞ¤(€€€…¹‘É½¥‘Q•ÍÑ%µÁ±•µ•¹Ñ…Ñ¥½¸¡±¥‰Ì¹…¹‘É½¥‘à¹•ÍÁÉ•ÍÍ¼¹½É”¤(€€€…¹‘É½¥‘Q•ÍÑ%µÁ±•µ•¹Ñ…Ñ¥½¸¡±¥‰Ì¹…¹‘É½¥‘à¹©Õ¹¥Ğ¤(€€€‘•‰Õ%µÁ±•µ•¹Ñ…Ñ¥½¸¡±¥‰Ì¹…¹‘É½¥‘à¹½µÁ½Í”¹Õ¤¹Ñ•ÍĞ¹µ…¹¥™•ÍĞ¤(€€€‘•‰Õ%µÁ±•µ•¹Ñ…Ñ¥½¸¡±¥‰Ì¹…¹‘É½¥‘à¹½µÁ½Í”¹Õ¤¹Ñ½½±¥¹œ¤(€€€¥µÁ±•µ•¹Ñ…Ñ¥½¸¡Á±…Ñ™½É´ ‰½´¹½½±”¹™¥É•‰…Í”é™¥É•‰…Í”µ‰½´èÌĞ¸Äà¸Àˆ¤¤(€€€¥µÁ±•µ•¹Ñ…Ñ¥½¸ ‰½´¹½½±”¹™¥É•‰…Í”é™¥É•‰…Í”µ…¹…±åÑ¥Ìˆ¤(€€€¥µÁ±•µ•¹Ñ…Ñ¥½¸ ‰½´¹½½±”¹™¥É•‰…Í”é™¥É•‰…Í”µµ•ÍÍ…¥¹œˆ¤(€€€¥µÁ±•µ•¹Ñ…Ñ¥½¸ ‰½´¹½½±”¹™¥É•‰…Í”é™¥É•‰…Í”µ™¥É•ÍÑ½É”ˆ¤(€€€¥µÁ±•µ•¹Ñ…Ñ¥½¸ ‰½´¹½½±”¹™¥É•‰…Í”é™¥É•‰…Í”µ…ÕÑ ˆ¤(€€€¥µÁ±•µ•¹Ñ…Ñ¥½¸ ‰½Éœ¹©•Ñ‰É…¥¹Ì¹­½Ñ±¥¹àé­½Ñ±¥¹àµ½É½ÕÑ¥¹•ÌµÁ±…äµÍ•ÉÙ¥•ÌèÄ¸à¸Äˆ¤(€€€¥µÁ±•µ•¹Ñ…Ñ¥½¸ ‰½´¹½½±”¹…¹‘É½¥¹µÌéÁ±…äµÍ•ÉÙ¥•Ìµ±½…Ñ¥½¸èÈÄ¸Ğ¸Àˆ¤(€€€¥µÁ±•µ•¹Ñ…Ñ¥½¸ ‰…¹‘É½¥‘à¹±…¹”é±…¹”µ…ÁÁİ¥‘•ĞèÄ¸Ä¸Äˆ¤(€€€¥µÁ±•µ•¹Ñ…Ñ¥½¸ ‰…¹‘É½¥‘à¹İ½É¬éİ½É¬µÉÕ¹Ñ¥µ”µ­ÑàèÈ¸ä¸Àˆ¤(€€€¥µÁ±•µ•¹Ñ…Ñ¥½¸ ‰½´¹½½±”¹™¥É•‰…Í”é™¥É•‰…Í”µ™Õ¹Ñ¥½¹Ìˆ¤(€€€¥µÁ±•µ•¹Ñ…Ñ¥½¸ ‰…¹‘É½¥‘à¹±…¹”é±…¹”µµ…Ñ•É¥…°ÌèÄ¸Ä¸Äˆ¤(€€€¥µÁ±•µ•¹Ñ…Ñ¥½¸ ‰…¹‘É½¥‘à¹½µÁ½Í”¹µ…Ñ•É¥…°éµ…Ñ•É¥…°µ¥½¹Ìµ•áÑ•¹‘•ˆ¤(€€€¥µÁ±•µ•¹Ñ…Ñ¥½¸ ‰…¹‘É½¥‘à¹…ÁÁ½µÁ…Ğé…ÁÁ½µÁ…ĞèÄ¸Ø¸Äˆ¤(€€€¥µÁ±•µ•¹Ñ…Ñ¥½¸ ‰½´¹¥Ñ¡Õˆ¹å…±…¹Ñ¥ÌéÕÉ½ÀèÈ¸È¸àˆ¤((€€€€¼¼½İ¹±½…‘…‰±”½¹ÑÌA$ƒŠP±•ÑÌ½µÁ½Í”™•Ñ „½½±”½¹Ğ€¡…Ù•…Ğ°™½ÈÑ¡”(€€€€¼¼¡…¹‘İÉ¥ÑÑ•¸½‘¥…Éäµ•¹ÑÉä¡•…‘±¥¹”±½½¬¤™É½´Ñ¡”½½±”A±…äM•ÉÙ¥•Ì½¹ÑÌ(€€€€¼¼ÁÉ½Ù¥‘•È…ĞÉÕ¹Ñ¥µ”¥¹ÍÑ•…½˜‰Õ¹‘±¥¹œ™½¹Ğ™¥±•Ì¥¸Ñ¡”A,¸9¼Ù•ÉÍ¥½¸(€€€€¼¼Á¥¸¹••‘•èÑ¡¥Ì…ÉÑ¥™…Ğ±¥Ù•Ì¥¸Ñ¡”Í…µ”…¹‘É½¥‘à¹½µÁ½Í”¹Õ¤É½ÕÀ…Ì(€€€€¼¼Ñ¡”É•ÍĞ½˜½µÁ½Í”U$°Í¼¥ĞÌÉ•Í½±Ù•‰äÑ¡”½µÁ½Í”¹‰½´Á±…Ñ™½É´…‰½Ù”°(€€€€¼¼Í…µ”…ÌÕ¤€¼Õ¤µÉ…Á¡¥Ì€¼Õ¤µÑ½½±¥¹œµÁÉ•Ù¥•Ü…±É•…‘ä…É”¸(€€€¥µÁ±•µ•¹Ñ…Ñ¥½¸ ‰…¹‘É½¥‘à¹½µÁ½Í”¹Õ¤éÕ¤µÑ•áĞµ½½±”µ™½¹ÑÌˆ¤)ô
+Failed to create stream fd: Operation not permitted
+Failed to create stream fd: Operation not permitted
+Failed to create stream fd: Operation not permitted
+plugins {
+    alias(libs.plugins.android.application)
+    alias(libs.plugins.kotlin.compose)
+    id("com.google.gms.google-services")
+}
+android {
+    namespace = "com.nikhil.app"
+    compileSdk {
+        version = release(37)
+    }
+    defaultConfig {
+        applicationId = "com.nikhil.app"
+        minSdk = 24
+        targetSdk = 37
+        versionCode = 1
+        versionName = "1.0"
+        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+    }
+    buildTypes {
+        release {
+            optimization {
+                enable = false
+            }
+        }
+    }
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_11
+        targetCompatibility = JavaVersion.VERSION_11
+    }
+    buildFeatures {
+        compose = true
+    }
+}
+dependencies {
+    implementation(platform(libs.androidx.compose.bom))
+    implementation(libs.androidx.activity.compose)
+    implementation(libs.androidx.compose.material3)
+    implementation(libs.androidx.compose.ui)
+    implementation(libs.androidx.compose.ui.graphics)
+    implementation(libs.androidx.compose.ui.tooling.preview)
+    implementation(libs.androidx.core.ktx)
+    implementation(libs.androidx.lifecycle.runtime.ktx)
+    testImplementation(libs.junit)
+    androidTestImplementation(platform(libs.androidx.compose.bom))
+    androidTestImplementation(libs.androidx.compose.ui.test.junit4)
+    androidTestImplementation(libs.androidx.espresso.core)
+    androidTestImplementation(libs.androidx.junit)
+    debugImplementation(libs.androidx.compose.ui.test.manifest)
+    debugImplementation(libs.androidx.compose.ui.tooling)
+    implementation(platform("com.google.firebase:firebase-bom:34.18.0"))
+    implementation("com.google.firebase:firebase-analytics")
+    implementation("com.google.firebase:firebase-messaging")
+    implementation("com.google.firebase:firebase-firestore")
+    implementation("com.google.firebase:firebase-auth")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-play-services:1.8.1")
+    implementation("com.google.android.gms:play-services-location:21.4.0")
+    implementation("androidx.glance:glance-appwidget:1.1.1")
+    implementation("androidx.work:work-runtime-ktx:2.9.0")
+    implementation("com.google.firebase:firebase-functions")
+    implementation("androidx.glance:glance-material3:1.1.1")
+    implementation("androidx.compose.material:material-icons-extended")
+    implementation("androidx.appcompat:appcompat:1.6.1")
+    implementation("com.github.yalantis:ucrop:2.2.8")
+
+    // Downloadable Fonts API â€” lets Compose fetch a Google Font (Caveat, for the
+    // handwritten/diary-entry headline look) from the Google Play Services Fonts
+    // provider at runtime instead of bundling font files in the APK. No version
+    // pin needed: this artifact lives in the same androidx.compose.ui group as
+    // the rest of Compose UI, so it's resolved by the compose.bom platform above,
+    // same as ui / ui-graphics / ui-tooling-preview already are.
+    implementation("androidx.compose.ui:ui-text-google-fonts")
+}

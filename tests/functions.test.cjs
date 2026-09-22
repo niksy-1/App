@@ -1,1 +1,78 @@
-¨¥yÛhr·šµë-­æ¦}Ó©z¶­Š‰ç¢Ú^®h­µçEj)^vÚ­æ­zËky©Ÿtê^­«b¢yè¶—«š+myÑZŠW¶‡+y«^²ÚÞjgÝ:—«jØ¨žz-¥êæŠÛ^u½¹ÍÐíÑ•ÍÐ°‰•™½É”°…™Ñ•È°‰•™½É•…¡ô€ôÉ•ÅÕ¥É” ¹½‘”éÑ•ÍÐœ¤ì)½¹ÍÐ…ÍÍ•ÉÐ€ôÉ•ÅÕ¥É” ¹½‘”é…ÍÍ•ÉÐ½ÍÑÉ¥Ðœ¤ì)½¹ÍÐ…‘µ¥¸€ôÉ•ÅÕ¥É” œ¸¸½™Õ¹Ñ¥½¹Ì½¹½‘•}µ½‘Õ±•Ì½™¥É•‰…Í”µ…‘µ¥¸œ¤ì)½¹ÍÐíÉ•…Ñ•!…¹‘±•ÉÍô€ôÉ•ÅÕ¥É” œ¸¸½™Õ¹Ñ¥½¹Ì½¡…¹‘±•ÉÌœ¤ì)±•Ð…ÁÀ°‘ˆ°¡…¹‘±•ÉÌ°Í•¹Ð°±½¬ì)½¹ÍÐÉ•ÅÕ•ÍÐ€ô€¡Õ¥€ô€…±¥”œ°‘…Ñ„€ôíÑ…É•ÑU¥è€‰½ˆô¤€ôø€¡í…ÕÑ èíÕ¥‘ô°‘…Ñ…ô¤ì)½¹ÍÐ½‘”€ô€¡•áÁ•Ñ•¤€ôø€¡•ÉÉ½È¤€ôø•ÉÉ½È¹½‘”€ôôô•áÁ•Ñ•ì)‰•™½É”  ¤€ôøì(€¥˜€ …ÁÉ½•ÍÌ¹•¹Ø¹%IMQ=I}5U1Q=I}!=MP¤Ñ¡É½Ü¹•ÜÉÉ½È µÕ±…Ñ½ÈÉ•ÅÕ¥É•¸œ¤ì(€…ÁÀ€ô…‘µ¥¸¹¥¹¥Ñ¥…±¥é•ÁÀ¡íÁÉ½©•Ñ%è€‘•µ¼µÉ…‘…ÈµÍ•ÕÉ¥Ñäô°€Í•ÕÉ¥ÑäµÑ•ÍÑÌœ¤ì(€‘ˆ€ô…ÁÀ¹™¥É•ÍÑ½É” ¤ì)ô¤ì)‰•™½É•… ¡…Íå¹Œ€ ¤€ôøì(€½¹ÍÐÉ•ÍÁ½¹Í”€ô…Ý…¥Ð™•Ñ ¡¡ÑÑÀè¼¼‘íÁÉ½•ÍÌ¹•¹Ø¹%IMQ=I}5U1Q=I}!=MQô½•µÕ±…Ñ½È½ØÄ½ÁÉ½©•ÑÌ½‘•µ¼µÉ…‘…ÈµÍ•ÕÉ¥Ñä½‘…Ñ…‰…Í•Ì¼¡‘•™…Õ±Ð¤½‘½Õµ•¹ÑÍ€°íµ•Ñ¡½è€1Qô¤ì(€…ÍÍ•ÉÐ¹•ÅÕ…°¡É•ÍÁ½¹Í”¹½¬°ÑÉÕ”¤ì(€Í•¹Ð€ômtì(€±½¬€ô€ÄÀÀÀÀÀì(€¡…¹‘±•ÉÌ€ôÉ•…Ñ•!…¹‘±•ÉÌ¡‘ˆ°íÍ•¹è…Íå¹Œ€¡µ•ÍÍ…”¤€ôøíÍ•¹Ð¹ÁÕÍ ¡µ•ÍÍ…”¤ìÉ•ÑÕÉ¸€µ•ÍÍ…”µ¥œíõô°€ ¤€ôø±½¬¤ì)ô¤ì)…™Ñ•È¡…Íå¹Œ€ ¤€ôø…ÁÀü¹‘•±•Ñ” ¤¤ì)…Íå¹Œ™Õ¹Ñ¥½¸Á…¥È ¤ì(€…Ý…¥Ð‘ˆ¹‘½Œ Á…¥É¥¹ÁÁÉ½Ù…±Ì½…±¥”œ¤¹Í•Ð¡íÁ…ÉÑ¹•ÉU¥è€‰½ˆô¤ì(€…Ý…¥Ð‘ˆ¹‘½Œ Á…¥É¥¹ÁÁÉ½Ù…±Ì½‰½ˆœ¤¹Í•Ð¡íÁ…ÉÑ¹•ÉU¥è€…±¥”ô¤ì(€…Ý…¥Ð‘ˆ¹‘½Œ ‘•Ù¥•½Õ¹ÑÌ½‰½ˆœ¤¹Í•Ð¡í™µQ½­•¸è€ÁÉ¥Ù…Ñ”µ‰½ˆµÑ½­•¸ô¤ì)ô)Ñ•ÍÐ …±°…±±…‰±•ÌÉ•ÅÕ¥É”…ÕÑ¡•¹Ñ¥…Ñ¥½¸œ°…Íå¹Œ€ ¤€ôøì(€™½È€¡½¹ÍÐ¡…¹‘±•È½˜=‰©•Ð¹Ù…±Õ•Ì¡¡…¹‘±•ÉÌ¤¤ì(€€€…Ý…¥Ð…ÍÍ•ÉÐ¹É•©•ÑÌ¡…Íå¹Œ€ ¤€ôø¡…¹‘±•È¡í‘…Ñ„èíÑ…É•ÑU¥è€‰½ˆœ°…Ñ¥½¸è€I5%9}!Iõô¤°½‘” Õ¹…ÕÑ¡•¹Ñ¥…Ñ•œ¤¤ì(€ô(€…ÍÍ•ÉÐ¹•ÅÕ…°¡Í•¹Ð¹±•¹Ñ °€À¤ì)ô¤ì)Ñ•ÍÐ …±±…‰±•ÌÉ•©•ÐÉ…ÜÑ½­•¸Ñ…É•ÑÌ°Í•±˜µÑ…É•ÑÌ°¥¹Ù…±¥%Ì°…¹½¹”µÍ¥‘•…ÁÁÉ½Ù…°œ°…Íå¹Œ€ ¤€ôøì(€™½È€¡½¹ÍÐ‘…Ñ„½˜míÑ…É•ÑQ½­•¸è€ÍÑ½±•¸µÑ½­•¸ô°íÑ…É•ÑU¥è€…±¥”ô°íÑ…É•ÑU¥è€œ¸¸½‰½ˆô°íÑ…É•ÑU¥è€Ñõt¤ì(€€€…Ý…¥Ð…ÍÍ•ÉÐ¹É•©•ÑÌ¡¡…¹‘±•ÉÌ¹É•ÅÕ•ÍÑ1½…Ñ¥½¸¡É•ÅÕ•ÍÐ …±¥”œ°‘…Ñ„¤¤°½‘” ¥¹Ù…±¥µ…ÉÕµ•¹Ðœ¤¤ì(€ô(€…Ý…¥Ð‘ˆ¹‘½Œ Á…¥É¥¹ÁÁÉ½Ù…±Ì½…±¥”œ¤¹Í•Ð¡íÁ…ÉÑ¹•ÉU¥è€‰½ˆô¤ì(€…Ý…¥Ð…ÍÍ•ÉÐ¹É•©•ÑÌ¡¡…¹‘±•ÉÌ¹É•ÅÕ•ÍÑ1½…Ñ¥½¸¡É•ÅÕ•ÍÐ ¤¤°½‘” Á•Éµ¥ÍÍ¥½¸µ‘•¹¥•œ¤¤ì(€…ÍÍ•ÉÐ¹‘••ÁÅÕ…°¡…Ý…¥Ð¡…¹‘±•ÉÌ¹•ÑA…¥É¥¹MÑ…ÑÕÌ¡É•ÅÕ•ÍÐ ¤¤°í…ÁÁÉ½Ù•è™…±Í•ô¤ì(€…ÍÍ•ÉÐ¹•ÅÕ…°¡Í•¹Ð¹±•¹Ñ °€À¤ì)ô¤ì)Ñ•ÍÐ …ÁÁÉ½Ù•Í•¹‘•ÈÕÍ•ÌÍ•ÉÙ•ÈµÍ¥‘”Ñ½­•¸…¹É•¥Á¥•¹Ð¥‘•¹Ñ¥Ñä°Ñ¡•¸É…Ñ”±¥µ¥Ð…ÁÁ±¥•Ìœ°…Íå¹Œ€ ¤€ôøì(€…Ý…¥ÐÁ…¥È ¤ì(€…ÍÍ•ÉÐ¹‘••ÁÅÕ…°¡…Ý…¥Ð¡…¹‘±•ÉÌ¹•ÑA…¥É¥¹MÑ…ÑÕÌ¡É•ÅÕ•ÍÐ ¤¤°í…ÁÁÉ½Ù•èÑÉÕ”°Á…ÉÑ¹•ÉU¥è€‰½ˆô¤ì(€…Ý…¥Ð¡…¹‘±•ÉÌ¹É•ÅÕ•ÍÑ1½…Ñ¥½¸¡É•ÅÕ•ÍÐ …±¥”œ°íÑ…É•ÑU¥è€‰½ˆœ°Ñ…É•ÑQ½­•¸è€…ÑÑ…­•ÈµÑ½­•¸ô¤¤ì(€…ÍÍ•ÉÐ¹•ÅÕ…°¡Í•¹ÑlÁt¹Ñ½­•¸°€ÁÉ¥Ù…Ñ”µ‰½ˆµÑ½­•¸œ¤ì(€…ÍÍ•ÉÐ¹‘••ÁÅÕ…°¡Í•¹ÑlÁt¹‘…Ñ„°í…Ñ¥½¸è€M9}1=Q%=8œ°Í•¹‘•ÉU¥è€…±¥”œ°Ñ…É•ÑU¥è€‰½ˆô¤ì(€…Ý…¥Ð…ÍÍ•ÉÐ¹É•©•ÑÌ¡¡…¹‘±•ÉÌ¹É•ÅÕ•ÍÑ1½…Ñ¥½¸¡É•ÅÕ•ÍÐ ¤¤°½‘” É•Í½ÕÉ”µ•á¡…ÕÍÑ•œ¤¤ì(€±½¬€¬ô€ÄÀÀÀÀì(€…Ý…¥Ð¡…¹‘±•ÉÌ¹Í•¹‘Q…É•Ñ9½Ñ¥™¥…Ñ¥½¸¡É•ÅÕ•ÍÐ …±¥”œ°íÑ…É•ÑU¥è€‰½ˆœ°…Ñ¥½¸è€I5%9}!Iœ°µ•ÍÍ…”è€¡…É”Í½½¸ô¤¤ì(€…ÍÍ•ÉÐ¹•ÅÕ…°¡Í•¹ÑlÅt¹‘…Ñ„¹µ•ÍÍ…”°€¡…É”Í½½¸œ¤ì)ô¤ì)Ñ•ÍÐ ½¹ÕÉÉ•¹ÐÉ•ÅÕ•ÍÑÌ…¹¹½Ð‰åÁ…ÍÌÑÉ…¹Í…Ñ¥½¸É…Ñ”±¥µ¥Ðœ°…Íå¹Œ€ ¤€ôøì(€…Ý…¥ÐÁ…¥È ¤ì(€½¹ÍÐÉ•ÍÕ±ÑÌ€ô…Ý…¥ÐAÉ½µ¥Í”¹…±±M•ÑÑ±•¡m¡…¹‘±•ÉÌ¹É•ÅÕ•ÍÑ1½…Ñ¥½¸¡É•ÅÕ•ÍÐ ¤¤°¡…¹‘±•ÉÌ¹É•ÅÕ•ÍÑ1½…Ñ¥½¸¡É•ÅÕ•ÍÐ ¤¥t¤ì(€…ÍÍ•ÉÐ¹•ÅÕ…°¡É•ÍÕ±ÑÌ¹™¥±Ñ•È ¡É•ÍÕ±Ð¤€ôøÉ•ÍÕ±Ð¹ÍÑ…ÑÕÌ€ôôô€™Õ±™¥±±•œ¤¹±•¹Ñ °€Ä¤ì(€…ÍÍ•ÉÐ¹•ÅÕ…°¡Í•¹Ð¹±•¹Ñ °€Ä¤ì)ô¤ì)Ñ•ÍÐ É•Ù½…Ñ¥½¸‰±½­Ì‰½Ñ …±±…‰±•Ì…¹±•…ÉÌÉ•Á½ÉÑ•Á…¥É¥¹œÍÑ…ÑÕÌœ°…Íå¹Œ€ ¤€ôøì(€…Ý…¥ÐÁ…¥È ¤ì(€…Ý…¥Ð‘ˆ¹‘½Œ Á…¥É¥¹ÁÁÉ½Ù…±Ì½‰½ˆœ¤¹‘•±•Ñ” ¤ì(€…Ý…¥Ð…ÍÍ•ÉÐ¹É•©•ÑÌ¡¡…¹‘±•ÉÌ¹É•ÅÕ•ÍÑ1½…Ñ¥½¸¡É•ÅÕ•ÍÐ ¤¤°½‘” Á•Éµ¥ÍÍ¥½¸µ‘•¹¥•œ¤¤ì(€…Ý…¥Ð…ÍÍ•ÉÐ¹É•©•ÑÌ¡…Íå¹Œ€ ¤€ôø¡…¹‘±•ÉÌ¹Í•¹‘Q…É•Ñ9½Ñ¥™¥…Ñ¥½¸¡É•ÅÕ•ÍÐ …±¥”œ°íÑ…É•ÑU¥è€‰½ˆœ°…Ñ¥½¸è€I5%9}!Iô¤¤°½‘” Á•Éµ¥ÍÍ¥½¸µ‘•¹¥•œ¤¤ì(€…ÍÍ•ÉÐ¹‘••ÁÅÕ…°¡…Ý…¥Ð¡…¹‘±•ÉÌ¹•ÑA…¥É¥¹MÑ…ÑÕÌ¡É•ÅÕ•ÍÐ ¤¤°í…ÁÁÉ½Ù•è™…±Í•ô¤ì(€…ÍÍ•ÉÐ¹•ÅÕ…°¡Í•¹Ð¹±•¹Ñ °€À¤ì)ô¤ì)Ñ•ÍÐ ¹½Ñ¥™¥…Ñ¥½¸¥¹ÁÕÐÙ…±¥‘…Ñ¥½¸…¹µ¥ÍÍ¥¹œ‘•Ù¥”‘¼¹½ÐÍ•¹µ•ÍÍ…•Ìœ°…Íå¹Œ€ ¤€ôøì(€…Ý…¥ÐÁ…¥È ¤ì(€™½È€¡½¹ÍÐ‘…Ñ„½˜mí…Ñ¥½¸è€=Q!Hô°í…Ñ¥½¸è€I5%9}!Iœ°µ•ÍÍ…”è€àœ¹É•Á•…Ð ÈÀÄ¥ô°(€€€í…Ñ¥½¸è€I5%9}!Iœ°µ•ÍÍ…”èmuõt¤ì(€€€…Ý…¥Ð…ÍÍ•ÉÐ¹É•©•ÑÌ¡…Íå¹Œ€ ¤€ôø¡…¹‘±•ÉÌ¹Í•¹‘Q…É•Ñ9½Ñ¥™¥…Ñ¥½¸¡É•ÅÕ•ÍÐ …±¥”œ°íÑ…É•ÑU¥è€‰½ˆœ°€¸¸¹‘…Ñ…ô¤¤°½‘” ¥¹Ù…±¥µ…ÉÕµ•¹Ðœ¤¤ì(€ô(€…Ý…¥Ð‘ˆ¹‘½Œ ‘•Ù¥•½Õ¹ÑÌ½‰½ˆœ¤¹‘•±•Ñ” ¤ì(€…Ý…¥Ð…ÍÍ•ÉÐ¹É•©•ÑÌ¡¡…¹‘±•ÉÌ¹É•ÅÕ•ÍÑ1½…Ñ¥½¸¡É•ÅÕ•ÍÐ ¤¤°½‘” ™…¥±•µÁÉ•½¹‘¥Ñ¥½¸œ¤¤ì(€…ÍÍ•ÉÐ¹•ÅÕ…°¡Í•¹Ð¹±•¹Ñ °€À¤ì)ô¤ì(
+Failed to create stream fd: Operation not permitted
+Failed to create stream fd: Operation not permitted
+Failed to create stream fd: Operation not permitted
+const {test, before, after, beforeEach} = require('node:test');
+const assert = require('node:assert/strict');
+const admin = require('../functions/node_modules/firebase-admin');
+const {createHandlers} = require('../functions/handlers');
+let app, db, handlers, sent, clock;
+const request = (uid = 'alice', data = {targetUid: 'bob'}) => ({auth: {uid}, data});
+const code = (expected) => (error) => error.code === expected;
+before(() => {
+  if (!process.env.FIRESTORE_EMULATOR_HOST) throw new Error('Emulator required.');
+  app = admin.initializeApp({projectId: 'demo-radar-security'}, 'security-tests');
+  db = app.firestore();
+});
+beforeEach(async () => {
+  const response = await fetch(`http://${process.env.FIRESTORE_EMULATOR_HOST}/emulator/v1/projects/demo-radar-security/databases/(default)/documents`, {method: 'DELETE'});
+  assert.equal(response.ok, true);
+  sent = [];
+  clock = 100000;
+  handlers = createHandlers(db, {send: async (message) => {sent.push(message); return 'message-id';}}, () => clock);
+});
+after(async () => app?.delete());
+async function pair() {
+  await db.doc('pairingApprovals/alice').set({partnerUid: 'bob'});
+  await db.doc('pairingApprovals/bob').set({partnerUid: 'alice'});
+  await db.doc('deviceAccounts/bob').set({fcmToken: 'private-bob-token'});
+}
+test('all callables require authentication', async () => {
+  for (const handler of Object.values(handlers)) {
+    await assert.rejects(async () => handler({data: {targetUid: 'bob', action: 'REMIND_CHARGE'}}), code('unauthenticated'));
+  }
+  assert.equal(sent.length, 0);
+});
+test('callables reject raw token targets, self-targets, invalid IDs, and one-sided approval', async () => {
+  for (const data of [{targetToken: 'stolen-token'}, {targetUid: 'alice'}, {targetUid: '../bob'}, {targetUid: 4}]) {
+    await assert.rejects(handlers.requestLocation(request('alice', data)), code('invalid-argument'));
+  }
+  await db.doc('pairingApprovals/alice').set({partnerUid: 'bob'});
+  await assert.rejects(handlers.requestLocation(request()), code('permission-denied'));
+  assert.deepEqual(await handlers.getPairingStatus(request()), {approved: false});
+  assert.equal(sent.length, 0);
+});
+test('approved sender uses server-side token and recipient identity, then rate limit applies', async () => {
+  await pair();
+  assert.deepEqual(await handlers.getPairingStatus(request()), {approved: true, partnerUid: 'bob'});
+  await handlers.requestLocation(request('alice', {targetUid: 'bob', targetToken: 'attacker-token'}));
+  assert.equal(sent[0].token, 'private-bob-token');
+  assert.deepEqual(sent[0].data, {action: 'SEND_LOCATION', senderUid: 'alice', targetUid: 'bob'});
+  await assert.rejects(handlers.requestLocation(request()), code('resource-exhausted'));
+  clock += 10000;
+  await handlers.sendTargetNotification(request('alice', {targetUid: 'bob', action: 'REMIND_CHARGE', message: 'Charge soon'}));
+  assert.equal(sent[1].data.message, 'Charge soon');
+});
+test('concurrent requests cannot bypass transaction rate limit', async () => {
+  await pair();
+  const results = await Promise.allSettled([handlers.requestLocation(request()), handlers.requestLocation(request())]);
+  assert.equal(results.filter((result) => result.status === 'fulfilled').length, 1);
+  assert.equal(sent.length, 1);
+});
+test('revocation blocks both callables and clears reported pairing status', async () => {
+  await pair();
+  await db.doc('pairingApprovals/bob').delete();
+  await assert.rejects(handlers.requestLocation(request()), code('permission-denied'));
+  await assert.rejects(async () => handlers.sendTargetNotification(request('alice', {targetUid: 'bob', action: 'REMIND_CHARGE'})), code('permission-denied'));
+  assert.deepEqual(await handlers.getPairingStatus(request()), {approved: false});
+  assert.equal(sent.length, 0);
+});
+test('notification input validation and missing device do not send messages', async () => {
+  await pair();
+  for (const data of [{action: 'OTHER'}, {action: 'REMIND_CHARGE', message: 'x'.repeat(201)},
+    {action: 'REMIND_CHARGE', message: []}]) {
+    await assert.rejects(async () => handlers.sendTargetNotification(request('alice', {targetUid: 'bob', ...data})), code('invalid-argument'));
+  }
+  await db.doc('deviceAccounts/bob').delete();
+  await assert.rejects(handlers.requestLocation(request()), code('failed-precondition'));
+  assert.equal(sent.length, 0);
+});

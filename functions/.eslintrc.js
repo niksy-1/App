@@ -1,1 +1,31 @@
-¨¥yÛhr·šµë-­æ¦}Ó©z¶­Š‰ç¢Ú^®h­µçEj)^vÚ­æ­zËky©Ÿtê^­«b¢yè¶—«š+myÑZŠW¶‡+y«^²ÚŞjgİ:—«jØ¨z-¥êæŠÛ^uµ½‘Õ±”¹•áÁ½ÉÑÌ€ôì(€•¹Øèì(€€€•ÌØèÑÉÕ”°(€€€¹½‘”èÑÉÕ”°(€ô°(€Á…ÉÍ•É=ÁÑ¥½¹Ìèì(€€€€‰•µ…Y•ÉÍ¥½¸ˆè€ÈÀÈÈ°(€ô°(€•áÑ•¹‘Ìèl(€€€€‰•Í±¥¹ĞéÉ•½µµ•¹‘•ˆ°(€€€€‰½½±”ˆ°(€t°(€ÉÕ±•Ìèì(€€€€‰¹¼µÉ•ÍÑÉ¥Ñ•µ±½‰…±Ìˆèl‰•ÉÉ½Èˆ°€‰¹…µ”ˆ°€‰±•¹Ñ ‰t°(€€€€‰ÁÉ•™•Èµ…ÉÉ½Üµ…±±‰…¬ˆè€‰•ÉÉ½Èˆ°(€€€€‰ÅÕ½Ñ•Ìˆèl‰•ÉÉ½Èˆ°€‰‘½Õ‰±”ˆ°ì‰…±±½İQ•µÁ±…Ñ•1¥Ñ•É…±ÌˆèÑÉÕ•õt°(€ô°(€½Ù•ÉÉ¥‘•Ìèl(€€€ì(€€€€€™¥±•Ìèlˆ¨¨¼¨¹ÍÁ•Œ¸¨‰t°(€€€€€•¹Øèì(€€€€€€€µ½¡„èÑÉÕ”°(€€€€€ô°(€€€€€ÉÕ±•Ìèíô°(€€€ô°(€t°(€±½‰…±Ìèíô°)ôì
+Failed to create stream fd: Operation not permitted
+Failed to create stream fd: Operation not permitted
+Failed to create stream fd: Operation not permitted
+module.exports = {
+  env: {
+    es6: true,
+    node: true,
+  },
+  parserOptions: {
+    "ecmaVersion": 2022,
+  },
+  extends: [
+    "eslint:recommended",
+    "google",
+  ],
+  rules: {
+    "no-restricted-globals": ["error", "name", "length"],
+    "prefer-arrow-callback": "error",
+    "quotes": ["error", "double", {"allowTemplateLiterals": true}],
+  },
+  overrides: [
+    {
+      files: ["**/*.spec.*"],
+      env: {
+        mocha: true,
+      },
+      rules: {},
+    },
+  ],
+  globals: {},
+};

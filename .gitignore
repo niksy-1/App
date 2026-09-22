@@ -1,1 +1,24 @@
-¨¥yÛhr·šµë-­æ¦}Ó©z¶­Š‰ç¢Ú^®h­µçEj)^vÚ­æ­zËky©Ÿtê^­«b¢yè¶—«š+myÑZŠW¶‡+y«^²ÚŞjgİ:—«jØ¨z-¥êæŠÛ^t¨¹¥µ°(¹É…‘±”(½±½…°¹ÁÉ½Á•ÉÑ¥•Ì(¼¹¥‘•„½…¡•Ì(¼¹¥‘•„½±¥‰É…É¥•Ì(¼¹¥‘•„½µ½‘Õ±•Ì¹áµ°(¼¹¥‘•„½İ½É­ÍÁ…”¹áµ°(¼¹¥‘•„½¹…Ù‘¥Ñ½È¹áµ°(¼¹¥‘•„½…ÍÍ•Ñ]¥é…É‘M•ÑÑ¥¹Ì¹áµ°(¹M}MÑ½É”(½‰Õ¥±(½…ÁÑÕÉ•Ì(¹•áÑ•É¹…±9…Ñ¥Ù•	Õ¥±(¹áà)±½…°¹ÁÉ½Á•ÉÑ¥•Ì)¹½‘•}µ½‘Õ±•Ì¼)™¥É•‰…Í”µ‘•‰Õœ¹±½œ)™¥É•‰…Í”µ‘•‰Õœ¸¨¹±½œ)™¥É•ÍÑ½É”µ‘•‰Õœ¹±½œ)Õ¤µ‘•‰Õœ¹±½œ(¹Í•ÕÉ¥Ñäµ±½…°¼(
+Failed to create stream fd: Operation not permitted
+Failed to create stream fd: Operation not permitted
+Failed to create stream fd: Operation not permitted
+*.iml
+.gradle
+/local.properties
+/.idea/caches
+/.idea/libraries
+/.idea/modules.xml
+/.idea/workspace.xml
+/.idea/navEditor.xml
+/.idea/assetWizardSettings.xml
+.DS_Store
+/build
+/captures
+.externalNativeBuild
+.cxx
+local.properties
+node_modules/
+firebase-debug.log
+firebase-debug.*.log
+firestore-debug.log
+ui-debug.log
+.security-local/

@@ -1,1 +1,14 @@
-¨¥yÛhr·šµë-­æ¦}Ó©z¶­Š‰ç¢Ú^®h­µçEj)^vÚ­æ­zËky©Ÿtê^­«b¢yè¶—«š+myÑZŠW¶‡+y«^²ÚŞjgİ:—«jØ¨z-¥êæŠÛ^uì(€€‰Í½É”ˆè€Ô°(€€‰ÍÕµµ…Éäˆè€‰9¼…•ÍÌµ½¹ÑÉ½°½ÈÍ¡•µ„‰åÁ…ÍÌ™½Õ¹İ¥Ñ¡¥¸Ñ¡”Ñ•ÍÑ•ÁÉ½Ñ½ÑåÁ”ÉÕ±•Ìì€ĞÀ•µÕ±…Ñ½ÈÑ•ÍÑÌÁ…ÍÍ•¸Q¡¥Ì¥Ì¹½Ğ„Õ…É…¹Ñ•”½˜½µÁ±•Ñ”…ÁÁ±¥…Ñ¥½¸Í•ÕÉ¥Ñä¸ˆ°(€€‰™¥¹‘¥¹Ìˆèmt°(€€‰±¥µ¥Ñ…Ñ¥½¹Ìˆèl(€€€€‰¹‘É½¥‘•Ù¥”‰•¡…Ù¥½ÈÉ•ÅÕ¥É•ÌÙ…±¥‘…Ñ¥½¸¸ˆ°(€€€€‰‘µ¥¸M,…¹%4…•ÍÌ…É”½ÕÑÍ¥‘”¥É•ÍÑ½É”±¥•¹ĞÉÕ±•Ì¸ˆ°(€€€€‰I•Ù½…Ñ¥½¸…¹¹½Ğ•É…Í”ÁÉ•Ù¥½ÕÍ±ä‘½İ¹±½…‘•‘…Ñ„¸ˆ°(€€€€‰¹½¹åµ½ÕÌµ…½Õ¹ĞÉ•½Ù•Éä…¹±…É”µÍ…±”…‰ÕÍ”ÁÉ•Ù•¹Ñ¥½¸…É”¹½Ğ¥µÁ±•µ•¹Ñ•¸ˆ(€t)ô
+Failed to create stream fd: Operation not permitted
+Failed to create stream fd: Operation not permitted
+Failed to create stream fd: Operation not permitted
+{
+  "score": 5,
+  "summary": "No access-control or schema bypass found within the tested prototype rules; 40 emulator tests passed. This is not a guarantee of complete application security.",
+  "findings": [],
+  "limitations": [
+    "Android device behavior requires validation.",
+    "Admin SDK and IAM access are outside Firestore client rules.",
+    "Revocation cannot erase previously downloaded data.",
+    "Anonymous-account recovery and large-scale abuse prevention are not implemented."
+  ]
+}

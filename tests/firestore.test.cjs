@@ -1,1 +1,208 @@
-¨¥yÛhr·šµë-­æ¦}Ó©z¶­Š‰ç¢Ú^®h­µçEj)^vÚ­æ­zËky©Ÿtê^­«b¢yè¶—«š+myÑZŠW¶‡+y«^²ÚÞjgÝ:—«jØ¨žz-¥êæŠÛ^u½¹ÍÐíÑ•ÍÐ°‰•™½É”°…™Ñ•È°‰•™½É•…¡ô€ôÉ•ÅÕ¥É” ¹½‘”éÑ•ÍÐœ¤ì)½¹ÍÐíÉ•…‘¥±•Må¹ô€ôÉ•ÅÕ¥É” ¹½‘”é™Ìœ¤ì)½¹ÍÐí¥¹¥Ñ¥…±¥é•Q•ÍÑ¹Ù¥É½¹µ•¹Ð°…ÍÍ•ÉÑMÕ••‘Ì°…ÍÍ•ÉÑ…¥±Íô€ôÉ•ÅÕ¥É” ™¥É•‰…Í”½ÉÕ±•ÌµÕ¹¥ÐµÑ•ÍÑ¥¹œœ¤ì)½¹ÍÐí‘½Œ°½±±•Ñ¥½¸°½±±•Ñ¥½¹É½ÕÀ°Í•Ñ½Œ°ÕÁ‘…Ñ•½Œ°‘•±•Ñ•½Œ°•Ñ½É½µM•ÉÙ•È°(€•Ñ½Ì°ÅÕ•Éä°½É‘•É	ä°±¥µ¥Ð°Í•ÉÙ•ÉQ¥µ•ÍÑ…µÀ°Q¥µ•ÍÑ…µÀ°‘•±•Ñ•¥•±°ÝÉ¥Ñ•	…Ñ °(€Í•Ñ1½1•Ù•±ô€ôÉ•ÅÕ¥É” ™¥É•‰…Í”½™¥É•ÍÑ½É”œ¤ì)Í•Ñ1½1•Ù•° Í¥±•¹Ðœ¤ì)±•Ð•¹Øì)½¹ÍÐ‘ˆ€ô€¡Õ¥¤€ôøÕ¥€ü•¹Ø¹…ÕÑ¡•¹Ñ¥…Ñ•‘½¹Ñ•áÐ¡Õ¥¤¹™¥É•ÍÑ½É” ¤€è•¹Ø¹Õ¹…ÕÑ¡•¹Ñ¥…Ñ•‘½¹Ñ•áÐ ¤¹™¥É•ÍÑ½É” ¤ì)½¹ÍÐ±½…Ñ¥½¸€ô€¡Õ¥¤€ôø€¡í½Ý¹•ÉU¥èÕ¥°ÕÁ‘…Ñ•‘ÐèÍ•ÉÙ•ÉQ¥µ•ÍÑ…µÀ ¤°(€±…Ñ¥ÑÕ‘”è€ÄÈ¸ä°±½¹¥ÑÕ‘”è€ÜÜ¸Ø°…ÕÉ…äè€ÄÀ°Ñ¥µ•ÍÑ…µÀèÍ•ÉÙ•ÉQ¥µ•ÍÑ…µÀ ¤°(€‰…ÑÑ•ÉåA•É•¹Ðè€ÜÀ°¥Í¡…É¥¹œè™…±Í•ô¤ì)½¹ÍÐ…ÁÁÉ½Ù…°€ô€¡Õ¥°Á…ÉÑ¹•ÉU¥¤€ôø€¡í½Ý¹•ÉU¥èÕ¥°Á…ÉÑ¹•ÉU¥°ÕÁ‘…Ñ•‘ÐèÍ•ÉÙ•ÉQ¥µ•ÍÑ…µÀ ¥ô¤ì)½¹ÍÐ‘•Ù¥”€ô€¡Õ¥¤€ôø€¡í½Ý¹•ÉU¥èÕ¥°™µQ½­•¸è€ÁÉ¥Ù…Ñ”µÑ½­•¸œ°ÕÁ‘…Ñ•‘ÐèÍ•ÉÙ•ÉQ¥µ•ÍÑ…µÀ ¥ô¤ì)½¹ÍÐ¹½Ñ”€ô€¡Í•¹‘•É%€ô€…±¥”œ°Ñ…É•Ñ%€ô€‰½ˆœ¤€ôø€¡íÍ•¹‘•É%°Ñ…É•Ñ%°Ñ•áÐè€!•±±¼œ°Ñ¥µ•ÍÑ…µÀèÍ•ÉÙ•ÉQ¥µ•ÍÑ…µÀ ¥ô¤ì)½¹ÍÐ¹½Ñ•ÍA…Ñ €ô€Á…¥É9½Ñ•Ì½…±¥”½Á…ÉÑ¹•ÉÌ½‰½ˆ½•¹ÑÉ¥•Ìœì)…Íå¹Œ™Õ¹Ñ¥½¸Á…¥È ¤ì(€…Ý…¥ÐÍ•Ñ½Œ¡‘½Œ¡‘ˆ …±¥”œ¤°€Á…¥É¥¹ÁÁÉ½Ù…±Ì½…±¥”œ¤°…ÁÁÉ½Ù…° …±¥”œ°€‰½ˆœ¤¤ì(€…Ý…¥ÐÍ•Ñ½Œ¡‘½Œ¡‘ˆ ‰½ˆœ¤°€Á…¥É¥¹ÁÁÉ½Ù…±Ì½‰½ˆœ¤°…ÁÁÉ½Ù…° ‰½ˆœ°€…±¥”œ¤¤ì)ô)‰•™½É”¡…Íå¹Œ€ ¤€ôøì(€¥˜€ …ÁÉ½•ÍÌ¹•¹Ø¹%IMQ=I}5U1Q=I}!=MP¤Ñ¡É½Ü¹•ÜÉÉ½È IÕ¸¹Á´ÉÕ¸Ñ•ÍÐéÉÕ±•Ìì¹•Ù•ÈÕÍ”ÁÉ½‘ÕÑ¥½¸¸œ¤ì(€•¹Ø€ô…Ý…¥Ð¥¹¥Ñ¥…±¥é•Q•ÍÑ¹Ù¥É½¹µ•¹Ð¡íÁÉ½©•Ñ%è€‘•µ¼µÉ…‘…ÈµÍ•ÕÉ¥Ñäœ°(€€€™¥É•ÍÑ½É”èíÉÕ±•ÌèÉ•…‘¥±•Må¹Œ ™¥É•ÍÑ½É”¹ÉÕ±•Ìœ°€ÕÑ˜àœ¥õô¤ì)ô¤ì)‰•™½É•… ¡…Íå¹Œ€ ¤€ôø•¹Ø¹±•…É¥É•ÍÑ½É” ¤¤ì)…™Ñ•È¡…Íå¹Œ€ ¤€ôø•¹Øü¹±•…¹ÕÀ ¤¤ì()Ñ•ÍÐ ½Ý¹•ÈÉ•…Ñ•Ì±½…Ñ¥½¸°µ•É•Ì„¹½Ñ”°É•™É•Í¡•Ì±½…Ñ¥½¸…¹‘•±•Ñ•Ì¥Ðœ°…Íå¹Œ€ ¤€ôøì(€½¹ÍÐÉ•˜€ô‘½Œ¡‘ˆ …±¥”œ¤°€±½…Ñ¥½¹ÍXÈ½…±¥”œ¤ì(€…Ý…¥Ð…ÍÍ•ÉÑMÕ••‘Ì¡Í•Ñ½Œ¡É•˜°±½…Ñ¥½¸ …±¥”œ¤¤¤ì(€…Ý…¥Ð…ÍÍ•ÉÑMÕ••‘Ì¡Í•Ñ½Œ¡É•˜°í¹½Ñ”è€!¤œ°ÕÁ‘…Ñ•‘ÐèÍ•ÉÙ•ÉQ¥µ•ÍÑ…µÀ ¥ô°íµ•É”èÑÉÕ•ô¤¤ì(€…Ý…¥Ð…ÍÍ•ÉÑMÕ••‘Ì¡ÕÁ‘…Ñ•½Œ¡É•˜°í±…Ñ¥ÑÕ‘”è€´äÀ°±½¹¥ÑÕ‘”è€ÄàÀ°‰…ÑÑ•ÉåA•É•¹Ðè€´Ä°(€€€Ñ¥µ•ÍÑ…µÀèÍ•ÉÙ•ÉQ¥µ•ÍÑ…µÀ ¤°ÕÁ‘…Ñ•‘ÐèÍ•ÉÙ•ÉQ¥µ•ÍÑ…µÀ ¥ô¤¤ì(€…Ý…¥Ð…ÍÍ•ÉÑMÕ••‘Ì¡•Ñ½É½µM•ÉÙ•È¡É•˜¤¤ì(€…Ý…¥Ð…ÍÍ•ÉÑMÕ••‘Ì¡‘•±•Ñ•½Œ¡É•˜¤¤ì)ô¤ì)Ñ•ÍÐ ¹½Ñ”µ½¹±ä±½…Ñ¥½¸µ…ä‰”É•…Ñ•‰•™½É”Ñ¡”™¥ÉÍÐ±½…Ñ¥½¸™¥àœ°…Íå¹Œ€ ¤€ôøì(€½¹ÍÐÉ•˜€ô‘½Œ¡‘ˆ …±¥”œ¤°€±½…Ñ¥½¹ÍXÈ½…±¥”œ¤ì(€…Ý…¥Ð…ÍÍ•ÉÑMÕ••‘Ì¡Í•Ñ½Œ¡É•˜°í½Ý¹•ÉU¥è€…±¥”œ°¹½Ñ”è€!¤œ°ÕÁ‘…Ñ•‘ÐèÍ•ÉÙ•ÉQ¥µ•ÍÑ…µÀ ¥ô¤¤ì(€…Ý…¥Ð…ÍÍ•ÉÑMÕ••‘Ì¡Í•Ñ½Œ¡É•˜°±½…Ñ¥½¸ …±¥”œ¤°íµ•É”èÑÉÕ•ô¤¤ì)ô¤ì)Ñ•ÍÐ ½¹±äµÕÑÕ…°…ÁÁÉ½Ù…°Á•Éµ¥ÑÌÁ…ÉÑ¹•È±½…Ñ¥½¸É•…‘ÌìÉ•Ù½­”¥µµ•‘¥…Ñ•±ä‘•¹¥•ÌÉ•…‘Ìœ°…Íå¹Œ€ ¤€ôøì(€…Ý…¥ÐÍ•Ñ½Œ¡‘½Œ¡‘ˆ ‰½ˆœ¤°€±½…Ñ¥½¹ÍXÈ½‰½ˆœ¤°±½…Ñ¥½¸ ‰½ˆœ¤¤ì(€…Ý…¥Ð…ÍÍ•ÉÑ…¥±Ì¡•Ñ½É½µM•ÉÙ•È¡‘½Œ¡‘ˆ …±¥”œ¤°€±½…Ñ¥½¹ÍXÈ½‰½ˆœ¤¤¤ì(€…Ý…¥ÐÍ•Ñ½Œ¡‘½Œ¡‘ˆ …±¥”œ¤°€Á…¥É¥¹ÁÁÉ½Ù…±Ì½…±¥”œ¤°…ÁÁÉ½Ù…° …±¥”œ°€‰½ˆœ¤¤ì(€…Ý…¥Ð…ÍÍ•ÉÑ…¥±Ì¡•Ñ½É½µM•ÉÙ•È¡‘½Œ¡‘ˆ …±¥”œ¤°€±½…Ñ¥½¹ÍXÈ½‰½ˆœ¤¤¤ì(€…Ý…¥ÐÍ•Ñ½Œ¡‘½Œ¡‘ˆ ‰½ˆœ¤°€Á…¥É¥¹ÁÁÉ½Ù…±Ì½‰½ˆœ¤°…ÁÁÉ½Ù…° ‰½ˆœ°€…±¥”œ¤¤ì(€…Ý…¥Ð…ÍÍ•ÉÑMÕ••‘Ì¡•Ñ½É½µM•ÉÙ•È¡‘½Œ¡‘ˆ …±¥”œ¤°€±½…Ñ¥½¹ÍXÈ½‰½ˆœ¤¤¤ì(€…Ý…¥Ð…ÍÍ•ÉÑ…¥±Ì¡•Ñ½É½µM•ÉÙ•È¡‘½Œ¡‘ˆ µ…±±½Éäœ¤°€±½…Ñ¥½¹ÍXÈ½‰½ˆœ¤¤¤ì(€…Ý…¥Ð‘•±•Ñ•½Œ¡‘½Œ¡‘ˆ ‰½ˆœ¤°€Á…¥É¥¹ÁÁÉ½Ù…±Ì½‰½ˆœ¤¤ì(€…Ý…¥Ð…ÍÍ•ÉÑ…¥±Ì¡•Ñ½É½µM•ÉÙ•È¡‘½Œ¡‘ˆ …±¥”œ¤°€±½…Ñ¥½¹ÍXÈ½‰½ˆœ¤¤¤ì)ô¤ì)™½È€¡½¹ÍÐ…Ñ½È½˜m¹Õ±°°€µ…±±½Éäœ°€‰½ˆt¤ì(€Ñ•ÍÐ¡€‘í…Ñ½È€üü€Õ¹…ÕÑ¡•¹Ñ¥…Ñ•ô…¹¹½ÐÉ•…Ñ”°½Ù•ÉÝÉ¥Ñ”°ÕÁ‘…Ñ”°½È‘•±•Ñ”…¹½Ñ¡•ÈÕÍ•ÈÌ±½…Ñ¥½¹€°…Íå¹Œ€ ¤€ôøì(€€€…Ý…¥ÐÁ…¥È ¤ì(€€€½¹ÍÐÉ•˜€ô‘½Œ¡‘ˆ¡…Ñ½È¤°€±½…Ñ¥½¹ÍXÈ½…±¥”œ¤ì(€€€…Ý…¥Ð…ÍÍ•ÉÑ…¥±Ì¡Í•Ñ½Œ¡É•˜°±½…Ñ¥½¸ …±¥”œ¤¤¤ì(€€€…Ý…¥ÐÍ•Ñ½Œ¡‘½Œ¡‘ˆ …±¥”œ¤°€±½…Ñ¥½¹ÍXÈ½…±¥”œ¤°±½…Ñ¥½¸ …±¥”œ¤¤ì(€€€…Ý…¥Ð…ÍÍ•ÉÑ…¥±Ì¡Í•Ñ½Œ¡É•˜°±½…Ñ¥½¸ …±¥”œ¤¤¤ì(€€€…Ý…¥Ð…ÍÍ•ÉÑ…¥±Ì¡ÕÁ‘…Ñ•½Œ¡É•˜°í¹½Ñ”è€%¹©•Ñ•œ°ÕÁ‘…Ñ•‘ÐèÍ•ÉÙ•ÉQ¥µ•ÍÑ…µÀ ¥ô¤¤ì(€€€…Ý…¥Ð…ÍÍ•ÉÑ…¥±Ì¡‘•±•Ñ•½Œ¡É•˜¤¤ì(€ô¤ì)ô)Ñ•ÍÐ Ñ½­•¹Ì…¹…ÁÁÉ½Ù…°Í•ÑÑ¥¹ÌÍÑ…äÁÉ¥Ù…Ñ”•Ù•¸‰•ÑÝ••¸Á…ÉÑ¹•ÉÌì½Ý¹•ÉÌ…¸É½Ñ…Ñ”Ñ½­•¹Ìœ°…Íå¹Œ€ ¤€ôøì(€…Ý…¥ÐÁ…¥È ¤ì(€½¹ÍÐÉ•˜€ô‘½Œ¡‘ˆ …±¥”œ¤°€‘•Ù¥•½Õ¹ÑÌ½…±¥”œ¤ì(€…Ý…¥Ð…ÍÍ•ÉÑMÕ••‘Ì¡Í•Ñ½Œ¡É•˜°‘•Ù¥” …±¥”œ¤¤¤ì(€…Ý…¥Ð…ÍÍ•ÉÑMÕ••‘Ì¡ÕÁ‘…Ñ•½Œ¡É•˜°í™µQ½­•¸è€É½Ñ…Ñ•œ°ÕÁ‘…Ñ•‘ÐèÍ•ÉÙ•ÉQ¥µ•ÍÑ…µÀ ¥ô¤¤ì(€…Ý…¥Ð…ÍÍ•ÉÑMÕ••‘Ì¡•Ñ½É½µM•ÉÙ•È¡É•˜¤¤ì(€™½È€¡½¹ÍÐ…Ñ½È½˜m¹Õ±°°€‰½ˆœ°€µ…±±½Éät¤ì(€€€…Ý…¥Ð…ÍÍ•ÉÑ…¥±Ì¡•Ñ½É½µM•ÉÙ•È¡‘½Œ¡‘ˆ¡…Ñ½È¤°€‘•Ù¥•½Õ¹ÑÌ½…±¥”œ¤¤¤ì(€€€…Ý…¥Ð…ÍÍ•ÉÑ…¥±Ì¡•Ñ½É½µM•ÉÙ•È¡‘½Œ¡‘ˆ¡…Ñ½È¤°€Á…¥É¥¹ÁÁÉ½Ù…±Ì½…±¥”œ¤¤¤ì(€€€…Ý…¥Ð…ÍÍ•ÉÑ…¥±Ì¡Í•Ñ½Œ¡‘½Œ¡‘ˆ¡…Ñ½È¤°€Á…¥É¥¹ÁÁÉ½Ù…±Ì½…±¥”œ¤°…ÁÁÉ½Ù…° …±¥”œ°€µ…±±½Éäœ¤¤¤ì(€€€…Ý…¥Ð…ÍÍ•ÉÑ…¥±Ì¡‘•±•Ñ•½Œ¡‘½Œ¡‘ˆ¡…Ñ½È¤°€Á…¥É¥¹ÁÁÉ½Ù…±Ì½…±¥”œ¤¤¤ì(€ô)ô¤ì)Ñ•ÍÐ ¹¼ÁÕ‰±¥Œ±¥ÍÑÌ°½±±•Ñ¥½¸É½ÕÀÅÕ•É¥•Ì½ÈÕ¹­¹½Ý¸½±•…äÁ…Ñ¡Ìœ°…Íå¹Œ€ ¤€ôøì(€™½È€¡½¹ÍÐÕ¥½˜m¹Õ±°°€…±¥”t¤ì(€€€™½È€¡½¹ÍÐÁ…Ñ ½˜l±½…Ñ¥½¹ÍXÈœ°€‘•Ù¥•½Õ¹ÑÌœ°€Á…¥É¥¹ÁÁÉ½Ù…±Ìœ°€±½…Ñ¥½¹Ìœ°€¹½Ñ•Ìœ°€¹½Ñ¥™¥…Ñ¥½¹1¥µ¥ÑÌt¤ì(€€€€€…Ý…¥Ð…ÍÍ•ÉÑ…¥±Ì¡•Ñ½Ì¡ÅÕ•Éä¡½±±•Ñ¥½¸¡‘ˆ¡Õ¥¤°Á…Ñ ¤°±¥µ¥Ð ÄÀÀ¤¤¤¤ì(€€€ô(€€€™½È€¡½¹ÍÐÁ…Ñ ½˜l±½…Ñ¥½¹Ì½±•…åQ½­•¸œ°€¹½Ñ•Ì½±•…å9½Ñ”œ°€ÕÍ•ÉÌ½…±¥”œ°(€€€€€€¹½Ñ¥™¥…Ñ¥½¹1¥µ¥ÑÌ½…±¥”œ°€±½…Ñ¥½¹ÍXÈ½…±¥”½ÁÉ¥Ù…Ñ”½Í•É•Ðœ°€Á…¥É9½Ñ•Ì½…±¥”t¤ì(€€€€€…Ý…¥Ð…ÍÍ•ÉÑ…¥±Ì¡•Ñ½É½µM•ÉÙ•È¡‘½Œ¡‘ˆ¡Õ¥¤°Á…Ñ ¤¤¤ì(€€€€€…Ý…¥Ð…ÍÍ•ÉÑ…¥±Ì¡Í•Ñ½Œ¡‘½Œ¡‘ˆ¡Õ¥¤°Á…Ñ ¤°í½Ý¹•ÉU¥è€…±¥”œ°¥Í‘µ¥¸èÑÉÕ•ô¤¤ì(€€€ô(€€€…Ý…¥Ð…ÍÍ•ÉÑ…¥±Ì¡•Ñ½Ì¡ÅÕ•Éä¡½±±•Ñ¥½¹É½ÕÀ¡‘ˆ¡Õ¥¤°€•¹ÑÉ¥•Ìœ¤°±¥µ¥Ð ÄÀÀ¤¤¤¤ì(€ô)ô¤ì)½¹ÍÐ¥¹Ù…±¥‘1½…Ñ¥½¸€ôì(€€½Ý¹•ÉÍ¡¥À¡¥©…­¥¹œœèí½Ý¹•ÉU¥è€‰½ˆô°(€€ÁÉ¥Ù¥±•”•Í…±…Ñ¥½¸œèí¥Í‘µ¥¸èÑÉÕ•ô°(€€…É‰¥ÑÉ…ÉäÍ¡•µ„œèí•áÑÉ……Ñ„è€àô°(€€½Ù•ÉÍ¥é”¹½Ñ”œèí¹½Ñ”è€àœ¹É•Á•…Ð ÄÀÄ¥ô°(€€œÅ5ÕÁ‘…Ñ”‰åÁ…ÍÌœèí¹½Ñ”è€àœ¹É•Á•…Ð ÄÀÀÀÀÀÀ¥ô°(€€¹½Ñ”ÑåÁ”©Õ±¥¹œœèí¹½Ñ”è€Ñô°(€€±…Ñ¥ÑÕ‘”½ÕÐ½˜É…¹”œèí±…Ñ¥ÑÕ‘”è€äÅô°(€€±½¹¥ÑÕ‘”½ÕÐ½˜É…¹”œèí±½¹¥ÑÕ‘”è€´ÄàÅô°(€€¹•…Ñ¥Ù”…ÕÉ…äœèí…ÕÉ…äè€´Åô°(€€¡Õ”…ÕÉ…äœèí…ÕÉ…äè€ÄÀÀÀÀÅô°(€€9…8±…Ñ¥ÑÕ‘”œèí±…Ñ¥ÑÕ‘”è9…9ô°(€€¥¹™¥¹¥Ñ”±½¹¥ÑÕ‘”œèí±½¹¥ÑÕ‘”è%¹™¥¹¥Ñåô°(€€™É…Ñ¥½¹…°‰…ÑÑ•Éäœèí‰…ÑÑ•ÉåA•É•¹Ðè€Ä¸Õô°(€€‰…ÑÑ•Éä½Ù•É™±½Üœèí‰…ÑÑ•ÉåA•É•¹Ðè€ÄÀÅô°(€€¹•…Ñ¥Ù”‰…ÑÑ•Éäœèí‰…ÑÑ•ÉåA•É•¹Ðè€´Éô°(€€‰½½±•…¸ÑåÁ”©Õ±¥¹œœèí¥Í¡…É¥¹œè€ÑÉÕ”ô°(€€Ñ¥µ•ÍÑ…µÀÑåÁ”©Õ±¥¹œœèíÑ¥µ•ÍÑ…µÀè€ÄÈÍô°(€€‰…­‘…Ñ•Ñ¥µ•ÍÑ…µÀœèíÑ¥µ•ÍÑ…µÀèQ¥µ•ÍÑ…µÀ¹™É½µ5¥±±¥Ì À¥ô°(€€™ÕÑÕÉ”Ñ¥µ•ÍÑ…µÀœèíÑ¥µ•ÍÑ…µÀèQ¥µ•ÍÑ…µÀ¹™É½µ5¥±±¥Ì ÐÄÀÈÐÐÐàÀÀÀÀÀ¥ô°(€€™½É•ÕÁ‘…Ñ”Ñ¥µ”œèíÕÁ‘…Ñ•‘ÐèQ¥µ•ÍÑ…µÀ¹™É½µ5¥±±¥Ì À¥ô°)ôì)™½È€¡½¹ÍÐm¹…µ”°Á…Ñ¡t½˜=‰©•Ð¹•¹ÑÉ¥•Ì¡¥¹Ù…±¥‘1½…Ñ¥½¸¤¤ì(€Ñ•ÍÐ¡±½…Ñ¥½¸É•©•ÑÌ€‘í¹…µ•ô½¸É•…Ñ”9ÕÁ‘…Ñ•€°…Íå¹Œ€ ¤€ôøì(€€€½¹ÍÐÉ•˜€ô‘½Œ¡‘ˆ …±¥”œ¤°€±½…Ñ¥½¹ÍXÈ½…±¥”œ¤ì(€€€…Ý…¥Ð…ÍÍ•ÉÑ…¥±Ì¡Í•Ñ½Œ¡É•˜°ì¸¸¹±½…Ñ¥½¸ …±¥”œ¤°€¸¸¹Á…Ñ¡ô¤¤ì(€€€…Ý…¥ÐÍ•Ñ½Œ¡É•˜°±½…Ñ¥½¸ …±¥”œ¤¤ì(€€€…Ý…¥Ð…ÍÍ•ÉÑ…¥±Ì¡ÕÁ‘…Ñ•½Œ¡É•˜°ì¸¸¹Á…Ñ °€¸¸¸¡Á…Ñ ¹ÕÁ‘…Ñ•‘Ð€üíô€èíÕÁ‘…Ñ•‘ÐèÍ•ÉÙ•ÉQ¥µ•ÍÑ…µÀ ¥ô¥ô¤¤ì(€ô¤ì)ô)Ñ•ÍÐ É•ÅÕ¥É•™¥•±‘Ì…¹±½…Ñ¥½¸É½ÕÀ…¹¹½Ð‰”½µ¥ÑÑ•½ÈÉ•µ½Ù•œ°…Íå¹Œ€ ¤€ôøì(€™½È€¡½¹ÍÐ™¥•±½˜=‰©•Ð¹­•åÌ¡±½…Ñ¥½¸ …±¥”œ¤¤¤ì(€€€½¹ÍÐÉ•˜€ô‘½Œ¡‘ˆ …±¥”œ¤°€±½…Ñ¥½¹ÍXÈ½…±¥”œ¤ì(€€€½¹ÍÐ‘…Ñ„€ô±½…Ñ¥½¸ …±¥”œ¤ì‘•±•Ñ”‘…Ñ…m™¥•±‘tì(€€€…Ý…¥Ð…ÍÍ•ÉÑ…¥±Ì¡Í•Ñ½Œ¡É•˜°‘…Ñ„¤¤ì(€€€…Ý…¥ÐÍ•Ñ½Œ¡É•˜°±½…Ñ¥½¸ …±¥”œ¤¤ì(€€€…Ý…¥Ð…ÍÍ•ÉÑ…¥±Ì¡ÕÁ‘…Ñ•½Œ¡É•˜°ím™¥•±‘tè‘•±•Ñ•¥•± ¤°€¸¸¸¡™¥•±€ôôô€ÕÁ‘…Ñ•‘Ðœ€üíô€èíÕÁ‘…Ñ•‘ÐèÍ•ÉÙ•ÉQ¥µ•ÍÑ…µÀ ¥ô¥ô¤¤ì(€€€…Ý…¥Ð‘•±•Ñ•½Œ¡É•˜¤ì(€ô)ô¤ì)Ñ•ÍÐ ‘•Ù¥”…¹…ÁÁÉ½Ù…°Ù…±¥‘…Ñ½ÉÌÉÕ¸½¸‰½Ñ É•…Ñ”…¹ÕÁ‘…Ñ”œ°…Íå¹Œ€ ¤€ôøì(€™½È€¡½¹ÍÐmÁ…Ñ °Ù…±¥°Á…Ñ¡•Ít½˜l(€€€l‘•Ù¥•½Õ¹ÑÌ½…±¥”œ°‘•Ù¥” …±¥”œ¤°mí™µQ½­•¸è€œô°í™µQ½­•¸è€àœ¹É•Á•…Ð ÐÀäÜ¥ô°(€€€€€í™µQ½­•¸èmuô°í½Ý¹•ÉU¥è€‰½ˆô°íÉ½±”è€…‘µ¥¸ô°íÕÁ‘…Ñ•‘Ðè€Åõut°(€€€lÁ…¥É¥¹ÁÁÉ½Ù…±Ì½…±¥”œ°…ÁÁÉ½Ù…° …±¥”œ°€‰½ˆœ¤°míÁ…ÉÑ¹•ÉU¥è€…±¥”ô°(€€€€€íÁ…ÉÑ¹•ÉU¥è€œô°íÁ…ÉÑ¹•ÉU¥è€àœ¹É•Á•…Ð ÄÈä¥ô°íÁ…ÉÑ¹•ÉU¥è€„½ˆô°(€€€€€íÁ…ÉÑ¹•ÉU¥èl‰½ˆuô°í½Ý¹•ÉU¥è€‰½ˆô°í¥Í‘µ¥¸èÑÉÕ•ô°íÕÁ‘…Ñ•‘Ðè€Åõut°(€t¤ì(€€€½¹ÍÐÉ•˜€ô‘½Œ¡‘ˆ …±¥”œ¤°Á…Ñ ¤ì(€€€™½È€¡½¹ÍÐÁ…Ñ ½˜Á…Ñ¡•Ì¤ì(€€€€€…Ý…¥Ð…ÍÍ•ÉÑ…¥±Ì¡Í•Ñ½Œ¡É•˜°ì¸¸¹Ù…±¥°€¸¸¹Á…Ñ¡ô¤¤ì(€€€€€…Ý…¥ÐÍ•Ñ½Œ¡É•˜°Ù…±¥¤ì(€€€€€…Ý…¥Ð…ÍÍ•ÉÑ…¥±Ì¡ÕÁ‘…Ñ•½Œ¡É•˜°ì¸¸¹Á…Ñ °€¸¸¸¡Á…Ñ ¹ÕÁ‘…Ñ•‘Ð€üíô€èíÕÁ‘…Ñ•‘ÐèÍ•ÉÙ•ÉQ¥µ•ÍÑ…µÀ ¥ô¥ô¤¤ì(€€€€€…Ý…¥Ð‘•±•Ñ•½Œ¡É•˜¤ì(€€€ô(€€€™½È€¡½¹ÍÐ­•ä½˜=‰©•Ð¹­•åÌ¡Ù…±¥¤¤ì(€€€€€½¹ÍÐ‘…Ñ„€ôì¸¸¹Ù…±¥‘ôì‘•±•Ñ”‘…Ñ…m­•åtì(€€€€€…Ý…¥Ð…ÍÍ•ÉÑ…¥±Ì¡Í•Ñ½Œ¡É•˜°‘…Ñ„¤¤ì(€€€€€…Ý…¥ÐÍ•Ñ½Œ¡É•˜°Ù…±¥¤ì(€€€€€…Ý…¥Ð…ÍÍ•ÉÑ…¥±Ì¡ÕÁ‘…Ñ•½Œ¡É•˜°ím­•åtè‘•±•Ñ•¥•± ¥ô¤¤ì(€€€€€…Ý…¥Ð‘•±•Ñ•½Œ¡É•˜¤ì(€€€ô(€ô)ô¤ì)Ñ•ÍÐ …ÑÕ…°…ÁÀ¹½Ñ”‰…Ñ …¹Á…¥ÈµÍ½Á•¡¥ÍÑ½ÉäÅÕ•ÉäÍÕ••™½È•¥Ñ¡•ÈÁ…ÉÑ¹•Èœ°…Íå¹Œ€ ¤€ôøì(€…Ý…¥ÐÁ…¥È ¤ì(€½¹ÍÐ…±¥”€ô‘ˆ …±¥”œ¤ì(€½¹ÍÐ‰…Ñ €ôÝÉ¥Ñ•	…Ñ ¡…±¥”¤ì(€‰…Ñ ¹Í•Ð¡‘½Œ¡…±¥”°€±½…Ñ¥½¹ÍXÈ½…±¥”œ¤°í½Ý¹•ÉU¥è€…±¥”œ°¹½Ñ”è€!•±±¼œ°ÕÁ‘…Ñ•‘ÐèÍ•ÉÙ•ÉQ¥µ•ÍÑ…µÀ ¥ô°íµ•É”èÑÉÕ•ô¤ì(€‰…Ñ ¹Í•Ð¡‘½Œ¡…±¥”°€‘í¹½Ñ•ÍA…Ñ¡ô½½¹•€¤°¹½Ñ” ¤¤ì(€…Ý…¥Ð…ÍÍ•ÉÑMÕ••‘Ì¡‰…Ñ ¹½µµ¥Ð ¤¤ì(€…Ý…¥Ð…ÍÍ•ÉÑMÕ••‘Ì¡Í•Ñ½Œ¡‘½Œ¡‘ˆ ‰½ˆœ¤°€‘í¹½Ñ•ÍA…Ñ¡ô½ÑÝ½€¤°¹½Ñ” ‰½ˆœ°€…±¥”œ¤¤¤ì(€™½È€¡½¹ÍÐÕ¥½˜l…±¥”œ°€‰½ˆt¤ì(€€€…Ý…¥Ð…ÍÍ•ÉÑMÕ••‘Ì¡•Ñ½Ì¡ÅÕ•Éä¡½±±•Ñ¥½¸¡‘ˆ¡Õ¥¤°¹½Ñ•ÍA…Ñ ¤°½É‘•É	ä Ñ¥µ•ÍÑ…µÀœ°€‘•ÍŒœ¤°±¥µ¥Ð ÄÀÀ¤¤¤¤ì(€€€…Ý…¥Ð…ÍÍ•ÉÑMÕ••‘Ì¡•Ñ½É½µM•ÉÙ•È¡‘½Œ¡‘ˆ¡Õ¥¤°€‘í¹½Ñ•ÍA…Ñ¡ô½½¹•€¤¤¤ì(€ô)ô¤ì)Ñ•ÍÐ ¹½Ñ”É•…‘Ì…¹ÝÉ¥Ñ•Ì™…¥°Ý¥Ñ¡½ÕÐµÕÑÕ…°…ÁÁÉ½Ù…°°™½È½ÕÑÍ¥‘•ÉÌ…¹…™Ñ•ÈÉ•Ù½…Ñ¥½¸œ°…Íå¹Œ€ ¤€ôøì(€…Ý…¥Ð…ÍÍ•ÉÑ…¥±Ì¡Í•Ñ½Œ¡‘½Œ¡‘ˆ …±¥”œ¤°€‘í¹½Ñ•ÍA…Ñ¡ô½½¹•€¤°¹½Ñ” ¤¤¤ì(€…Ý…¥ÐÁ…¥È ¤ì(€…Ý…¥ÐÍ•Ñ½Œ¡‘½Œ¡‘ˆ …±¥”œ¤°€‘í¹½Ñ•ÍA…Ñ¡ô½½¹•€¤°¹½Ñ” ¤¤ì(€™½È€¡½¹ÍÐÕ¥½˜m¹Õ±°°€µ…±±½Éät¤ì(€€€…Ý…¥Ð…ÍÍ•ÉÑ…¥±Ì¡•Ñ½É½µM•ÉÙ•È¡‘½Œ¡‘ˆ¡Õ¥¤°€‘í¹½Ñ•ÍA…Ñ¡ô½½¹•€¤¤¤ì(€€€…Ý…¥Ð…ÍÍ•ÉÑ…¥±Ì¡•Ñ½Ì¡ÅÕ•Éä¡½±±•Ñ¥½¸¡‘ˆ¡Õ¥¤°¹½Ñ•ÍA…Ñ ¤°±¥µ¥Ð ÄÀÀ¤¤¤¤ì(€€€…Ý…¥Ð…ÍÍ•ÉÑ…¥±Ì¡Í•Ñ½Œ¡‘½Œ¡‘ˆ¡Õ¥¤°€‘í¹½Ñ•ÍA…Ñ¡ô½ÑÝ½€¤°¹½Ñ” ¤¤¤ì(€ô(€…Ý…¥Ð‘•±•Ñ•½Œ¡‘½Œ¡‘ˆ ‰½ˆœ¤°€Á…¥É¥¹ÁÁÉ½Ù…±Ì½‰½ˆœ¤¤ì(€…Ý…¥Ð…ÍÍ•ÉÑ…¥±Ì¡•Ñ½É½µM•ÉÙ•È¡‘½Œ¡‘ˆ …±¥”œ¤°€‘í¹½Ñ•ÍA…Ñ¡ô½½¹•€¤¤¤ì(€…Ý…¥Ð…ÍÍ•ÉÑ…¥±Ì¡•Ñ½Ì¡ÅÕ•Éä¡½±±•Ñ¥½¸¡‘ˆ …±¥”œ¤°¹½Ñ•ÍA…Ñ ¤°±¥µ¥Ð ÄÀÀ¤¤¤¤ì(€…Ý…¥Ð…ÍÍ•ÉÑ…¥±Ì¡Í•Ñ½Œ¡‘½Œ¡‘ˆ …±¥”œ¤°€‘í¹½Ñ•ÍA…Ñ¡ô½ÑÝ½€¤°¹½Ñ” ¤¤¤ì)ô¤ì)Ñ•ÍÐ ¹½Ñ•Ì•¹™½É”¥‘•¹Ñ¥Ñ¥•Ì°Í¡•µ„°‰½Õ¹‘Ì°Ñ¥µ•ÍÑ…µÀ…¹¥µµÕÑ…‰¥±¥Ñäœ°…Íå¹Œ€ ¤€ôøì(€…Ý…¥ÐÁ…¥È ¤ì(€½¹ÍÐÉ•˜€ô‘½Œ¡‘ˆ …±¥”œ¤°€‘í¹½Ñ•ÍA…Ñ¡ô½½¹•€¤ì(€™½È€¡½¹ÍÐÁ…Ñ ½˜míÍ•¹‘•É%è€‰½ˆô°íÑ…É•Ñ%è€µ…±±½Éäô°íÑ•áÐè€œô°íÑ•áÐè€àœ¹É•Á•…Ð ÄÀÄ¥ô°(€€€íÑ•áÐèmuô°í¥Í‘µ¥¸èÑÉÕ•ô°íÑ¥µ•ÍÑ…µÀè€ÄÈÍô°íÑ¥µ•ÍÑ…µÀèQ¥µ•ÍÑ…µÀ¹™É½µ5¥±±¥Ì À¥õt¤ì(€€€…Ý…¥Ð…ÍÍ•ÉÑ…¥±Ì¡Í•Ñ½Œ¡É•˜°ì¸¸¹¹½Ñ” ¤°€¸¸¹Á…Ñ¡ô¤¤ì(€ô(€™½È€¡½¹ÍÐ­•ä½˜=‰©•Ð¹­•åÌ¡¹½Ñ” ¤¤¤ì(€€€½¹ÍÐ‘…Ñ„€ô¹½Ñ” ¤ì‘•±•Ñ”‘…Ñ…m­•åtì…Ý…¥Ð…ÍÍ•ÉÑ…¥±Ì¡Í•Ñ½Œ¡É•˜°‘…Ñ„¤¤ì(€ô(€…Ý…¥ÐÍ•Ñ½Œ¡É•˜°¹½Ñ” ¤¤ì(€…Ý…¥Ð…ÍÍ•ÉÑ…¥±Ì¡ÕÁ‘…Ñ•½Œ¡É•˜°íÑ•áÐè€‘¥Ñ•ô¤¤ì(€…Ý…¥Ð…ÍÍ•ÉÑ…¥±Ì¡‘•±•Ñ•½Œ¡É•˜¤¤ì(€…Ý…¥Ð…ÍÍ•ÉÑ…¥±Ì¡Í•Ñ½Œ¡‘½Œ¡‘ˆ …±¥”œ¤°€Á…¥É9½Ñ•Ì½‰½ˆ½Á…ÉÑ¹•ÉÌ½…±¥”½•¹ÑÉ¥•Ì½½¹”œ¤°¹½Ñ” ¤¤¤ì(€…Ý…¥Ð…ÍÍ•ÉÑ…¥±Ì¡•Ñ½Ì¡ÅÕ•Éä¡½±±•Ñ¥½¸¡‘ˆ …±¥”œ¤°¹½Ñ•ÍA…Ñ ¤°±¥µ¥Ð ÄÀÄ¤¤¤¤ì(€…Ý…¥Ð…ÍÍ•ÉÑ…¥±Ì¡•Ñ½Ì¡½±±•Ñ¥½¸¡‘ˆ …±¥”œ¤°¹½Ñ•ÍA…Ñ ¤¤¤ì)ô¤ì)Ñ•ÍÐ ÍÝ¥Ñ¡¥¹œÁ…ÉÑ¹•ÉÌ‘½•Ì¹½ÐÉ•Ñ…¥¸…•ÍÌÑ¼Ñ¡”ÁÉ•Ù¥½ÕÌÁ…ÉÑ¹•Èœ°…Íå¹Œ€ ¤€ôøì(€…Ý…¥ÐÁ…¥È ¤ì(€…Ý…¥ÐÍ•Ñ½Œ¡‘½Œ¡‘ˆ ‰½ˆœ¤°€±½…Ñ¥½¹ÍXÈ½‰½ˆœ¤°±½…Ñ¥½¸ ‰½ˆœ¤¤ì(€…Ý…¥ÐÍ•Ñ½Œ¡‘½Œ¡‘ˆ …±¥”œ¤°€Á…¥É¥¹ÁÁÉ½Ù…±Ì½…±¥”œ¤°…ÁÁÉ½Ù…° …±¥”œ°€…É½°œ¤¤ì(€…Ý…¥Ð…ÍÍ•ÉÑ…¥±Ì¡•Ñ½É½µM•ÉÙ•È¡‘½Œ¡‘ˆ …±¥”œ¤°€±½…Ñ¥½¹ÍXÈ½‰½ˆœ¤¤¤ì(€…Ý…¥Ð…ÍÍ•ÉÑ…¥±Ì¡Í•Ñ½Œ¡‘½Œ¡‘ˆ …±¥”œ¤°€‘í¹½Ñ•ÍA…Ñ¡ô½½¹•€¤°¹½Ñ” ¤¤¤ì)ô¤ì
+Failed to create stream fd: Operation not permitted
+Failed to create stream fd: Operation not permitted
+Failed to create stream fd: Operation not permitted
+const {test, before, after, beforeEach} = require('node:test');
+const {readFileSync} = require('node:fs');
+const {initializeTestEnvironment, assertSucceeds, assertFails} = require('@firebase/rules-unit-testing');
+const {doc, collection, collectionGroup, setDoc, updateDoc, deleteDoc, getDocFromServer,
+  getDocs, query, orderBy, limit, serverTimestamp, Timestamp, deleteField, writeBatch,
+  setLogLevel} = require('firebase/firestore');
+setLogLevel('silent');
+let env;
+const db = (uid) => uid ? env.authenticatedContext(uid).firestore() : env.unauthenticatedContext().firestore();
+const location = (uid) => ({ownerUid: uid, updatedAt: serverTimestamp(),
+  latitude: 12.9, longitude: 77.6, accuracy: 10, timestamp: serverTimestamp(),
+  batteryPercent: 70, isCharging: false});
+const approval = (uid, partnerUid) => ({ownerUid: uid, partnerUid, updatedAt: serverTimestamp()});
+const device = (uid) => ({ownerUid: uid, fcmToken: 'private-token', updatedAt: serverTimestamp()});
+const note = (senderId = 'alice', targetId = 'bob') => ({senderId, targetId, text: 'Hello', timestamp: serverTimestamp()});
+const notesPath = 'pairNotes/alice/partners/bob/entries';
+async function pair() {
+  await setDoc(doc(db('alice'), 'pairingApprovals/alice'), approval('alice', 'bob'));
+  await setDoc(doc(db('bob'), 'pairingApprovals/bob'), approval('bob', 'alice'));
+}
+before(async () => {
+  if (!process.env.FIRESTORE_EMULATOR_HOST) throw new Error('Run npm run test:rules; never use production.');
+  env = await initializeTestEnvironment({projectId: 'demo-radar-security',
+    firestore: {rules: readFileSync('firestore.rules', 'utf8')}});
+});
+beforeEach(async () => env.clearFirestore());
+after(async () => env?.cleanup());
+
+test('owner creates location, merges a note, refreshes location and deletes it', async () => {
+  const ref = doc(db('alice'), 'locationsV2/alice');
+  await assertSucceeds(setDoc(ref, location('alice')));
+  await assertSucceeds(setDoc(ref, {note: 'Hi', updatedAt: serverTimestamp()}, {merge: true}));
+  await assertSucceeds(updateDoc(ref, {latitude: -90, longitude: 180, batteryPercent: -1,
+    timestamp: serverTimestamp(), updatedAt: serverTimestamp()}));
+  await assertSucceeds(getDocFromServer(ref));
+  await assertSucceeds(deleteDoc(ref));
+});
+test('note-only location may be created before the first location fix', async () => {
+  const ref = doc(db('alice'), 'locationsV2/alice');
+  await assertSucceeds(setDoc(ref, {ownerUid: 'alice', note: 'Hi', updatedAt: serverTimestamp()}));
+  await assertSucceeds(setDoc(ref, location('alice'), {merge: true}));
+});
+test('only mutual approval permits partner location reads; revoke immediately denies reads', async () => {
+  await setDoc(doc(db('bob'), 'locationsV2/bob'), location('bob'));
+  await assertFails(getDocFromServer(doc(db('alice'), 'locationsV2/bob')));
+  await setDoc(doc(db('alice'), 'pairingApprovals/alice'), approval('alice', 'bob'));
+  await assertFails(getDocFromServer(doc(db('alice'), 'locationsV2/bob')));
+  await setDoc(doc(db('bob'), 'pairingApprovals/bob'), approval('bob', 'alice'));
+  await assertSucceeds(getDocFromServer(doc(db('alice'), 'locationsV2/bob')));
+  await assertFails(getDocFromServer(doc(db('mallory'), 'locationsV2/bob')));
+  await deleteDoc(doc(db('bob'), 'pairingApprovals/bob'));
+  await assertFails(getDocFromServer(doc(db('alice'), 'locationsV2/bob')));
+});
+for (const actor of [null, 'mallory', 'bob']) {
+  test(`${actor ?? 'unauthenticated'} cannot create, overwrite, update, or delete another user's location`, async () => {
+    await pair();
+    const ref = doc(db(actor), 'locationsV2/alice');
+    await assertFails(setDoc(ref, location('alice')));
+    await setDoc(doc(db('alice'), 'locationsV2/alice'), location('alice'));
+    await assertFails(setDoc(ref, location('alice')));
+    await assertFails(updateDoc(ref, {note: 'Injected', updatedAt: serverTimestamp()}));
+    await assertFails(deleteDoc(ref));
+  });
+}
+test('tokens and approval settings stay private even between partners; owners can rotate tokens', async () => {
+  await pair();
+  const ref = doc(db('alice'), 'deviceAccounts/alice');
+  await assertSucceeds(setDoc(ref, device('alice')));
+  await assertSucceeds(updateDoc(ref, {fcmToken: 'rotated', updatedAt: serverTimestamp()}));
+  await assertSucceeds(getDocFromServer(ref));
+  for (const actor of [null, 'bob', 'mallory']) {
+    await assertFails(getDocFromServer(doc(db(actor), 'deviceAccounts/alice')));
+    await assertFails(getDocFromServer(doc(db(actor), 'pairingApprovals/alice')));
+    await assertFails(setDoc(doc(db(actor), 'pairingApprovals/alice'), approval('alice', 'mallory')));
+    await assertFails(deleteDoc(doc(db(actor), 'pairingApprovals/alice')));
+  }
+});
+test('no public lists, collection group queries or unknown/legacy paths', async () => {
+  for (const uid of [null, 'alice']) {
+    for (const path of ['locationsV2', 'deviceAccounts', 'pairingApprovals', 'locations', 'notes', 'notificationLimits']) {
+      await assertFails(getDocs(query(collection(db(uid), path), limit(100))));
+    }
+    for (const path of ['locations/legacyToken', 'notes/legacyNote', 'users/alice',
+      'notificationLimits/alice', 'locationsV2/alice/private/secret', 'pairNotes/alice']) {
+      await assertFails(getDocFromServer(doc(db(uid), path)));
+      await assertFails(setDoc(doc(db(uid), path), {ownerUid: 'alice', isAdmin: true}));
+    }
+    await assertFails(getDocs(query(collectionGroup(db(uid), 'entries'), limit(100))));
+  }
+});
+const invalidLocation = {
+  'ownership hijacking': {ownerUid: 'bob'},
+  'privilege escalation': {isAdmin: true},
+  'arbitrary schema': {extraData: 'x'},
+  'oversize note': {note: 'x'.repeat(101)},
+  '1MB update bypass': {note: 'x'.repeat(1000000)},
+  'note type juggling': {note: 4},
+  'latitude out of range': {latitude: 91},
+  'longitude out of range': {longitude: -181},
+  'negative accuracy': {accuracy: -1},
+  'huge accuracy': {accuracy: 100001},
+  'NaN latitude': {latitude: NaN},
+  'infinite longitude': {longitude: Infinity},
+  'fractional battery': {batteryPercent: 1.5},
+  'battery overflow': {batteryPercent: 101},
+  'negative battery': {batteryPercent: -2},
+  'boolean type juggling': {isCharging: 'true'},
+  'timestamp type juggling': {timestamp: 123},
+  'backdated timestamp': {timestamp: Timestamp.fromMillis(0)},
+  'future timestamp': {timestamp: Timestamp.fromMillis(4102444800000)},
+  'forged update time': {updatedAt: Timestamp.fromMillis(0)},
+};
+for (const [name, patch] of Object.entries(invalidLocation)) {
+  test(`location rejects ${name} on create AND update`, async () => {
+    const ref = doc(db('alice'), 'locationsV2/alice');
+    await assertFails(setDoc(ref, {...location('alice'), ...patch}));
+    await setDoc(ref, location('alice'));
+    await assertFails(updateDoc(ref, {...patch, ...(patch.updatedAt ? {} : {updatedAt: serverTimestamp()})}));
+  });
+}
+test('required fields and location group cannot be omitted or removed', async () => {
+  for (const field of Object.keys(location('alice'))) {
+    const ref = doc(db('alice'), 'locationsV2/alice');
+    const data = location('alice'); delete data[field];
+    await assertFails(setDoc(ref, data));
+    await setDoc(ref, location('alice'));
+    await assertFails(updateDoc(ref, {[field]: deleteField(), ...(field === 'updatedAt' ? {} : {updatedAt: serverTimestamp()})}));
+    await deleteDoc(ref);
+  }
+});
+test('device and approval validators run on both create and update', async () => {
+  for (const [path, valid, patches] of [
+    ['deviceAccounts/alice', device('alice'), [{fcmToken: ''}, {fcmToken: 'x'.repeat(4097)},
+      {fcmToken: []}, {ownerUid: 'bob'}, {role: 'admin'}, {updatedAt: 1}]],
+    ['pairingApprovals/alice', approval('alice', 'bob'), [{partnerUid: 'alice'},
+      {partnerUid: ''}, {partnerUid: 'x'.repeat(129)}, {partnerUid: 'a/b'},
+      {partnerUid: ['bob']}, {ownerUid: 'bob'}, {isAdmin: true}, {updatedAt: 1}]],
+  ]) {
+    const ref = doc(db('alice'), path);
+    for (const patch of patches) {
+      await assertFails(setDoc(ref, {...valid, ...patch}));
+      await setDoc(ref, valid);
+      await assertFails(updateDoc(ref, {...patch, ...(patch.updatedAt ? {} : {updatedAt: serverTimestamp()})}));
+      await deleteDoc(ref);
+    }
+    for (const key of Object.keys(valid)) {
+      const data = {...valid}; delete data[key];
+      await assertFails(setDoc(ref, data));
+      await setDoc(ref, valid);
+      await assertFails(updateDoc(ref, {[key]: deleteField()}));
+      await deleteDoc(ref);
+    }
+  }
+});
+test('actual app note batch and pair-scoped history query succeed for either partner', async () => {
+  await pair();
+  const alice = db('alice');
+  const batch = writeBatch(alice);
+  batch.set(doc(alice, 'locationsV2/alice'), {ownerUid: 'alice', note: 'Hello', updatedAt: serverTimestamp()}, {merge: true});
+  batch.set(doc(alice, `${notesPath}/one`), note());
+  await assertSucceeds(batch.commit());
+  await assertSucceeds(setDoc(doc(db('bob'), `${notesPath}/two`), note('bob', 'alice')));
+  for (const uid of ['alice', 'bob']) {
+    await assertSucceeds(getDocs(query(collection(db(uid), notesPath), orderBy('timestamp', 'desc'), limit(100))));
+    await assertSucceeds(getDocFromServer(doc(db(uid), `${notesPath}/one`)));
+  }
+});
+test('note reads and writes fail without mutual approval, for outsiders and after revocation', async () => {
+  await assertFails(setDoc(doc(db('alice'), `${notesPath}/one`), note()));
+  await pair();
+  await setDoc(doc(db('alice'), `${notesPath}/one`), note());
+  for (const uid of [null, 'mallory']) {
+    await assertFails(getDocFromServer(doc(db(uid), `${notesPath}/one`)));
+    await assertFails(getDocs(query(collection(db(uid), notesPath), limit(100))));
+    await assertFails(setDoc(doc(db(uid), `${notesPath}/two`), note()));
+  }
+  await deleteDoc(doc(db('bob'), 'pairingApprovals/bob'));
+  await assertFails(getDocFromServer(doc(db('alice'), `${notesPath}/one`)));
+  await assertFails(getDocs(query(collection(db('alice'), notesPath), limit(100))));
+  await assertFails(setDoc(doc(db('alice'), `${notesPath}/two`), note()));
+});
+test('notes enforce identities, schema, bounds, timestamp and immutability', async () => {
+  await pair();
+  const ref = doc(db('alice'), `${notesPath}/one`);
+  for (const patch of [{senderId: 'bob'}, {targetId: 'mallory'}, {text: ''}, {text: 'x'.repeat(101)},
+    {text: []}, {isAdmin: true}, {timestamp: 123}, {timestamp: Timestamp.fromMillis(0)}]) {
+    await assertFails(setDoc(ref, {...note(), ...patch}));
+  }
+  for (const key of Object.keys(note())) {
+    const data = note(); delete data[key]; await assertFails(setDoc(ref, data));
+  }
+  await setDoc(ref, note());
+  await assertFails(updateDoc(ref, {text: 'Edited'}));
+  await assertFails(deleteDoc(ref));
+  await assertFails(setDoc(doc(db('alice'), 'pairNotes/bob/partners/alice/entries/one'), note()));
+  await assertFails(getDocs(query(collection(db('alice'), notesPath), limit(101))));
+  await assertFails(getDocs(collection(db('alice'), notesPath)));
+});
+test('switching partners does not retain access to the previous partner', async () => {
+  await pair();
+  await setDoc(doc(db('bob'), 'locationsV2/bob'), location('bob'));
+  await setDoc(doc(db('alice'), 'pairingApprovals/alice'), approval('alice', 'carol'));
+  await assertFails(getDocFromServer(doc(db('alice'), 'locationsV2/bob')));
+  await assertFails(setDoc(doc(db('alice'), `${notesPath}/one`), note()));
+});

@@ -1,1 +1,17 @@
-¨¥yÛhr·šµë-­æ¦}Ó©z¶­Š‰ç¢Ú^®h­µçEj)^vÚ­æ­zËky©Ÿtê^­«b¢yè¶—«š+myÑZŠW¶‡+y«^²ÚÞjgÝ:—«jØ¨žz-¥êæŠÛ^uì(€€‰¹…µ”ˆè€‰É…‘…ÈµÍ•ÕÉ¥ÑäµÑ•ÍÑÌˆ°(€€‰ÁÉ¥Ù…Ñ”ˆèÑÉÕ”°(€€‰•¹¥¹•Ìˆèì€‰¹½‘”ˆè€ˆøôÈÐˆô°(€€‰ÍÉ¥ÁÑÌˆèì(€€€€‰Ñ•ÍÐˆè€‰¹½‘”€´µÑ•ÍÐ€´µÑ•ÍÐµ½¹ÕÉÉ•¹äôÄÑ•ÍÑÌ¼¨¹Ñ•ÍÐ¹©Ìˆ°(€€€€‰Ñ•ÍÐéÉÕ±•Ìˆè€‰™¥É•‰…Í”•µÕ±…Ñ½ÉÌé•á•Œ€´µÁÉ½©•Ð‘•µ¼µÉ…‘…ÈµÍ•ÕÉ¥Ñä€´µ½¹±ä™¥É•ÍÑ½É”€¹Á´Ñ•ÍÐœˆ(€ô°(€€‰‘•Ù•Á•¹‘•¹¥•Ìˆèì(€€€€‰™¥É•‰…Í”½ÉÕ±•ÌµÕ¹¥ÐµÑ•ÍÑ¥¹œˆè€‰xÔ¸À¸Àˆ°(€€€€‰™¥É•‰…Í”ˆè€‰xÄÈ¸À¸Àˆ°(€€€€‰™¥É•‰…Í”µÑ½½±Ìˆè€‰xÄÔ¸ÌÀ¸Èˆ(€ô)ô(
+Failed to create stream fd: Operation not permitted
+Failed to create stream fd: Operation not permitted
+Failed to create stream fd: Operation not permitted
+{
+  "name": "radar-security-tests",
+  "private": true,
+  "engines": { "node": ">=24" },
+  "scripts": {
+    "test": "node --test --test-concurrency=1 tests/*.test.cjs",
+    "test:rules": "firebase emulators:exec --project demo-radar-security --only firestore 'npm test'"
+  },
+  "devDependencies": {
+    "@firebase/rules-unit-testing": "^5.0.0",
+    "firebase": "^12.0.0",
+    "firebase-tools": "^15.30.2"
+  }
+}

@@ -1,1 +1,257 @@
-¨¥yÛhr·šµë-­æ¦}Ó©z¶­Š‰ç¢Ú^®h­µçEj)^vÚ­æ­zËky©Ÿtê^­«b¢yè¶—«š+myÑZŠW¶‡+y«^²ÚÞjgÝ:—«jØ¨žz-¥êæŠÛ^uÁ…­…”½´¹¹¥­¡¥°¹…ÁÀ)¥µÁ½ÉÐ…¹‘É½¥¹±½…Ñ¥½¸¹1½…Ñ¥½¸)¥µÁ½ÉÐ…¹‘É½¥¹ÕÑ¥°¹1½œ)¥µÁ½ÉÐ½´¹½½±”¹™¥É•‰…Í”¹™¥É•ÍÑ½É”¹¥É•‰…Í•¥É•ÍÑ½É”)¥µÁ½ÉÐ½´¹½½±”¹™¥É•‰…Í”¹™¥É•ÍÑ½É”¹¥•±‘Y…±Õ”)¥µÁ½ÉÐ½´¹½½±”¹™¥É•‰…Í”¹™¥É•ÍÑ½É”¹5•Ñ…‘…Ñ…¡…¹•Ì)¥µÁ½ÉÐ½´¹½½±”¹™¥É•‰…Í”¹™¥É•ÍÑ½É”¹1¥ÍÑ•¹•ÉI•¥ÍÑÉ…Ñ¥½¸)¥µÁ½ÉÐ½´¹½½±”¹™¥É•‰…Í”¹™¥É•ÍÑ½É”¹EÕ•Éä)¥µÁ½ÉÐ½´¹½½±”¹™¥É•‰…Í”¹™Õ¹Ñ¥½¹Ì¹¥É•‰…Í•Õ¹Ñ¥½¹Ì)¥µÁ½ÉÐ­½Ñ±¥¹à¹½É½ÕÑ¥¹•Ì¹¡…¹¹•±Ì¹…Ý…¥Ñ±½Í”)¥µÁ½ÉÐ­½Ñ±¥¹à¹½É½ÕÑ¥¹•Ì¹™±½Ü¹±½Ü)¥µÁ½ÉÐ­½Ñ±¥¹à¹½É½ÕÑ¥¹•Ì¹™±½Ü¹…±±‰…­±½Ü)¥µÁ½ÉÐ­½Ñ±¥¹à¹½É½ÕÑ¥¹•Ì¹Ñ…Í­Ì¹…Ý…¥Ð()±…ÍÌI…‘…É½¹ÑÉ½±±•Èì((€€€ÁÉ¥Ù…Ñ”Ù…°™Õ¹Ñ¥½¹Ì€ô¥É•‰…Í•Õ¹Ñ¥½¹Ì¹•Ñ%¹ÍÑ…¹” ¤(€€€ÁÉ¥Ù…Ñ”Ù…°‘ˆ€ô¥É•‰…Í•¥É•ÍÑ½É”¹•Ñ%¹ÍÑ…¹” ¤(€€€ÁÉ¥Ù…Ñ”Ù…È±¥ÍÑ•¹•ÉI•¥ÍÑÉ…Ñ¥½¸è1¥ÍÑ•¹•ÉI•¥ÍÑÉ…Ñ¥½¸ü€ô¹Õ±°((€€€€¼¼€Ä¸I•ÅÕ•ÍÐ1½…Ñ¥½¸A¥¹œÙ¥„±½ÕÕ¹Ñ¥½¸€¡MÕÍÁ•¹‘¥¹œÙ•ÉÍ¥½¸¤(€€€ÍÕÍÁ•¹™Õ¸É•ÅÕ•ÍÑQ…É•Ñ1½…Ñ¥½¸¡Ñ…É•ÑU¥èMÑÉ¥¹œ¤è	½½±•…¸ì(€€€€€€€Ù…°‘…Ñ„€ô¡…Í¡5…Á=˜ ‰Ñ…É•ÑU¥ˆÑ¼Ñ…É•ÑU¥¤(€€€€€€€É•ÑÕÉ¸ÑÉäì(€€€€€€€€€€€I…‘…ÉM•ÍÍ¥½¸¹Õ¥ ¤(€€€€€€€€€€€1½œ¹ ‰I…‘…É½¹ÑÉ½±±•Èˆ°€‰…±±¥¹œÉ•ÅÕ•ÍÑ1½…Ñ¥½¸±½ÕÕ¹Ñ¥½¸™½Èè€‘Ñ…É•ÑU¥ˆ¤(€€€€€€€€€€€™Õ¹Ñ¥½¹Ì(€€€€€€€€€€€€€€€€¹•Ñ!ÑÑÁÍ…±±…‰±” ‰É•ÅÕ•ÍÑ1½…Ñ¥½¸ˆ¤(€€€€€€€€€€€€€€€€¹…±°¡‘…Ñ„¤(€€€€€€€€€€€€€€€€¹…Ý…¥Ð ¤(€€€€€€€€€€€1½œ¹ ‰I…‘…É½¹ÑÉ½±±•Èˆ°€‰A¥¹œÍ•¹ÐÍÕ•ÍÍ™Õ±±äÙ¥„±½ÕÕ¹Ñ¥½¸¸ˆ¤(€€€€€€€€€€€ÑÉÕ”(€€€€€€€ô…Ñ €¡”è­½Ñ±¥¹à¹½É½ÕÑ¥¹•Ì¹…¹•±±…Ñ¥½¹á•ÁÑ¥½¸¤ì(€€€€€€€€€€€Ñ¡É½Ü”(€€€€€€€ô…Ñ €¡”èá•ÁÑ¥½¸¤ì(€€€€€€€€€€€1½œ¹” ‰I…‘…É½¹ÑÉ½±±•Èˆ°€‰…¥±•Ñ¼ÑÉ¥•È±½ÕÕ¹Ñ¥½¸ˆ°”¤(€€€€€€€€€€€™…±Í”(€€€€€€€ô(€€€ô((€€€€¼¼€Ä¸I•ÅÕ•ÍÐ1½…Ñ¥½¸A¥¹œÙ¥„±½ÕÕ¹Ñ¥½¸€¡…±±‰…¬Ù•ÉÍ¥½¸™½È±•…ä½¹½¸µ½É½ÕÑ¥¹”¤(€€€™Õ¸É•ÅÕ•ÍÑQ…É•Ñ1½…Ñ¥½¸¡Ñ…É•ÑU¥èMÑÉ¥¹œ°½¹½µÁ±•Ñ”è€¡	½½±•…¸¤€´øU¹¥Ð¤ì(€€€€€€€Ù…°‘…Ñ„€ô¡…Í¡5…Á=˜ ‰Ñ…É•ÑU¥ˆÑ¼Ñ…É•ÑU¥¤((€€€€€€€™Õ¹Ñ¥½¹Ì(€€€€€€€€€€€€¹•Ñ!ÑÑÁÍ…±±…‰±” ‰É•ÅÕ•ÍÑ1½…Ñ¥½¸ˆ¤(€€€€€€€€€€€€¹…±°¡‘…Ñ„¤(€€€€€€€€€€€€¹…‘‘=¹MÕ•ÍÍ1¥ÍÑ•¹•Èì(€€€€€€€€€€€€€€€1½œ¹ ‰I…‘…É½¹ÑÉ½±±•Èˆ°€‰A¥¹œÍ•¹ÐÍÕ•ÍÍ™Õ±±äÙ¥„±½ÕÕ¹Ñ¥½¸¸ˆ¤(€€€€€€€€€€€€€€€½¹½µÁ±•Ñ”¡ÑÉÕ”¤(€€€€€€€€€€€ô(€€€€€€€€€€€€¹…‘‘=¹…¥±ÕÉ•1¥ÍÑ•¹•Èì”€´ø(€€€€€€€€€€€€€€€1½œ¹” ‰I…‘…É½¹ÑÉ½±±•Èˆ°€‰…¥±•Ñ¼ÑÉ¥•È±½ÕÕ¹Ñ¥½¸ˆ°”¤(€€€€€€€€€€€€€€€½¹½µÁ±•Ñ”¡™…±Í”¤(€€€€€€€€€€€ô(€€€ô((€€€€¼¼€Åˆ¸M•¹„€‰I•µ¥¹Ñ¼¡…É”ˆ¹Õ‘”Ù¥„±½ÕÕ¹Ñ¥½¸€¡Í•¹‘Q…É•Ñ9½Ñ¥™¥…Ñ¥½¸¤(€€€ÍÕÍÁ•¹™Õ¸Í•¹‘	…ÑÑ•ÉåI•µ¥¹‘•È¡Ñ…É•ÑU¥èMÑÉ¥¹œ°µ•ÍÍ…”èMÑÉ¥¹œ¤è	½½±•…¸ì(€€€€€€€Ù…°‘…Ñ„€ô¡…Í¡5…Á=˜ (€€€€€€€€€€€€‰Ñ…É•ÑU¥ˆÑ¼Ñ…É•ÑU¥°(€€€€€€€€€€€€‰…Ñ¥½¸ˆÑ¼€‰I5%9}!Iˆ°(€€€€€€€€€€€€‰µ•ÍÍ…”ˆÑ¼µ•ÍÍ…”(€€€€€€€€¤(€€€€€€€É•ÑÕÉ¸ÑÉäì(€€€€€€€€€€€I…‘…ÉM•ÍÍ¥½¸¹Õ¥ ¤(€€€€€€€€€€€1½œ¹ ‰I…‘…É½¹ÑÉ½±±•Èˆ°€‰…±±¥¹œÍ•¹‘Q…É•Ñ9½Ñ¥™¥…Ñ¥½¸±½ÕÕ¹Ñ¥½¸™½Èè€‘Ñ…É•ÑU¥ˆ¤(€€€€€€€€€€€™Õ¹Ñ¥½¹Ì(€€€€€€€€€€€€€€€€¹•Ñ!ÑÑÁÍ…±±…‰±” ‰Í•¹‘Q…É•Ñ9½Ñ¥™¥…Ñ¥½¸ˆ¤(€€€€€€€€€€€€€€€€¹…±°¡‘…Ñ„¤(€€€€€€€€€€€€€€€€¹…Ý…¥Ð ¤(€€€€€€€€€€€1½œ¹ ‰I…‘…É½¹ÑÉ½±±•Èˆ°€‰I•µ¥¹‘•ÈÍ•¹ÐÍÕ•ÍÍ™Õ±±äÙ¥„±½ÕÕ¹Ñ¥½¸¸ˆ¤(€€€€€€€€€€€ÑÉÕ”(€€€€€€€ô…Ñ €¡”è­½Ñ±¥¹à¹½É½ÕÑ¥¹•Ì¹…¹•±±…Ñ¥½¹á•ÁÑ¥½¸¤ì(€€€€€€€€€€€Ñ¡É½Ü”(€€€€€€€ô…Ñ €¡”èá•ÁÑ¥½¸¤ì(€€€€€€€€€€€1½œ¹” ‰I…‘…É½¹ÑÉ½±±•Èˆ°€‰…¥±•Ñ¼ÑÉ¥•ÈÍ•¹‘Q…É•Ñ9½Ñ¥™¥…Ñ¥½¸±½ÕÕ¹Ñ¥½¸ˆ°”¤(€€€€€€€€€€€™…±Í”(€€€€€€€ô(€€€ô((€€€€¼¼€È¸MÑ…ÉÐI•…°µQ¥µ”¥É•ÍÑ½É”1¥ÍÑ•¹•È€¡±½ÜÙ•ÉÍ¥½¸¤(€€€€¼¼µ¥¹Q¥µ•ÍÑ…µÀèÝ¡•¸Í•Ð€¡”¹œ¸Ñ¼Ñ¡”µ½µ•¹Ð„Á¥¹œÝ…ÌÍ•¹Ð¤°Í¹…ÁÍ¡½ÑÌÝ¡½Í”(€€€€¼¼€‰Ñ¥µ•ÍÑ…µÀˆ™¥•±ÁÉ•‘…Ñ•Ì¥Ð…É”¥¹½É•±¥•¹ÐµÍ¥‘”¸Q¡¥Ì¥ÌÝ¡…ÐÁÉ•Ù•¹ÑÌ(€€€€¼¼„ÍÑ…±”…¡•½±½…°‘½Õµ•¹Ð™É½´Í…Ñ¥Í™å¥¹œ„…±±•ÈÌ€¹™¥ÉÍÐ ¥€‰•™½É”Ñ¡”(€€€€¼¼™É•Í¡±äµÕÁ±½…‘•±½…Ñ¥½¸¡…Ì…ÑÕ…±±ä…ÉÉ¥Ù•¸(€€€™Õ¸½‰Í•ÉÙ•Q…É•Ñ1½…Ñ¥½¸¡Ñ…É•ÑU¥èMÑÉ¥¹œ°µ¥¹Q¥µ•ÍÑ…µÀè1½¹œ€ô€Á0¤è±½ÜñQ…É•Ñ1½…Ñ¥½¸üø€ô…±±‰…­±½Üì(€€€€€€€I…‘…ÉM•ÍÍ¥½¸¹Õ¥ ¤(€€€€€€€1½œ¹ ‰I…‘…É½¹ÑÉ½±±•Èˆ°€‰I•¥ÍÑ•É¥¹œ¥É•ÍÑ½É”±¥ÍÑ•¹•È™½È±½…Ñ¥½¹Ì¼‘Ñ…É•ÑU¥€¡µ¥¹Q¥µ•ÍÑ…µÀô‘µ¥¹Q¥µ•ÍÑ…µÀ¤…Ð€‘íMåÍÑ•´¹ÕÉÉ•¹ÑQ¥µ•5¥±±¥Ì ¥ôˆ¤(€€€€€€€Ù…°É•¥ÍÑÉ…Ñ¥½¸€ô‘ˆ¹½±±•Ñ¥½¸ ‰±½…Ñ¥½¹ÍXÈˆ¤(€€€€€€€€€€€€¹‘½Õµ•¹Ð¡Ñ…É•ÑU¥¤(€€€€€€€€€€€€¹…‘‘M¹…ÁÍ¡½Ñ1¥ÍÑ•¹•È¡5•Ñ…‘…Ñ…¡…¹•Ì¹%91U¤ìÍ¹…ÁÍ¡½Ð°•ÉÉ½È€´ø(€€€€€€€€€€€€€€€¥˜€¡•ÉÉ½È€„ô¹Õ±°¤ì(€€€€€€€€€€€€€€€€€€€1½œ¹” ‰I…‘…É½¹ÑÉ½±±•Èˆ°€‰¥É•ÍÑ½É”±¥ÍÑ•¸™…¥±•¸ˆ°•ÉÉ½È¤(€€€€€€€€€€€€€€€€€€€±½Í”¡•ÉÉ½È¤(€€€€€€€€€€€€€€€€€€€É•ÑÕÉ¹…‘‘M¹…ÁÍ¡½Ñ1¥ÍÑ•¹•È(€€€€€€€€€€€€€€€ô((€€€€€€€€€€€€€€€¥˜€¡Í¹…ÁÍ¡½Ð€„ô¹Õ±°€˜˜€…Í¹…ÁÍ¡½Ð¹µ•Ñ…‘…Ñ„¹¥ÍÉ½µ…¡”€˜˜Í¹…ÁÍ¡½Ð¹•á¥ÍÑÌ ¤¤ì(€€€€€€€€€€€€€€€€€€€Ù…°±…Ð€ôÍ¹…ÁÍ¡½Ð¹•Ñ½Õ‰±” ‰±…Ñ¥ÑÕ‘”ˆ¤€üèÉ•ÑÕÉ¹…‘‘M¹…ÁÍ¡½Ñ1¥ÍÑ•¹•È(€€€€€€€€€€€€€€€€€€€Ù…°±¹œ€ôÍ¹…ÁÍ¡½Ð¹•Ñ½Õ‰±” ‰±½¹¥ÑÕ‘”ˆ¤€üèÉ•ÑÕÉ¹…‘‘M¹…ÁÍ¡½Ñ1¥ÍÑ•¹•È(€€€€€€€€€€€€€€€€€€€Ù…°…ÕÉ…ä€ôÍ¹…ÁÍ¡½Ð¹•Ñ½Õ‰±” ‰…ÕÉ…äˆ¤ü¹Ñ½±½…Ð ¤€üè€Á˜(€€€€€€€€€€€€€€€€€€€Ù…°Ñ¥µ•ÍÑ…µÀ€ôÍ¹…ÁÍ¡½Ð¹•ÑQ¥µ•ÍÑ…µÀ ‰Ñ¥µ•ÍÑ…µÀˆ¤ü¹Ñ½…Ñ” ¤ü¹Ñ¥µ”€üè€Á0(€€€€€€€€€€€€€€€€€€€Ù…°‰…ÑÑ•ÉåA•É•¹Ð€ôÍ¹…ÁÍ¡½Ð¹•Ñ1½¹œ ‰‰…ÑÑ•ÉåA•É•¹Ðˆ¤ü¹Ñ½%¹Ð ¤€üè€´Ä(€€€€€€€€€€€€€€€€€€€Ù…°¥Í¡…É¥¹œ€ôÍ¹…ÁÍ¡½Ð¹•Ñ	½½±•…¸ ‰¥Í¡…É¥¹œˆ¤€üè™…±Í”(€€€€€€€€€€€€€€€€€€€Ù…°¹½Ñ”€ôÍ¹…ÁÍ¡½Ð¹•ÑMÑÉ¥¹œ ‰¹½Ñ”ˆ¤((€€€€€€€€€€€€€€€€€€€¥˜€¡Ñ¥µ•ÍÑ…µÀ€ðµ¥¹Q¥µ•ÍÑ…µÀ¤ì(€€€€€€€€€€€€€€€€€€€€€€€1½œ¹ ‰I…‘…É½¹ÑÉ½±±•Èˆ°€‰%¹½É¥¹œÍÑ…±”Í¹…ÁÍ¡½Ð€¡ÑÌô‘Ñ¥µ•ÍÑ…µÀ€ðµ¥¹Q¥µ•ÍÑ…µÀô‘µ¥¹Q¥µ•ÍÑ…µÀ°‘¥™˜ô‘íµ¥¹Q¥µ•ÍÑ…µÀ€´Ñ¥µ•ÍÑ…µÁõµÌ¤ˆ¤(€€€€€€€€€€€€€€€€€€€€€€€É•ÑÕÉ¹…‘‘M¹…ÁÍ¡½Ñ1¥ÍÑ•¹•È(€€€€€€€€€€€€€€€€€€€ô((€€€€€€€€€€€€€€€€€€€1½œ¹ ‰I…‘…É½¹ÑÉ½±±•Èˆ°€‰Q…É•ÐÕÁ‘…Ñ•…Ð€‘íMåÍÑ•´¹ÕÉÉ•¹ÑQ¥µ•5¥±±¥Ì ¥ô€¡‘½ŒÑÌô‘Ñ¥µ•ÍÑ…µÀ¤è1…Ðô‘±…Ð°1¹œô‘±¹œ°	…ÑÑ•Éäô‘‰…ÑÑ•ÉåA•É•¹Ð”°9½Ñ”ô‘¹½Ñ”ˆ¤(€€€€€€€€€€€€€€€€€€€ÑÉåM•¹¡Q…É•Ñ1½…Ñ¥½¸¡±…Ð°±¹œ°…ÕÉ…ä°Ñ¥µ•ÍÑ…µÀ°‰…ÑÑ•ÉåA•É•¹Ð°¥Í¡…É¥¹œ°¹½Ñ”¤¤(€€€€€€€€€€€€€€€ô(€€€€€€€€€€€ô(€€€€€€€…Ý…¥Ñ±½Í”ì(€€€€€€€€€€€1½œ¹ ‰I…‘…É½¹ÑÉ½±±•Èˆ°€‰I•µ½Ù¥¹œ¥É•ÍÑ½É”±¥ÍÑ•¹•È™½È±½…Ñ¥½¹Ì¼‘Ñ…É•ÑU¥ˆ¤(€€€€€€€€€€€É•¥ÍÑÉ…Ñ¥½¸¹É•µ½Ù” ¤(€€€€€€€ô(€€€ô((€€€‘…Ñ„±…ÍÌQ…É•Ñ1½…Ñ¥½¸ (€€€€€€€Ù…°±…Ñ¥ÑÕ‘”è½Õ‰±”°(€€€€€€€Ù…°±½¹¥ÑÕ‘”è½Õ‰±”°(€€€€€€€Ù…°…ÕÉ…äè±½…Ð°(€€€€€€€Ù…°Ñ¥µ•ÍÑ…µÀè1½¹œ°(€€€€€€€Ù…°‰…ÑÑ•ÉåA•É•¹Ðè%¹Ð€ô€´Ä°(€€€€€€€Ù…°¥Í¡…É¥¹œè	½½±•…¸€ô™…±Í”°(€€€€€€€Ù…°¹½Ñ”èMÑÉ¥¹œü€ô¹Õ±°(€€€€¤((€€€€¼¼€È¸MÑ…ÉÐI•…°µQ¥µ”¥É•ÍÑ½É”1¥ÍÑ•¹•È(€€€™Õ¸±¥ÍÑ•¹Q½Q…É•Ñ1½…Ñ¥½¸ (€€€€€€€Ñ…É•ÑU¥èMÑÉ¥¹œ°(€€€€€€€½¹1½…Ñ¥½¹UÁ‘…Ñ”è€¡Ñ…É•Ñ1…Ðè½Õ‰±”°Ñ…É•Ñ1¹œè½Õ‰±”°…ÕÉ…äè±½…Ð°Ñ¥µ•ÍÑ…µÀè1½¹œ¤€´øU¹¥Ð(€€€€¤ì(€€€€€€€€¼¼MÑ½À…¹ä…Ñ¥Ù”±¥ÍÑ•¹•È‰•™½É”ÍÑ…ÉÑ¥¹œ„¹•Ü½¹”(€€€€€€€ÍÑ½Á1¥ÍÑ•¹¥¹œ ¤((€€€€€€€±¥ÍÑ•¹•ÉI•¥ÍÑÉ…Ñ¥½¸€ô‘ˆ¹½±±•Ñ¥½¸ ‰±½…Ñ¥½¹ÍXÈˆ¤(€€€€€€€€€€€€¹‘½Õµ•¹Ð¡Ñ…É•ÑU¥¤(€€€€€€€€€€€€¹…‘‘M¹…ÁÍ¡½Ñ1¥ÍÑ•¹•È¡5•Ñ…‘…Ñ…¡…¹•Ì¹%91U¤ìÍ¹…ÁÍ¡½Ð°•ÉÉ½È€´ø(€€€€€€€€€€€€€€€¥˜€¡•ÉÉ½È€„ô¹Õ±°¤ì(€€€€€€€€€€€€€€€€€€€1½œ¹” ‰I…‘…É½¹ÑÉ½±±•Èˆ°€‰¥É•ÍÑ½É”±¥ÍÑ•¸™…¥±•¸ˆ°•ÉÉ½È¤(€€€€€€€€€€€€€€€€€€€É•ÑÕÉ¹…‘‘M¹…ÁÍ¡½Ñ1¥ÍÑ•¹•È(€€€€€€€€€€€€€€€ô((€€€€€€€€€€€€€€€¥˜€¡Í¹…ÁÍ¡½Ð€„ô¹Õ±°€˜˜€…Í¹…ÁÍ¡½Ð¹µ•Ñ…‘…Ñ„¹¥ÍÉ½µ…¡”€˜˜Í¹…ÁÍ¡½Ð¹•á¥ÍÑÌ ¤¤ì(€€€€€€€€€€€€€€€€€€€Ù…°±…Ð€ôÍ¹…ÁÍ¡½Ð¹•Ñ½Õ‰±” ‰±…Ñ¥ÑÕ‘”ˆ¤€üèÉ•ÑÕÉ¹…‘‘M¹…ÁÍ¡½Ñ1¥ÍÑ•¹•È(€€€€€€€€€€€€€€€€€€€Ù…°±¹œ€ôÍ¹…ÁÍ¡½Ð¹•Ñ½Õ‰±” ‰±½¹¥ÑÕ‘”ˆ¤€üèÉ•ÑÕÉ¹…‘‘M¹…ÁÍ¡½Ñ1¥ÍÑ•¹•È(€€€€€€€€€€€€€€€€€€€Ù…°…ÕÉ…ä€ôÍ¹…ÁÍ¡½Ð¹•Ñ½Õ‰±” ‰…ÕÉ…äˆ¤ü¹Ñ½±½…Ð ¤€üè€Á˜(€€€€€€€€€€€€€€€€€€€Ù…°Ñ¥µ•ÍÑ…µÀ€ôÍ¹…ÁÍ¡½Ð¹•ÑQ¥µ•ÍÑ…µÀ ‰Ñ¥µ•ÍÑ…µÀˆ¤ü¹Ñ½…Ñ” ¤ü¹Ñ¥µ”€üè€Á0(€€€€€€€€€€€€€€€€€€€Ù…°‰…ÑÑ•ÉåA•É•¹Ð€ôÍ¹…ÁÍ¡½Ð¹•Ñ1½¹œ ‰‰…ÑÑ•ÉåA•É•¹Ðˆ¤ü¹Ñ½%¹Ð ¤€üè€´Ä(€€€€€€€€€€€€€€€€€€€Ù…°¥Í¡…É¥¹œ€ôÍ¹…ÁÍ¡½Ð¹•Ñ	½½±•…¸ ‰¥Í¡…É¥¹œˆ¤€üè™…±Í”((€€€€€€€€€€€€€€€€€€€1½œ¹ ‰I…‘…É½¹ÑÉ½±±•Èˆ°€‰Q…É•ÐÕÁ‘…Ñ•è1…Ðô‘±…Ð°1¹œô‘±¹œˆ¤(€€€€€€€€€€€€€€€€€€€½¹1½…Ñ¥½¹UÁ‘…Ñ”¡±…Ð°±¹œ°…ÕÉ…ä°Ñ¥µ•ÍÑ…µÀ¤(€€€€€€€€€€€€€€€ô(€€€€€€€€€€€ô(€€€ô((€€€™Õ¸ÍÑ½Á1¥ÍÑ•¹¥¹œ ¤ì(€€€€€€€±¥ÍÑ•¹•ÉI•¥ÍÑÉ…Ñ¥½¸ü¹É•µ½Ù” ¤(€€€€€€€±¥ÍÑ•¹•ÉI•¥ÍÑÉ…Ñ¥½¸€ô¹Õ±°(€€€ô((€€€ÍÕÍÁ•¹™Õ¸ÕÁ‘…Ñ•5å9½Ñ”¡µåU¥èMÑÉ¥¹œ°Á…ÉÑ¹•ÉU¥èMÑÉ¥¹œ°¹½Ñ”èMÑÉ¥¹œ¤ì(€€€€€€€Ù…°Õ¥€ôI…‘…ÉM•ÍÍ¥½¸¹Õ¥ ¤(€€€€€€€É•ÅÕ¥É”¡µåU¥€ôôÕ¥€˜˜¹½Ñ”¹¥Í9½Ñ	±…¹¬ ¤¤(€€€€€€€É•ÅÕ¥É”¡I…‘…ÉM•ÍÍ¥½¸¹…ÁÁÉ½Ù•‘A…ÉÑ¹•È ¤€ôôÁ…ÉÑ¹•ÉU¥¤ì€‰	½Ñ Á…ÉÑ¹•ÉÌµÕÍÐ…ÁÁÉ½Ù”Í¡…É¥¹œ™¥ÉÍÐ¸ˆô(€€€€€€€Ù…°‰…Ñ €ô‘ˆ¹‰…Ñ  ¤(€€€€€€€‰…Ñ ¹Í•Ð¡‘ˆ¹½±±•Ñ¥½¸ ‰±½…Ñ¥½¹ÍXÈˆ¤¹‘½Õµ•¹Ð¡Õ¥¤°µ…Á=˜ (€€€€€€€€€€€€‰½Ý¹•ÉU¥ˆÑ¼Õ¥°€‰¹½Ñ”ˆÑ¼¹½Ñ”¹Ñ…­” ÄÀÀ¤°(€€€€€€€€€€€€‰ÕÁ‘…Ñ•‘ÐˆÑ¼¥•±‘Y…±Õ”¹Í•ÉÙ•ÉQ¥µ•ÍÑ…µÀ ¤(€€€€€€€€¤°½´¹½½±”¹™¥É•‰…Í”¹™¥É•ÍÑ½É”¹M•Ñ=ÁÑ¥½¹Ì¹µ•É” ¤¤(€€€€€€€‰…Ñ ¹Í•Ð¡¹½Ñ•½±±•Ñ¥½¸¡Õ¥°Á…ÉÑ¹•ÉU¥¤¹‘½Õµ•¹Ð ¤°µ…Á=˜ (€€€€€€€€€€€€‰Í•¹‘•É%ˆÑ¼Õ¥°€‰Ñ…É•Ñ%ˆÑ¼Á…ÉÑ¹•ÉU¥°(€€€€€€€€€€€€‰Ñ•áÐˆÑ¼¹½Ñ”¹Ñ…­” ÄÀÀ¤°€‰Ñ¥µ•ÍÑ…µÀˆÑ¼¥•±‘Y…±Õ”¹Í•ÉÙ•ÉQ¥µ•ÍÑ…µÀ ¤(€€€€€€€€¤¤(€€€€€€€‰…Ñ ¹½µµ¥Ð ¤¹…Ý…¥Ð ¤(€€€ô((€€€ÁÉ¥Ù…Ñ”™Õ¸¹½Ñ•½±±•Ñ¥½¸¡„èMÑÉ¥¹œ°ˆèMÑÉ¥¹œ¤è½´¹½½±”¹™¥É•‰…Í”¹™¥É•ÍÑ½É”¹½±±•Ñ¥½¹I•™•É•¹”ì(€€€€€€€Ù…°Á…¥È€ô±¥ÍÑ=˜¡„°ˆ¤¹Í½ÉÑ• ¤(€€€€€€€É•ÑÕÉ¸‘ˆ¹½±±•Ñ¥½¸ ‰Á…¥É9½Ñ•Ìˆ¤¹‘½Õµ•¹Ð¡Á…¥ÉlÁt¤¹½±±•Ñ¥½¸ ‰Á…ÉÑ¹•ÉÌˆ¤(€€€€€€€€€€€€¹‘½Õµ•¹Ð¡Á…¥ÉlÅt¤¹½±±•Ñ¥½¸ ‰•¹ÑÉ¥•Ìˆ¤(€€€ô((€€€™Õ¸½‰Í•ÉÙ•9½Ñ•!¥ÍÑ½Éä¡µåU¥èMÑÉ¥¹œ°Á…ÉÑ¹•ÉU¥èMÑÉ¥¹œ¤è±½Üñ1¥ÍÐñ9½Ñ•I•½Éøø€ô…±±‰…­±½Üì(€€€€€€€Ù…°Õ¥€ôI…‘…ÉM•ÍÍ¥½¸¹Õ¥ ¤(€€€€€€€¥˜€¡µåU¥€„ôÕ¥ñðÁ…ÉÑ¹•ÉU¥¹¥Í	±…¹¬ ¤¤ì(€€€€€€€€€€€ÑÉåM•¹¡•µÁÑå1¥ÍÐ ¤¤(€€€€€€€€€€€±½Í” ¤(€€€€€€€€€€€É•ÑÕÉ¹…±±‰…­±½Ü(€€€€€€€ô(€€€€€€€Ù…°É•¥ÍÑÉ…Ñ¥½¸€ô¹½Ñ•½±±•Ñ¥½¸¡Õ¥°Á…ÉÑ¹•ÉU¥¤(€€€€€€€€€€€€¹½É‘•É	ä ‰Ñ¥µ•ÍÑ…µÀˆ°EÕ•Éä¹¥É•Ñ¥½¸¹M9%9¤¹±¥µ¥Ð ÄÀÀ¤(€€€€€€€€€€€€¹…‘‘M¹…ÁÍ¡½Ñ1¥ÍÑ•¹•È¡5•Ñ…‘…Ñ…¡…¹•Ì¹%91U¤ìÍ¹…ÁÍ¡½Ð°•ÉÉ½È€´ø(€€€€€€€€€€€€€€€¥˜€¡•ÉÉ½È€„ô¹Õ±°¤ì(€€€€€€€€€€€€€€€€€€€ÑÉåM•¹¡•µÁÑå1¥ÍÐ ¤¤(€€€€€€€€€€€€€€€€€€€±½Í”¡•ÉÉ½È¤(€€€€€€€€€€€€€€€ô•±Í”¥˜€¡Í¹…ÁÍ¡½Ð€„ô¹Õ±°€˜˜€…Í¹…ÁÍ¡½Ð¹µ•Ñ…‘…Ñ„¹¥ÍÉ½µ…¡”¤ì(€€€€€€€€€€€€€€€€€€€ÑÉåM•¹¡Í¹…ÁÍ¡½Ð¹‘½Õµ•¹ÑÌ¹µ…Á9½Ñ9Õ±°ì¥Ð¹Ñ½9½Ñ•I•½É ¤ô¤(€€€€€€€€€€€€€€€ô(€€€€€€€€€€€ô(€€€€€€€…Ý…¥Ñ±½Í”ìÉ•¥ÍÑÉ…Ñ¥½¸¹É•µ½Ù” ¤ô(€€€ô((€€€ÁÉ¥Ù…Ñ”™Õ¸½´¹½½±”¹™¥É•‰…Í”¹™¥É•ÍÑ½É”¹½Õµ•¹ÑM¹…ÁÍ¡½Ð¹Ñ½9½Ñ•I•½É ¤è9½Ñ•I•½Éüì(€€€€€€€Ù…°Ñ•áÐ€ô•ÑMÑÉ¥¹œ ‰Ñ•áÐˆ¤€üèÉ•ÑÕÉ¸¹Õ±°(€€€€€€€Ù…°Í•¹‘•É%€ô•ÑMÑÉ¥¹œ ‰Í•¹‘•É%ˆ¤€üèÉ•ÑÕÉ¸¹Õ±°(€€€€€€€Ù…°Ñ¥µ•ÍÑ…µÀ€ôÝ¡•¸€¡Ù…°ÑÌ€ô•Ð ‰Ñ¥µ•ÍÑ…µÀˆ¤¤ì(€€€€€€€€€€€¥Ì1½¹œ€´øÑÌ(€€€€€€€€€€€¥Ì½´¹½½±”¹™¥É•‰…Í”¹Q¥µ•ÍÑ…µÀ€´øÑÌ¹Ñ½…Ñ” ¤¹Ñ¥µ”(€€€€€€€€€€€¥Ì9Õµ‰•È€´øÑÌ¹Ñ½1½¹œ ¤(€€€€€€€€€€€•±Í”€´ø¹Õ±°(€€€€€€€ô€üèÉ•ÑÕÉ¸¹Õ±°(€€€€€€€É•ÑÕÉ¸9½Ñ•I•½É¡¥°Í•¹‘•É%°Ñ•áÐ°Ñ¥µ•ÍÑ…µÀ¤(€€€ô((€€€‘…Ñ„±…ÍÌ9½Ñ•I•½É (€€€€€€€Ù…°¥èMÑÉ¥¹œ°(€€€€€€€Ù…°Í•¹‘•É%èMÑÉ¥¹œ°(€€€€€€€Ù…°Ñ•áÐèMÑÉ¥¹œ°(€€€€€€€Ù…°Ñ¥µ•ÍÑ…µÀè1½¹œ(€€€€¤((€€€€¼¼€Ì¸½µÁÕÑ”¥ÍÑ…¹”€˜	•…É¥¹œ(€€€½µÁ…¹¥½¸½‰©•Ðì(€€€€€€€™Õ¸½µÁÕÑ•I•±…Ñ¥Ù•	•…É¥¹¹‘¥ÍÑ…¹” (€€€€€€€€€€€ÕÉÉ•¹Ñ1½…Ñ¥½¸è1½…Ñ¥½¸°(€€€€€€€€€€€Ñ…É•Ñ1…Ðè½Õ‰±”°(€€€€€€€€€€€Ñ…É•Ñ1¹œè½Õ‰±”°(€€€€€€€€€€€ÕÉÉ•¹Ñ•Ù¥•é¥µÕÑ è±½…Ð€¼¼•Ù¥”½µÁ…ÍÌ¡•…‘¥¹œ€ À´ÌØÀ¤(€€€€€€€€¤èA…¥Èñ±½…Ð°±½…Ðøì(€€€€€€€€€€€Ù…°Ñ…É•Ñ1½…Ñ¥½¸€ô1½…Ñ¥½¸ ‰Ñ…É•Ðˆ¤¹…ÁÁ±äì(€€€€€€€€€€€€€€€±…Ñ¥ÑÕ‘”€ôÑ…É•Ñ1…Ð(€€€€€€€€€€€€€€€±½¹¥ÑÕ‘”€ôÑ…É•Ñ1¹œ(€€€€€€€€€€€ô((€€€€€€€€€€€Ù…°‘¥ÍÑ…¹•5•Ñ•ÉÌ€ôÕÉÉ•¹Ñ1½…Ñ¥½¸¹‘¥ÍÑ…¹•Q¼¡Ñ…É•Ñ1½…Ñ¥½¸¤(€€€€€€€€€€€Ù…°…‰Í½±ÕÑ•	•…É¥¹œ€ôÕÉÉ•¹Ñ1½…Ñ¥½¸¹‰•…É¥¹Q¼¡Ñ…É•Ñ1½…Ñ¥½¸¤€¼¼€´ÄàÀÑ¼€ÄàÀ((€€€€€€€€€€€€¼¼9½Éµ…±¥é”‰•…É¥¹œÑ¼€À´ÌØÀ(€€€€€€€€€€€Ù…°¹½Éµ…±¥é•‘	•…É¥¹œ€ô€¡…‰Í½±ÕÑ•	•…É¥¹œ€¬€ÌØÀ¤€”€ÌØÀ((€€€€€€€€€€€€¼¼I•±…Ñ¥Ù”‰•…É¥¹œ€ô¹±”…ÉÉ½Ü¹••‘ÌÑ¼ÑÕÉ¸É•±…Ñ¥Ù”Ñ¼‘•Ù¥”¡•…‘¥¹œ(€€€€€€€€€€€Ù…°É•±…Ñ¥Ù•	•…É¥¹œ€ô€¡¹½Éµ…±¥é•‘	•…É¥¹œ€´ÕÉÉ•¹Ñ•Ù¥•é¥µÕÑ €¬€ÌØÀ¤€”€ÌØÀ((€€€€€€€€€€€É•ÑÕÉ¸A…¥È¡‘¥ÍÑ…¹•5•Ñ•ÉÌ°É•±…Ñ¥Ù•	•…É¥¹œ¤(€€€€€€€ô(€€€ô)ô
+Failed to create stream fd: Operation not permitted
+Failed to create stream fd: Operation not permitted
+Failed to create stream fd: Operation not permitted
+package com.nikhil.app
+import android.location.Location
+import android.util.Log
+import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.FieldValue
+import com.google.firebase.firestore.MetadataChanges
+import com.google.firebase.firestore.ListenerRegistration
+import com.google.firebase.firestore.Query
+import com.google.firebase.functions.FirebaseFunctions
+import kotlinx.coroutines.channels.awaitClose
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.callbackFlow
+import kotlinx.coroutines.tasks.await
+
+class RadarController {
+
+    private val functions = FirebaseFunctions.getInstance()
+    private val db = FirebaseFirestore.getInstance()
+    private var listenerRegistration: ListenerRegistration? = null
+
+    // 1. Request Location Ping via Cloud Function (Suspending version)
+    suspend fun requestTargetLocation(targetUid: String): Boolean {
+        val data = hashMapOf("targetUid" to targetUid)
+        return try {
+            RadarSession.uid()
+            Log.d("RadarController", "Calling requestLocation Cloud Function for: $targetUid")
+            functions
+                .getHttpsCallable("requestLocation")
+                .call(data)
+                .await()
+            Log.d("RadarController", "Ping sent successfully via Cloud Function.")
+            true
+        } catch (e: kotlinx.coroutines.CancellationException) {
+            throw e
+        } catch (e: Exception) {
+            Log.e("RadarController", "Failed to trigger Cloud Function", e)
+            false
+        }
+    }
+
+    // 1. Request Location Ping via Cloud Function (Callback version for legacy/non-coroutine)
+    fun requestTargetLocation(targetUid: String, onComplete: (Boolean) -> Unit) {
+        val data = hashMapOf("targetUid" to targetUid)
+
+        functions
+            .getHttpsCallable("requestLocation")
+            .call(data)
+            .addOnSuccessListener {
+                Log.d("RadarController", "Ping sent successfully via Cloud Function.")
+                onComplete(true)
+            }
+            .addOnFailureListener { e ->
+                Log.e("RadarController", "Failed to trigger Cloud Function", e)
+                onComplete(false)
+            }
+    }
+
+    // 1b. Send a "Remind to Charge" nudge via Cloud Function (sendTargetNotification)
+    suspend fun sendBatteryReminder(targetUid: String, message: String): Boolean {
+        val data = hashMapOf(
+            "targetUid" to targetUid,
+            "action" to "REMIND_CHARGE",
+            "message" to message
+        )
+        return try {
+            RadarSession.uid()
+            Log.d("RadarController", "Calling sendTargetNotification Cloud Function for: $targetUid")
+            functions
+                .getHttpsCallable("sendTargetNotification")
+                .call(data)
+                .await()
+            Log.d("RadarController", "Reminder sent successfully via Cloud Function.")
+            true
+        } catch (e: kotlinx.coroutines.CancellationException) {
+            throw e
+        } catch (e: Exception) {
+            Log.e("RadarController", "Failed to trigger sendTargetNotification Cloud Function", e)
+            false
+        }
+    }
+
+    // 2. Start Real-Time Firestore Listener (Flow version)
+    // minTimestamp: when set (e.g. to the moment a ping was sent), snapshots whose
+    // "timestamp" field predates it are ignored client-side. This is what prevents
+    // a stale cached/local document from satisfying a caller's `.first()` before the
+    // freshly-uploaded location has actually arrived.
+    fun observeTargetLocation(targetUid: String, minTimestamp: Long = 0L): Flow<TargetLocation?> = callbackFlow {
+        RadarSession.uid()
+        Log.d("RadarController", "Registering Firestore listener for locations/$targetUid (minTimestamp=$minTimestamp) at ${System.currentTimeMillis()}")
+        val registration = db.collection("locationsV2")
+            .document(targetUid)
+            .addSnapshotListener(MetadataChanges.INCLUDE) { snapshot, error ->
+                if (error != null) {
+                    Log.e("RadarController", "Firestore listen failed.", error)
+                    close(error)
+                    return@addSnapshotListener
+                }
+
+                if (snapshot != null && !snapshot.metadata.isFromCache && snapshot.exists()) {
+                    val lat = snapshot.getDouble("latitude") ?: return@addSnapshotListener
+                    val lng = snapshot.getDouble("longitude") ?: return@addSnapshotListener
+                    val accuracy = snapshot.getDouble("accuracy")?.toFloat() ?: 0f
+                    val timestamp = snapshot.getTimestamp("timestamp")?.toDate()?.time ?: 0L
+                    val batteryPercent = snapshot.getLong("batteryPercent")?.toInt() ?: -1
+                    val isCharging = snapshot.getBoolean("isCharging") ?: false
+                    val note = snapshot.getString("note")
+
+                    if (timestamp < minTimestamp) {
+                        Log.d("RadarController", "Ignoring stale snapshot (ts=$timestamp < minTimestamp=$minTimestamp, diff=${minTimestamp - timestamp}ms)")
+                        return@addSnapshotListener
+                    }
+
+                    Log.d("RadarController", "Target updated at ${System.currentTimeMillis()} (doc ts=$timestamp): Lat=$lat, Lng=$lng, Battery=$batteryPercent%, Note=$note")
+                    trySend(TargetLocation(lat, lng, accuracy, timestamp, batteryPercent, isCharging, note))
+                }
+            }
+        awaitClose {
+            Log.d("RadarController", "Removing Firestore listener for locations/$targetUid")
+            registration.remove()
+        }
+    }
+
+    data class TargetLocation(
+        val latitude: Double,
+        val longitude: Double,
+        val accuracy: Float,
+        val timestamp: Long,
+        val batteryPercent: Int = -1,
+        val isCharging: Boolean = false,
+        val note: String? = null
+    )
+
+    // 2. Start Real-Time Firestore Listener
+    fun listenToTargetLocation(
+        targetUid: String,
+        onLocationUpdate: (targetLat: Double, targetLng: Double, accuracy: Float, timestamp: Long) -> Unit
+    ) {
+        // Stop any active listener before starting a new one
+        stopListening()
+
+        listenerRegistration = db.collection("locationsV2")
+            .document(targetUid)
+            .addSnapshotListener(MetadataChanges.INCLUDE) { snapshot, error ->
+                if (error != null) {
+                    Log.e("RadarController", "Firestore listen failed.", error)
+                    return@addSnapshotListener
+                }
+
+                if (snapshot != null && !snapshot.metadata.isFromCache && snapshot.exists()) {
+                    val lat = snapshot.getDouble("latitude") ?: return@addSnapshotListener
+                    val lng = snapshot.getDouble("longitude") ?: return@addSnapshotListener
+                    val accuracy = snapshot.getDouble("accuracy")?.toFloat() ?: 0f
+                    val timestamp = snapshot.getTimestamp("timestamp")?.toDate()?.time ?: 0L
+                    val batteryPercent = snapshot.getLong("batteryPercent")?.toInt() ?: -1
+                    val isCharging = snapshot.getBoolean("isCharging") ?: false
+
+                    Log.d("RadarController", "Target updated: Lat=$lat, Lng=$lng")
+                    onLocationUpdate(lat, lng, accuracy, timestamp)
+                }
+            }
+    }
+
+    fun stopListening() {
+        listenerRegistration?.remove()
+        listenerRegistration = null
+    }
+
+    suspend fun updateMyNote(myUid: String, partnerUid: String, note: String) {
+        val uid = RadarSession.uid()
+        require(myUid == uid && note.isNotBlank())
+        require(RadarSession.approvedPartner() == partnerUid) { "Both partners must approve sharing first." }
+        val batch = db.batch()
+        batch.set(db.collection("locationsV2").document(uid), mapOf(
+            "ownerUid" to uid, "note" to note.take(100),
+            "updatedAt" to FieldValue.serverTimestamp()
+        ), com.google.firebase.firestore.SetOptions.merge())
+        batch.set(noteCollection(uid, partnerUid).document(), mapOf(
+            "senderId" to uid, "targetId" to partnerUid,
+            "text" to note.take(100), "timestamp" to FieldValue.serverTimestamp()
+        ))
+        batch.commit().await()
+    }
+
+    private fun noteCollection(a: String, b: String): com.google.firebase.firestore.CollectionReference {
+        val pair = listOf(a, b).sorted()
+        return db.collection("pairNotes").document(pair[0]).collection("partners")
+            .document(pair[1]).collection("entries")
+    }
+
+    fun observeNoteHistory(myUid: String, partnerUid: String): Flow<List<NoteRecord>> = callbackFlow {
+        val uid = RadarSession.uid()
+        if (myUid != uid || partnerUid.isBlank()) {
+            trySend(emptyList())
+            close()
+            return@callbackFlow
+        }
+        val registration = noteCollection(uid, partnerUid)
+            .orderBy("timestamp", Query.Direction.DESCENDING).limit(100)
+            .addSnapshotListener(MetadataChanges.INCLUDE) { snapshot, error ->
+                if (error != null) {
+                    trySend(emptyList())
+                    close(error)
+                } else if (snapshot != null && !snapshot.metadata.isFromCache) {
+                    trySend(snapshot.documents.mapNotNull { it.toNoteRecord() })
+                }
+            }
+        awaitClose { registration.remove() }
+    }
+
+    private fun com.google.firebase.firestore.DocumentSnapshot.toNoteRecord(): NoteRecord? {
+        val text = getString("text") ?: return null
+        val senderId = getString("senderId") ?: return null
+        val timestamp = when (val ts = get("timestamp")) {
+            is Long -> ts
+            is com.google.firebase.Timestamp -> ts.toDate().time
+            is Number -> ts.toLong()
+            else -> null
+        } ?: return null
+        return NoteRecord(id, senderId, text, timestamp)
+    }
+
+    data class NoteRecord(
+        val id: String,
+        val senderId: String,
+        val text: String,
+        val timestamp: Long
+    )
+
+    // 3. Compute Distance & Bearing
+    companion object {
+        fun computeRelativeBearingAndDistance(
+            currentLocation: Location,
+            targetLat: Double,
+            targetLng: Double,
+            currentDeviceAzimuth: Float // Device compass heading (0-360)
+        ): Pair<Float, Float> {
+            val targetLocation = Location("target").apply {
+                latitude = targetLat
+                longitude = targetLng
+            }
+
+            val distanceMeters = currentLocation.distanceTo(targetLocation)
+            val absoluteBearing = currentLocation.bearingTo(targetLocation) // -180 to 180
+
+            // Normalize bearing to 0-360
+            val normalizedBearing = (absoluteBearing + 360) % 360
+
+            // Relative bearing = Angle arrow needs to turn relative to device heading
+            val relativeBearing = (normalizedBearing - currentDeviceAzimuth + 360) % 360
+
+            return Pair(distanceMeters, relativeBearing)
+        }
+    }
+}

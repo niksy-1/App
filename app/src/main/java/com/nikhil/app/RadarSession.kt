@@ -1,1 +1,67 @@
-¨¥yÛhr·šµë-­æ¦}Ó©z¶­Š‰ç¢Ú^®h­µçEj)^vÚ­æ­zËky©Ÿtê^­«b¢yè¶—«š+myÑZŠW¶‡+y«^²ÚŞjgİ:—«jØ¨z-¥êæŠÛ^uÁ…­…”½´¹¹¥­¡¥°¹…ÁÀ()¥µÁ½ÉĞ…¹‘É½¥¹½¹Ñ•¹Ğ¹½¹Ñ•áĞ)¥µÁ½ÉĞ…¹‘É½¥‘à¹±…¹”¹…ÁÁİ¥‘•Ğ¹ÕÁ‘…Ñ•±°)¥µÁ½ÉĞ½´¹½½±”¹™¥É•‰…Í”¹…ÕÑ ¹¥É•‰…Í•ÕÑ )¥µÁ½ÉĞ½´¹½½±”¹™¥É•‰…Í”¹™¥É•ÍÑ½É”¹¥•±‘Y…±Õ”)¥µÁ½ÉĞ½´¹½½±”¹™¥É•‰…Í”¹™¥É•ÍÑ½É”¹¥É•‰…Í•¥É•ÍÑ½É”)¥µÁ½ÉĞ½´¹½½±”¹™¥É•‰…Í”¹™Õ¹Ñ¥½¹Ì¹¥É•‰…Í•Õ¹Ñ¥½¹Ì)¥µÁ½ÉĞ½´¹½½±”¹™¥É•‰…Í”¹µ•ÍÍ…¥¹œ¹¥É•‰…Í•5•ÍÍ…¥¹œ)¥µÁ½ÉĞ­½Ñ±¥¹à¹½É½ÕÑ¥¹•Ì¹Íå¹Œ¹5ÕÑ•à)¥µÁ½ÉĞ­½Ñ±¥¹à¹½É½ÕÑ¥¹•Ì¹Íå¹Œ¹İ¥Ñ¡1½¬)¥µÁ½ÉĞ­½Ñ±¥¹à¹½É½ÕÑ¥¹•Ì¹Ñ…Í­Ì¹…İ…¥Ğ((¼¨¨%‘•¹Ñ¥Ñä¥Ì„¥É•‰…Í”U%¸9½Ñ¥™¥…Ñ¥½¸Ñ½­•¹Ì¹•Ù•ÈÍ•ÉÙ”…ÌÍ¡…É¥¹œ%Ì¸€¨¼)½‰©•ĞI…‘…ÉM•ÍÍ¥½¸ì(€€€ÁÉ¥Ù…Ñ”Ù…°Í¥¹%¹5ÕÑ•à€ô5ÕÑ•à ¤(€€€ÍÕÍÁ•¹™Õ¸±•…ÉA…ÉÑ¹•É…¡”¡½¹Ñ•áĞè½¹Ñ•áĞ¤ì(€€€€€€€Ù…°ÁÉ•™Ì€ô½¹Ñ•áĞ¹•ÑM¡…É•‘AÉ•™•É•¹•Ì ‰I…‘…ÉAÉ•™Ìˆ°½¹Ñ•áĞ¹5=}AI%YQ¤(€€€€€€€Ù…°•‘¥Ñ½È€ôÁÉ•™Ì¹•‘¥Ğ ¤(€€€€€€€ÁÉ•™Ì¹…±°¹­•åÌ¹™¥±Ñ•Èì¥Ğ¹ÍÑ…ÉÑÍ]¥Ñ  ‰±…ÍÑ}İ¥‘•Ñ|ˆ¤ñğ¥Ğ€ôô€‰±…ÍÑ}ÍÕ•ÍÍ}Ñ¥µ•ÍÑ…µÀˆô(€€€€€€€€€€€€¹™½É… ì•‘¥Ñ½È¹É•µ½Ù”¡¥Ğ¤ô(€€€€€€€•‘¥Ñ½È¹ÁÕÑMÑÉ¥¹œ ‰±…ÍÑ}İ¥‘•Ñ}ÍÑ…ÑÕÌˆ°€‰M¡…É¥¹œÕ¹…Ù…¥±…‰±”ˆ¤¹…ÁÁ±ä ¤(€€€€€€€I…‘…É]¥‘•Ğ ¤¹ÕÁ‘…Ñ•±°¡½¹Ñ•áĞ¤(€€€ô((€€€ÍÕÍÁ•¹™Õ¸Õ¥ ¤èMÑÉ¥¹œ€ôÍ¥¹%¹5ÕÑ•à¹İ¥Ñ¡1½¬ì(€€€€€€€Ù…°…ÕÑ €ô¥É•‰…Í•ÕÑ ¹•Ñ%¹ÍÑ…¹” ¤(€€€€€€€…ÕÑ ¹ÕÉÉ•¹ÑUÍ•Èü¹Õ¥€üèÉ•ÅÕ¥É•9½Ñ9Õ±°¡…ÕÑ ¹Í¥¹%¹¹½¹åµ½ÕÍ±ä ¤¹…İ…¥Ğ ¤¹ÕÍ•È¤¹Õ¥(€€€ô((€€€ÍÕÍÁ•¹™Õ¸É•¥ÍÑ•É•Ù¥” ¤èMÑÉ¥¹œì(€€€€€€€Ù…°Õ¥€ôÕ¥ ¤(€€€€€€€Í…Ù•Q½­•¸¡¥É•‰…Í•5•ÍÍ…¥¹œ¹•Ñ%¹ÍÑ…¹” ¤¹Ñ½­•¸¹…İ…¥Ğ ¤¤(€€€€€€€É•ÑÕÉ¸Õ¥(€€€ô((€€€ÍÕÍÁ•¹™Õ¸Í…Ù•Q½­•¸¡Ñ½­•¸èMÑÉ¥¹œ¤ì(€€€€€€€Ù…°Õ¥€ôÕ¥ ¤(€€€€€€€¥É•‰…Í•¥É•ÍÑ½É”¹•Ñ%¹ÍÑ…¹” ¤¹½±±•Ñ¥½¸ ‰‘•Ù¥•½Õ¹ÑÌˆ¤¹‘½Õµ•¹Ğ¡Õ¥¤¹Í•Ğ (€€€€€€€€€€€µ…Á=˜ ‰½İ¹•ÉU¥ˆÑ¼Õ¥°€‰™µQ½­•¸ˆÑ¼Ñ½­•¸°€‰ÕÁ‘…Ñ•‘ĞˆÑ¼¥•±‘Y…±Õ”¹Í•ÉÙ•ÉQ¥µ•ÍÑ…µÀ ¤¤(€€€€€€€€¤¹…İ…¥Ğ ¤(€€€ô((€€€ÍÕÍÁ•¹™Õ¸…ÁÁÉ½Ù”¡Á…ÉÑ¹•ÉU¥èMÑÉ¥¹œ¤ì(€€€€€€€Ù…°Õ¥€ôÕ¥ ¤(€€€€€€€É•ÅÕ¥É”¡Á…ÉÑ¹•ÉU¥¹µ…Ñ¡•Ì¡I••à ‰mµi„µèÀ´å|µuìÄ°ÄÈáôˆ¤¤€˜˜Á…ÉÑ¹•ÉU¥€„ôÕ¥¤ì(€€€€€€€€€€€€‰¹Ñ•Èå½ÕÈÁ…ÉÑ¹•ÈÌ¹•Ü	•…½¸%°¹½Ğ„¹½Ñ¥™¥…Ñ¥½¸Ñ½­•¸¸ˆ(€€€€€€€ô(€€€€€€€¥É•‰…Í•¥É•ÍÑ½É”¹•Ñ%¹ÍÑ…¹” ¤¹½±±•Ñ¥½¸ ‰Á…¥É¥¹ÁÁÉ½Ù…±Ìˆ¤¹‘½Õµ•¹Ğ¡Õ¥¤¹Í•Ğ (€€€€€€€€€€€µ…Á=˜ ‰½İ¹•ÉU¥ˆÑ¼Õ¥°€‰Á…ÉÑ¹•ÉU¥ˆÑ¼Á…ÉÑ¹•ÉU¥°€‰ÕÁ‘…Ñ•‘ĞˆÑ¼¥•±‘Y…±Õ”¹Í•ÉÙ•ÉQ¥µ•ÍÑ…µÀ ¤¤(€€€€€€€€¤¹…İ…¥Ğ ¤(€€€ô((€€€ÍÕÍÁ•¹™Õ¸É•Ù½­” ¤ì(€€€€€€€¥É•‰…Í•¥É•ÍÑ½É”¹•Ñ%¹ÍÑ…¹” ¤¹½±±•Ñ¥½¸ ‰Á…¥É¥¹ÁÁÉ½Ù…±Ìˆ¤¹‘½Õµ•¹Ğ¡Õ¥ ¤¤¹‘•±•Ñ” ¤¹…İ…¥Ğ ¤(€€€ô((€€€ÍÕÍÁ•¹™Õ¸…ÁÁÉ½Ù•‘A…ÉÑ¹•È ¤èMÑÉ¥¹œüì(€€€€€€€Õ¥ ¤(€€€€€€€Ù…°É•ÍÕ±Ğ€ô¥É•‰…Í•Õ¹Ñ¥½¹Ì¹•Ñ%¹ÍÑ…¹” ¤¹•Ñ!ÑÑÁÍ…±±…‰±” ‰•ÑA…¥É¥¹MÑ…ÑÕÌˆ¤(€€€€€€€€€€€€¹…±° ¤¹…İ…¥Ğ ¤¹‘…Ñ„…Ìü5…Àğ¨°€¨ø(€€€€€€€É•ÑÕÉ¸¥˜€¡É•ÍÕ±Ğü¹•Ğ ‰…ÁÁÉ½Ù•ˆ¤€ôôÑÉÕ”¤É•ÍÕ±Ñl‰Á…ÉÑ¹•ÉU¥‰t…ÌüMÑÉ¥¹œ•±Í”¹Õ±°(€€€ô)ô(
+Failed to create stream fd: Operation not permitted
+Failed to create stream fd: Operation not permitted
+Failed to create stream fd: Operation not permitted
+package com.nikhil.app
+
+import android.content.Context
+import androidx.glance.appwidget.updateAll
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FieldValue
+import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.functions.FirebaseFunctions
+import com.google.firebase.messaging.FirebaseMessaging
+import kotlinx.coroutines.sync.Mutex
+import kotlinx.coroutines.sync.withLock
+import kotlinx.coroutines.tasks.await
+
+/** Identity is a Firebase UID. Notification tokens never serve as sharing IDs. */
+object RadarSession {
+    private val signInMutex = Mutex()
+    suspend fun clearPartnerCache(context: Context) {
+        val prefs = context.getSharedPreferences("RadarPrefs", Context.MODE_PRIVATE)
+        val editor = prefs.edit()
+        prefs.all.keys.filter { it.startsWith("last_widget_") || it == "last_success_timestamp" }
+            .forEach { editor.remove(it) }
+        editor.putString("last_widget_status", "Sharing unavailable").apply()
+        RadarWidget().updateAll(context)
+    }
+
+    suspend fun uid(): String = signInMutex.withLock {
+        val auth = FirebaseAuth.getInstance()
+        auth.currentUser?.uid ?: requireNotNull(auth.signInAnonymously().await().user).uid
+    }
+
+    suspend fun registerDevice(): String {
+        val uid = uid()
+        saveToken(FirebaseMessaging.getInstance().token.await())
+        return uid
+    }
+
+    suspend fun saveToken(token: String) {
+        val uid = uid()
+        FirebaseFirestore.getInstance().collection("deviceAccounts").document(uid).set(
+            mapOf("ownerUid" to uid, "fcmToken" to token, "updatedAt" to FieldValue.serverTimestamp())
+        ).await()
+    }
+
+    suspend fun approve(partnerUid: String) {
+        val uid = uid()
+        require(partnerUid.matches(Regex("[A-Za-z0-9_-]{1,128}")) && partnerUid != uid) {
+            "Enter your partner's new Beacon ID, not a notification token."
+        }
+        FirebaseFirestore.getInstance().collection("pairingApprovals").document(uid).set(
+            mapOf("ownerUid" to uid, "partnerUid" to partnerUid, "updatedAt" to FieldValue.serverTimestamp())
+        ).await()
+    }
+
+    suspend fun revoke() {
+        FirebaseFirestore.getInstance().collection("pairingApprovals").document(uid()).delete().await()
+    }
+
+    suspend fun approvedPartner(): String? {
+        uid()
+        val result = FirebaseFunctions.getInstance().getHttpsCallable("getPairingStatus")
+            .call().await().data as? Map<*, *>
+        return if (result?.get("approved") == true) result["partnerUid"] as? String else null
+    }
+}

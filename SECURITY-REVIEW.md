@@ -1,1 +1,58 @@
-¨¥yÛhr·šµë-­æ¦}Ó©z¶­Š‰ç¢Ú^®h­µçEj)^vÚ­æ­zËky©Ÿtê^­«b¢yè¶—«š+myÑZŠW¶‡+y«^²ÚŞjgİ:—«jØ¨z-¥êæŠÛ^tŒ¥É•ÍÑ½É”Í•ÕÉ¥ÑäÉ•Ù¥•Ü()AÉ½©•Ğèİ¥‘•Ğ´ÌÍ™˜Í€¸M½Á”èÑ¡”¹•ÜÉÕ±•Ì°Ñ¡É•”…±±…‰±”¡…¹‘±•ÉÌ°…¹µ…Ñ¡¥¹œ)¹‘É½¥¥‘•¹Ñ¥Ñä°Á…¥É¥¹œ°ÅÕ•Éä°…¹¹½Ñ¥™¥…Ñ¥½¸¡…¹•Ì¸M•”MUI%Qd¹µ™½È)‘…Ñ„µ½‘•±Ì°É½±±½ÕĞÉ•ÅÕ¥É•µ•¹ÑÌ°…¹±¥µ¥Ñ…Ñ¥½¹Ì¸((ŒŒY…±¥‘…Ñ¥½¸((´€ÌĞ¥É•ÍÑ½É”•µÕ±…Ñ½ÈÑ•ÍÑÌÁ…ÍÍ•°¥¹±Õ‘¥¹œ‰½Ñ Ù…±¥±¥•¹Ğ…•ÍÌ…¹‘•¹¥…±Ì¸(´€Ø…±±…‰±”µ¡…¹‘±•ÈÑ•ÍÑÌÁ…ÍÍ•……¥¹ÍĞÑ¡”•µÕ±…Ñ½Èİ¥Ñ µ½­•4‘•±¥Ù•Éä¸(´Õ¹Ñ¥½¹ÌM1¥¹ĞÁ…ÍÍ•¸(´¥É•ÍÑ½É”ÁÉ½‘ÕÑ¥½¸½µÁ¥±•È½‘ÉäµÉÕ¸Á…ÍÍ•¸(´Õ¹Ñ¥½¹Ì…¹ÕÑ¡•¹Ñ¥…Ñ¥½¸‘•Á±½åµ•¹Ğ‘ÉäµÉÕ¸Á…ÍÍ•¸(´¹‘É½¥½µÁ¥±…Ñ¥½¸…¹‘•Á±½åµ•¹ĞÙ•É¥™¥…Ñ¥½¸…É”É•½É‘•Í•Á…É…Ñ•±ä‰•±½Ü(€İ¡•¸½µÁ±•Ñ•ì•µÕ±…Ñ½ÈÑ•ÍÑÌ‘¼¹½Ğ•ÍÑ…‰±¥Í ½¸µ‘•Ù¥”‰•¡…Ù¥½È¸((ŒŒ‘Ù•ÉÍ…É¥…°¡•­Ì()ğÑÑ…¬ğ=‰Í•ÉÙ•½ÕÑ½µ”ğ)ğ€´´´ğ€´´´ğ)ğAÕ‰±¥Œ½±±•Ñ¥½¸±¥ÍÑ¥¹œğ•¹¥•™½È…¹½¹åµ½ÕÌÕ¹…ÕÑ¡•¹Ñ¥…Ñ•±¥•¹ÑÌ…¹Í¥¹•µ¥¸ÕÍ•ÉÌğ)ğU¹…ÕÑ¡½É¥é••Ğ½É•…Ñ”½ÕÁ‘…Ñ”½‘•±•Ñ”ğ•¹¥•™½È½ÕÑÍ¥‘•ÉÌ…¹™½ÈÁ…ÉÑ¹•ÉÌ…ÑÑ•µÁÑ¥¹œ½İ¹•Èµ½¹±äİÉ¥Ñ•Ìğ)ğUÁ‘…Ñ”‰åÁ…ÍÌ€¼½Ù•ÉÍ¥é•Á…å±½…ğ%¹Ù…±¥É•…Ñ•Ì…¹ÕÁ‘…Ñ•Ì‘•¹¥•°¥¹±Õ‘¥¹œ„€Ä°ÀÀÀ°ÀÀÀµ¡…É…Ñ•È¹½Ñ”ğ)ğ=İ¹•ÉÍ¡¥À¡¥©…¬½¸É•…Ñ”ğA…Ñ ½İ¹•ÉÍ¡¥À…¹½İ¹•ÉU¥µÕÍĞµ…Ñ …ÕÑ U%ğ)ğ=İ¹•ÉÍ¡¥À¡¥©…¬½¸ÕÁ‘…Ñ”ğ=İ¹•ÈU%¡…¹•Ì‘•¹¥•ğ)ğ%µµÕÑ…‰±”™¥•±µ½‘¥™¥…Ñ¥½¸ğ9½Ñ•Ì…¹¹½Ğ‰”ÕÁ‘…Ñ•½È‘•±•Ñ•ì½İ¹•ÈU%¥µµÕÑ…‰±”ğ)ğQåÁ”©Õ±¥¹œğ%¹Ù…±¥Í…±…È°±¥ÍĞ°‰½½±•…¸…¹Ñ¥µ•ÍÑ…µÀÑåÁ•Ì‘•¹¥•ğ)ğÉ•…Ñ”½ÕÁ‘…Ñ”Ù…±¥‘…Ñ¥½¸µ¥Íµ…Ñ ğ	½Ñ É½ÕÑ•Ì•á•É¥Í”Ñ¡”Í…µ”‘½µ…¥¸Ù…±¥‘…Ñ½ÉÌğ)ğI•Í½ÕÉ”•á¡…ÕÍÑ¥½¸ğQ•áĞ½Ñ½­•¸½U%‰½Õ¹‘Ì…¹ÅÕ•Éä±¥µ¥ÑÌ•¹™½É•ì¹¼…É‰¥ÑÉ…Éä±¥ÍÑÌ½µ…ÁÌ…±±½İ•ğ)ğI•ÅÕ¥É•™¥•±½µ¥ÍÍ¥½¸ğ=µ¥ÍÍ¥½¸…ĞÉ•…Ñ”…¹‘•±•Ñ¥½¸…ĞÕÁ‘…Ñ”‘•¹¥•ğ)ğAÉ¥Ù¥±•”•Í…±…Ñ¥½¸ğ9¼±¥•¹Ğµ…‘µ¥¸É½±•Ìì¥¹©•Ñ•¥Í‘µ¥¸½É½±”™¥•±‘Ì‘•¹¥•ğ)ğM¡•µ„Á½±±ÕÑ¥½¸ğáÑÉ„‘½Õµ•¹Ğ™¥•±‘Ì‘•¹¥•ğ)ğ%¹Ù…±¥ÍÑ…Ñ”ÑÉ…¹Í¥Ñ¥½¸ğ=¹”µÍ¥‘•…ÁÁÉ½Ù…°¥Ù•Ì¹¼…•ÍÌìÉ•Ù½­”…¹Íİ¥Ñ µÁ…ÉÑ¹•È™±½İÌÑ•ÍÑ•ğ)ğA…Ñ Í½Á¥¹œğI•Ù•ÉÍ•Á…¥ÈÁ…Ñ °Õ¹­¹½İ¸¹•ÍÑ•Á…Ñ …¹½±±•Ñ¥½¸µÉ½ÕÀ…•ÍÌ‘•¹¥•ğ)ğQ¥µ•ÍÑ…µÀµ…¹¥ÁÕ±…Ñ¥½¸ğ9½¸µÍ•ÉÙ•ÈÉ•…Ñ”½ÕÁ‘…Ñ”Ñ¥µ•ÌÉ•©•Ñ•ì±½…Ñ¥½¸É•™É•Í µÕÍĞÕÍ”Í•ÉÙ•ÈÑ¥µ”ğ)ğ9Õµ•É¥Œ½Ù•É™±½Ü½¹•…Ñ¥Ù”Ù…±Õ•Ìğ%¹Ù…±¥½½É‘¥¹…Ñ•Ì°…ÕÉ…ä°‰…ÑÑ•Éä°9…8…¹¥¹™¥¹¥Ñä‘•¹¥•ğ)ğ5¥á•µ½¹Ñ•¹Ğ±•…¬ğ4Ñ½­•¹Ì…¹…ÁÁÉ½Ù…°Í•ÑÑ¥¹ÌÉ•µ…¥¸½İ¹•Èµ½¹±ä°¥¹±Õ‘¥¹œ‰•Ñİ••¸Á…ÉÑ¹•ÉÌğ)ğI•Á±…ä½½Õ¹Ñ•ÉÌğ9¼±¥•¹Ğ½Õ¹Ñ•ÉÌì…±±…‰±”É…Ñ”µ±¥µ¥ĞÉ•Á±…ä…¹Í¥µÕ±Ñ…¹•½ÕÌ…±±ÌÑ•ÍÑ•ğ)ğ=ÉÁ¡…¹•ÍÕ‰½±±•Ñ¥½¹ÌğA…¥ÈÁ…É•¹ÑÌ¥¹Ñ•¹Ñ¥½¹…±±ä¹…µ•ÍÁ…•Ìì•¹ÑÉ¥•ÌÍÑ¥±°É•ÅÕ¥É”‰½Ñ ±¥Ù”…ÁÁÉ½Ù…±Ìğ)ğEÕ•Éäµ¥Íµ…Ñ ğQ¡”…ÁÀÌÁ…¥ÈµÍ½Á•Ñ¥µ•ÍÑ…µÀµ‘•Í•¹‘¥¹œ±¥µ¥Ğ´ÄÀÀ¡¥ÍÑ½ÉäÅÕ•ÉäÍÕ••‘Ìğ)ğY…±¥‘…Ñ½ÈÁ…ÑÑ•É¸ğÙ•Éä…±±½İ•ÕÁ‘…Ñ”…±±Ì¥ÑÌ‘½µ…¥¸Ù…±¥‘…Ñ½È…¹½İ¹•È½¥‘•¹Ñ¥Ñä¡•­Ìğ((ŒŒ1¥µ¥ÑÌ()Q¡•Í”¡•­Ì‘¥¹½Ğ™¥¹…¸…ÕÑ¡½É¥é…Ñ¥½¸½ÈÍ¡•µ„‰åÁ…ÍÌ¥¸Ñ¡”Ñ•ÍÑ•ÉÕ±•Ì¸)Q¡•ä…É”¹½Ğ„Õ…É…¹Ñ•”……¥¹ÍĞ…±°ÙÕ±¹•É…‰¥±¥Ñ¥•Ì¸QÉÕÍÑ•‘µ¥¸M,…±±•ÉÌ)…¹%4Á•Éµ¥ÍÍ¥½¹Ì‰åÁ…ÍÌÉÕ±•Ì¸¹½¹åµ½ÕÌ…½Õ¹Ğ…‰ÕÍ”°‰É½…‘¥ÍÑÉ¥‰ÕÑ¥½¸°)½¸µ‘•Ù¥”‰…­É½Õ¹‘•±¥Ù•Éä…¹É•½Ù•Éä…™Ñ•ÈÉ•¥¹ÍÑ…±°É•ÅÕ¥É”™ÕÉÑ¡•È)½Á•É…Ñ¥½¹…°É•Ù¥•Ü¸I•Ù½…Ñ¥½¸ÁÉ•Ù•¹ÑÌ™ÕÑÕÉ”…•ÍÌ°¹½ĞÉ•Ñ•¹Ñ¥½¸½˜‘…Ñ„)…±É•…‘ä‘½İ¹±½…‘•¸¹½Ñ¥™¥…Ñ¥½¸…±É•…‘ä…•ÁÑ•…¸‰”¥¸™±¥¡Ğ‘ÕÉ¥¹œ)É•Ù½…Ñ¥½¸ìÑ¡”É•¥Á¥•¹Ğ¡•­Ì¥ÑÌÕÉÉ•¹ĞÁ…¥É¥¹œ‰•™½É”…Ñ¥¹œ¸()Q¡”½É¥¥¹…°ÉÕ±•Ìİ•É”ÁÕ‰±¥ŒÕ¹Ñ¥°M•ÁÑ•µ‰•È€ÈØ°€ÈÀÈØ¸Q¡”ÁÉ¥Ù…Ñ”±½…°‰…­ÕÀ)¥Ì€¹Í•ÕÉ¥Ñäµ±½…°½½É¥¥¹…°µ™¥É•ÍÑ½É”¹ÉÕ±•Í€¸1•…äÉ•½É‘Ì…É”É•Ñ…¥¹•‰ÕĞ)¹½Ğ…ÍÍ¥¹•Ñ¼¹•Ü¥‘•¹Ñ¥Ñ¥•Ìİ¥Ñ¡½ÕĞÁÉ½½˜½˜½İ¹•ÉÍ¡¥À¸(
+Failed to create stream fd: Operation not permitted
+Failed to create stream fd: Operation not permitted
+Failed to create stream fd: Operation not permitted
+# Firestore security review
+
+Project: `widget-33ff3`. Scope: the new rules, three callable handlers, and matching
+Android identity, pairing, query, and notification changes. See SECURITY.md for
+data models, rollout requirements, and limitations.
+
+## Validation
+
+- 34 Firestore emulator tests passed, including both valid client access and denials.
+- 6 callable-handler tests passed against the emulator with mocked FCM delivery.
+- Functions ESLint passed.
+- Firestore production compiler/dry-run passed.
+- Functions and Authentication deployment dry-run passed.
+- Android compilation and deployment verification are recorded separately below
+  when completed; emulator tests do not establish on-device behavior.
+
+## Adversarial checks
+
+| Attack | Observed outcome |
+| --- | --- |
+| Public collection listing | Denied for anonymous unauthenticated clients and signed-in users |
+| Unauthorized get/create/update/delete | Denied for outsiders and for partners attempting owner-only writes |
+| Update bypass / oversized payload | Invalid creates and updates denied, including a 1,000,000-character note |
+| Ownership hijack on create | Path ownership and ownerUid must match auth UID |
+| Ownership hijack on update | Owner UID changes denied |
+| Immutable field modification | Notes cannot be updated or deleted; owner UID immutable |
+| Type juggling | Invalid scalar, list, boolean and timestamp types denied |
+| Create/update validation mismatch | Both routes exercise the same domain validators |
+| Resource exhaustion | Text/token/UID bounds and query limits enforced; no arbitrary lists/maps allowed |
+| Required field omission | Omission at create and deletion at update denied |
+| Privilege escalation | No client-admin roles; injected isAdmin/role fields denied |
+| Schema pollution | Extra document fields denied |
+| Invalid state transition | One-sided approval gives no access; revoke and switch-partner flows tested |
+| Path scoping | Reversed pair path, unknown nested path and collection-group access denied |
+| Timestamp manipulation | Non-server create/update times rejected; location refresh must use server time |
+| Numeric overflow/negative values | Invalid coordinates, accuracy, battery, NaN and infinity denied |
+| Mixed-content leak | FCM tokens and approval settings remain owner-only, including between partners |
+| Replay/counters | No client counters; callable rate-limit replay and simultaneous calls tested |
+| Orphaned subcollections | Pair parents intentionally namespaces; entries still require both live approvals |
+| Query mismatch | The app's pair-scoped timestamp-descending limit-100 history query succeeds |
+| Validator pattern | Every allowed update calls its domain validator and owner/identity checks |
+
+## Limits
+
+These checks did not find an authorization or schema bypass in the tested rules.
+They are not a guarantee against all vulnerabilities. Trusted Admin SDK callers
+and IAM permissions bypass rules. Anonymous account abuse, broad distribution,
+on-device background delivery and recovery after reinstall require further
+operational review. Revocation prevents future access, not retention of data
+already downloaded. A notification already accepted can be in flight during
+revocation; the recipient checks its current pairing before acting.
+
+The original rules were public until September 26, 2026. The private local backup
+is `.security-local/original-firestore.rules`. Legacy records are retained but
+not assigned to new identities without proof of ownership.

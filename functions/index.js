@@ -1,1 +1,12 @@
-¨¥yÛhr·šµë-­æ¦}Ó©z¶­Š‰ç¢Ú^®h­µçEj)^vÚ­æ­zËky©Ÿtê^­«b¢yè¶—«š+myÑZŠW¶‡+y«^²ÚŞjgİ:—«jØ¨z-¥êæŠÛ^u½¹ÍĞí½¹…±±ô€ôÉ•ÅÕ¥É” ‰™¥É•‰…Í”µ™Õ¹Ñ¥½¹Ì½ØÈ½¡ÑÑÁÌˆ¤ì)½¹ÍĞ…‘µ¥¸€ôÉ•ÅÕ¥É” ‰™¥É•‰…Í”µ…‘µ¥¸ˆ¤ì)½¹ÍĞíÉ•…Ñ•!…¹‘±•ÉÍô€ôÉ•ÅÕ¥É” ˆ¸½¡…¹‘±•ÉÌˆ¤ì()…‘µ¥¸¹¥¹¥Ñ¥…±¥é•ÁÀ ¤ì)½¹ÍĞ¡…¹‘±•ÉÌ€ôÉ•…Ñ•!…¹‘±•ÉÌ¡…‘µ¥¸¹™¥É•ÍÑ½É” ¤°…‘µ¥¸¹µ•ÍÍ…¥¹œ ¤¤ì)•áÁ½ÉÑÌ¹É•ÅÕ•ÍÑ1½…Ñ¥½¸€ô½¹…±°¡¡…¹‘±•ÉÌ¹É•ÅÕ•ÍÑ1½…Ñ¥½¸¤ì)•áÁ½ÉÑÌ¹Í•¹‘Q…É•Ñ9½Ñ¥™¥…Ñ¥½¸€ô½¹…±°¡¡…¹‘±•ÉÌ¹Í•¹‘Q…É•Ñ9½Ñ¥™¥…Ñ¥½¸¤ì)•áÁ½ÉÑÌ¹•ÑA…¥É¥¹MÑ…ÑÕÌ€ô½¹…±°¡¡…¹‘±•ÉÌ¹•ÑA…¥É¥¹MÑ…ÑÕÌ¤ì(
+Failed to create stream fd: Operation not permitted
+Failed to create stream fd: Operation not permitted
+Failed to create stream fd: Operation not permitted
+const {onCall} = require("firebase-functions/v2/https");
+const admin = require("firebase-admin");
+const {createHandlers} = require("./handlers");
+
+admin.initializeApp();
+const handlers = createHandlers(admin.firestore(), admin.messaging());
+exports.requestLocation = onCall(handlers.requestLocation);
+exports.sendTargetNotification = onCall(handlers.sendTargetNotification);
+exports.getPairingStatus = onCall(handlers.getPairingStatus);
