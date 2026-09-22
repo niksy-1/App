@@ -1,328 +1,1 @@
-package com.nikhil.app
-
-import android.content.Context
-import android.content.Intent
-import android.util.Log
-import androidx.core.content.edit
-import androidx.core.net.toUri
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
-import androidx.glance.Button
-import androidx.glance.GlanceId
-import androidx.glance.GlanceModifier
-import androidx.glance.action.clickable
-import android.graphics.BitmapFactory
-import androidx.glance.GlanceTheme
-import androidx.glance.ImageProvider
-import androidx.glance.LocalSize
-import androidx.glance.action.ActionParameters
-import androidx.glance.appwidget.GlanceAppWidget
-import androidx.glance.appwidget.GlanceAppWidgetReceiver
-import androidx.glance.appwidget.SizeMode
-import androidx.glance.appwidget.action.ActionCallback
-import androidx.glance.appwidget.action.actionRunCallback
-import androidx.glance.appwidget.action.actionStartActivity
-import androidx.glance.appwidget.provideContent
-import androidx.glance.appwidget.updateAll
-import androidx.glance.background
-import androidx.glance.layout.Alignment
-import androidx.glance.layout.Box
-import androidx.glance.layout.Column
-import androidx.glance.layout.Row
-import androidx.glance.layout.Spacer
-import androidx.glance.layout.fillMaxSize
-import androidx.glance.layout.fillMaxWidth
-import androidx.glance.layout.height
-import androidx.glance.layout.padding
-import androidx.glance.layout.width
-import androidx.glance.text.FontWeight
-import androidx.glance.text.Text
-import androidx.glance.text.TextStyle
-import androidx.compose.ui.unit.DpSize
-import androidx.compose.ui.graphics.Color
-import androidx.glance.unit.ColorProvider
-import java.io.File
-
-class RadarWidget : GlanceAppWidget() {
-
-    companion object {
-        private val SMALL_SQUARE = DpSize(100.dp, 100.dp) // 2x2 approx
-        private val HORIZONTAL_RECT = DpSize(200.dp, 50.dp) // 4x1 approx
-        private val LARGE_RECT = DpSize(200.dp, 100.dp) // 4x2 approx
-    }
-
-    override val sizeMode: SizeMode = SizeMode.Responsive(
-        setOf(SMALL_SQUARE, HORIZONTAL_RECT, LARGE_RECT)
-    )
-
-    override suspend fun provideGlance(context: Context, id: GlanceId) {
-        provideContent {
-            GlanceTheme {
-                WidgetContent(context)
-            }
-        }
-    }
-
-    @Composable
-    private fun WidgetContent(context: Context) {
-        val size = LocalSize.current
-        val prefs = context.getSharedPreferences("RadarPrefs", Context.MODE_PRIVATE)
-
-        // Dynamic Background
-        val useBgImage = prefs.getBoolean("use_bg_image", false)
-        val bgImagePath = prefs.getString("widget_bg_image_path", "")
-        val bgColorInt = prefs.getInt("widget_bg_color", 0xFF180F16.toInt()) // plum-black default
-
-        val isDark: Boolean
-        val rootModifier: GlanceModifier
-
-        if (useBgImage && !bgImagePath.isNullOrEmpty() && File(bgImagePath).exists()) {
-            isDark = true
-            val bitmap = decodeSampledBitmap(bgImagePath)
-            if (bitmap != null) {
-                rootModifier = GlanceModifier.fillMaxSize().background(ImageProvider(bitmap))
-            } else {
-                Log.e("RadarWidget", "Failed to decode widget background from $bgImagePath â€” falling back to color.")
-                rootModifier = GlanceModifier.fillMaxSize().background(Color(bgColorInt))
-            }
-        } else {
-            val r = (bgColorInt shr 16 and 0xFF) / 255f
-            val g = (bgColorInt shr 8 and 0xFF) / 255f
-            val b = (bgColorInt and 0xFF) / 255f
-            val luminance = 0.299f * r + 0.587f * g + 0.114f * b
-            isDark = luminance < 0.5f
-            rootModifier = GlanceModifier.fillMaxSize().background(Color(bgColorInt))
-        }
-
-        // ColorProvider(color: Color) is restricted to androidx.glance's own internal
-        // use (@RestrictTo LIBRARY_GROUP) â€” it compiles from source but fails the
-        // RestrictedApi lint check, which AGP treats as a build error. The public,
-        // sanctioned way to get a ColorProvider for a specific fixed color is via a
-        // color resource: see res/values/colors.xml for widget_text_primary_dark /
-        // widget_text_primary_light / widget_text_secondary_dark /
-        // widget_text_secondary_light (#C97B8C / #7A2E42 / #B8A8B0 / #6B5560).
-        val primaryProvider = ColorProvider(if (isDark) R.color.widget_text_primary_dark else R.color.widget_text_primary_light)
-        val secondaryProvider = ColorProvider(if (isDark) R.color.widget_text_secondary_dark else R.color.widget_text_secondary_light)
-
-        val lastDist = prefs.getString("last_widget_distance", "-- m") ?: "-- m"
-        val lastStatus = prefs.getString("last_widget_status", "Standby") ?: "Standby"
-        val battery = prefs.getInt("last_widget_battery", -1)
-        val isCharging = prefs.getBoolean("last_widget_is_charging", false)
-        val targetLat = prefs.getString("last_widget_lat", "") ?: ""
-        val targetLng = prefs.getString("last_widget_lng", "") ?: ""
-        val lastNote = prefs.getString("last_widget_note", "") ?: ""
-        val showDist = prefs.getBoolean("show_distance", true)
-        val batteryIcon = if (isCharging) "âš¡" else "ðŸ”‹"
-        val batteryText = if (battery != -1) "$batteryIcon $battery%" else ""
-
-        Box(modifier = rootModifier) {
-            if (useBgImage) {
-                Box(modifier = GlanceModifier.fillMaxSize().background(Color.Black.copy(alpha = 0.4f))) {}
-            }
-
-            // Determine layout based on size
-            if (size.width >= 200.dp && size.height < 80.dp) {
-                // 4x1 - Compact Horizontal
-                Row(
-                    modifier = GlanceModifier
-                        .fillMaxSize()
-                        .padding(8.dp),
-                    verticalAlignment = Alignment.CenterVertically
-                ) {
-                    Column(modifier = GlanceModifier.defaultWeight()) {
-                        if (showDist) {
-                            Text(text = lastDist, style = TextStyle(fontSize = 18.sp, fontWeight = FontWeight.Bold, color = primaryProvider))
-                        }
-                        if (batteryText.isNotEmpty()) {
-                            Text(
-                                text = batteryText,
-                                style = TextStyle(fontSize = 10.sp, color = secondaryProvider),
-                                modifier = GlanceModifier.clickable(actionRunCallback<RemindWidgetCallback>())
-                            )
-                        }
-                    }
-                    Spacer(modifier = GlanceModifier.width(8.dp))
-                    Button(text = "Ping", onClick = actionRunCallback<RefreshWidgetCallback>())
-                    if (targetLat.isNotEmpty()) {
-                        Spacer(modifier = GlanceModifier.width(4.dp))
-                        Button(text = "Maps", onClick = actionStartActivity(getMapsIntent(targetLat, targetLng)))
-                    }
-                }
-            } else if (size.width >= 200.dp && size.height >= 80.dp) {
-                // 4x2 - Full Info
-                Column(
-                    modifier = GlanceModifier
-                        .fillMaxSize()
-                        .padding(12.dp),
-                    verticalAlignment = Alignment.CenterVertically,
-                    horizontalAlignment = Alignment.CenterHorizontally
-                ) {
-                    if (showDist) {
-                        Text(text = "Target Distance", style = TextStyle(fontSize = 12.sp, color = secondaryProvider))
-                    }
-                    Row(verticalAlignment = Alignment.CenterVertically) {
-                        if (showDist) {
-                            Text(text = lastDist, style = TextStyle(fontSize = 24.sp, fontWeight = FontWeight.Bold, color = primaryProvider))
-                        }
-                        if (batteryText.isNotEmpty()) {
-                            Spacer(modifier = GlanceModifier.width(12.dp))
-                            Text(
-                                text = batteryText,
-                                style = TextStyle(fontSize = 16.sp, color = secondaryProvider),
-                                modifier = GlanceModifier.clickable(actionRunCallback<RemindWidgetCallback>())
-                            )
-                        }
-                    }
-                    Text(text = lastStatus, style = TextStyle(fontSize = 12.sp, color = secondaryProvider))
-                    if (lastNote.isNotEmpty()) {
-                        Text(
-                            text = "\"$lastNote\"",
-                            style = TextStyle(fontSize = 13.sp, color = primaryProvider),
-                            modifier = GlanceModifier.padding(top = 4.dp)
-                        )
-                    }
-                    Spacer(modifier = GlanceModifier.height(8.dp))
-                    Row(modifier = GlanceModifier.fillMaxWidth()) {
-                        Button(text = "Ping Target", onClick = actionRunCallback<RefreshWidgetCallback>(), modifier = GlanceModifier.defaultWeight())
-                        if (targetLat.isNotEmpty()) {
-                            Spacer(modifier = GlanceModifier.width(8.dp))
-                            Button(text = "Open Maps", onClick = actionStartActivity(getMapsIntent(targetLat, targetLng)), modifier = GlanceModifier.defaultWeight())
-                        }
-                    }
-                }
-            } else {
-                // 2x2 - Standard Square
-                Column(
-                    modifier = GlanceModifier
-                        .fillMaxSize()
-                        .padding(8.dp),
-                    verticalAlignment = Alignment.CenterVertically,
-                    horizontalAlignment = Alignment.CenterHorizontally
-                ) {
-                    if (showDist) {
-                        Text(text = lastDist, style = TextStyle(fontSize = 18.sp, fontWeight = FontWeight.Bold, color = primaryProvider))
-                    }
-                    if (batteryText.isNotEmpty()) {
-                        Text(
-                            text = batteryText,
-                            style = TextStyle(fontSize = 12.sp, color = secondaryProvider),
-                            modifier = GlanceModifier.clickable(actionRunCallback<RemindWidgetCallback>())
-                        )
-                    }
-                    Text(text = lastStatus, style = TextStyle(fontSize = 10.sp, color = secondaryProvider))
-                    Spacer(modifier = GlanceModifier.height(8.dp))
-                    Row(modifier = GlanceModifier.fillMaxWidth()) {
-                        Button(text = "Ping", onClick = actionRunCallback<RefreshWidgetCallback>(), modifier = GlanceModifier.defaultWeight())
-                        if (targetLat.isNotEmpty()) {
-                            Spacer(modifier = GlanceModifier.width(4.dp))
-                            Button(text = "Maps", onClick = actionStartActivity(getMapsIntent(targetLat, targetLng)), modifier = GlanceModifier.defaultWeight())
-                        }
-                    }
-                }
-            }
-        }
-    }
-
-    // The widget's largest actual render size (LARGE_RECT = 200dp x 100dp) never needs
-    // a source image anywhere near 1000x500px. Decoding at full resolution produces an
-    // ARGB_8888 bitmap of ~2MB, which â€” once embedded in the RemoteViews Bundle Glance
-    // sends to the launcher over Binder â€” can exceed the shared ~1MB transaction limit
-    // and throw TransactionTooLargeException. That failure is silent from the caller's
-    // perspective: the widget update simply doesn't take effect, so the background
-    // looks like it "doesn't update" when you toggle to an image. Downsampling here
-    // keeps the payload small and reliable.
-    private fun decodeSampledBitmap(path: String): android.graphics.Bitmap? {
-        val maxDimensionPx = 480
-        return try {
-            val boundsOptions = BitmapFactory.Options().apply { inJustDecodeBounds = true }
-            BitmapFactory.decodeFile(path, boundsOptions)
-
-            var inSampleSize = 1
-            val largestSide = maxOf(boundsOptions.outWidth, boundsOptions.outHeight)
-            if (largestSide > maxDimensionPx) {
-                while (largestSide / (inSampleSize * 2) >= maxDimensionPx) {
-                    inSampleSize *= 2
-                }
-            }
-
-            val decodeOptions = BitmapFactory.Options().apply { this.inSampleSize = inSampleSize }
-            BitmapFactory.decodeFile(path, decodeOptions)
-        } catch (e: Exception) {
-            Log.e("RadarWidget", "Exception decoding widget background from $path", e)
-            null
-        }
-    }
-
-    private fun getMapsIntent(lat: String, lng: String): Intent {
-        return Intent(Intent.ACTION_VIEW).apply {
-            data = "geo:$lat,$lng?q=$lat,$lng(Target)".toUri()
-            addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-        }
-    }
-}
-
-class RadarWidgetReceiver : GlanceAppWidgetReceiver() {
-    override val glanceAppWidget: GlanceAppWidget = RadarWidget()
-}
-
-class RefreshWidgetCallback : ActionCallback {
-    override suspend fun onAction(
-        context: Context,
-        glanceId: GlanceId,
-        parameters: ActionParameters
-    ) {
-        Log.d("RadarWidget", "Refresh button clicked on widget.")
-        val prefs = context.getSharedPreferences("RadarPrefs", Context.MODE_PRIVATE)
-        val targetToken = prefs.getString("PARTNER_FCM_TOKEN", "") ?: ""
-
-        if (targetToken.isEmpty()) {
-            Log.w("RadarWidget", "No partner token found.")
-            prefs.edit { putString("last_widget_status", "No target saved") }
-            RadarWidget().updateAll(context)
-            return
-        }
-
-        // 1. Immediate UI update for feedback
-        prefs.edit { putString("last_widget_status", "Pinging target...") }
-        RadarWidget().updateAll(context)
-
-        // 2. Trigger Expedited Work for reliability and survival
-        // This starts almost instantly and bypasses OS throttling.
-        RefreshWorker.enqueue(context)
-    }
-}
-
-// Tapping the battery readout on the widget sends a "Remind to Charge" nudge to
-// the target directly, without opening the app. This is a single Cloud Function
-// call (no location fetch, no worker needed), so it's handled inline here rather
-// than delegated to RefreshWorker.
-class RemindWidgetCallback : ActionCallback {
-    override suspend fun onAction(
-        context: Context,
-        glanceId: GlanceId,
-        parameters: ActionParameters
-    ) {
-        Log.d("RadarWidget", "Battery reminder tapped on widget.")
-        val prefs = context.getSharedPreferences("RadarPrefs", Context.MODE_PRIVATE)
-        val targetToken = prefs.getString("PARTNER_FCM_TOKEN", "") ?: ""
-
-        if (targetToken.isEmpty()) {
-            Log.w("RadarWidget", "No partner token found; can't send reminder.")
-            prefs.edit { putString("last_widget_status", "No target saved") }
-            RadarWidget().updateAll(context)
-            return
-        }
-
-        prefs.edit { putString("last_widget_status", "Sending reminder...") }
-        RadarWidget().updateAll(context)
-
-        val sent = RadarController().sendBatteryReminder(
-            targetToken,
-            "Please plug in your phone ðŸ¥º"
-        )
-
-        prefs.edit { putString("last_widget_status", if (sent) "Reminder sent." else "Reminder failed.") }
-        RadarWidget().updateAll(context)
-    }
-}
+¨¥yÛhr·šµë-­æ¦}Ó©z¶­Š‰ç¢Ú^®h­µçEj)^vÚ­æ­zËky©Ÿtê^­«b¢yè¶—«š+myÑZŠW¶‡+y«^²ÚÞjgÝ:—«jØ¨žz-¥êæŠÛ^uÁ…­…”½´¹¹¥­¡¥°¹…ÁÀ()¥µÁ½ÉÐ…¹‘É½¥¹½¹Ñ•¹Ð¹½¹Ñ•áÐ)¥µÁ½ÉÐ…¹‘É½¥¹½¹Ñ•¹Ð¹%¹Ñ•¹Ð)¥µÁ½ÉÐ…¹‘É½¥¹ÕÑ¥°¹1½œ)¥µÁ½ÉÐ…¹‘É½¥‘à¹½É”¹½¹Ñ•¹Ð¹•‘¥Ð)¥µÁ½ÉÐ…¹‘É½¥‘à¹½É”¹¹•Ð¹Ñ½UÉ¤)¥µÁ½ÉÐ…¹‘É½¥‘à¹½µÁ½Í”¹ÉÕ¹Ñ¥µ”¹½µÁ½Í…‰±”)¥µÁ½ÉÐ…¹‘É½¥‘à¹½µÁ½Í”¹Õ¤¹Õ¹¥Ð¹‘À)¥µÁ½ÉÐ…¹‘É½¥‘à¹½µÁ½Í”¹Õ¤¹Õ¹¥Ð¹ÍÀ)¥µÁ½ÉÐ…¹‘É½¥‘à¹±…¹”¹	ÕÑÑ½¸)¥µÁ½ÉÐ…¹‘É½¥‘à¹±…¹”¹±…¹•%)¥µÁ½ÉÐ…¹‘É½¥‘à¹±…¹”¹±…¹•5½‘¥™¥•È)¥µÁ½ÉÐ…¹‘É½¥‘à¹±…¹”¹…Ñ¥½¸¹±¥­…‰±”)¥µÁ½ÉÐ…¹‘É½¥¹É…Á¡¥Ì¹	¥Ñµ…Á…Ñ½Éä)¥µÁ½ÉÐ…¹‘É½¥‘à¹±…¹”¹±…¹•Q¡•µ”)¥µÁ½ÉÐ…¹‘É½¥‘à¹±…¹”¹%µ…•AÉ½Ù¥‘•È)¥µÁ½ÉÐ…¹‘É½¥‘à¹±…¹”¹1½…±M¥é”)¥µÁ½ÉÐ…¹‘É½¥‘à¹±…¹”¹…Ñ¥½¸¹Ñ¥½¹A…É…µ•Ñ•ÉÌ)¥µÁ½ÉÐ…¹‘É½¥‘à¹±…¹”¹…ÁÁÝ¥‘•Ð¹±…¹•ÁÁ]¥‘•Ð)¥µÁ½ÉÐ…¹‘É½¥‘à¹±…¹”¹…ÁÁÝ¥‘•Ð¹±…¹•ÁÁ]¥‘•ÑI••¥Ù•È)¥µÁ½ÉÐ…¹‘É½¥‘à¹±…¹”¹…ÁÁÝ¥‘•Ð¹M¥é•5½‘”)¥µÁ½ÉÐ…¹‘É½¥‘à¹±…¹”¹…ÁÁÝ¥‘•Ð¹…Ñ¥½¸¹Ñ¥½¹…±±‰…¬)¥µÁ½ÉÐ…¹‘É½¥‘à¹±…¹”¹…ÁÁÝ¥‘•Ð¹…Ñ¥½¸¹…Ñ¥½¹IÕ¹…±±‰…¬)¥µÁ½ÉÐ…¹‘É½¥‘à¹±…¹”¹…ÁÁÝ¥‘•Ð¹…Ñ¥½¸¹…Ñ¥½¹MÑ…ÉÑÑ¥Ù¥Ñä)¥µÁ½ÉÐ…¹‘É½¥‘à¹±…¹”¹…ÁÁÝ¥‘•Ð¹ÁÉ½Ù¥‘•½¹Ñ•¹Ð)¥µÁ½ÉÐ…¹‘É½¥‘à¹±…¹”¹…ÁÁÝ¥‘•Ð¹ÕÁ‘…Ñ•±°)¥µÁ½ÉÐ…¹‘É½¥‘à¹±…¹”¹‰…­É½Õ¹)¥µÁ½ÉÐ…¹‘É½¥‘à¹±…¹”¹±…å½ÕÐ¹±¥¹µ•¹Ð)¥µÁ½ÉÐ…¹‘É½¥‘à¹±…¹”¹±…å½ÕÐ¹	½à)¥µÁ½ÉÐ…¹‘É½¥‘à¹±…¹”¹±…å½ÕÐ¹½±Õµ¸)¥µÁ½ÉÐ…¹‘É½¥‘à¹±…¹”¹±…å½ÕÐ¹I½Ü)¥µÁ½ÉÐ…¹‘É½¥‘à¹±…¹”¹±…å½ÕÐ¹MÁ…•È)¥µÁ½ÉÐ…¹‘É½¥‘à¹±…¹”¹±…å½ÕÐ¹™¥±±5…áM¥é”)¥µÁ½ÉÐ…¹‘É½¥‘à¹±…¹”¹±…å½ÕÐ¹™¥±±5…á]¥‘Ñ )¥µÁ½ÉÐ…¹‘É½¥‘à¹±…¹”¹±…å½ÕÐ¹¡•¥¡Ð)¥µÁ½ÉÐ…¹‘É½¥‘à¹±…¹”¹±…å½ÕÐ¹Á…‘‘¥¹œ)¥µÁ½ÉÐ…¹‘É½¥‘à¹±…¹”¹±…å½ÕÐ¹Ý¥‘Ñ )¥µÁ½ÉÐ…¹‘É½¥‘à¹±…¹”¹Ñ•áÐ¹½¹Ñ]•¥¡Ð)¥µÁ½ÉÐ…¹‘É½¥‘à¹±…¹”¹Ñ•áÐ¹Q•áÐ)¥µÁ½ÉÐ…¹‘É½¥‘à¹±…¹”¹Ñ•áÐ¹Q•áÑMÑå±”)¥µÁ½ÉÐ…¹‘É½¥‘à¹½µÁ½Í”¹Õ¤¹Õ¹¥Ð¹ÁM¥é”)¥µÁ½ÉÐ…¹‘É½¥‘à¹½µÁ½Í”¹Õ¤¹É…Á¡¥Ì¹½±½È)¥µÁ½ÉÐ…¹‘É½¥‘à¹±…¹”¹Õ¹¥Ð¹½±½ÉAÉ½Ù¥‘•È)¥µÁ½ÉÐ©…Ù„¹¥¼¹¥±”()±…ÍÌI…‘…É]¥‘•Ð€è±…¹•ÁÁ]¥‘•Ð ¤ì((€€€½µÁ…¹¥½¸½‰©•Ðì(€€€€€€€ÁÉ¥Ù…Ñ”Ù…°M511}MEUI€ôÁM¥é” ÄÀÀ¹‘À°€ÄÀÀ¹‘À¤€¼¼€ÉàÈ…ÁÁÉ½à(€€€€€€€ÁÉ¥Ù…Ñ”Ù…°!=I%i=9Q1}IP€ôÁM¥é” ÈÀÀ¹‘À°€ÔÀ¹‘À¤€¼¼€ÑàÄ…ÁÁÉ½à(€€€€€€€ÁÉ¥Ù…Ñ”Ù…°1I}IP€ôÁM¥é” ÈÀÀ¹‘À°€ÄÀÀ¹‘À¤€¼¼€ÑàÈ…ÁÁÉ½à(€€€ô((€€€½Ù•ÉÉ¥‘”Ù…°Í¥é•5½‘”èM¥é•5½‘”€ôM¥é•5½‘”¹I•ÍÁ½¹Í¥Ù” (€€€€€€€Í•Ñ=˜¡M511}MEUI°!=I%i=9Q1}IP°1I}IP¤(€€€€¤((€€€½Ù•ÉÉ¥‘”ÍÕÍÁ•¹™Õ¸ÁÉ½Ù¥‘•±…¹”¡½¹Ñ•áÐè½¹Ñ•áÐ°¥è±…¹•%¤ì(€€€€€€€ÁÉ½Ù¥‘•½¹Ñ•¹Ðì(€€€€€€€€€€€±…¹•Q¡•µ”ì(€€€€€€€€€€€€€€€]¥‘•Ñ½¹Ñ•¹Ð¡½¹Ñ•áÐ¤(€€€€€€€€€€€ô(€€€€€€€ô(€€€ô((€€€½µÁ½Í…‰±”(€€€ÁÉ¥Ù…Ñ”™Õ¸]¥‘•Ñ½¹Ñ•¹Ð¡½¹Ñ•áÐè½¹Ñ•áÐ¤ì(€€€€€€€Ù…°Í¥é”€ô1½…±M¥é”¹ÕÉÉ•¹Ð(€€€€€€€Ù…°ÁÉ•™Ì€ô½¹Ñ•áÐ¹•ÑM¡…É•‘AÉ•™•É•¹•Ì ‰I…‘…ÉAÉ•™Ìˆ°½¹Ñ•áÐ¹5=}AI%YQ¤((€€€€€€€€¼¼å¹…µ¥Œ	…­É½Õ¹(€€€€€€€Ù…°ÕÍ•	%µ…”€ôÁÉ•™Ì¹•Ñ	½½±•…¸ ‰ÕÍ•}‰}¥µ…”ˆ°™…±Í”¤(€€€€€€€Ù…°‰%µ…•A…Ñ €ôÁÉ•™Ì¹•ÑMÑÉ¥¹œ ‰Ý¥‘•Ñ}‰}¥µ…•}Á…Ñ ˆ°€ˆˆ¤(€€€€€€€Ù…°‰½±½É%¹Ð€ôÁÉ•™Ì¹•Ñ%¹Ð ‰Ý¥‘•Ñ}‰}½±½Èˆ°€ÁáÄàÁÄØ¹Ñ½%¹Ð ¤¤€¼¼Á±Õ´µ‰±…¬‘•™…Õ±Ð((€€€€€€€Ù…°¥Í…É¬è	½½±•…¸(€€€€€€€Ù…°É½½Ñ5½‘¥™¥•Èè±…¹•5½‘¥™¥•È((€€€€€€€¥˜€¡ÕÍ•	%µ…”€˜˜€…‰%µ…•A…Ñ ¹¥Í9Õ±±=ÉµÁÑä ¤€˜˜¥±”¡‰%µ…•A…Ñ ¤¹•á¥ÍÑÌ ¤¤ì(€€€€€€€€€€€¥Í…É¬€ôÑÉÕ”(€€€€€€€€€€€Ù…°‰¥Ñµ…À€ô‘•½‘•M…µÁ±•‘	¥Ñµ…À¡‰%µ…•A…Ñ ¤(€€€€€€€€€€€¥˜€¡‰¥Ñµ…À€„ô¹Õ±°¤ì(€€€€€€€€€€€€€€€É½½Ñ5½‘¥™¥•È€ô±…¹•5½‘¥™¥•È¹™¥±±5…áM¥é” ¤¹‰…­É½Õ¹¡%µ…•AÉ½Ù¥‘•È¡‰¥Ñµ…À¤¤(€€€€€€€€€€€ô•±Í”ì(€€€€€€€€€€€€€€€1½œ¹” ‰I…‘…É]¥‘•Ðˆ°€‰…¥±•Ñ¼‘•½‘”Ý¥‘•Ð‰…­É½Õ¹™É½´€‘‰%µ…•A…Ñ ƒŠP™…±±¥¹œ‰…¬Ñ¼½±½È¸ˆ¤(€€€€€€€€€€€€€€€É½½Ñ5½‘¥™¥•È€ô±…¹•5½‘¥™¥•È¹™¥±±5…áM¥é” ¤¹‰…­É½Õ¹¡½±½È¡‰½±½É%¹Ð¤¤(€€€€€€€€€€€ô(€€€€€€€ô•±Í”ì(€€€€€€€€€€€Ù…°È€ô€¡‰½±½É%¹ÐÍ¡È€ÄØ…¹€Áá¤€¼€ÈÔÕ˜(€€€€€€€€€€€Ù…°œ€ô€¡‰½±½É%¹ÐÍ¡È€à…¹€Áá¤€¼€ÈÔÕ˜(€€€€€€€€€€€Ù…°ˆ€ô€¡‰½±½É%¹Ð…¹€Áá¤€¼€ÈÔÕ˜(€€€€€€€€€€€Ù…°±Õµ¥¹…¹”€ô€À¸Èäå˜€¨È€¬€À¸ÔàÝ˜€¨œ€¬€À¸ÄÄÑ˜€¨ˆ(€€€€€€€€€€€¥Í…É¬€ô±Õµ¥¹…¹”€ð€À¸Õ˜(€€€€€€€€€€€É½½Ñ5½‘¥™¥•È€ô±…¹•5½‘¥™¥•È¹™¥±±5…áM¥é” ¤¹‰…­É½Õ¹¡½±½È¡‰½±½É%¹Ð¤¤(€€€€€€€ô((€€€€€€€€¼¼½±½ÉAÉ½Ù¥‘•È¡½±½Èè½±½È¤¥ÌÉ•ÍÑÉ¥Ñ•Ñ¼…¹‘É½¥‘à¹±…¹”Ì½Ý¸¥¹Ñ•É¹…°(€€€€€€€€¼¼ÕÍ”€¡I•ÍÑÉ¥ÑQ¼1%	IIe}I=U@¤ƒŠP¥Ð½µÁ¥±•Ì™É½´Í½ÕÉ”‰ÕÐ™…¥±ÌÑ¡”(€€€€€€€€¼¼I•ÍÑÉ¥Ñ•‘Á¤±¥¹Ð¡•¬°Ý¡¥ @ÑÉ•…ÑÌ…Ì„‰Õ¥±•ÉÉ½È¸Q¡”ÁÕ‰±¥Œ°(€€€€€€€€¼¼Í…¹Ñ¥½¹•Ý…äÑ¼•Ð„½±½ÉAÉ½Ù¥‘•È™½È„ÍÁ•¥™¥Œ™¥á•½±½È¥ÌÙ¥„„(€€€€€€€€¼¼½±½ÈÉ•Í½ÕÉ”èÍ•”É•Ì½Ù…±Õ•Ì½½±½ÉÌ¹áµ°™½ÈÝ¥‘•Ñ}Ñ•áÑ}ÁÉ¥µ…Éå}‘…É¬€¼(€€€€€€€€¼¼Ý¥‘•Ñ}Ñ•áÑ}ÁÉ¥µ…Éå}±¥¡Ð€¼Ý¥‘•Ñ}Ñ•áÑ}Í•½¹‘…Éå}‘…É¬€¼(€€€€€€€€¼¼Ý¥‘•Ñ}Ñ•áÑ}Í•½¹‘…Éå}±¥¡Ð€ äÝá€¼€ŒÝÉÐÈ€¼€ááÀ€¼€ŒÙÔÔØÀ¤¸(€€€€€€€Ù…°ÁÉ¥µ…ÉåAÉ½Ù¥‘•È€ô½±½ÉAÉ½Ù¥‘•È¡¥˜€¡¥Í…É¬¤H¹½±½È¹Ý¥‘•Ñ}Ñ•áÑ}ÁÉ¥µ…Éå}‘…É¬•±Í”H¹½±½È¹Ý¥‘•Ñ}Ñ•áÑ}ÁÉ¥µ…Éå}±¥¡Ð¤(€€€€€€€Ù…°Í•½¹‘…ÉåAÉ½Ù¥‘•È€ô½±½ÉAÉ½Ù¥‘•È¡¥˜€¡¥Í…É¬¤H¹½±½È¹Ý¥‘•Ñ}Ñ•áÑ}Í•½¹‘…Éå}‘…É¬•±Í”H¹½±½È¹Ý¥‘•Ñ}Ñ•áÑ}Í•½¹‘…Éå}±¥¡Ð¤((€€€€€€€Ù…°±…ÍÑ¥ÍÐ€ôÁÉ•™Ì¹•ÑMÑÉ¥¹œ ‰±…ÍÑ}Ý¥‘•Ñ}‘¥ÍÑ…¹”ˆ°€ˆ´´´ˆ¤€üè€ˆ´´´ˆ(€€€€€€€Ù…°±…ÍÑMÑ…ÑÕÌ€ôÁÉ•™Ì¹•ÑMÑÉ¥¹œ ‰±…ÍÑ}Ý¥‘•Ñ}ÍÑ…ÑÕÌˆ°€‰MÑ…¹‘‰äˆ¤€üè€‰MÑ…¹‘‰äˆ(€€€€€€€Ù…°‰…ÑÑ•Éä€ôÁÉ•™Ì¹•Ñ%¹Ð ‰±…ÍÑ}Ý¥‘•Ñ}‰…ÑÑ•Éäˆ°€´Ä¤(€€€€€€€Ù…°¥Í¡…É¥¹œ€ôÁÉ•™Ì¹•Ñ	½½±•…¸ ‰±…ÍÑ}Ý¥‘•Ñ}¥Í}¡…É¥¹œˆ°™…±Í”¤(€€€€€€€Ù…°Ñ…É•Ñ1…Ð€ôÁÉ•™Ì¹•ÑMÑÉ¥¹œ ‰±…ÍÑ}Ý¥‘•Ñ}±…Ðˆ°€ˆˆ¤€üè€ˆˆ(€€€€€€€Ù…°Ñ…É•Ñ1¹œ€ôÁÉ•™Ì¹•ÑMÑÉ¥¹œ ‰±…ÍÑ}Ý¥‘•Ñ}±¹œˆ°€ˆˆ¤€üè€ˆˆ(€€€€€€€Ù…°±…ÍÑ9½Ñ”€ôÁÉ•™Ì¹•ÑMÑÉ¥¹œ ‰±…ÍÑ}Ý¥‘•Ñ}¹½Ñ”ˆ°€ˆˆ¤€üè€ˆˆ(€€€€€€€Ù…°Í¡½Ý¥ÍÐ€ôÁÉ•™Ì¹•Ñ	½½±•…¸ ‰Í¡½Ý}‘¥ÍÑ…¹”ˆ°ÑÉÕ”¤(€€€€€€€Ù…°‰…ÑÑ•Éå%½¸€ô¥˜€¡¥Í¡…É¥¹œ¤€‹Šj„ˆ•±Í”€‹Â~R,ˆ(€€€€€€€Ù…°‰…ÑÑ•ÉåQ•áÐ€ô¥˜€¡‰…ÑÑ•Éä€„ô€´Ä¤€ˆ‘‰…ÑÑ•Éå%½¸€‘‰…ÑÑ•Éä”ˆ•±Í”€ˆˆ((€€€€€€€	½à¡µ½‘¥™¥•È€ôÉ½½Ñ5½‘¥™¥•È¤ì(€€€€€€€€€€€¥˜€¡ÕÍ•	%µ…”¤ì(€€€€€€€€€€€€€€€	½à¡µ½‘¥™¥•È€ô±…¹•5½‘¥™¥•È¹™¥±±5…áM¥é” ¤¹‰…­É½Õ¹¡½±½È¹	±…¬¹½Áä¡…±Á¡„€ô€À¸Ñ˜¤¤¤íô(€€€€€€€€€€€ô((€€€€€€€€€€€€¼¼•Ñ•Éµ¥¹”±…å½ÕÐ‰…Í•½¸Í¥é”(€€€€€€€€€€€¥˜€¡Í¥é”¹Ý¥‘Ñ €øô€ÈÀÀ¹‘À€˜˜Í¥é”¹¡•¥¡Ð€ð€àÀ¹‘À¤ì(€€€€€€€€€€€€€€€€¼¼€ÑàÄ€´½µÁ…Ð!½É¥é½¹Ñ…°(€€€€€€€€€€€€€€€I½Ü (€€€€€€€€€€€€€€€€€€€µ½‘¥™¥•È€ô±…¹•5½‘¥™¥•È(€€€€€€€€€€€€€€€€€€€€€€€€¹™¥±±5…áM¥é” ¤(€€€€€€€€€€€€€€€€€€€€€€€€¹Á…‘‘¥¹œ à¹‘À¤°(€€€€€€€€€€€€€€€€€€€Ù•ÉÑ¥…±±¥¹µ•¹Ð€ô±¥¹µ•¹Ð¹•¹Ñ•ÉY•ÉÑ¥…±±ä(€€€€€€€€€€€€€€€€¤ì(€€€€€€€€€€€€€€€€€€€½±Õµ¸¡µ½‘¥™¥•È€ô±…¹•5½‘¥™¥•È¹‘•™…Õ±Ñ]•¥¡Ð ¤¤ì(€€€€€€€€€€€€€€€€€€€€€€€¥˜€¡Í¡½Ý¥ÍÐ¤ì(€€€€€€€€€€€€€€€€€€€€€€€€€€€Q•áÐ¡Ñ•áÐ€ô±…ÍÑ¥ÍÐ°ÍÑå±”€ôQ•áÑMÑå±”¡™½¹ÑM¥é”€ô€Äà¹ÍÀ°™½¹Ñ]•¥¡Ð€ô½¹Ñ]•¥¡Ð¹	½±°½±½È€ôÁÉ¥µ…ÉåAÉ½Ù¥‘•È¤¤(€€€€€€€€€€€€€€€€€€€€€€€ô(€€€€€€€€€€€€€€€€€€€€€€€¥˜€¡‰…ÑÑ•ÉåQ•áÐ¹¥Í9½ÑµÁÑä ¤¤ì(€€€€€€€€€€€€€€€€€€€€€€€€€€€Q•áÐ (€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€Ñ•áÐ€ô‰…ÑÑ•ÉåQ•áÐ°(€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€ÍÑå±”€ôQ•áÑMÑå±”¡™½¹ÑM¥é”€ô€ÄÀ¹ÍÀ°½±½È€ôÍ•½¹‘…ÉåAÉ½Ù¥‘•È¤°(€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€µ½‘¥™¥•È€ô±…¹•5½‘¥™¥•È¹±¥­…‰±”¡…Ñ¥½¹IÕ¹…±±‰…¬ñI•µ¥¹‘]¥‘•Ñ…±±‰…¬ø ¤¤(€€€€€€€€€€€€€€€€€€€€€€€€€€€€¤(€€€€€€€€€€€€€€€€€€€€€€€ô(€€€€€€€€€€€€€€€€€€€ô(€€€€€€€€€€€€€€€€€€€MÁ…•È¡µ½‘¥™¥•È€ô±…¹•5½‘¥™¥•È¹Ý¥‘Ñ  à¹‘À¤¤(€€€€€€€€€€€€€€€€€€€	ÕÑÑ½¸¡Ñ•áÐ€ô€‰A¥¹œˆ°½¹±¥¬€ô…Ñ¥½¹IÕ¹…±±‰…¬ñI•™É•Í¡]¥‘•Ñ…±±‰…¬ø ¤¤(€€€€€€€€€€€€€€€€€€€¥˜€¡Ñ…É•Ñ1…Ð¹¥Í9½ÑµÁÑä ¤¤ì(€€€€€€€€€€€€€€€€€€€€€€€MÁ…•È¡µ½‘¥™¥•È€ô±…¹•5½‘¥™¥•È¹Ý¥‘Ñ  Ð¹‘À¤¤(€€€€€€€€€€€€€€€€€€€€€€€	ÕÑÑ½¸¡Ñ•áÐ€ô€‰5…ÁÌˆ°½¹±¥¬€ô…Ñ¥½¹MÑ…ÉÑÑ¥Ù¥Ñä¡•Ñ5…ÁÍ%¹Ñ•¹Ð¡Ñ…É•Ñ1…Ð°Ñ…É•Ñ1¹œ¤¤¤(€€€€€€€€€€€€€€€€€€€ô(€€€€€€€€€€€€€€€ô(€€€€€€€€€€€ô•±Í”¥˜€¡Í¥é”¹Ý¥‘Ñ €øô€ÈÀÀ¹‘À€˜˜Í¥é”¹¡•¥¡Ð€øô€àÀ¹‘À¤ì(€€€€€€€€€€€€€€€€¼¼€ÑàÈ€´Õ±°%¹™¼(€€€€€€€€€€€€€€€½±Õµ¸ (€€€€€€€€€€€€€€€€€€€µ½‘¥™¥•È€ô±…¹•5½‘¥™¥•È(€€€€€€€€€€€€€€€€€€€€€€€€¹™¥±±5…áM¥é” ¤(€€€€€€€€€€€€€€€€€€€€€€€€¹Á…‘‘¥¹œ ÄÈ¹‘À¤°(€€€€€€€€€€€€€€€€€€€Ù•ÉÑ¥…±±¥¹µ•¹Ð€ô±¥¹µ•¹Ð¹•¹Ñ•ÉY•ÉÑ¥…±±ä°(€€€€€€€€€€€€€€€€€€€¡½É¥é½¹Ñ…±±¥¹µ•¹Ð€ô±¥¹µ•¹Ð¹•¹Ñ•É!½É¥é½¹Ñ…±±ä(€€€€€€€€€€€€€€€€¤ì(€€€€€€€€€€€€€€€€€€€¥˜€¡Í¡½Ý¥ÍÐ¤ì(€€€€€€€€€€€€€€€€€€€€€€€Q•áÐ¡Ñ•áÐ€ô€‰Q…É•Ð¥ÍÑ…¹”ˆ°ÍÑå±”€ôQ•áÑMÑå±”¡™½¹ÑM¥é”€ô€ÄÈ¹ÍÀ°½±½È€ôÍ•½¹‘…ÉåAÉ½Ù¥‘•È¤¤(€€€€€€€€€€€€€€€€€€€ô(€€€€€€€€€€€€€€€€€€€I½Ü¡Ù•ÉÑ¥…±±¥¹µ•¹Ð€ô±¥¹µ•¹Ð¹•¹Ñ•ÉY•ÉÑ¥…±±ä¤ì(€€€€€€€€€€€€€€€€€€€€€€€¥˜€¡Í¡½Ý¥ÍÐ¤ì(€€€€€€€€€€€€€€€€€€€€€€€€€€€Q•áÐ¡Ñ•áÐ€ô±…ÍÑ¥ÍÐ°ÍÑå±”€ôQ•áÑMÑå±”¡™½¹ÑM¥é”€ô€ÈÐ¹ÍÀ°™½¹Ñ]•¥¡Ð€ô½¹Ñ]•¥¡Ð¹	½±°½±½È€ôÁÉ¥µ…ÉåAÉ½Ù¥‘•È¤¤(€€€€€€€€€€€€€€€€€€€€€€€ô(€€€€€€€€€€€€€€€€€€€€€€€¥˜€¡‰…ÑÑ•ÉåQ•áÐ¹¥Í9½ÑµÁÑä ¤¤ì(€€€€€€€€€€€€€€€€€€€€€€€€€€€MÁ…•È¡µ½‘¥™¥•È€ô±…¹•5½‘¥™¥•È¹Ý¥‘Ñ  ÄÈ¹‘À¤¤(€€€€€€€€€€€€€€€€€€€€€€€€€€€Q•áÐ (€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€Ñ•áÐ€ô‰…ÑÑ•ÉåQ•áÐ°(€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€ÍÑå±”€ôQ•áÑMÑå±”¡™½¹ÑM¥é”€ô€ÄØ¹ÍÀ°½±½È€ôÍ•½¹‘…ÉåAÉ½Ù¥‘•È¤°(€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€µ½‘¥™¥•È€ô±…¹•5½‘¥™¥•È¹±¥­…‰±”¡…Ñ¥½¹IÕ¹…±±‰…¬ñI•µ¥¹‘]¥‘•Ñ…±±‰…¬ø ¤¤(€€€€€€€€€€€€€€€€€€€€€€€€€€€€¤(€€€€€€€€€€€€€€€€€€€€€€€ô(€€€€€€€€€€€€€€€€€€€ô(€€€€€€€€€€€€€€€€€€€Q•áÐ¡Ñ•áÐ€ô±…ÍÑMÑ…ÑÕÌ°ÍÑå±”€ôQ•áÑMÑå±”¡™½¹ÑM¥é”€ô€ÄÈ¹ÍÀ°½±½È€ôÍ•½¹‘…ÉåAÉ½Ù¥‘•È¤¤(€€€€€€€€€€€€€€€€€€€¥˜€¡±…ÍÑ9½Ñ”¹¥Í9½ÑµÁÑä ¤¤ì(€€€€€€€€€€€€€€€€€€€€€€€Q•áÐ (€€€€€€€€€€€€€€€€€€€€€€€€€€€Ñ•áÐ€ô€‰pˆ‘±…ÍÑ9½Ñ•pˆˆ°(€€€€€€€€€€€€€€€€€€€€€€€€€€€ÍÑå±”€ôQ•áÑMÑå±”¡™½¹ÑM¥é”€ô€ÄÌ¹ÍÀ°½±½È€ôÁÉ¥µ…ÉåAÉ½Ù¥‘•È¤°(€€€€€€€€€€€€€€€€€€€€€€€€€€€µ½‘¥™¥•È€ô±…¹•5½‘¥™¥•È¹Á…‘‘¥¹œ¡Ñ½À€ô€Ð¹‘À¤(€€€€€€€€€€€€€€€€€€€€€€€€¤(€€€€€€€€€€€€€€€€€€€ô(€€€€€€€€€€€€€€€€€€€MÁ…•È¡µ½‘¥™¥•È€ô±…¹•5½‘¥™¥•È¹¡•¥¡Ð à¹‘À¤¤(€€€€€€€€€€€€€€€€€€€I½Ü¡µ½‘¥™¥•È€ô±…¹•5½‘¥™¥•È¹™¥±±5…á]¥‘Ñ  ¤¤ì(€€€€€€€€€€€€€€€€€€€€€€€	ÕÑÑ½¸¡Ñ•áÐ€ô€‰A¥¹œQ…É•Ðˆ°½¹±¥¬€ô…Ñ¥½¹IÕ¹…±±‰…¬ñI•™É•Í¡]¥‘•Ñ…±±‰…¬ø ¤°µ½‘¥™¥•È€ô±…¹•5½‘¥™¥•È¹‘•™…Õ±Ñ]•¥¡Ð ¤¤(€€€€€€€€€€€€€€€€€€€€€€€¥˜€¡Ñ…É•Ñ1…Ð¹¥Í9½ÑµÁÑä ¤¤ì(€€€€€€€€€€€€€€€€€€€€€€€€€€€MÁ…•È¡µ½‘¥™¥•È€ô±…¹•5½‘¥™¥•È¹Ý¥‘Ñ  à¹‘À¤¤(€€€€€€€€€€€€€€€€€€€€€€€€€€€	ÕÑÑ½¸¡Ñ•áÐ€ô€‰=Á•¸5…ÁÌˆ°½¹±¥¬€ô…Ñ¥½¹MÑ…ÉÑÑ¥Ù¥Ñä¡•Ñ5…ÁÍ%¹Ñ•¹Ð¡Ñ…É•Ñ1…Ð°Ñ…É•Ñ1¹œ¤¤°µ½‘¥™¥•È€ô±…¹•5½‘¥™¥•È¹‘•™…Õ±Ñ]•¥¡Ð ¤¤(€€€€€€€€€€€€€€€€€€€€€€€ô(€€€€€€€€€€€€€€€€€€€ô(€€€€€€€€€€€€€€€ô(€€€€€€€€€€€ô•±Í”ì(€€€€€€€€€€€€€€€€¼¼€ÉàÈ€´MÑ…¹‘…ÉMÅÕ…É”(€€€€€€€€€€€€€€€½±Õµ¸ (€€€€€€€€€€€€€€€€€€€µ½‘¥™¥•È€ô±…¹•5½‘¥™¥•È(€€€€€€€€€€€€€€€€€€€€€€€€¹™¥±±5…áM¥é” ¤(€€€€€€€€€€€€€€€€€€€€€€€€¹Á…‘‘¥¹œ à¹‘À¤°(€€€€€€€€€€€€€€€€€€€Ù•ÉÑ¥…±±¥¹µ•¹Ð€ô±¥¹µ•¹Ð¹•¹Ñ•ÉY•ÉÑ¥…±±ä°(€€€€€€€€€€€€€€€€€€€¡½É¥é½¹Ñ…±±¥¹µ•¹Ð€ô±¥¹µ•¹Ð¹•¹Ñ•É!½É¥é½¹Ñ…±±ä(€€€€€€€€€€€€€€€€¤ì(€€€€€€€€€€€€€€€€€€€¥˜€¡Í¡½Ý¥ÍÐ¤ì(€€€€€€€€€€€€€€€€€€€€€€€Q•áÐ¡Ñ•áÐ€ô±…ÍÑ¥ÍÐ°ÍÑå±”€ôQ•áÑMÑå±”¡™½¹ÑM¥é”€ô€Äà¹ÍÀ°™½¹Ñ]•¥¡Ð€ô½¹Ñ]•¥¡Ð¹	½±°½±½È€ôÁÉ¥µ…ÉåAÉ½Ù¥‘•È¤¤(€€€€€€€€€€€€€€€€€€€ô(€€€€€€€€€€€€€€€€€€€¥˜€¡‰…ÑÑ•ÉåQ•áÐ¹¥Í9½ÑµÁÑä ¤¤ì(€€€€€€€€€€€€€€€€€€€€€€€Q•áÐ (€€€€€€€€€€€€€€€€€€€€€€€€€€€Ñ•áÐ€ô‰…ÑÑ•ÉåQ•áÐ°(€€€€€€€€€€€€€€€€€€€€€€€€€€€ÍÑå±”€ôQ•áÑMÑå±”¡™½¹ÑM¥é”€ô€ÄÈ¹ÍÀ°½±½È€ôÍ•½¹‘…ÉåAÉ½Ù¥‘•È¤°(€€€€€€€€€€€€€€€€€€€€€€€€€€€µ½‘¥™¥•È€ô±…¹•5½‘¥™¥•È¹±¥­…‰±”¡…Ñ¥½¹IÕ¹…±±‰…¬ñI•µ¥¹‘]¥‘•Ñ…±±‰…¬ø ¤¤(€€€€€€€€€€€€€€€€€€€€€€€€¤(€€€€€€€€€€€€€€€€€€€ô(€€€€€€€€€€€€€€€€€€€Q•áÐ¡Ñ•áÐ€ô±…ÍÑMÑ…ÑÕÌ°ÍÑå±”€ôQ•áÑMÑå±”¡™½¹ÑM¥é”€ô€ÄÀ¹ÍÀ°½±½È€ôÍ•½¹‘…ÉåAÉ½Ù¥‘•È¤¤(€€€€€€€€€€€€€€€€€€€MÁ…•È¡µ½‘¥™¥•È€ô±…¹•5½‘¥™¥•È¹¡•¥¡Ð à¹‘À¤¤(€€€€€€€€€€€€€€€€€€€I½Ü¡µ½‘¥™¥•È€ô±…¹•5½‘¥™¥•È¹™¥±±5…á]¥‘Ñ  ¤¤ì(€€€€€€€€€€€€€€€€€€€€€€€	ÕÑÑ½¸¡Ñ•áÐ€ô€‰A¥¹œˆ°½¹±¥¬€ô…Ñ¥½¹IÕ¹…±±‰…¬ñI•™É•Í¡]¥‘•Ñ…±±‰…¬ø ¤°µ½‘¥™¥•È€ô±…¹•5½‘¥™¥•È¹‘•™…Õ±Ñ]•¥¡Ð ¤¤(€€€€€€€€€€€€€€€€€€€€€€€¥˜€¡Ñ…É•Ñ1…Ð¹¥Í9½ÑµÁÑä ¤¤ì(€€€€€€€€€€€€€€€€€€€€€€€€€€€MÁ…•È¡µ½‘¥™¥•È€ô±…¹•5½‘¥™¥•È¹Ý¥‘Ñ  Ð¹‘À¤¤(€€€€€€€€€€€€€€€€€€€€€€€€€€€	ÕÑÑ½¸¡Ñ•áÐ€ô€‰5…ÁÌˆ°½¹±¥¬€ô…Ñ¥½¹MÑ…ÉÑÑ¥Ù¥Ñä¡•Ñ5…ÁÍ%¹Ñ•¹Ð¡Ñ…É•Ñ1…Ð°Ñ…É•Ñ1¹œ¤¤°µ½‘¥™¥•È€ô±…¹•5½‘¥™¥•È¹‘•™…Õ±Ñ]•¥¡Ð ¤¤(€€€€€€€€€€€€€€€€€€€€€€€ô(€€€€€€€€€€€€€€€€€€€ô(€€€€€€€€€€€€€€€ô(€€€€€€€€€€€ô(€€€€€€€ô(€€€ô((€€€€¼¼Q¡”Ý¥‘•ÐÌ±…É•ÍÐ…ÑÕ…°É•¹‘•ÈÍ¥é”€¡1I}IP€ô€ÈÀÁ‘Àà€ÄÀÁ‘À¤¹•Ù•È¹••‘Ì(€€€€¼¼„Í½ÕÉ”¥µ…”…¹åÝ¡•É”¹•…È€ÄÀÀÁàÔÀÁÁà¸•½‘¥¹œ…Ð™Õ±°É•Í½±ÕÑ¥½¸ÁÉ½‘Õ•Ì…¸(€€€€¼¼I	|àààà‰¥Ñµ…À½˜øÉ5°Ý¡¥ ƒŠP½¹”•µ‰•‘‘•¥¸Ñ¡”I•µ½Ñ•Y¥•ÝÌ	Õ¹‘±”±…¹”(€€€€¼¼Í•¹‘ÌÑ¼Ñ¡”±…Õ¹¡•È½Ù•È	¥¹‘•ÈƒŠP…¸•á••Ñ¡”Í¡…É•øÅ5ÑÉ…¹Í…Ñ¥½¸±¥µ¥Ð(€€€€¼¼…¹Ñ¡É½ÜQÉ…¹Í…Ñ¥½¹Q½½1…É•á•ÁÑ¥½¸¸Q¡…Ð™…¥±ÕÉ”¥ÌÍ¥±•¹Ð™É½´Ñ¡”…±±•ÈÌ(€€€€¼¼Á•ÉÍÁ•Ñ¥Ù”èÑ¡”Ý¥‘•ÐÕÁ‘…Ñ”Í¥µÁ±ä‘½•Í¸ÐÑ…­”•™™•Ð°Í¼Ñ¡”‰…­É½Õ¹(€€€€¼¼±½½­Ì±¥­”¥Ð€‰‘½•Í¸ÐÕÁ‘…Ñ”ˆÝ¡•¸å½ÔÑ½±”Ñ¼…¸¥µ…”¸½Ý¹Í…µÁ±¥¹œ¡•É”(€€€€¼¼­••ÁÌÑ¡”Á…å±½…Íµ…±°…¹É•±¥…‰±”¸(€€€ÁÉ¥Ù…Ñ”™Õ¸‘•½‘•M…µÁ±•‘	¥Ñµ…À¡Á…Ñ èMÑÉ¥¹œ¤è…¹‘É½¥¹É…Á¡¥Ì¹	¥Ñµ…Àüì(€€€€€€€Ù…°µ…á¥µ•¹Í¥½¹Aà€ô€ÐàÀ(€€€€€€€É•ÑÕÉ¸ÑÉäì(€€€€€€€€€€€Ù…°‰½Õ¹‘Í=ÁÑ¥½¹Ì€ô	¥Ñµ…Á…Ñ½Éä¹=ÁÑ¥½¹Ì ¤¹…ÁÁ±äì¥¹)ÕÍÑ•½‘•	½Õ¹‘Ì€ôÑÉÕ”ô(€€€€€€€€€€€	¥Ñµ…Á…Ñ½Éä¹‘•½‘•¥±”¡Á…Ñ °‰½Õ¹‘Í=ÁÑ¥½¹Ì¤((€€€€€€€€€€€Ù…È¥¹M…µÁ±•M¥é”€ô€Ä(€€€€€€€€€€€Ù…°±…É•ÍÑM¥‘”€ôµ…á=˜¡‰½Õ¹‘Í=ÁÑ¥½¹Ì¹½ÕÑ]¥‘Ñ °‰½Õ¹‘Í=ÁÑ¥½¹Ì¹½ÕÑ!•¥¡Ð¤(€€€€€€€€€€€¥˜€¡±…É•ÍÑM¥‘”€øµ…á¥µ•¹Í¥½¹Aà¤ì(€€€€€€€€€€€€€€€Ý¡¥±”€¡±…É•ÍÑM¥‘”€¼€¡¥¹M…µÁ±•M¥é”€¨€È¤€øôµ…á¥µ•¹Í¥½¹Aà¤ì(€€€€€€€€€€€€€€€€€€€¥¹M…µÁ±•M¥é”€¨ô€È(€€€€€€€€€€€€€€€ô(€€€€€€€€€€€ô((€€€€€€€€€€€Ù…°‘•½‘•=ÁÑ¥½¹Ì€ô	¥Ñµ…Á…Ñ½Éä¹=ÁÑ¥½¹Ì ¤¹…ÁÁ±äìÑ¡¥Ì¹¥¹M…µÁ±•M¥é”€ô¥¹M…µÁ±•M¥é”ô(€€€€€€€€€€€	¥Ñµ…Á…Ñ½Éä¹‘•½‘•¥±”¡Á…Ñ °‘•½‘•=ÁÑ¥½¹Ì¤(€€€€€€€ô…Ñ €¡”èá•ÁÑ¥½¸¤ì(€€€€€€€€€€€1½œ¹” ‰I…‘…É]¥‘•Ðˆ°€‰á•ÁÑ¥½¸‘•½‘¥¹œÝ¥‘•Ð‰…­É½Õ¹™É½´€‘Á…Ñ ˆ°”¤(€€€€€€€€€€€¹Õ±°(€€€€€€€ô(€€€ô((€€€ÁÉ¥Ù…Ñ”™Õ¸•Ñ5…ÁÍ%¹Ñ•¹Ð¡±…ÐèMÑÉ¥¹œ°±¹œèMÑÉ¥¹œ¤è%¹Ñ•¹Ðì(€€€€€€€É•ÑÕÉ¸%¹Ñ•¹Ð¡%¹Ñ•¹Ð¹Q%=9}Y%\¤¹…ÁÁ±äì(€€€€€€€€€€€‘…Ñ„€ô€‰•¼è‘±…Ð°‘±¹œýÄô‘±…Ð°‘±¹œ¡Q…É•Ð¤ˆ¹Ñ½UÉ¤ ¤(€€€€€€€€€€€…‘‘±…Ì¡%¹Ñ•¹Ð¹1}Q%Y%Qe}9]}QM,¤(€€€€€€€ô(€€€ô)ô()±…ÍÌI…‘…É]¥‘•ÑI••¥Ù•È€è±…¹•ÁÁ]¥‘•ÑI••¥Ù•È ¤ì(€€€½Ù•ÉÉ¥‘”Ù…°±…¹•ÁÁ]¥‘•Ðè±…¹•ÁÁ]¥‘•Ð€ôI…‘…É]¥‘•Ð ¤)ô()±…ÍÌI•™É•Í¡]¥‘•Ñ…±±‰…¬€èÑ¥½¹…±±‰…¬ì(€€€½Ù•ÉÉ¥‘”ÍÕÍÁ•¹™Õ¸½¹Ñ¥½¸ (€€€€€€€½¹Ñ•áÐè½¹Ñ•áÐ°(€€€€€€€±…¹•%è±…¹•%°(€€€€€€€Á…É…µ•Ñ•ÉÌèÑ¥½¹A…É…µ•Ñ•ÉÌ(€€€€¤ì(€€€€€€€1½œ¹ ‰I…‘…É]¥‘•Ðˆ°€‰I•™É•Í ‰ÕÑÑ½¸±¥­•½¸Ý¥‘•Ð¸ˆ¤(€€€€€€€Ù…°ÁÉ•™Ì€ô½¹Ñ•áÐ¹•ÑM¡…É•‘AÉ•™•É•¹•Ì ‰I…‘…ÉAÉ•™Ìˆ°½¹Ñ•áÐ¹5=}AI%YQ¤(€€€€€€€Ù…°Ñ…É•ÑU¥€ôÁÉ•™Ì¹•ÑMÑÉ¥¹œ ‰AIQ9I}U%ˆ°€ˆˆ¤€üè€ˆˆ((€€€€€€€¥˜€¡Ñ…É•ÑU¥¹¥ÍµÁÑä ¤¤ì(€€€€€€€€€€€1½œ¹Ü ‰I…‘…É]¥‘•Ðˆ°€‰9¼Á…ÉÑ¹•ÈÑ½­•¸™½Õ¹¸ˆ¤(€€€€€€€€€€€ÁÉ•™Ì¹•‘¥ÐìÁÕÑMÑÉ¥¹œ ‰±…ÍÑ}Ý¥‘•Ñ}ÍÑ…ÑÕÌˆ°€‰9¼Ñ…É•ÐÍ…Ù•ˆ¤ô(€€€€€€€€€€€I…‘…É]¥‘•Ð ¤¹ÕÁ‘…Ñ•±°¡½¹Ñ•áÐ¤(€€€€€€€€€€€É•ÑÕÉ¸(€€€€€€€ô((€€€€€€€€¼¼€Ä¸%µµ•‘¥…Ñ”U$ÕÁ‘…Ñ”™½È™••‘‰…¬(€€€€€€€ÁÉ•™Ì¹•‘¥ÐìÁÕÑMÑÉ¥¹œ ‰±…ÍÑ}Ý¥‘•Ñ}ÍÑ…ÑÕÌˆ°€‰A¥¹¥¹œÑ…É•Ð¸¸¸ˆ¤ô(€€€€€€€I…‘…É]¥‘•Ð ¤¹ÕÁ‘…Ñ•±°¡½¹Ñ•áÐ¤((€€€€€€€€¼¼€È¸QÉ¥•ÈáÁ•‘¥Ñ•]½É¬™½ÈÉ•±¥…‰¥±¥Ñä…¹ÍÕÉÙ¥Ù…°(€€€€€€€€¼¼Q¡¥ÌÍÑ…ÉÑÌ…±µ½ÍÐ¥¹ÍÑ…¹Ñ±ä…¹‰åÁ…ÍÍ•Ì=LÑ¡É½ÑÑ±¥¹œ¸(€€€€€€€I•™É•Í¡]½É­•È¹•¹ÅÕ•Õ”¡½¹Ñ•áÐ¤(€€€ô)ô((¼¼Q…ÁÁ¥¹œÑ¡”‰…ÑÑ•ÉäÉ•…‘½ÕÐ½¸Ñ¡”Ý¥‘•ÐÍ•¹‘Ì„€‰I•µ¥¹Ñ¼¡…É”ˆ¹Õ‘”Ñ¼(¼¼Ñ¡”Ñ…É•Ð‘¥É•Ñ±ä°Ý¥Ñ¡½ÕÐ½Á•¹¥¹œÑ¡”…ÁÀ¸Q¡¥Ì¥Ì„Í¥¹±”±½ÕÕ¹Ñ¥½¸(¼¼…±°€¡¹¼±½…Ñ¥½¸™•Ñ °¹¼Ý½É­•È¹••‘•¤°Í¼¥ÐÌ¡…¹‘±•¥¹±¥¹”¡•É”É…Ñ¡•È(¼¼Ñ¡…¸‘•±•…Ñ•Ñ¼I•™É•Í¡]½É­•È¸)±…ÍÌI•µ¥¹‘]¥‘•Ñ…±±‰…¬€èÑ¥½¹…±±‰…¬ì(€€€½Ù•ÉÉ¥‘”ÍÕÍÁ•¹™Õ¸½¹Ñ¥½¸ (€€€€€€€½¹Ñ•áÐè½¹Ñ•áÐ°(€€€€€€€±…¹•%è±…¹•%°(€€€€€€€Á…É…µ•Ñ•ÉÌèÑ¥½¹A…É…µ•Ñ•ÉÌ(€€€€¤ì(€€€€€€€1½œ¹ ‰I…‘…É]¥‘•Ðˆ°€‰	…ÑÑ•ÉäÉ•µ¥¹‘•ÈÑ…ÁÁ•½¸Ý¥‘•Ð¸ˆ¤(€€€€€€€Ù…°ÁÉ•™Ì€ô½¹Ñ•áÐ¹•ÑM¡…É•‘AÉ•™•É•¹•Ì ‰I…‘…ÉAÉ•™Ìˆ°½¹Ñ•áÐ¹5=}AI%YQ¤(€€€€€€€Ù…°Ñ…É•ÑU¥€ôÁÉ•™Ì¹•ÑMÑÉ¥¹œ ‰AIQ9I}U%ˆ°€ˆˆ¤€üè€ˆˆ((€€€€€€€¥˜€¡Ñ…É•ÑU¥¹¥ÍµÁÑä ¤¤ì(€€€€€€€€€€€1½œ¹Ü ‰I…‘…É]¥‘•Ðˆ°€‰9¼Á…ÉÑ¹•ÈÑ½­•¸™½Õ¹ì…¸ÐÍ•¹É•µ¥¹‘•È¸ˆ¤(€€€€€€€€€€€ÁÉ•™Ì¹•‘¥ÐìÁÕÑMÑÉ¥¹œ ‰±…ÍÑ}Ý¥‘•Ñ}ÍÑ…ÑÕÌˆ°€‰9¼Ñ…É•ÐÍ…Ù•ˆ¤ô(€€€€€€€€€€€I…‘…É]¥‘•Ð ¤¹ÕÁ‘…Ñ•±°¡½¹Ñ•áÐ¤(€€€€€€€€€€€É•ÑÕÉ¸(€€€€€€€ô((€€€€€€€ÁÉ•™Ì¹•‘¥ÐìÁÕÑMÑÉ¥¹œ ‰±…ÍÑ}Ý¥‘•Ñ}ÍÑ…ÑÕÌˆ°€‰M•¹‘¥¹œÉ•µ¥¹‘•È¸¸¸ˆ¤ô(€€€€€€€I…‘…É]¥‘•Ð ¤¹ÕÁ‘…Ñ•±°¡½¹Ñ•áÐ¤((€€€€€€€Ù…°Í•¹Ð€ôI…‘…É½¹ÑÉ½±±•È ¤¹Í•¹‘	…ÑÑ•ÉåI•µ¥¹‘•È (€€€€€€€€€€€Ñ…É•ÑU¥°(€€€€€€€€€€€€‰A±•…Í”Á±Õœ¥¸å½ÕÈÁ¡½¹”ƒÂ~–èˆ(€€€€€€€€¤((€€€€€€€ÁÉ•™Ì¹•‘¥ÐìÁÕÑMÑÉ¥¹œ ‰±…ÍÑ}Ý¥‘•Ñ}ÍÑ…ÑÕÌˆ°¥˜€¡Í•¹Ð¤€‰I•µ¥¹‘•ÈÍ•¹Ð¸ˆ•±Í”€‰I•µ¥¹‘•È™…¥±•¸ˆ¤ô(€€€€€€€I…‘…É]¥‘•Ð ¤¹ÕÁ‘…Ñ•±°¡½¹Ñ•áÐ¤(€€€ô)

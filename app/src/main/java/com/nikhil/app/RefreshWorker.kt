@@ -1,254 +1,1 @@
-package com.nikhil.app
-
-import android.Manifest
-import android.app.Notification
-import android.app.NotificationChannel
-import android.app.NotificationManager
-import android.content.Context
-import android.content.pm.PackageManager
-import android.os.Build
-import android.util.Log
-import androidx.core.app.NotificationCompat
-import androidx.core.content.ContextCompat
-import androidx.glance.appwidget.updateAll
-import androidx.work.CoroutineWorker
-import androidx.work.Constraints
-import androidx.work.ExistingPeriodicWorkPolicy
-import androidx.work.ForegroundInfo
-import androidx.work.NetworkType
-import androidx.work.OneTimeWorkRequestBuilder
-import androidx.work.OutOfQuotaPolicy
-import androidx.work.PeriodicWorkRequestBuilder
-import androidx.work.WorkManager
-import androidx.work.WorkerParameters
-import com.google.android.gms.location.LocationServices
-import com.google.android.gms.location.Priority
-import com.google.android.gms.tasks.CancellationTokenSource
-import kotlinx.coroutines.flow.first
-import kotlinx.coroutines.tasks.await
-import kotlinx.coroutines.withTimeoutOrNull
-import java.util.concurrent.TimeUnit
-import kotlin.time.Duration.Companion.seconds
-
-class RefreshWorker(
-    private val context: Context,
-    workerParams: WorkerParameters
-) : CoroutineWorker(context, workerParams) {
-
-    override suspend fun getForegroundInfo(): ForegroundInfo {
-        return createForegroundInfo()
-    }
-
-    private fun createForegroundInfo(): ForegroundInfo {
-        val channelId = "radar_refresh"
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            val name = "Radar Refresh"
-            val importance = NotificationManager.IMPORTANCE_LOW
-            val channel = NotificationChannel(channelId, name, importance)
-            val notificationManager = context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
-            notificationManager.createNotificationChannel(channel)
-        }
-
-        val notification: Notification = NotificationCompat.Builder(context, channelId)
-            .setContentTitle("Updating Radar")
-            .setSmallIcon(R.mipmap.ic_launcher)
-            .setOngoing(true)
-            .build()
-
-        return ForegroundInfo(101, notification)
-    }
-
-    override suspend fun doWork(): Result {
-        val isPeriodic = inputData.getBoolean("is_periodic", false)
-        Log.d("RefreshWorker", "Worker started execution. Periodic: $isPeriodic")
-
-        val prefs = context.getSharedPreferences("RadarPrefs", Context.MODE_PRIVATE)
-        val targetToken = prefs.getString("PARTNER_FCM_TOKEN", "") ?: ""
-
-        if (targetToken.isEmpty()) {
-            if (!isPeriodic) updateWidgetStatus("No target saved")
-            return Result.success() // Success to avoid retries if no target is configured
-        }
-
-        val controller = RadarController()
-        val fusedClient = LocationServices.getFusedLocationProviderClient(context)
-        val workStart = System.currentTimeMillis()
-        fun elapsed() = "${System.currentTimeMillis() - workStart}ms"
-
-        try {
-            // 1. Immediate Ping ‚Äî record the moment we asked, so we can tell a fresh
-            // Firestore write apart from whatever the target's doc already contained.
-            val pingStartTime = System.currentTimeMillis()
-            Log.d("RefreshWorker", "[${elapsed()}] Sending ping to target...")
-            val pingSuccess = controller.requestTargetLocation(targetToken)
-            Log.d("RefreshWorker", "[${elapsed()}] Ping call returned: success=$pingSuccess")
-            if (!pingSuccess) {
-                updateWidgetStatus("Ping failed")
-                RadarWidget().updateAll(context)
-                return Result.failure()
-            }
-
-            // 2. Wait for target coordinates. minTimestamp guarantees we don't resolve
-            // on a stale cached snapshot that predates this ping. 20s gives headroom
-            // for the target device's fast lastLocation write plus network variance ‚Äî
-            // see RadarMessagingService.fetchAndUploadLocation() for the matching
-            // fast-path optimization on the sending side.
-            Log.d("RefreshWorker", "[${elapsed()}] Waiting for target's Firestore snapshot (timeout=20s)...")
-            val targetLoc = withTimeoutOrNull(20.seconds) {
-                controller.observeTargetLocation(targetToken, minTimestamp = pingStartTime).first()
-            }
-
-            if (targetLoc == null) {
-                Log.w("RefreshWorker", "[${elapsed()}] Timed out waiting for target's location update.")
-                updateWidgetStatus("Target timed out")
-                RadarWidget().updateAll(context)
-                return Result.failure()
-            }
-            Log.d("RefreshWorker", "[${elapsed()}] Target location received: lat=${targetLoc.latitude}, lng=${targetLoc.longitude}")
-
-            // 3. Location Optimization: Grab lastLocation first for instant response
-            val hasLocationPermission = ContextCompat.checkSelfPermission(
-                context, Manifest.permission.ACCESS_FINE_LOCATION
-            ) == PackageManager.PERMISSION_GRANTED
-
-            if (!hasLocationPermission) {
-                Log.e("RefreshWorker", "[${elapsed()}] ACCESS_FINE_LOCATION not granted.")
-                updateWidgetStatus("Loc Permission Denied")
-                return Result.failure()
-            }
-
-            // Grab lastLocation cheaply first and push it right away so the widget
-            // moves off "Pinging target..." promptly ‚Äî a fresh high-accuracy fix can
-            // take 10s+ (see the target-side note in RadarMessagingService), and
-            // leaving the widget on stale status text for that whole stretch reads as
-            // stuck/broken even though the ping itself already succeeded.
-            Log.d("RefreshWorker", "[${elapsed()}] Requesting own lastLocation...")
-            val lastLoc = fusedClient.lastLocation.await()
-            if (lastLoc != null) {
-                Log.d("RefreshWorker", "[${elapsed()}] Using lastLocation as an immediate interim update.")
-                writeLocationPrefs(lastLoc, targetLoc)
-                RadarWidget().updateAll(context)
-            } else {
-                Log.w("RefreshWorker", "[${elapsed()}] Own lastLocation was null.")
-            }
-
-            // 4. Get fresh location for high accuracy ‚Äî this refines the interim
-            // lastLocation-based update above with a more precise fix, once it's
-            // ready. The widget already shows something useful by this point.
-            Log.d("RefreshWorker", "[${elapsed()}] Requesting own fresh high-accuracy location...")
-            val cts = CancellationTokenSource()
-            val myLoc = fusedClient.getCurrentLocation(Priority.PRIORITY_HIGH_ACCURACY, cts.token).await()
-
-            var pushed = false
-            if (myLoc != null) {
-                Log.d("RefreshWorker", "[${elapsed()}] Fresh own location received.")
-                writeLocationPrefs(myLoc, targetLoc)
-                pushed = true
-            } else if (lastLoc == null) {
-                Log.e("RefreshWorker", "[${elapsed()}] Both lastLocation and fresh GPS fix failed.")
-                writeStatusPrefs("GPS fix failed")
-            } else {
-                Log.d("RefreshWorker", "[${elapsed()}] Fresh fix was null; keeping the lastLocation fallback already written.")
-                // We already have lastLoc's data written to prefs; push it now since
-                // no fresher fix arrived.
-                pushed = true
-            }
-            if (pushed) RadarWidget().updateAll(context)
-            Log.d("RefreshWorker", "[${elapsed()}] doWork() completed. pushed=$pushed")
-
-        } catch (e: kotlinx.coroutines.CancellationException) {
-            // Cooperative cancellation (e.g. this run was superseded) is not a
-            // real failure ‚Äî rethrow rather than reporting a misleading status.
-            Log.w("RefreshWorker", "[${elapsed()}] Work was cancelled ‚Äî not reporting as a failure.")
-            throw e
-        } catch (e: Exception) {
-            Log.e("RefreshWorker", "[${elapsed()}] Error during widget refresh", e)
-            writeStatusPrefs("Refresh error")
-            RadarWidget().updateAll(context)
-            return Result.failure()
-        }
-
-        return Result.success()
-    }
-
-    // Writes distance/status/target fields to prefs WITHOUT touching the widget UI.
-    // Call RadarWidget().updateAll(context) once, separately, when you actually want
-    // the host to redraw ‚Äî see doWork() above.
-    private fun writeLocationPrefs(myLoc: android.location.Location, targetLoc: RadarController.TargetLocation) {
-        val prefs = context.getSharedPreferences("RadarPrefs", Context.MODE_PRIVATE)
-        val (dist, _) = RadarController.computeRelativeBearingAndDistance(
-            currentLocation = myLoc,
-            targetLat = targetLoc.latitude,
-            targetLng = targetLoc.longitude,
-            currentDeviceAzimuth = 0f
-        )
-
-        val distString = if (dist < 1000) "%.1f m".format(dist) else "%.2f km".format(dist / 1000)
-
-        val timeFormat = java.text.SimpleDateFormat("h:mm a", java.util.Locale.getDefault())
-        val statusString = "Updated at ${timeFormat.format(java.util.Date())}"
-
-        prefs.edit()
-            .putString("last_widget_distance", distString)
-            .putString("last_widget_status", statusString)
-            .putString("last_widget_lat", targetLoc.latitude.toString())
-            .putString("last_widget_lng", targetLoc.longitude.toString())
-            .putInt("last_widget_battery", targetLoc.batteryPercent)
-            .putBoolean("last_widget_is_charging", targetLoc.isCharging)
-            .putString("last_widget_note", targetLoc.note ?: "")
-            .putLong("last_success_timestamp", System.currentTimeMillis())
-            .apply()
-    }
-
-    private fun writeStatusPrefs(status: String) {
-        context.getSharedPreferences("RadarPrefs", Context.MODE_PRIVATE)
-            .edit()
-            .putString("last_widget_status", status)
-            .apply()
-    }
-
-    private suspend fun updateWidgetStatus(status: String) {
-        writeStatusPrefs(status)
-        RadarWidget().updateAll(context)
-    }
-
-    companion object {
-        // Unique work: KEEP (not REPLACE) ‚Äî if the button is tapped again while a
-        // ping is already in flight, the new request is simply dropped rather than
-        // cancelling the run that's already partway through a network round trip.
-        // REPLACE was cancelling in-flight Cloud Function calls and widget renders
-        // mid-flight (surfacing as JobCancellationException), which is what made
-        // both the ping and the widget's background render feel flaky ‚Äî a stray
-        // repeat tap could tear down a run that would otherwise have succeeded.
-        fun enqueue(context: Context) {
-            Log.d("RefreshWorker", "Enqueuing Expedited RefreshWorker (unique, KEEP).")
-            val request = OneTimeWorkRequestBuilder<RefreshWorker>()
-                .setExpedited(OutOfQuotaPolicy.RUN_AS_NON_EXPEDITED_WORK_REQUEST)
-                .setInputData(androidx.work.workDataOf("is_periodic" to false))
-                .build()
-            WorkManager.getInstance(context).enqueueUniqueWork(
-                "RadarOneTimeRefresh",
-                androidx.work.ExistingWorkPolicy.KEEP,
-                request
-            )
-        }
-
-        fun schedulePeriodicSync(context: Context) {
-            Log.d("RefreshWorker", "Scheduling Periodic RefreshWorker.")
-            val constraints = Constraints.Builder()
-                .setRequiredNetworkType(NetworkType.CONNECTED)
-                .build()
-
-            val request = PeriodicWorkRequestBuilder<RefreshWorker>(15, TimeUnit.MINUTES)
-                .setConstraints(constraints)
-                .addTag("RadarPeriodicSync")
-                .build()
-
-            WorkManager.getInstance(context).enqueueUniquePeriodicWork(
-                "RadarPeriodicSync",
-                ExistingPeriodicWorkPolicy.KEEP,
-                request
-            )
-        }
-    }
-}
+®•y€hr∑öµÎ-≠Ê¶}”©z∂≠äâÁ¢⁄^Æh≠µÁEj)^v⁄≠Ê≠zÀky©ütÍ^≠´b¢yË∂ó´ö+my—ZäWù∂á+y´^≤⁄ﬁjg›:ó´jÿ®ûz-•ÍÊä€^u¡Öç≠ÖùîÅçΩ¥ππ•≠°•∞πÖ¡¿()•µ¡Ω…–ÅÖπë…Ω•êπ5Öπ•ôïÕ–)•µ¡Ω…–ÅÖπë…Ω•êπÖ¡¿π9Ω—•ô•çÖ—•Ω∏)•µ¡Ω…–ÅÖπë…Ω•êπÖ¡¿π9Ω—•ô•çÖ—•Ωπ°Öππï∞)•µ¡Ω…–ÅÖπë…Ω•êπÖ¡¿π9Ω—•ô•çÖ—•Ωπ5ÖπÖùï»)•µ¡Ω…–ÅÖπë…Ω•êπçΩπ—ïπ–πΩπ—ï·–)•µ¡Ω…–ÅÖπë…Ω•êπçΩπ—ïπ–π¡¥πAÖç≠Öùï5ÖπÖùï»)•µ¡Ω…–ÅÖπë…Ω•êπΩÃπ	’•±ê)•µ¡Ω…–ÅÖπë…Ω•êπ’—•∞π1Ωú)•µ¡Ω…–ÅÖπë…Ω•ë‡πçΩ…îπÖ¡¿π9Ω—•ô•çÖ—•ΩπΩµ¡Ö–)•µ¡Ω…–ÅÖπë…Ω•ë‡πçΩ…îπçΩπ—ïπ–πΩπ—ï·—Ωµ¡Ö–)•µ¡Ω…–ÅÖπë…Ω•ë‡πù±ÖπçîπÖ¡¡›•ëùï–π’¡ëÖ—ï±∞)•µ¡Ω…–ÅÖπë…Ω•ë‡π›Ω…¨πΩ…Ω’—•πï]Ω…≠ï»)•µ¡Ω…–ÅÖπë…Ω•ë‡π›Ω…¨πΩπÕ—…Ö•π—Ã)•µ¡Ω…–ÅÖπë…Ω•ë‡π›Ω…¨π·•Õ—•πùAï…•Ωë•ç]Ω…≠AΩ±•ç‰)•µ¡Ω…–ÅÖπë…Ω•ë‡π›Ω…¨πΩ…ïù…Ω’πë%πôº)•µ¡Ω…–ÅÖπë…Ω•ë‡π›Ω…¨π9ï—›Ω…≠QÂ¡î)•µ¡Ω…–ÅÖπë…Ω•ë‡π›Ω…¨π=πïQ•µï]Ω…≠Iï≈’ïÕ—	’•±ëï»)•µ¡Ω…–ÅÖπë…Ω•ë‡π›Ω…¨π=’—=ôE’Ω—ÖAΩ±•ç‰)•µ¡Ω…–ÅÖπë…Ω•ë‡π›Ω…¨πAï…•Ωë•ç]Ω…≠Iï≈’ïÕ—	’•±ëï»)•µ¡Ω…–ÅÖπë…Ω•ë‡π›Ω…¨π]Ω…≠5ÖπÖùï»)•µ¡Ω…–ÅÖπë…Ω•ë‡π›Ω…¨π]Ω…≠ï…AÖ…Öµï—ï…Ã)•µ¡Ω…–ÅçΩ¥πùΩΩù±îπÖπë…Ω•êπùµÃπ±ΩçÖ—•Ω∏π1ΩçÖ—•ΩπMï…Ÿ•çïÃ)•µ¡Ω…–ÅçΩ¥πùΩΩù±îπÖπë…Ω•êπùµÃπ±ΩçÖ—•Ω∏πA…•Ω…•—‰)•µ¡Ω…–ÅçΩ¥πùΩΩù±îπÖπë…Ω•êπùµÃπ—ÖÕ≠ÃπÖπçï±±Ö—•ΩπQΩ≠ïπMΩ’…çî)•µ¡Ω…–Å≠Ω—±•π‡πçΩ…Ω’—•πïÃπô±Ω‹πô•…Õ–)•µ¡Ω…–Å≠Ω—±•π‡πçΩ…Ω’—•πïÃπ—ÖÕ≠ÃπÖ›Ö•–)•µ¡Ω…–Å≠Ω—±•π‡πçΩ…Ω’—•πïÃπ›•—°Q•µïΩ’—=…9’±∞)•µ¡Ω…–Å©ÖŸÑπ’—•∞πçΩπç’……ïπ–πQ•µïUπ•–)•µ¡Ω…–Å≠Ω—±•∏π—•µîπ’…Ö—•Ω∏πΩµ¡Öπ•Ω∏πÕïçΩπëÃ()ç±ÖÕÃÅIïô…ïÕ°]Ω…≠ï»†(ÄÄÄÅ¡…•ŸÖ—îÅŸÖ∞ÅçΩπ—ï·–ËÅΩπ—ï·–∞(ÄÄÄÅ›Ω…≠ï…AÖ…ÖµÃËÅ]Ω…≠ï…AÖ…Öµï—ï…Ã(§ÄËÅΩ…Ω’—•πï]Ω…≠ï»°çΩπ—ï·–∞Å›Ω…≠ï…AÖ…ÖµÃ§ÅÏ((ÄÄÄÅΩŸï……•ëîÅÕ’Õ¡ïπêÅô’∏Åùï—Ω…ïù…Ω’πë%πôº†§ËÅΩ…ïù…Ω’πë%πôºÅÏ(ÄÄÄÄÄÄÄÅ…ï—’…∏Åç…ïÖ—ïΩ…ïù…Ω’πë%πôº†§(ÄÄÄÅÙ((ÄÄÄÅ¡…•ŸÖ—îÅô’∏Åç…ïÖ—ïΩ…ïù…Ω’πë%πôº†§ËÅΩ…ïù…Ω’πë%πôºÅÏ(ÄÄÄÄÄÄÄÅŸÖ∞Åç°Öππï±%êÄÙÄâ…ÖëÖ…}…ïô…ïÕ†à(ÄÄÄÄÄÄÄÅ•òÄ°	’•±êπYIM%=8πM-}%9PÄ¯ÙÅ	’•±êπYIM%=9}=Lπ<§ÅÏ(ÄÄÄÄÄÄÄÄÄÄÄÅŸÖ∞ÅπÖµîÄÙÄâIÖëÖ»ÅIïô…ïÕ†à(ÄÄÄÄÄÄÄÄÄÄÄÅŸÖ∞Å•µ¡Ω…—ÖπçîÄÙÅ9Ω—•ô•çÖ—•Ωπ5ÖπÖùï»π%5A=IQ9}1=\(ÄÄÄÄÄÄÄÄÄÄÄÅŸÖ∞Åç°Öππï∞ÄÙÅ9Ω—•ô•çÖ—•Ωπ°Öππï∞°ç°Öππï±%ê∞ÅπÖµî∞Å•µ¡Ω…—Öπçî§(ÄÄÄÄÄÄÄÄÄÄÄÅŸÖ∞ÅπΩ—•ô•çÖ—•Ωπ5ÖπÖùï»ÄÙÅçΩπ—ï·–πùï—MÂÕ—ïµMï…Ÿ•çî°Ωπ—ï·–π9=Q%%Q%=9}MIY%§ÅÖÃÅ9Ω—•ô•çÖ—•Ωπ5ÖπÖùï»(ÄÄÄÄÄÄÄÄÄÄÄÅπΩ—•ô•çÖ—•Ωπ5ÖπÖùï»πç…ïÖ—ï9Ω—•ô•çÖ—•Ωπ°Öππï∞°ç°Öππï∞§(ÄÄÄÄÄÄÄÅÙ((ÄÄÄÄÄÄÄÅŸÖ∞ÅπΩ—•ô•çÖ—•Ω∏ËÅ9Ω—•ô•çÖ—•Ω∏ÄÙÅ9Ω—•ô•çÖ—•ΩπΩµ¡Ö–π	’•±ëï»°çΩπ—ï·–∞Åç°Öππï±%ê§(ÄÄÄÄÄÄÄÄÄÄÄÄπÕï—Ωπ—ïπ—Q•—±î†âU¡ëÖ—•πúÅIÖëÖ»à§(ÄÄÄÄÄÄÄÄÄÄÄÄπÕï—MµÖ±±%çΩ∏°Hπµ•¡µÖ¿π•ç}±Ö’πç°ï»§(ÄÄÄÄÄÄÄÄÄÄÄÄπÕï—=πùΩ•πú°—…’î§(ÄÄÄÄÄÄÄÄÄÄÄÄπâ’•±ê†§((ÄÄÄÄÄÄÄÅ…ï—’…∏ÅΩ…ïù…Ω’πë%πôº†ƒ¿ƒ∞ÅπΩ—•ô•çÖ—•Ω∏§(ÄÄÄÅÙ((ÄÄÄÅΩŸï……•ëîÅÕ’Õ¡ïπêÅô’∏ÅëΩ]Ω…¨†§ËÅIïÕ’±–ÅÏ(ÄÄÄÄÄÄÄÅŸÖ∞Å•ÕAï…•Ωë•åÄÙÅ•π¡’—Ö—Ñπùï—	ΩΩ±ïÖ∏†â•Õ}¡ï…•Ωë•åà∞ÅôÖ±Õî§(ÄÄÄÄÄÄÄÅ1Ωúπê†âIïô…ïÕ°]Ω…≠ï»à∞Äâ]Ω…≠ï»ÅÕ—Ö…—ïêÅï·ïç’—•Ω∏∏ÅAï…•Ωë•åËÄë•ÕAï…•Ωë•åà§((ÄÄÄÄÄÄÄÅŸÖ∞Å¡…ïôÃÄÙÅçΩπ—ï·–πùï—M°Ö…ïëA…ïôï…ïπçïÃ†âIÖëÖ…A…ïôÃà∞ÅΩπ—ï·–π5=}AI%YQ§(ÄÄÄÄÄÄÄÅŸÖ∞Å—Ö…ùï—U•êÄÙÅ¡…ïôÃπùï—M—…•πú†âAIQ9I}U%à∞Äàà§Ä¸ËÄàà((ÄÄÄÄÄÄÄÅ•òÄ°—Ö…ùï—U•êπ•Õµ¡—‰†§§ÅÏ(ÄÄÄÄÄÄÄÄÄÄÄÅ•òÄ†Ö•ÕAï…•Ωë•å§Å’¡ëÖ—ï]•ëùï—M—Ö—’Ã†â9ºÅ—Ö…ùï–ÅÕÖŸïêà§(ÄÄÄÄÄÄÄÄÄÄÄÅ…ï—’…∏ÅIïÕ’±–πÕ’ççïÕÃ†§ÄººÅM’ççïÕÃÅ—ºÅÖŸΩ•êÅ…ï—…•ïÃÅ•òÅπºÅ—Ö…ùï–Å•ÃÅçΩπô•ù’…ïê(ÄÄÄÄÄÄÄÅÙ((ÄÄÄÄÄÄÄÅŸÖ∞ÅçΩπ—…Ω±±ï»ÄÙÅIÖëÖ…Ωπ—…Ω±±ï»†§(ÄÄÄÄÄÄÄÅŸÖ∞Åô’Õïë±•ïπ–ÄÙÅ1ΩçÖ—•ΩπMï…Ÿ•çïÃπùï—’Õïë1ΩçÖ—•ΩπA…ΩŸ•ëï…±•ïπ–°çΩπ—ï·–§(ÄÄÄÄÄÄÄÅŸÖ∞Å›Ω…≠M—Ö…–ÄÙÅMÂÕ—ï¥πç’……ïπ—Q•µï5•±±•Ã†§(ÄÄÄÄÄÄÄÅô’∏Åï±Ö¡Õïê†§ÄÙÄàëÌMÂÕ—ï¥πç’……ïπ—Q•µï5•±±•Ã†§Ä¥Å›Ω…≠M—Ö…—ıµÃà((ÄÄÄÄÄÄÄÅ—…‰ÅÏ(ÄÄÄÄÄÄÄÄÄÄÄÅIÖëÖ…MïÕÕ•Ω∏π’•ê†§(ÄÄÄÄÄÄÄÄÄÄÄÅ•òÄ°IÖëÖ…MïÕÕ•Ω∏πÖ¡¡…ΩŸïëAÖ…—πï»†§ÄÑÙÅ—Ö…ùï—U•ê§ÅÏ(ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÅIÖëÖ…MïÕÕ•Ω∏πç±ïÖ…AÖ…—πï…Öç°î°çΩπ—ï·–§(ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÅ…ï—’…∏ÅIïÕ’±–πÕ’ççïÕÃ†§(ÄÄÄÄÄÄÄÄÄÄÄÅÙ(ÄÄÄÄÄÄÄÄÄÄÄÄººÄƒ∏Å%µµïë•Ö—îÅA•πúÉäPÅ…ïçΩ…êÅ—°îÅµΩµïπ–Å›îÅÖÕ≠ïê∞ÅÕºÅ›îÅçÖ∏Å—ï±∞ÅÑÅô…ïÕ†(ÄÄÄÄÄÄÄÄÄÄÄÄººÅ•…ïÕ—Ω…îÅ›…•—îÅÖ¡Ö…–Åô…Ω¥Å›°Ö—ïŸï»Å—°îÅ—Ö…ùï–ùÃÅëΩåÅÖ±…ïÖë‰ÅçΩπ—Ö•πïê∏(ÄÄÄÄÄÄÄÄÄÄÄÅŸÖ∞Å¡•πùM—Ö…—Q•µîÄÙÅMÂÕ—ï¥πç’……ïπ—Q•µï5•±±•Ã†§(ÄÄÄÄÄÄÄÄÄÄÄÅ1Ωúπê†âIïô…ïÕ°]Ω…≠ï»à∞ÄâlëÌï±Ö¡Õïê†•ıtÅMïπë•πúÅ¡•πúÅ—ºÅ—Ö…ùï–∏∏∏à§(ÄÄÄÄÄÄÄÄÄÄÄÅŸÖ∞Å¡•πùM’ççïÕÃÄÙÅçΩπ—…Ω±±ï»π…ï≈’ïÕ—QÖ…ùï—1ΩçÖ—•Ω∏°—Ö…ùï—U•ê§(ÄÄÄÄÄÄÄÄÄÄÄÅ1Ωúπê†âIïô…ïÕ°]Ω…≠ï»à∞ÄâlëÌï±Ö¡Õïê†•ıtÅA•πúÅçÖ±∞Å…ï—’…πïêËÅÕ’ççïÕÃÙë¡•πùM’ççïÕÃà§(ÄÄÄÄÄÄÄÄÄÄÄÅ•òÄ†Ö¡•πùM’ççïÕÃ§ÅÏ(ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÅ’¡ëÖ—ï]•ëùï—M—Ö—’Ã†âA•πúÅôÖ•±ïêà§(ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÅIÖëÖ…]•ëùï–†§π’¡ëÖ—ï±∞°çΩπ—ï·–§(ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÅ…ï—’…∏ÅIïÕ’±–πôÖ•±’…î†§(ÄÄÄÄÄÄÄÄÄÄÄÅÙ((ÄÄÄÄÄÄÄÄÄÄÄÄººÄ»∏Å]Ö•–ÅôΩ»Å—Ö…ùï–ÅçΩΩ…ë•πÖ—ïÃ∏Åµ•πQ•µïÕ—Öµ¿Åù’Ö…Öπ—ïïÃÅ›îÅëΩ∏ù–Å…ïÕΩ±Ÿî(ÄÄÄÄÄÄÄÄÄÄÄÄººÅΩ∏ÅÑÅÕ—Ö±îÅçÖç°ïêÅÕπÖ¡Õ°Ω–Å—°Ö–Å¡…ïëÖ—ïÃÅ—°•ÃÅ¡•πú∏Ä»¡ÃÅù•ŸïÃÅ°ïÖë…ΩΩ¥(ÄÄÄÄÄÄÄÄÄÄÄÄººÅôΩ»Å—°îÅ—Ö…ùï–ÅëïŸ•çîùÃÅôÖÕ–Å±ÖÕ—1ΩçÖ—•Ω∏Å›…•—îÅ¡±’ÃÅπï—›Ω…¨ÅŸÖ…•ÖπçîÉäP(ÄÄÄÄÄÄÄÄÄÄÄÄººÅÕïîÅIÖëÖ…5ïÕÕÖù•πùMï…Ÿ•çîπôï—ç°πëU¡±ΩÖë1ΩçÖ—•Ω∏†§ÅôΩ»Å—°îÅµÖ—ç°•πú(ÄÄÄÄÄÄÄÄÄÄÄÄººÅôÖÕ–µ¡Ö—†ÅΩ¡—•µ•ÈÖ—•Ω∏ÅΩ∏Å—°îÅÕïπë•πúÅÕ•ëî∏(ÄÄÄÄÄÄÄÄÄÄÄÅ1Ωúπê†âIïô…ïÕ°]Ω…≠ï»à∞ÄâlëÌï±Ö¡Õïê†•ıtÅ]Ö•—•πúÅôΩ»Å—Ö…ùï–ùÃÅ•…ïÕ—Ω…îÅÕπÖ¡Õ°Ω–Ä°—•µïΩ’–Ù»¡Ã§∏∏∏à§(ÄÄÄÄÄÄÄÄÄÄÄÅŸÖ∞Å—Ö…ùï—1ΩåÄÙÅ›•—°Q•µïΩ’—=…9’±∞†»¿πÕïçΩπëÃ§ÅÏ(ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÅçΩπ—…Ω±±ï»πΩâÕï…ŸïQÖ…ùï—1ΩçÖ—•Ω∏°—Ö…ùï—U•ê∞Åµ•πQ•µïÕ—Öµ¿ÄÙÅ¡•πùM—Ö…—Q•µî§πô•…Õ–†§(ÄÄÄÄÄÄÄÄÄÄÄÅÙ((ÄÄÄÄÄÄÄÄÄÄÄÅ•òÄ°—Ö…ùï—1ΩåÄÙÙÅπ’±∞§ÅÏ(ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÅ1Ωúπ‹†âIïô…ïÕ°]Ω…≠ï»à∞ÄâlëÌï±Ö¡Õïê†•ıtÅQ•µïêÅΩ’–Å›Ö•—•πúÅôΩ»Å—Ö…ùï–ùÃÅ±ΩçÖ—•Ω∏Å’¡ëÖ—î∏à§(ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÅ’¡ëÖ—ï]•ëùï—M—Ö—’Ã†âQÖ…ùï–Å—•µïêÅΩ’–à§(ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÅIÖëÖ…]•ëùï–†§π’¡ëÖ—ï±∞°çΩπ—ï·–§(ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÅ…ï—’…∏ÅIïÕ’±–πôÖ•±’…î†§(ÄÄÄÄÄÄÄÄÄÄÄÅÙ(ÄÄÄÄÄÄÄÄÄÄÄÅ1Ωúπê†âIïô…ïÕ°]Ω…≠ï»à∞ÄâlëÌï±Ö¡Õïê†•ıtÅQÖ…ùï–Å±ΩçÖ—•Ω∏Å…ïçï•ŸïêËÅ±Ö–ÙëÌ—Ö…ùï—1Ωåπ±Ö—•—’ëïÙ∞Å±πúÙëÌ—Ö…ùï—1Ωåπ±Ωπù•—’ëïÙà§((ÄÄÄÄÄÄÄÄÄÄÄÄººÄÃ∏Å1ΩçÖ—•Ω∏Å=¡—•µ•ÈÖ—•Ω∏ËÅ…ÖàÅ±ÖÕ—1ΩçÖ—•Ω∏Åô•…Õ–ÅôΩ»Å•πÕ—Öπ–Å…ïÕ¡ΩπÕî(ÄÄÄÄÄÄÄÄÄÄÄÅŸÖ∞Å°ÖÕ1ΩçÖ—•ΩπAï…µ•ÕÕ•Ω∏ÄÙÅΩπ—ï·—Ωµ¡Ö–πç°ïç≠Mï±ôAï…µ•ÕÕ•Ω∏†(ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÅçΩπ—ï·–∞Å5Öπ•ôïÕ–π¡ï…µ•ÕÕ•Ω∏πMM}%9}1=Q%=8(ÄÄÄÄÄÄÄÄÄÄÄÄ§ÄÙÙÅAÖç≠Öùï5ÖπÖùï»πAI5%MM%=9}I9Q((ÄÄÄÄÄÄÄÄÄÄÄÅ•òÄ†Ö°ÖÕ1ΩçÖ—•ΩπAï…µ•ÕÕ•Ω∏§ÅÏ(ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÅ1Ωúπî†âIïô…ïÕ°]Ω…≠ï»à∞ÄâlëÌï±Ö¡Õïê†•ıtÅMM}%9}1=Q%=8ÅπΩ–Åù…Öπ—ïê∏à§(ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÅ’¡ëÖ—ï]•ëùï—M—Ö—’Ã†â1ΩåÅAï…µ•ÕÕ•Ω∏Åïπ•ïêà§(ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÅ…ï—’…∏ÅIïÕ’±–πôÖ•±’…î†§(ÄÄÄÄÄÄÄÄÄÄÄÅÙ((ÄÄÄÄÄÄÄÄÄÄÄÄººÅ…ÖàÅ±ÖÕ—1ΩçÖ—•Ω∏Åç°ïÖ¡±‰Åô•…Õ–ÅÖπêÅ¡’Õ†Å•–Å…•ù°–ÅÖ›Ö‰ÅÕºÅ—°îÅ›•ëùï–(ÄÄÄÄÄÄÄÄÄÄÄÄººÅµΩŸïÃÅΩôòÄâA•πù•πúÅ—Ö…ùï–∏∏∏àÅ¡…Ωµ¡—±‰ÉäPÅÑÅô…ïÕ†Å°•ù†µÖçç’…Öç‰Åô•‡ÅçÖ∏(ÄÄÄÄÄÄÄÄÄÄÄÄººÅ—Ö≠îÄƒ¡Ã¨Ä°ÕïîÅ—°îÅ—Ö…ùï–µÕ•ëîÅπΩ—îÅ•∏ÅIÖëÖ…5ïÕÕÖù•πùMï…Ÿ•çî§∞ÅÖπê(ÄÄÄÄÄÄÄÄÄÄÄÄººÅ±ïÖŸ•πúÅ—°îÅ›•ëùï–ÅΩ∏ÅÕ—Ö±îÅÕ—Ö—’ÃÅ—ï·–ÅôΩ»Å—°Ö–Å›°Ω±îÅÕ—…ï—ç†Å…ïÖëÃÅÖÃ(ÄÄÄÄÄÄÄÄÄÄÄÄººÅÕ—’ç¨Ωâ…Ω≠ï∏ÅïŸï∏Å—°Ω’ù†Å—°îÅ¡•πúÅ•—Õï±òÅÖ±…ïÖë‰ÅÕ’ççïïëïê∏(ÄÄÄÄÄÄÄÄÄÄÄÅ1Ωúπê†âIïô…ïÕ°]Ω…≠ï»à∞ÄâlëÌï±Ö¡Õïê†•ıtÅIï≈’ïÕ—•πúÅΩ›∏Å±ÖÕ—1ΩçÖ—•Ω∏∏∏∏à§(ÄÄÄÄÄÄÄÄÄÄÄÅŸÖ∞Å±ÖÕ—1ΩåÄÙÅô’Õïë±•ïπ–π±ÖÕ—1ΩçÖ—•Ω∏πÖ›Ö•–†§(ÄÄÄÄÄÄÄÄÄÄÄÅ•òÄ°±ÖÕ—1ΩåÄÑÙÅπ’±∞§ÅÏ(ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÅ1Ωúπê†âIïô…ïÕ°]Ω…≠ï»à∞ÄâlëÌï±Ö¡Õïê†•ıtÅUÕ•πúÅ±ÖÕ—1ΩçÖ—•Ω∏ÅÖÃÅÖ∏Å•µµïë•Ö—îÅ•π—ï…•¥Å’¡ëÖ—î∏à§(ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÅ›…•—ï1ΩçÖ—•ΩπA…ïôÃ°±ÖÕ—1Ωå∞Å—Ö…ùï—1Ωå§(ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÅIÖëÖ…]•ëùï–†§π’¡ëÖ—ï±∞°çΩπ—ï·–§(ÄÄÄÄÄÄÄÄÄÄÄÅÙÅï±ÕîÅÏ(ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÅ1Ωúπ‹†âIïô…ïÕ°]Ω…≠ï»à∞ÄâlëÌï±Ö¡Õïê†•ıtÅ=›∏Å±ÖÕ—1ΩçÖ—•Ω∏Å›ÖÃÅπ’±∞∏à§(ÄÄÄÄÄÄÄÄÄÄÄÅÙ((ÄÄÄÄÄÄÄÄÄÄÄÄººÄ–∏Åï–Åô…ïÕ†Å±ΩçÖ—•Ω∏ÅôΩ»Å°•ù†ÅÖçç’…Öç‰ÉäPÅ—°•ÃÅ…ïô•πïÃÅ—°îÅ•π—ï…•¥(ÄÄÄÄÄÄÄÄÄÄÄÄººÅ±ÖÕ—1ΩçÖ—•Ω∏µâÖÕïêÅ’¡ëÖ—îÅÖâΩŸîÅ›•—†ÅÑÅµΩ…îÅ¡…ïç•ÕîÅô•‡∞ÅΩπçîÅ•–ùÃ(ÄÄÄÄÄÄÄÄÄÄÄÄººÅ…ïÖë‰∏ÅQ°îÅ›•ëùï–ÅÖ±…ïÖë‰ÅÕ°Ω›ÃÅÕΩµï—°•πúÅ’Õïô’∞Åâ‰Å—°•ÃÅ¡Ω•π–∏(ÄÄÄÄÄÄÄÄÄÄÄÅ1Ωúπê†âIïô…ïÕ°]Ω…≠ï»à∞ÄâlëÌï±Ö¡Õïê†•ıtÅIï≈’ïÕ—•πúÅΩ›∏Åô…ïÕ†Å°•ù†µÖçç’…Öç‰Å±ΩçÖ—•Ω∏∏∏∏à§(ÄÄÄÄÄÄÄÄÄÄÄÅŸÖ∞Åç—ÃÄÙÅÖπçï±±Ö—•ΩπQΩ≠ïπMΩ’…çî†§(ÄÄÄÄÄÄÄÄÄÄÄÅŸÖ∞ÅµÂ1ΩåÄÙÅô’Õïë±•ïπ–πùï—’……ïπ—1ΩçÖ—•Ω∏°A…•Ω…•—‰πAI%=I%Qe}!%!}UId∞Åç—Ãπ—Ω≠ï∏§πÖ›Ö•–†§((ÄÄÄÄÄÄÄÄÄÄÄÅŸÖ»Å¡’Õ°ïêÄÙÅôÖ±Õî(ÄÄÄÄÄÄÄÄÄÄÄÅ•òÄ°µÂ1ΩåÄÑÙÅπ’±∞§ÅÏ(ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÅ1Ωúπê†âIïô…ïÕ°]Ω…≠ï»à∞ÄâlëÌï±Ö¡Õïê†•ıtÅ…ïÕ†ÅΩ›∏Å±ΩçÖ—•Ω∏Å…ïçï•Ÿïê∏à§(ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÅ›…•—ï1ΩçÖ—•ΩπA…ïôÃ°µÂ1Ωå∞Å—Ö…ùï—1Ωå§(ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÅ¡’Õ°ïêÄÙÅ—…’î(ÄÄÄÄÄÄÄÄÄÄÄÅÙÅï±ÕîÅ•òÄ°±ÖÕ—1ΩåÄÙÙÅπ’±∞§ÅÏ(ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÅ1Ωúπî†âIïô…ïÕ°]Ω…≠ï»à∞ÄâlëÌï±Ö¡Õïê†•ıtÅ	Ω—†Å±ÖÕ—1ΩçÖ—•Ω∏ÅÖπêÅô…ïÕ†ÅALÅô•‡ÅôÖ•±ïê∏à§(ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÅ›…•—ïM—Ö—’ÕA…ïôÃ†âALÅô•‡ÅôÖ•±ïêà§(ÄÄÄÄÄÄÄÄÄÄÄÅÙÅï±ÕîÅÏ(ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÅ1Ωúπê†âIïô…ïÕ°]Ω…≠ï»à∞ÄâlëÌï±Ö¡Õïê†•ıtÅ…ïÕ†Åô•‡Å›ÖÃÅπ’±∞ÏÅ≠ïï¡•πúÅ—°îÅ±ÖÕ—1ΩçÖ—•Ω∏ÅôÖ±±âÖç¨ÅÖ±…ïÖë‰Å›…•——ï∏∏à§(ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄººÅ]îÅÖ±…ïÖë‰Å°ÖŸîÅ±ÖÕ—1ΩåùÃÅëÖ—ÑÅ›…•——ï∏Å—ºÅ¡…ïôÃÏÅ¡’Õ†Å•–ÅπΩ‹ÅÕ•πçî(ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄººÅπºÅô…ïÕ°ï»Åô•‡ÅÖ……•Ÿïê∏(ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÅ¡’Õ°ïêÄÙÅ—…’î(ÄÄÄÄÄÄÄÄÄÄÄÅÙ(ÄÄÄÄÄÄÄÄÄÄÄÅ•òÄ°¡’Õ°ïê§ÅIÖëÖ…]•ëùï–†§π’¡ëÖ—ï±∞°çΩπ—ï·–§(ÄÄÄÄÄÄÄÄÄÄÄÅ1Ωúπê†âIïô…ïÕ°]Ω…≠ï»à∞ÄâlëÌï±Ö¡Õïê†•ıtÅëΩ]Ω…¨†§ÅçΩµ¡±ï—ïê∏Å¡’Õ°ïêÙë¡’Õ°ïêà§((ÄÄÄÄÄÄÄÅÙÅçÖ—ç†Ä°îËÅ≠Ω—±•π‡πçΩ…Ω’—•πïÃπÖπçï±±Ö—•Ωπ·çï¡—•Ω∏§ÅÏ(ÄÄÄÄÄÄÄÄÄÄÄÄººÅΩΩ¡ï…Ö—•ŸîÅçÖπçï±±Ö—•Ω∏Ä°îπú∏Å—°•ÃÅ…’∏Å›ÖÃÅÕ’¡ï…Õïëïê§Å•ÃÅπΩ–ÅÑ(ÄÄÄÄÄÄÄÄÄÄÄÄººÅ…ïÖ∞ÅôÖ•±’…îÉäPÅ…ï—°…Ω‹Å…Ö—°ï»Å—°Ö∏Å…ï¡Ω…—•πúÅÑÅµ•Õ±ïÖë•πúÅÕ—Ö—’Ã∏(ÄÄÄÄÄÄÄÄÄÄÄÅ1Ωúπ‹†âIïô…ïÕ°]Ω…≠ï»à∞ÄâlëÌï±Ö¡Õïê†•ıtÅ]Ω…¨Å›ÖÃÅçÖπçï±±ïêÉäPÅπΩ–Å…ï¡Ω…—•πúÅÖÃÅÑÅôÖ•±’…î∏à§(ÄÄÄÄÄÄÄÄÄÄÄÅ—°…Ω‹Åî(ÄÄÄÄÄÄÄÅÙÅçÖ—ç†Ä°îËÅ·çï¡—•Ω∏§ÅÏ(ÄÄÄÄÄÄÄÄÄÄÄÅ1Ωúπî†âIïô…ïÕ°]Ω…≠ï»à∞ÄâlëÌï±Ö¡Õïê†•ıtÅ……Ω»Åë’…•πúÅ›•ëùï–Å…ïô…ïÕ†à∞Åî§(ÄÄÄÄÄÄÄÄÄÄÄÅIÖëÖ…MïÕÕ•Ω∏πç±ïÖ…AÖ…—πï…Öç°î°çΩπ—ï·–§(ÄÄÄÄÄÄÄÄÄÄÄÅ›…•—ïM—Ö—’ÕA…ïôÃ†âIïô…ïÕ†Åï……Ω»à§(ÄÄÄÄÄÄÄÄÄÄÄÅIÖëÖ…]•ëùï–†§π’¡ëÖ—ï±∞°çΩπ—ï·–§(ÄÄÄÄÄÄÄÄÄÄÄÅ…ï—’…∏ÅIïÕ’±–πôÖ•±’…î†§(ÄÄÄÄÄÄÄÅÙ((ÄÄÄÄÄÄÄÅ…ï—’…∏ÅIïÕ’±–πÕ’ççïÕÃ†§(ÄÄÄÅÙ((ÄÄÄÄººÅ]…•—ïÃÅë•Õ—ÖπçîΩÕ—Ö—’ÃΩ—Ö…ùï–Åô•ï±ëÃÅ—ºÅ¡…ïôÃÅ]%Q!=UPÅ—Ω’ç°•πúÅ—°îÅ›•ëùï–ÅU$∏(ÄÄÄÄººÅÖ±∞ÅIÖëÖ…]•ëùï–†§π’¡ëÖ—ï±∞°çΩπ—ï·–§ÅΩπçî∞ÅÕï¡Ö…Ö—ï±‰∞Å›°ï∏ÅÂΩ‘ÅÖç—’Ö±±‰Å›Öπ–(ÄÄÄÄººÅ—°îÅ°ΩÕ–Å—ºÅ…ïë…Ö‹ÉäPÅÕïîÅëΩ]Ω…¨†§ÅÖâΩŸî∏(ÄÄÄÅ¡…•ŸÖ—îÅô’∏Å›…•—ï1ΩçÖ—•ΩπA…ïôÃ°µÂ1ΩåËÅÖπë…Ω•êπ±ΩçÖ—•Ω∏π1ΩçÖ—•Ω∏∞Å—Ö…ùï—1ΩåËÅIÖëÖ…Ωπ—…Ω±±ï»πQÖ…ùï—1ΩçÖ—•Ω∏§ÅÏ(ÄÄÄÄÄÄÄÅŸÖ∞Å¡…ïôÃÄÙÅçΩπ—ï·–πùï—M°Ö…ïëA…ïôï…ïπçïÃ†âIÖëÖ…A…ïôÃà∞ÅΩπ—ï·–π5=}AI%YQ§(ÄÄÄÄÄÄÄÅŸÖ∞Ä°ë•Õ–∞Å|§ÄÙÅIÖëÖ…Ωπ—…Ω±±ï»πçΩµ¡’—ïIï±Ö—•Ÿï	ïÖ…•πùπë•Õ—Öπçî†(ÄÄÄÄÄÄÄÄÄÄÄÅç’……ïπ—1ΩçÖ—•Ω∏ÄÙÅµÂ1Ωå∞(ÄÄÄÄÄÄÄÄÄÄÄÅ—Ö…ùï—1Ö–ÄÙÅ—Ö…ùï—1Ωåπ±Ö—•—’ëî∞(ÄÄÄÄÄÄÄÄÄÄÄÅ—Ö…ùï—1πúÄÙÅ—Ö…ùï—1Ωåπ±Ωπù•—’ëî∞(ÄÄÄÄÄÄÄÄÄÄÄÅç’……ïπ—ïŸ•çïÈ•µ’—†ÄÙÄ¡ò(ÄÄÄÄÄÄÄÄ§((ÄÄÄÄÄÄÄÅŸÖ∞Åë•Õ—M—…•πúÄÙÅ•òÄ°ë•Õ–ÄÄƒ¿¿¿§Äàî∏≈òÅ¥àπôΩ…µÖ–°ë•Õ–§Åï±ÕîÄàî∏…òÅ≠¥àπôΩ…µÖ–°ë•Õ–ÄºÄƒ¿¿¿§((ÄÄÄÄÄÄÄÅŸÖ∞Å—•µïΩ…µÖ–ÄÙÅ©ÖŸÑπ—ï·–πM•µ¡±ïÖ—ïΩ…µÖ–†â†Èµ¥ÅÑà∞Å©ÖŸÑπ’—•∞π1ΩçÖ±îπùï—ïôÖ’±–†§§(ÄÄÄÄÄÄÄÅŸÖ∞ÅÕ—Ö—’ÕM—…•πúÄÙÄâU¡ëÖ—ïêÅÖ–ÄëÌ—•µïΩ…µÖ–πôΩ…µÖ–°©ÖŸÑπ’—•∞πÖ—î†§•Ùà((ÄÄÄÄÄÄÄÅ¡…ïôÃπïë•–†§(ÄÄÄÄÄÄÄÄÄÄÄÄπ¡’—M—…•πú†â±ÖÕ—}›•ëùï—}ë•Õ—Öπçîà∞Åë•Õ—M—…•πú§(ÄÄÄÄÄÄÄÄÄÄÄÄπ¡’—M—…•πú†â±ÖÕ—}›•ëùï—}Õ—Ö—’Ãà∞ÅÕ—Ö—’ÕM—…•πú§(ÄÄÄÄÄÄÄÄÄÄÄÄπ¡’—M—…•πú†â±ÖÕ—}›•ëùï—}±Ö–à∞Å—Ö…ùï—1Ωåπ±Ö—•—’ëîπ—ΩM—…•πú†§§(ÄÄÄÄÄÄÄÄÄÄÄÄπ¡’—M—…•πú†â±ÖÕ—}›•ëùï—}±πúà∞Å—Ö…ùï—1Ωåπ±Ωπù•—’ëîπ—ΩM—…•πú†§§(ÄÄÄÄÄÄÄÄÄÄÄÄπ¡’—%π–†â±ÖÕ—}›•ëùï—}âÖ——ï…‰à∞Å—Ö…ùï—1ΩåπâÖ——ï…ÂAï…çïπ–§(ÄÄÄÄÄÄÄÄÄÄÄÄπ¡’—	ΩΩ±ïÖ∏†â±ÖÕ—}›•ëùï—}•Õ}ç°Ö…ù•πúà∞Å—Ö…ùï—1Ωåπ•Õ°Ö…ù•πú§(ÄÄÄÄÄÄÄÄÄÄÄÄπ¡’—M—…•πú†â±ÖÕ—}›•ëùï—}πΩ—îà∞Å—Ö…ùï—1ΩåππΩ—îÄ¸ËÄàà§(ÄÄÄÄÄÄÄÄÄÄÄÄπ¡’—1Ωπú†â±ÖÕ—}Õ’ççïÕÕ}—•µïÕ—Öµ¿à∞ÅMÂÕ—ï¥πç’……ïπ—Q•µï5•±±•Ã†§§(ÄÄÄÄÄÄÄÄÄÄÄÄπÖ¡¡±‰†§(ÄÄÄÅÙ((ÄÄÄÅ¡…•ŸÖ—îÅô’∏Å›…•—ïM—Ö—’ÕA…ïôÃ°Õ—Ö—’ÃËÅM—…•πú§ÅÏ(ÄÄÄÄÄÄÄÅçΩπ—ï·–πùï—M°Ö…ïëA…ïôï…ïπçïÃ†âIÖëÖ…A…ïôÃà∞ÅΩπ—ï·–π5=}AI%YQ§(ÄÄÄÄÄÄÄÄÄÄÄÄπïë•–†§(ÄÄÄÄÄÄÄÄÄÄÄÄπ¡’—M—…•πú†â±ÖÕ—}›•ëùï—}Õ—Ö—’Ãà∞ÅÕ—Ö—’Ã§(ÄÄÄÄÄÄÄÄÄÄÄÄπÖ¡¡±‰†§(ÄÄÄÅÙ((ÄÄÄÅ¡…•ŸÖ—îÅÕ’Õ¡ïπêÅô’∏Å’¡ëÖ—ï]•ëùï—M—Ö—’Ã°Õ—Ö—’ÃËÅM—…•πú§ÅÏ(ÄÄÄÄÄÄÄÅ›…•—ïM—Ö—’ÕA…ïôÃ°Õ—Ö—’Ã§(ÄÄÄÄÄÄÄÅIÖëÖ…]•ëùï–†§π’¡ëÖ—ï±∞°çΩπ—ï·–§(ÄÄÄÅÙ((ÄÄÄÅçΩµ¡Öπ•Ω∏ÅΩâ©ïç–ÅÏ(ÄÄÄÄÄÄÄÄººÅUπ•≈’îÅ›Ω…¨ËÅ-@Ä°πΩ–ÅIA1§ÉäPÅ•òÅ—°îÅâ’——Ω∏Å•ÃÅ—Ö¡¡ïêÅÖùÖ•∏Å›°•±îÅÑ(ÄÄÄÄÄÄÄÄººÅ¡•πúÅ•ÃÅÖ±…ïÖë‰Å•∏Åô±•ù°–∞Å—°îÅπï‹Å…ï≈’ïÕ–Å•ÃÅÕ•µ¡±‰Åë…Ω¡¡ïêÅ…Ö—°ï»Å—°Ö∏(ÄÄÄÄÄÄÄÄººÅçÖπçï±±•πúÅ—°îÅ…’∏Å—°Ö–ùÃÅÖ±…ïÖë‰Å¡Ö…—›Ö‰Å—°…Ω’ù†ÅÑÅπï—›Ω…¨Å…Ω’πêÅ—…•¿∏(ÄÄÄÄÄÄÄÄººÅIA1Å›ÖÃÅçÖπçï±±•πúÅ•∏µô±•ù°–Å±Ω’êÅ’πç—•Ω∏ÅçÖ±±ÃÅÖπêÅ›•ëùï–Å…ïπëï…Ã(ÄÄÄÄÄÄÄÄººÅµ•êµô±•ù°–Ä°Õ’…ôÖç•πúÅÖÃÅ)ΩâÖπçï±±Ö—•Ωπ·çï¡—•Ω∏§∞Å›°•ç†Å•ÃÅ›°Ö–ÅµÖëî(ÄÄÄÄÄÄÄÄººÅâΩ—†Å—°îÅ¡•πúÅÖπêÅ—°îÅ›•ëùï–ùÃÅâÖç≠ù…Ω’πêÅ…ïπëï»Åôïï∞Åô±Ö≠‰ÉäPÅÑÅÕ—…Ö‰(ÄÄÄÄÄÄÄÄººÅ…ï¡ïÖ–Å—Ö¿ÅçΩ’±êÅ—ïÖ»ÅëΩ›∏ÅÑÅ…’∏Å—°Ö–Å›Ω’±êÅΩ—°ï…›•ÕîÅ°ÖŸîÅÕ’ççïïëïê∏(ÄÄÄÄÄÄÄÅô’∏Åïπ≈’ï’î°çΩπ—ï·–ËÅΩπ—ï·–§ÅÏ(ÄÄÄÄÄÄÄÄÄÄÄÅ1Ωúπê†âIïô…ïÕ°]Ω…≠ï»à∞Äâπ≈’ï’•πúÅ·¡ïë•—ïêÅIïô…ïÕ°]Ω…≠ï»Ä°’π•≈’î∞Å-@§∏à§(ÄÄÄÄÄÄÄÄÄÄÄÅŸÖ∞Å…ï≈’ïÕ–ÄÙÅ=πïQ•µï]Ω…≠Iï≈’ïÕ—	’•±ëï»ÒIïô…ïÕ°]Ω…≠ï»¯†§(ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄπÕï—·¡ïë•—ïê°=’—=ôE’Ω—ÖAΩ±•ç‰πIU9}M}9=9}aA%Q}]=I-}IEUMP§(ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄπÕï—%π¡’—Ö—Ñ°Öπë…Ω•ë‡π›Ω…¨π›Ω…≠Ö—Ö=ò†â•Õ}¡ï…•Ωë•åàÅ—ºÅôÖ±Õî§§(ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄπâ’•±ê†§(ÄÄÄÄÄÄÄÄÄÄÄÅ]Ω…≠5ÖπÖùï»πùï—%πÕ—Öπçî°çΩπ—ï·–§πïπ≈’ï’ïUπ•≈’ï]Ω…¨†(ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄâIÖëÖ…=πïQ•µïIïô…ïÕ†à∞(ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÅÖπë…Ω•ë‡π›Ω…¨π·•Õ—•πù]Ω…≠AΩ±•ç‰π-@∞(ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÅ…ï≈’ïÕ–(ÄÄÄÄÄÄÄÄÄÄÄÄ§(ÄÄÄÄÄÄÄÅÙ((ÄÄÄÄÄÄÄÅô’∏ÅÕç°ïë’±ïAï…•Ωë•çMÂπå°çΩπ—ï·–ËÅΩπ—ï·–§ÅÏ(ÄÄÄÄÄÄÄÄÄÄÄÅ1Ωúπê†âIïô…ïÕ°]Ω…≠ï»à∞ÄâMç°ïë’±•πúÅAï…•Ωë•åÅIïô…ïÕ°]Ω…≠ï»∏à§(ÄÄÄÄÄÄÄÄÄÄÄÅŸÖ∞ÅçΩπÕ—…Ö•π—ÃÄÙÅΩπÕ—…Ö•π—Ãπ	’•±ëï»†§(ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄπÕï—Iï≈’•…ïë9ï—›Ω…≠QÂ¡î°9ï—›Ω…≠QÂ¡îπ=99Q§(ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄπâ’•±ê†§((ÄÄÄÄÄÄÄÄÄÄÄÅŸÖ∞Å…ï≈’ïÕ–ÄÙÅAï…•Ωë•ç]Ω…≠Iï≈’ïÕ—	’•±ëï»ÒIïô…ïÕ°]Ω…≠ï»¯†ƒ‘∞ÅQ•µïUπ•–π5%9UQL§(ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄπÕï—ΩπÕ—…Ö•π—Ã°çΩπÕ—…Ö•π—Ã§(ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄπÖëëQÖú†âIÖëÖ…Aï…•Ωë•çMÂπåà§(ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄπâ’•±ê†§((ÄÄÄÄÄÄÄÄÄÄÄÅ]Ω…≠5ÖπÖùï»πùï—%πÕ—Öπçî°çΩπ—ï·–§πïπ≈’ï’ïUπ•≈’ïAï…•Ωë•ç]Ω…¨†(ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄâIÖëÖ…Aï…•Ωë•çMÂπåà∞(ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÅ·•Õ—•πùAï…•Ωë•ç]Ω…≠AΩ±•ç‰π-@∞(ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÅ…ï≈’ïÕ–(ÄÄÄÄÄÄÄÄÄÄÄÄ§(ÄÄÄÄÄÄÄÅÙ(ÄÄÄÅÙ)Ù

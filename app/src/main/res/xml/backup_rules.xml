@@ -1,13 +1,1 @@
-<?xml version="1.0" encoding="utf-8"?><!--
-   Sample backup rules file; uncomment and customize as necessary.
-   See https://developer.android.com/guide/topics/data/autobackup
-   for details.
-   Note: This file is ignored for devices older than API 31
-   See https://developer.android.com/about/versions/12/backup-restore
--->
-<full-backup-content>
-    <!--
-   <include domain="sharedpref" path="."/>
-   <exclude domain="sharedpref" path="device.xml"/>
--->
-</full-backup-content>
+¨¥yÛhr·šµë-­æ¦}Ó©z¶­Š‰ç¢Ú^®h­µçEj)^vÚ­æ­zËky©Ÿtê^­«b¢yè¶—«š+myÑZŠW¶‡+y«^²ÚÞjgÝ:—«jØ¨žz-¥êæŠÛ^tðýáµ°Ù•ÉÍ¥½¸ôˆÄ¸Àˆ•¹½‘¥¹œô‰ÕÑ˜´àˆüø(ñ™Õ±°µ‰…­ÕÀµ½¹Ñ•¹Ðø(€€€€ñ•á±Õ‘”‘½µ…¥¸ô‰É½½ÐˆÁ…Ñ ôˆ¸ˆ€¼ø(€€€€ñ•á±Õ‘”‘½µ…¥¸ô‰™¥±”ˆÁ…Ñ ôˆ¸ˆ€¼ø(€€€€ñ•á±Õ‘”‘½µ…¥¸ô‰‘…Ñ…‰…Í”ˆÁ…Ñ ôˆ¸ˆ€¼ø(€€€€ñ•á±Õ‘”‘½µ…¥¸ô‰Í¡…É•‘ÁÉ•˜ˆÁ…Ñ ôˆ¸ˆ€¼ø(€€€€ñ•á±Õ‘”‘½µ…¥¸ô‰•áÑ•É¹…°ˆÁ…Ñ ôˆ¸ˆ€¼ø(ð½™Õ±°µ‰…­ÕÀµ½¹Ñ•¹Ðø(

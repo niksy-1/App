@@ -1,240 +1,1 @@
-package com.nikhil.app
-
-import android.annotation.SuppressLint
-import android.app.NotificationChannel
-import android.app.NotificationManager
-import android.content.Context
-import android.content.Intent
-import android.content.IntentFilter
-import android.content.pm.PackageManager
-import android.net.Uri
-import android.media.AudioAttributes
-import android.os.BatteryManager
-import android.os.Build
-import android.util.Log
-import androidx.core.app.NotificationCompat
-import androidx.core.app.NotificationManagerCompat
-import androidx.core.content.ContextCompat
-import com.google.android.gms.location.LocationServices
-import com.google.android.gms.location.Priority
-import com.google.android.gms.tasks.CancellationTokenSource
-import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.firestore.SetOptions
-import com.google.firebase.messaging.FirebaseMessaging
-import com.google.firebase.messaging.FirebaseMessagingService
-import com.google.firebase.messaging.RemoteMessage
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.runBlocking
-import kotlinx.coroutines.tasks.await
-
-@Suppress("DEPRECATION")
-class RadarMessagingService : FirebaseMessagingService() {
-
-    private val db = FirebaseFirestore.getInstance()
-
-    override fun onMessageReceived(remoteMessage: RemoteMessage) {
-        super.onMessageReceived(remoteMessage)
-
-        Log.d("RadarService", "onMessageReceived triggered at ${System.currentTimeMillis()}. Data: ${remoteMessage.data}")
-
-        val action = remoteMessage.data["action"]
-        when (action) {
-            "SEND_LOCATION" -> {
-                Log.d("RadarService", "Action 'SEND_LOCATION' identified. Starting fetch...")
-                fetchAndUploadLocation()
-            }
-            "REMIND_CHARGE" -> {
-                Log.d("RadarService", "Action 'REMIND_CHARGE' identified. Showing alert...")
-                val message = remoteMessage.data["message"]?.takeIf { it.isNotBlank() }
-                    ?: "Please plug in your phone ðŸ¥º"
-                showChargeReminderNotification(message)
-            }
-            else -> {
-                Log.d("RadarService", "Action not recognized or missing: $action")
-            }
-        }
-    }
-
-    // High-priority, heads-up notification on a dedicated alerts channel. Runs
-    // synchronously (no goAsync needed) â€” posting a notification is a fast local
-    // call, unlike fetchAndUploadLocation()'s network round trip.
-    private fun showChargeReminderNotification(message: String) {
-        val channelId = "radar_alerts_v3" // Updated ID to force system to register new sound settings
-        val soundUri = Uri.parse("android.resource://${packageName}/${R.raw.strum}")
-
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            val audioAttributes = AudioAttributes.Builder()
-                .setContentType(AudioAttributes.CONTENT_TYPE_SONIFICATION)
-                .setUsage(AudioAttributes.USAGE_NOTIFICATION)
-                .build()
-
-            val channel = NotificationChannel(
-                channelId,
-                "Radar Alerts",
-                NotificationManager.IMPORTANCE_HIGH // required for heads-up display
-            ).apply {
-                description = "Nudges to plug in your phone, etc."
-                setSound(soundUri, audioAttributes)
-                enableVibration(true)
-            }
-            val notificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
-            notificationManager.createNotificationChannel(channel)
-        }
-
-        // POST_NOTIFICATIONS is a runtime permission on API 33+. If the user hasn't
-        // granted it, NotificationManagerCompat.notify() would either throw or
-        // silently drop the notification depending on OS version â€” check first and
-        // just log rather than crash the FCM callback.
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU &&
-            ContextCompat.checkSelfPermission(this, android.Manifest.permission.POST_NOTIFICATIONS)
-            != PackageManager.PERMISSION_GRANTED
-        ) {
-            Log.w("RadarService", "POST_NOTIFICATIONS not granted â€” cannot show charge reminder.")
-            return
-        }
-
-        val notification = NotificationCompat.Builder(this, channelId)
-            .setSmallIcon(R.mipmap.ic_launcher)
-            .setContentTitle("Low Battery Reminder âš¡")
-            .setContentText(message)
-            .setStyle(NotificationCompat.BigTextStyle().bigText(message))
-            .setPriority(NotificationCompat.PRIORITY_HIGH) // pre-O heads-up equivalent
-            .setCategory(NotificationCompat.CATEGORY_REMINDER)
-            .setSound(soundUri)
-            .setAutoCancel(true)
-            .build()
-
-        NotificationManagerCompat.from(this).notify(NOTIFICATION_ID_CHARGE_REMINDER, notification)
-    }
-
-    @SuppressLint("MissingPermission")
-    private fun fetchAndUploadLocation() {
-        // NOTE: goAsync() is a BroadcastReceiver API, not a Service one â€” it doesn't
-        // exist on FirebaseMessagingService, which extends Service. The FCM SDK
-        // already invokes onMessageReceived on a background thread it owns (not the
-        // main thread), so instead of firing an unscoped coroutine and returning
-        // immediately, we block that worker thread with runBlocking until the work
-        // finishes. That keeps the service (and process) alive for the duration
-        // without needing any extra lifecycle API.
-        val appContext = applicationContext
-        val fusedLocationClient = LocationServices.getFusedLocationProviderClient(appContext)
-        val startTime = System.currentTimeMillis()
-
-        fun elapsed() = "${System.currentTimeMillis() - startTime}ms"
-
-        runBlocking(Dispatchers.IO) {
-            try {
-                if (ContextCompat.checkSelfPermission(appContext, android.Manifest.permission.ACCESS_FINE_LOCATION)
-                    != PackageManager.PERMISSION_GRANTED
-                ) {
-                    Log.e("RadarService", "[${elapsed()}] ACCESS_FINE_LOCATION not granted â€” cannot fetch location.")
-                    return@runBlocking
-                }
-
-                val prefs = appContext.getSharedPreferences("RadarPrefs", Context.MODE_PRIVATE)
-                var myToken = prefs.getString("fcm_token", null)
-
-                if (myToken.isNullOrEmpty()) {
-                    Log.w("RadarService", "[${elapsed()}] FCM token missing from SharedPreferences. Fetching directly from SDK...")
-                    myToken = FirebaseMessaging.getInstance().token.await()
-                    prefs.edit().putString("fcm_token", myToken).apply()
-                    Log.d("RadarService", "[${elapsed()}] FCM token fetched from SDK.")
-                }
-
-                if (myToken.isNullOrEmpty()) {
-                    Log.e("RadarService", "[${elapsed()}] Could not retrieve an FCM token. Aborting Firestore write.")
-                    return@runBlocking
-                }
-
-                // Fast path: lastLocation is typically served from cache in well under
-                // a second, vs. a fresh high-accuracy fix which can take 10-30s+ on a
-                // cold GPS lock. Writing this immediately gives the requester's
-                // Firestore listener something to resolve on right away, mirroring the
-                // same optimization RefreshWorker already uses on the requester side.
-                Log.d("RadarService", "[${elapsed()}] Requesting lastLocation (fast path)...")
-                val lastLoc = fusedLocationClient.lastLocation.await()
-                if (lastLoc != null) {
-                    Log.d("RadarService", "[${elapsed()}] lastLocation available (age unknown to us): " +
-                            "${lastLoc.latitude}, ${lastLoc.longitude}. Writing to Firestore immediately.")
-                    uploadLocation(appContext, myToken, lastLoc, elapsed = { elapsed() })
-                } else {
-                    Log.w("RadarService", "[${elapsed()}] lastLocation was null â€” no cached fix available, waiting on fresh fix only.")
-                }
-
-                // Now get a fresh, high-accuracy fix and overwrite with the better
-                // value once it arrives. This is the slow step â€” logged distinctly so
-                // you can see in logcat exactly how long the GPS fix itself takes.
-                Log.d("RadarService", "[${elapsed()}] Requesting fresh high-accuracy location...")
-                val cts = CancellationTokenSource()
-                val location = fusedLocationClient.getCurrentLocation(
-                    Priority.PRIORITY_HIGH_ACCURACY,
-                    cts.token
-                ).await()
-
-                if (location != null) {
-                    Log.d("RadarService", "[${elapsed()}] Fresh high-accuracy location received: " +
-                            "${location.latitude}, ${location.longitude} (accuracy=${location.accuracy}m). Overwriting Firestore.")
-                    uploadLocation(appContext, myToken, location, elapsed = { elapsed() })
-                    Log.d("RadarService", "[${elapsed()}] Location successfully written to Firestore!")
-                } else {
-                    Log.w("RadarService", "[${elapsed()}] Fresh location fetch returned null. " +
-                            "GPS might be disabled, or no fix available. " +
-                            if (lastLoc != null) "Requester already has the lastLocation fallback written above."
-                            else "No fallback was available either â€” requester's ping will time out.")
-                }
-            } catch (e: Exception) {
-                Log.e("RadarService", "[${elapsed()}] Failed to retrieve or upload location. Exception: ${e.message}", e)
-            }
-        }
-
-        Log.d("RadarService", "[${elapsed()}] fetchAndUploadLocation() finished.")
-    }
-
-    private suspend fun uploadLocation(
-        context: Context,
-        myToken: String,
-        location: android.location.Location,
-        elapsed: () -> String
-    ) {
-        val (batteryPercent, isCharging) = getBatteryInfo(context)
-
-        val payload = hashMapOf(
-            "latitude" to location.latitude,
-            "longitude" to location.longitude,
-            "accuracy" to location.accuracy,
-            "timestamp" to System.currentTimeMillis(),
-            "batteryPercent" to batteryPercent,
-            "isCharging" to isCharging
-        )
-
-        Log.d("RadarService", "[${elapsed()}] Writing to Firestore: locations/$myToken")
-        db.collection("locations")
-            .document(myToken)
-            .set(payload, SetOptions.merge())
-            .await()
-        Log.d("RadarService", "[${elapsed()}] Firestore write confirmed for locations/$myToken")
-    }
-
-    override fun onNewToken(token: String) {
-        super.onNewToken(token)
-        val prefs = getSharedPreferences("RadarPrefs", Context.MODE_PRIVATE)
-        prefs.edit().putString("fcm_token", token).apply()
-    }
-
-    private fun getBatteryInfo(context: Context): Pair<Int, Boolean> {
-        val batteryStatus: Intent? = context.registerReceiver(null, IntentFilter(Intent.ACTION_BATTERY_CHANGED))
-        val level: Int = batteryStatus?.getIntExtra(BatteryManager.EXTRA_LEVEL, -1) ?: -1
-        val scale: Int = batteryStatus?.getIntExtra(BatteryManager.EXTRA_SCALE, -1) ?: -1
-        val batteryPct = if (scale > 0) (level * 100 / scale.toFloat()).toInt() else -1
-
-        val status: Int = batteryStatus?.getIntExtra(BatteryManager.EXTRA_STATUS, -1) ?: -1
-        val isCharging = status == BatteryManager.BATTERY_STATUS_CHARGING ||
-                status == BatteryManager.BATTERY_STATUS_FULL
-
-        return Pair(batteryPct, isCharging)
-    }
-
-    companion object {
-        private const val NOTIFICATION_ID_CHARGE_REMINDER = 5501
-    }
-}
+¨¥yÛhr·šµë-­æ¦}Ó©z¶­Š‰ç¢Ú^®h­µçEj)^vÚ­æ­zËky©Ÿtê^­«b¢yè¶—«š+myÑZŠW¶‡+y«^²ÚÞjgÝ:—«jØ¨žz-¥êæŠÛ^uÁ…­…”½´¹¹¥­¡¥°¹…ÁÀ()¥µÁ½ÉÐ…¹‘É½¥¹…¹¹½Ñ…Ñ¥½¸¹MÕÁÁÉ•ÍÍ1¥¹Ð)¥µÁ½ÉÐ…¹‘É½¥¹…ÁÀ¹9½Ñ¥™¥…Ñ¥½¹¡…¹¹•°)¥µÁ½ÉÐ…¹‘É½¥¹…ÁÀ¹9½Ñ¥™¥…Ñ¥½¹5…¹…•È)¥µÁ½ÉÐ…¹‘É½¥¹½¹Ñ•¹Ð¹½¹Ñ•áÐ)¥µÁ½ÉÐ…¹‘É½¥¹½¹Ñ•¹Ð¹%¹Ñ•¹Ð)¥µÁ½ÉÐ…¹‘É½¥¹½¹Ñ•¹Ð¹%¹Ñ•¹Ñ¥±Ñ•È)¥µÁ½ÉÐ…¹‘É½¥¹½¹Ñ•¹Ð¹Á´¹A…­…•5…¹…•È)¥µÁ½ÉÐ…¹‘É½¥¹¹•Ð¹UÉ¤)¥µÁ½ÉÐ…¹‘É½¥¹µ•‘¥„¹Õ‘¥½ÑÑÉ¥‰ÕÑ•Ì)¥µÁ½ÉÐ…¹‘É½¥¹½Ì¹	…ÑÑ•Éå5…¹…•È)¥µÁ½ÉÐ…¹‘É½¥¹½Ì¹	Õ¥±)¥µÁ½ÉÐ…¹‘É½¥¹ÕÑ¥°¹1½œ)¥µÁ½ÉÐ…¹‘É½¥‘à¹½É”¹…ÁÀ¹9½Ñ¥™¥…Ñ¥½¹½µÁ…Ð)¥µÁ½ÉÐ…¹‘É½¥‘à¹½É”¹…ÁÀ¹9½Ñ¥™¥…Ñ¥½¹5…¹…•É½µÁ…Ð)¥µÁ½ÉÐ…¹‘É½¥‘à¹½É”¹½¹Ñ•¹Ð¹½¹Ñ•áÑ½µÁ…Ð)¥µÁ½ÉÐ½´¹½½±”¹…¹‘É½¥¹µÌ¹±½…Ñ¥½¸¹1½…Ñ¥½¹M•ÉÙ¥•Ì)¥µÁ½ÉÐ½´¹½½±”¹…¹‘É½¥¹µÌ¹±½…Ñ¥½¸¹AÉ¥½É¥Ñä)¥µÁ½ÉÐ½´¹½½±”¹…¹‘É½¥¹µÌ¹Ñ…Í­Ì¹…¹•±±…Ñ¥½¹Q½­•¹M½ÕÉ”)¥µÁ½ÉÐ½´¹½½±”¹™¥É•‰…Í”¹™¥É•ÍÑ½É”¹¥•±‘Y…±Õ”)¥µÁ½ÉÐ½´¹½½±”¹™¥É•‰…Í”¹™¥É•ÍÑ½É”¹¥É•‰…Í•¥É•ÍÑ½É”)¥µÁ½ÉÐ½´¹½½±”¹™¥É•‰…Í”¹™¥É•ÍÑ½É”¹M•Ñ=ÁÑ¥½¹Ì)¥µÁ½ÉÐ½´¹½½±”¹™¥É•‰…Í”¹µ•ÍÍ…¥¹œ¹¥É•‰…Í•5•ÍÍ…¥¹M•ÉÙ¥”)¥µÁ½ÉÐ½´¹½½±”¹™¥É•‰…Í”¹µ•ÍÍ…¥¹œ¹I•µ½Ñ•5•ÍÍ…”)¥µÁ½ÉÐ­½Ñ±¥¹à¹½É½ÕÑ¥¹•Ì¹¥ÍÁ…Ñ¡•ÉÌ)¥µÁ½ÉÐ­½Ñ±¥¹à¹½É½ÕÑ¥¹•Ì¹ÉÕ¹	±½­¥¹œ)¥µÁ½ÉÐ­½Ñ±¥¹à¹½É½ÕÑ¥¹•Ì¹Ñ…Í­Ì¹…Ý…¥Ð()MÕÁÁÉ•ÍÌ ‰AIQ%=8ˆ¤)±…ÍÌI…‘…É5•ÍÍ…¥¹M•ÉÙ¥”€è¥É•‰…Í•5•ÍÍ…¥¹M•ÉÙ¥” ¤ì((€€€ÁÉ¥Ù…Ñ”Ù…°‘ˆ€ô¥É•‰…Í•¥É•ÍÑ½É”¹•Ñ%¹ÍÑ…¹” ¤((€€€½Ù•ÉÉ¥‘”™Õ¸½¹5•ÍÍ…•I••¥Ù•¡É•µ½Ñ•5•ÍÍ…”èI•µ½Ñ•5•ÍÍ…”¤ì(€€€€€€€ÍÕÁ•È¹½¹5•ÍÍ…•I••¥Ù•¡É•µ½Ñ•5•ÍÍ…”¤((€€€€€€€1½œ¹ ‰I…‘…ÉM•ÉÙ¥”ˆ°€‰½¹5•ÍÍ…•I••¥Ù•ÑÉ¥•É•…Ð€‘íMåÍÑ•´¹ÕÉÉ•¹ÑQ¥µ•5¥±±¥Ì ¥ô¸…Ñ„è€‘íÉ•µ½Ñ•5•ÍÍ…”¹‘…Ñ…ôˆ¤((€€€€€€€€¼¼½Á¥•Ñ½­•¸…±½¹”µÕÍÐ¹•Ù•ÈÑÉ¥•È±½…Ñ¥½¸½±±•Ñ¥½¸¸(€€€€€€€Ù…°…•ÁÑ•€ôÉÕ¹	±½­¥¹œ¡¥ÍÁ…Ñ¡•ÉÌ¹%<¤ì(€€€€€€€€€€€ÑÉäì(€€€€€€€€€€€€€€€Ù…°Õ¥€ôI…‘…ÉM•ÍÍ¥½¸¹Õ¥ ¤(€€€€€€€€€€€€€€€Ù…°Í•¹‘•ÉU¥€ôÉ•µ½Ñ•5•ÍÍ…”¹‘…Ñ…l‰Í•¹‘•ÉU¥‰t(€€€€€€€€€€€€€€€Í•¹‘•ÉU¥€„ô¹Õ±°€˜˜É•µ½Ñ•5•ÍÍ…”¹‘…Ñ…l‰Ñ…É•ÑU¥‰t€ôôÕ¥€˜˜(€€€€€€€€€€€€€€€€€€€Í•¹‘•ÉU¥€ôôI…‘…ÉM•ÍÍ¥½¸¹…ÁÁÉ½Ù•‘A…ÉÑ¹•È ¤(€€€€€€€€€€€ô…Ñ €¡”èá•ÁÑ¥½¸¤ì™…±Í”ô(€€€€€€€ô(€€€€€€€¥˜€ ……•ÁÑ•¤É•ÑÕÉ¸((€€€€€€€Ù…°…Ñ¥½¸€ôÉ•µ½Ñ•5•ÍÍ…”¹‘…Ñ…l‰…Ñ¥½¸‰t(€€€€€€€Ý¡•¸€¡…Ñ¥½¸¤ì(€€€€€€€€€€€€‰M9}1=Q%=8ˆ€´øì(€€€€€€€€€€€€€€€1½œ¹ ‰I…‘…ÉM•ÉÙ¥”ˆ°€‰Ñ¥½¸€M9}1=Q%=8œ¥‘•¹Ñ¥™¥•¸MÑ…ÉÑ¥¹œ™•Ñ ¸¸¸ˆ¤(€€€€€€€€€€€€€€€™•Ñ¡¹‘UÁ±½…‘1½…Ñ¥½¸ ¤(€€€€€€€€€€€ô(€€€€€€€€€€€€‰I5%9}!Iˆ€´øì(€€€€€€€€€€€€€€€1½œ¹ ‰I…‘…ÉM•ÉÙ¥”ˆ°€‰Ñ¥½¸€I5%9}!Iœ¥‘•¹Ñ¥™¥•¸M¡½Ý¥¹œ…±•ÉÐ¸¸¸ˆ¤(€€€€€€€€€€€€€€€Ù…°µ•ÍÍ…”€ôÉ•µ½Ñ•5•ÍÍ…”¹‘…Ñ…l‰µ•ÍÍ…”‰tü¹Ñ…­•%˜ì¥Ð¹¥Í9½Ñ	±…¹¬ ¤ô(€€€€€€€€€€€€€€€€€€€€üè€‰A±•…Í”Á±Õœ¥¸å½ÕÈÁ¡½¹”ƒÂ~–èˆ(€€€€€€€€€€€€€€€Í¡½Ý¡…É•I•µ¥¹‘•É9½Ñ¥™¥…Ñ¥½¸¡µ•ÍÍ…”¤(€€€€€€€€€€€ô(€€€€€€€€€€€•±Í”€´øì(€€€€€€€€€€€€€€€1½œ¹ ‰I…‘…ÉM•ÉÙ¥”ˆ°€‰Ñ¥½¸¹½ÐÉ•½¹¥é•½Èµ¥ÍÍ¥¹œè€‘…Ñ¥½¸ˆ¤(€€€€€€€€€€€ô(€€€€€€€ô(€€€ô((€€€€¼¼!¥ µÁÉ¥½É¥Ñä°¡•…‘ÌµÕÀ¹½Ñ¥™¥…Ñ¥½¸½¸„‘•‘¥…Ñ•…±•ÉÑÌ¡…¹¹•°¸IÕ¹Ì(€€€€¼¼Íå¹¡É½¹½ÕÍ±ä€¡¹¼½Íå¹Œ¹••‘•¤ƒŠPÁ½ÍÑ¥¹œ„¹½Ñ¥™¥…Ñ¥½¸¥Ì„™…ÍÐ±½…°(€€€€¼¼…±°°Õ¹±¥­”™•Ñ¡¹‘UÁ±½…‘1½…Ñ¥½¸ ¤Ì¹•ÑÝ½É¬É½Õ¹ÑÉ¥À¸(€€€ÁÉ¥Ù…Ñ”™Õ¸Í¡½Ý¡…É•I•µ¥¹‘•É9½Ñ¥™¥…Ñ¥½¸¡µ•ÍÍ…”èMÑÉ¥¹œ¤ì(€€€€€€€Ù…°¡…¹¹•±%€ô€‰É…‘…É}…±•ÉÑÍ}ØÌˆ€¼¼UÁ‘…Ñ•%Ñ¼™½É”ÍåÍÑ•´Ñ¼É•¥ÍÑ•È¹•ÜÍ½Õ¹Í•ÑÑ¥¹Ì(€€€€€€€Ù…°Í½Õ¹‘UÉ¤€ôUÉ¤¹Á…ÉÍ” ‰…¹‘É½¥¹É•Í½ÕÉ”è¼¼‘íÁ…­…•9…µ•ô¼‘íH¹É…Ü¹ÍÑÉÕµôˆ¤((€€€€€€€¥˜€¡	Õ¥±¹YIM%=8¹M-}%9P€øô	Õ¥±¹YIM%=9}=L¹<¤ì(€€€€€€€€€€€Ù…°…Õ‘¥½ÑÑÉ¥‰ÕÑ•Ì€ôÕ‘¥½ÑÑÉ¥‰ÕÑ•Ì¹	Õ¥±‘•È ¤(€€€€€€€€€€€€€€€€¹Í•Ñ½¹Ñ•¹ÑQåÁ”¡Õ‘¥½ÑÑÉ¥‰ÕÑ•Ì¹=9Q9Q}QeA}M=9%%Q%=8¤(€€€€€€€€€€€€€€€€¹Í•ÑUÍ…”¡Õ‘¥½ÑÑÉ¥‰ÕÑ•Ì¹UM}9=Q%%Q%=8¤(€€€€€€€€€€€€€€€€¹‰Õ¥± ¤((€€€€€€€€€€€Ù…°¡…¹¹•°€ô9½Ñ¥™¥…Ñ¥½¹¡…¹¹•° (€€€€€€€€€€€€€€€¡…¹¹•±%°(€€€€€€€€€€€€€€€€‰I…‘…È±•ÉÑÌˆ°(€€€€€€€€€€€€€€€9½Ñ¥™¥…Ñ¥½¹5…¹…•È¹%5A=IQ9}!% €¼¼É•ÅÕ¥É•™½È¡•…‘ÌµÕÀ‘¥ÍÁ±…ä(€€€€€€€€€€€€¤¹…ÁÁ±äì(€€€€€€€€€€€€€€€‘•ÍÉ¥ÁÑ¥½¸€ô€‰9Õ‘•ÌÑ¼Á±Õœ¥¸å½ÕÈÁ¡½¹”°•ÑŒ¸ˆ(€€€€€€€€€€€€€€€Í•ÑM½Õ¹¡Í½Õ¹‘UÉ¤°…Õ‘¥½ÑÑÉ¥‰ÕÑ•Ì¤(€€€€€€€€€€€€€€€•¹…‰±•Y¥‰É…Ñ¥½¸¡ÑÉÕ”¤(€€€€€€€€€€€ô(€€€€€€€€€€€Ù…°¹½Ñ¥™¥…Ñ¥½¹5…¹…•È€ô•ÑMåÍÑ•µM•ÉÙ¥”¡½¹Ñ•áÐ¹9=Q%%Q%=9}MIY%¤…Ì9½Ñ¥™¥…Ñ¥½¹5…¹…•È(€€€€€€€€€€€¹½Ñ¥™¥…Ñ¥½¹5…¹…•È¹É•…Ñ•9½Ñ¥™¥…Ñ¥½¹¡…¹¹•°¡¡…¹¹•°¤(€€€€€€€ô((€€€€€€€€¼¼A=MQ}9=Q%%Q%=9L¥Ì„ÉÕ¹Ñ¥µ”Á•Éµ¥ÍÍ¥½¸½¸A$€ÌÌ¬¸%˜Ñ¡”ÕÍ•È¡…Í¸Ð(€€€€€€€€¼¼É…¹Ñ•¥Ð°9½Ñ¥™¥…Ñ¥½¹5…¹…•É½µÁ…Ð¹¹½Ñ¥™ä ¤Ý½Õ±•¥Ñ¡•ÈÑ¡É½Ü½È(€€€€€€€€¼¼Í¥±•¹Ñ±ä‘É½ÀÑ¡”¹½Ñ¥™¥…Ñ¥½¸‘•Á•¹‘¥¹œ½¸=LÙ•ÉÍ¥½¸ƒŠP¡•¬™¥ÉÍÐ…¹(€€€€€€€€¼¼©ÕÍÐ±½œÉ…Ñ¡•ÈÑ¡…¸É…Í Ñ¡”4…±±‰…¬¸(€€€€€€€¥˜€¡	Õ¥±¹YIM%=8¹M-}%9P€øô	Õ¥±¹YIM%=9}=L¹Q%I5%MT€˜˜(€€€€€€€€€€€½¹Ñ•áÑ½µÁ…Ð¹¡•­M•±™A•Éµ¥ÍÍ¥½¸¡Ñ¡¥Ì°…¹‘É½¥¹5…¹¥™•ÍÐ¹Á•Éµ¥ÍÍ¥½¸¹A=MQ}9=Q%%Q%=9L¤(€€€€€€€€€€€€„ôA…­…•5…¹…•È¹AI5%MM%=9}I9Q(€€€€€€€€¤ì(€€€€€€€€€€€1½œ¹Ü ‰I…‘…ÉM•ÉÙ¥”ˆ°€‰A=MQ}9=Q%%Q%=9L¹½ÐÉ…¹Ñ•ƒŠP…¹¹½ÐÍ¡½Ü¡…É”É•µ¥¹‘•È¸ˆ¤(€€€€€€€€€€€É•ÑÕÉ¸(€€€€€€€ô((€€€€€€€Ù…°¹½Ñ¥™¥…Ñ¥½¸€ô9½Ñ¥™¥…Ñ¥½¹½µÁ…Ð¹	Õ¥±‘•È¡Ñ¡¥Ì°¡…¹¹•±%¤(€€€€€€€€€€€€¹Í•ÑMµ…±±%½¸¡H¹µ¥Áµ…À¹¥}±…Õ¹¡•È¤(€€€€€€€€€€€€¹Í•Ñ½¹Ñ•¹ÑQ¥Ñ±” ‰1½Ü	…ÑÑ•ÉäI•µ¥¹‘•ÈƒŠj„ˆ¤(€€€€€€€€€€€€¹Í•Ñ½¹Ñ•¹ÑQ•áÐ¡µ•ÍÍ…”¤(€€€€€€€€€€€€¹Í•ÑMÑå±”¡9½Ñ¥™¥…Ñ¥½¹½µÁ…Ð¹	¥Q•áÑMÑå±” ¤¹‰¥Q•áÐ¡µ•ÍÍ…”¤¤(€€€€€€€€€€€€¹Í•ÑAÉ¥½É¥Ñä¡9½Ñ¥™¥…Ñ¥½¹½µÁ…Ð¹AI%=I%Qe}!% ¤€¼¼ÁÉ”µ<¡•…‘ÌµÕÀ•ÅÕ¥Ù…±•¹Ð(€€€€€€€€€€€€¹Í•Ñ…Ñ•½Éä¡9½Ñ¥™¥…Ñ¥½¹½µÁ…Ð¹Q=Ie}I5%9H¤(€€€€€€€€€€€€¹Í•ÑM½Õ¹¡Í½Õ¹‘UÉ¤¤(€€€€€€€€€€€€¹Í•ÑÕÑ½…¹•°¡ÑÉÕ”¤(€€€€€€€€€€€€¹‰Õ¥± ¤((€€€€€€€9½Ñ¥™¥…Ñ¥½¹5…¹…•É½µÁ…Ð¹™É½´¡Ñ¡¥Ì¤¹¹½Ñ¥™ä¡9=Q%%Q%=9}%}!I}I5%9H°¹½Ñ¥™¥…Ñ¥½¸¤(€€€ô((€€€MÕÁÁÉ•ÍÍ1¥¹Ð ‰5¥ÍÍ¥¹A•Éµ¥ÍÍ¥½¸ˆ¤(€€€ÁÉ¥Ù…Ñ”™Õ¸™•Ñ¡¹‘UÁ±½…‘1½…Ñ¥½¸ ¤ì(€€€€€€€€¼¼9=Qè½Íå¹Œ ¤¥Ì„	É½…‘…ÍÑI••¥Ù•ÈA$°¹½Ð„M•ÉÙ¥”½¹”ƒŠP¥Ð‘½•Í¸Ð(€€€€€€€€¼¼•á¥ÍÐ½¸¥É•‰…Í•5•ÍÍ…¥¹M•ÉÙ¥”°Ý¡¥ •áÑ•¹‘ÌM•ÉÙ¥”¸Q¡”4M,(€€€€€€€€¼¼…±É•…‘ä¥¹Ù½­•Ì½¹5•ÍÍ…•I••¥Ù•½¸„‰…­É½Õ¹Ñ¡É•…¥Ð½Ý¹Ì€¡¹½ÐÑ¡”(€€€€€€€€¼¼µ…¥¸Ñ¡É•…¤°Í¼¥¹ÍÑ•…½˜™¥É¥¹œ…¸Õ¹Í½Á•½É½ÕÑ¥¹”…¹É•ÑÕÉ¹¥¹œ(€€€€€€€€¼¼¥µµ•‘¥…Ñ•±ä°Ý”‰±½¬Ñ¡…ÐÝ½É­•ÈÑ¡É•…Ý¥Ñ ÉÕ¹	±½­¥¹œÕ¹Ñ¥°Ñ¡”Ý½É¬(€€€€€€€€¼¼™¥¹¥Í¡•Ì¸Q¡…Ð­••ÁÌÑ¡”Í•ÉÙ¥”€¡…¹ÁÉ½•ÍÌ¤…±¥Ù”™½ÈÑ¡”‘ÕÉ…Ñ¥½¸(€€€€€€€€¼¼Ý¥Ñ¡½ÕÐ¹••‘¥¹œ…¹ä•áÑÉ„±¥™•å±”A$¸(€€€€€€€Ù…°…ÁÁ½¹Ñ•áÐ€ô…ÁÁ±¥…Ñ¥½¹½¹Ñ•áÐ(€€€€€€€Ù…°™ÕÍ•‘1½…Ñ¥½¹±¥•¹Ð€ô1½…Ñ¥½¹M•ÉÙ¥•Ì¹•ÑÕÍ•‘1½…Ñ¥½¹AÉ½Ù¥‘•É±¥•¹Ð¡…ÁÁ½¹Ñ•áÐ¤(€€€€€€€Ù…°ÍÑ…ÉÑQ¥µ”€ôMåÍÑ•´¹ÕÉÉ•¹ÑQ¥µ•5¥±±¥Ì ¤((€€€€€€€™Õ¸•±…ÁÍ• ¤€ô€ˆ‘íMåÍÑ•´¹ÕÉÉ•¹ÑQ¥µ•5¥±±¥Ì ¤€´ÍÑ…ÉÑQ¥µ•õµÌˆ((€€€€€€€ÉÕ¹	±½­¥¹œ¡¥ÍÁ…Ñ¡•ÉÌ¹%<¤ì(€€€€€€€€€€€ÑÉäì(€€€€€€€€€€€€€€€¥˜€¡½¹Ñ•áÑ½µÁ…Ð¹¡•­M•±™A•Éµ¥ÍÍ¥½¸¡…ÁÁ½¹Ñ•áÐ°…¹‘É½¥¹5…¹¥™•ÍÐ¹Á•Éµ¥ÍÍ¥½¸¹MM}%9}1=Q%=8¤(€€€€€€€€€€€€€€€€€€€€„ôA…­…•5…¹…•È¹AI5%MM%=9}I9Q(€€€€€€€€€€€€€€€€¤ì(€€€€€€€€€€€€€€€€€€€1½œ¹” ‰I…‘…ÉM•ÉÙ¥”ˆ°€‰l‘í•±…ÁÍ• ¥õtMM}%9}1=Q%=8¹½ÐÉ…¹Ñ•ƒŠP…¹¹½Ð™•Ñ ±½…Ñ¥½¸¸ˆ¤(€€€€€€€€€€€€€€€€€€€É•ÑÕÉ¹ÉÕ¹	±½­¥¹œ(€€€€€€€€€€€€€€€ô((€€€€€€€€€€€€€€€Ù…°½Ý¹•ÉU¥€ôI…‘…ÉM•ÍÍ¥½¸¹Õ¥ ¤((€€€€€€€€€€€€€€€€¼¼…ÍÐÁ…Ñ è±…ÍÑ1½…Ñ¥½¸¥ÌÑåÁ¥…±±äÍ•ÉÙ•™É½´…¡”¥¸Ý•±°Õ¹‘•È(€€€€€€€€€€€€€€€€¼¼„Í•½¹°ÙÌ¸„™É•Í ¡¥ µ…ÕÉ…ä™¥àÝ¡¥ …¸Ñ…­”€ÄÀ´ÌÁÌ¬½¸„(€€€€€€€€€€€€€€€€¼¼½±AL±½¬¸]É¥Ñ¥¹œÑ¡¥Ì¥µµ•‘¥…Ñ•±ä¥Ù•ÌÑ¡”É•ÅÕ•ÍÑ•ÈÌ(€€€€€€€€€€€€€€€€¼¼¥É•ÍÑ½É”±¥ÍÑ•¹•ÈÍ½µ•Ñ¡¥¹œÑ¼É•Í½±Ù”½¸É¥¡Ð…Ý…ä°µ¥ÉÉ½É¥¹œÑ¡”(€€€€€€€€€€€€€€€€¼¼Í…µ”½ÁÑ¥µ¥é…Ñ¥½¸I•™É•Í¡]½É­•È…±É•…‘äÕÍ•Ì½¸Ñ¡”É•ÅÕ•ÍÑ•ÈÍ¥‘”¸(€€€€€€€€€€€€€€€1½œ¹ ‰I…‘…ÉM•ÉÙ¥”ˆ°€‰l‘í•±…ÁÍ• ¥õtI•ÅÕ•ÍÑ¥¹œ±…ÍÑ1½…Ñ¥½¸€¡™…ÍÐÁ…Ñ ¤¸¸¸ˆ¤(€€€€€€€€€€€€€€€Ù…°±…ÍÑ1½Œ€ô™ÕÍ•‘1½…Ñ¥½¹±¥•¹Ð¹±…ÍÑ1½…Ñ¥½¸¹…Ý…¥Ð ¤(€€€€€€€€€€€€€€€¥˜€¡±…ÍÑ1½Œ€„ô¹Õ±°¤ì(€€€€€€€€€€€€€€€€€€€1½œ¹ ‰I…‘…ÉM•ÉÙ¥”ˆ°€‰l‘í•±…ÁÍ• ¥õt±…ÍÑ1½…Ñ¥½¸…Ù…¥±…‰±”€¡…”Õ¹­¹½Ý¸Ñ¼ÕÌ¤è€ˆ€¬(€€€€€€€€€€€€€€€€€€€€€€€€€€€€ˆ‘í±…ÍÑ1½Œ¹±…Ñ¥ÑÕ‘•ô°€‘í±…ÍÑ1½Œ¹±½¹¥ÑÕ‘•ô¸]É¥Ñ¥¹œÑ¼¥É•ÍÑ½É”¥µµ•‘¥…Ñ•±ä¸ˆ¤(€€€€€€€€€€€€€€€€€€€ÕÁ±½…‘1½…Ñ¥½¸¡…ÁÁ½¹Ñ•áÐ°½Ý¹•ÉU¥°±…ÍÑ1½Œ°•±…ÁÍ•€ôì•±…ÁÍ• ¤ô¤(€€€€€€€€€€€€€€€ô•±Í”ì(€€€€€€€€€€€€€€€€€€€1½œ¹Ü ‰I…‘…ÉM•ÉÙ¥”ˆ°€‰l‘í•±…ÁÍ• ¥õt±…ÍÑ1½…Ñ¥½¸Ý…Ì¹Õ±°ƒŠP¹¼…¡•™¥à…Ù…¥±…‰±”°Ý…¥Ñ¥¹œ½¸™É•Í ™¥à½¹±ä¸ˆ¤(€€€€€€€€€€€€€€€ô((€€€€€€€€€€€€€€€€¼¼9½Ü•Ð„™É•Í °¡¥ µ…ÕÉ…ä™¥à…¹½Ù•ÉÝÉ¥Ñ”Ý¥Ñ Ñ¡”‰•ÑÑ•È(€€€€€€€€€€€€€€€€¼¼Ù…±Õ”½¹”¥Ð…ÉÉ¥Ù•Ì¸Q¡¥Ì¥ÌÑ¡”Í±½ÜÍÑ•ÀƒŠP±½•‘¥ÍÑ¥¹Ñ±äÍ¼(€€€€€€€€€€€€€€€€¼¼å½Ô…¸Í•”¥¸±½…Ð•á…Ñ±ä¡½Ü±½¹œÑ¡”AL™¥à¥ÑÍ•±˜Ñ…­•Ì¸(€€€€€€€€€€€€€€€1½œ¹ ‰I…‘…ÉM•ÉÙ¥”ˆ°€‰l‘í•±…ÁÍ• ¥õtI•ÅÕ•ÍÑ¥¹œ™É•Í ¡¥ µ…ÕÉ…ä±½…Ñ¥½¸¸¸¸ˆ¤(€€€€€€€€€€€€€€€Ù…°ÑÌ€ô…¹•±±…Ñ¥½¹Q½­•¹M½ÕÉ” ¤(€€€€€€€€€€€€€€€Ù…°±½…Ñ¥½¸€ô™ÕÍ•‘1½…Ñ¥½¹±¥•¹Ð¹•ÑÕÉÉ•¹Ñ1½…Ñ¥½¸ (€€€€€€€€€€€€€€€€€€€AÉ¥½É¥Ñä¹AI%=I%Qe}!%!}UId°(€€€€€€€€€€€€€€€€€€€ÑÌ¹Ñ½­•¸(€€€€€€€€€€€€€€€€¤¹…Ý…¥Ð ¤((€€€€€€€€€€€€€€€¥˜€¡±½…Ñ¥½¸€„ô¹Õ±°¤ì(€€€€€€€€€€€€€€€€€€€1½œ¹ ‰I…‘…ÉM•ÉÙ¥”ˆ°€‰l‘í•±…ÁÍ• ¥õtÉ•Í ¡¥ µ…ÕÉ…ä±½…Ñ¥½¸É••¥Ù•è€ˆ€¬(€€€€€€€€€€€€€€€€€€€€€€€€€€€€ˆ‘í±½…Ñ¥½¸¹±…Ñ¥ÑÕ‘•ô°€‘í±½…Ñ¥½¸¹±½¹¥ÑÕ‘•ô€¡…ÕÉ…äô‘í±½…Ñ¥½¸¹…ÕÉ…åõ´¤¸=Ù•ÉÝÉ¥Ñ¥¹œ¥É•ÍÑ½É”¸ˆ¤(€€€€€€€€€€€€€€€€€€€ÕÁ±½…‘1½…Ñ¥½¸¡…ÁÁ½¹Ñ•áÐ°½Ý¹•ÉU¥°±½…Ñ¥½¸°•±…ÁÍ•€ôì•±…ÁÍ• ¤ô¤(€€€€€€€€€€€€€€€€€€€1½œ¹ ‰I…‘…ÉM•ÉÙ¥”ˆ°€‰l‘í•±…ÁÍ• ¥õt1½…Ñ¥½¸ÍÕ•ÍÍ™Õ±±äÝÉ¥ÑÑ•¸Ñ¼¥É•ÍÑ½É”„ˆ¤(€€€€€€€€€€€€€€€ô•±Í”ì(€€€€€€€€€€€€€€€€€€€1½œ¹Ü ‰I…‘…ÉM•ÉÙ¥”ˆ°€‰l‘í•±…ÁÍ• ¥õtÉ•Í ±½…Ñ¥½¸™•Ñ É•ÑÕÉ¹•¹Õ±°¸€ˆ€¬(€€€€€€€€€€€€€€€€€€€€€€€€€€€€‰ALµ¥¡Ð‰”‘¥Í…‰±•°½È¹¼™¥à…Ù…¥±…‰±”¸€ˆ€¬(€€€€€€€€€€€€€€€€€€€€€€€€€€€¥˜€¡±…ÍÑ1½Œ€„ô¹Õ±°¤€‰I•ÅÕ•ÍÑ•È…±É•…‘ä¡…ÌÑ¡”±…ÍÑ1½…Ñ¥½¸™…±±‰…¬ÝÉ¥ÑÑ•¸…‰½Ù”¸ˆ(€€€€€€€€€€€€€€€€€€€€€€€€€€€•±Í”€‰9¼™…±±‰…¬Ý…Ì…Ù…¥±…‰±”•¥Ñ¡•ÈƒŠPÉ•ÅÕ•ÍÑ•ÈÌÁ¥¹œÝ¥±°Ñ¥µ”½ÕÐ¸ˆ¤(€€€€€€€€€€€€€€€ô(€€€€€€€€€€€ô…Ñ €¡”èá•ÁÑ¥½¸¤ì(€€€€€€€€€€€€€€€1½œ¹” ‰I…‘…ÉM•ÉÙ¥”ˆ°€‰l‘í•±…ÁÍ• ¥õt…¥±•Ñ¼É•ÑÉ¥•Ù”½ÈÕÁ±½…±½…Ñ¥½¸¸á•ÁÑ¥½¸è€‘í”¹µ•ÍÍ…•ôˆ°”¤(€€€€€€€€€€€ô(€€€€€€€ô((€€€€€€€1½œ¹ ‰I…‘…ÉM•ÉÙ¥”ˆ°€‰l‘í•±…ÁÍ• ¥õt™•Ñ¡¹‘UÁ±½…‘1½…Ñ¥½¸ ¤™¥¹¥Í¡•¸ˆ¤(€€€ô((€€€ÁÉ¥Ù…Ñ”ÍÕÍÁ•¹™Õ¸ÕÁ±½…‘1½…Ñ¥½¸ (€€€€€€€½¹Ñ•áÐè½¹Ñ•áÐ°(€€€€€€€½Ý¹•ÉU¥èMÑÉ¥¹œ°(€€€€€€€±½…Ñ¥½¸è…¹‘É½¥¹±½…Ñ¥½¸¹1½…Ñ¥½¸°(€€€€€€€•±…ÁÍ•è€ ¤€´øMÑÉ¥¹œ(€€€€¤ì(€€€€€€€Ù…°€¡‰…ÑÑ•ÉåA•É•¹Ð°¥Í¡…É¥¹œ¤€ô•Ñ	…ÑÑ•Éå%¹™¼¡½¹Ñ•áÐ¤((€€€€€€€Ù…°Á…å±½…€ô¡…Í¡5…Á=˜ (€€€€€€€€€€€€‰±…Ñ¥ÑÕ‘”ˆÑ¼±½…Ñ¥½¸¹±…Ñ¥ÑÕ‘”°(€€€€€€€€€€€€‰±½¹¥ÑÕ‘”ˆÑ¼±½…Ñ¥½¸¹±½¹¥ÑÕ‘”°(€€€€€€€€€€€€‰…ÕÉ…äˆÑ¼±½…Ñ¥½¸¹…ÕÉ…ä°(€€€€€€€€€€€€‰½Ý¹•ÉU¥ˆÑ¼½Ý¹•ÉU¥°(€€€€€€€€€€€€‰ÕÁ‘…Ñ•‘ÐˆÑ¼¥•±‘Y…±Õ”¹Í•ÉÙ•ÉQ¥µ•ÍÑ…µÀ ¤°(€€€€€€€€€€€€‰Ñ¥µ•ÍÑ…µÀˆÑ¼¥•±‘Y…±Õ”¹Í•ÉÙ•ÉQ¥µ•ÍÑ…µÀ ¤°(€€€€€€€€€€€€‰‰…ÑÑ•ÉåA•É•¹ÐˆÑ¼‰…ÑÑ•ÉåA•É•¹Ð°(€€€€€€€€€€€€‰¥Í¡…É¥¹œˆÑ¼¥Í¡…É¥¹œ(€€€€€€€€¤((€€€€€€€1½œ¹ ‰I…‘…ÉM•ÉÙ¥”ˆ°€‰l‘í•±…ÁÍ• ¥õt]É¥Ñ¥¹œÑ¼¥É•ÍÑ½É”è±½…Ñ¥½¹Ì¼‘½Ý¹•ÉU¥ˆ¤(€€€€€€€‘ˆ¹½±±•Ñ¥½¸ ‰±½…Ñ¥½¹ÍXÈˆ¤(€€€€€€€€€€€€¹‘½Õµ•¹Ð¡½Ý¹•ÉU¥¤(€€€€€€€€€€€€¹Í•Ð¡Á…å±½…°M•Ñ=ÁÑ¥½¹Ì¹µ•É” ¤¤(€€€€€€€€€€€€¹…Ý…¥Ð ¤(€€€€€€€1½œ¹ ‰I…‘…ÉM•ÉÙ¥”ˆ°€‰l‘í•±…ÁÍ• ¥õt¥É•ÍÑ½É”ÝÉ¥Ñ”½¹™¥Éµ•™½È±½…Ñ¥½¹Ì¼‘½Ý¹•ÉU¥ˆ¤(€€€ô((€€€½Ù•ÉÉ¥‘”™Õ¸½¹9•ÝQ½­•¸¡Ñ½­•¸èMÑÉ¥¹œ¤ì(€€€€€€€ÍÕÁ•È¹½¹9•ÝQ½­•¸¡Ñ½­•¸¤(€€€€€€€ÉÕ¹	±½­¥¹œ¡¥ÍÁ…Ñ¡•ÉÌ¹%<¤ì(€€€€€€€€€€€ÑÉäìI…‘…ÉM•ÍÍ¥½¸¹Í…Ù•Q½­•¸¡Ñ½­•¸¤ô(€€€€€€€€€€€…Ñ €¡”èá•ÁÑ¥½¸¤ì1½œ¹Ü ‰I…‘…ÉM•ÉÙ¥”ˆ°€‰Q½­•¸É•¥ÍÑÉ…Ñ¥½¸Ý¥±°É•ÑÉä½¸…ÁÀÍÑ…ÉÑÕÀˆ°”¤ô(€€€€€€€ô(€€€ô((€€€ÁÉ¥Ù…Ñ”™Õ¸•Ñ	…ÑÑ•Éå%¹™¼¡½¹Ñ•áÐè½¹Ñ•áÐ¤èA…¥Èñ%¹Ð°	½½±•…¸øì(€€€€€€€Ù…°‰…ÑÑ•ÉåMÑ…ÑÕÌè%¹Ñ•¹Ðü€ô½¹Ñ•áÐ¹É•¥ÍÑ•ÉI••¥Ù•È¡¹Õ±°°%¹Ñ•¹Ñ¥±Ñ•È¡%¹Ñ•¹Ð¹Q%=9}	QQIe}!9¤¤(€€€€€€€Ù…°±•Ù•°è%¹Ð€ô‰…ÑÑ•ÉåMÑ…ÑÕÌü¹•Ñ%¹ÑáÑÉ„¡	…ÑÑ•Éå5…¹…•È¹aQI}1Y0°€´Ä¤€üè€´Ä(€€€€€€€Ù…°Í…±”è%¹Ð€ô‰…ÑÑ•ÉåMÑ…ÑÕÌü¹•Ñ%¹ÑáÑÉ„¡	…ÑÑ•Éå5…¹…•È¹aQI}M1°€´Ä¤€üè€´Ä(€€€€€€€Ù…°‰…ÑÑ•ÉåAÐ€ô¥˜€¡Í…±”€ø€À¤€¡±•Ù•°€¨€ÄÀÀ€¼Í…±”¹Ñ½±½…Ð ¤¤¹Ñ½%¹Ð ¤•±Í”€´Ä((€€€€€€€Ù…°ÍÑ…ÑÕÌè%¹Ð€ô‰…ÑÑ•ÉåMÑ…ÑÕÌü¹•Ñ%¹ÑáÑÉ„¡	…ÑÑ•Éå5…¹…•È¹aQI}MQQUL°€´Ä¤€üè€´Ä(€€€€€€€Ù…°¥Í¡…É¥¹œ€ôÍÑ…ÑÕÌ€ôô	…ÑÑ•Éå5…¹…•È¹	QQIe}MQQUM}!I%9ñð(€€€€€€€€€€€€€€€ÍÑ…ÑÕÌ€ôô	…ÑÑ•Éå5…¹…•È¹	QQIe}MQQUM}U10((€€€€€€€É•ÑÕÉ¸A…¥È¡‰…ÑÑ•ÉåAÐ°¥Í¡…É¥¹œ¤(€€€ô((€€€½µÁ…¹¥½¸½‰©•Ðì(€€€€€€€ÁÉ¥Ù…Ñ”½¹ÍÐÙ…°9=Q%%Q%=9}%}!I}I5%9H€ô€ÔÔÀÄ(€€€ô)
