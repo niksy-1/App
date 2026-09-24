@@ -245,21 +245,30 @@ class RadarWidget : GlanceAppWidget() {
     ) {
         if (note.isEmpty()) return
 
-        LazyColumn(
+        // A one-pixel contrasting inset makes the scrollable area obvious while
+        // keeping the viewport size fixed so the buttons below never move.
+        Box(
             modifier = GlanceModifier
                 .fillMaxWidth()
                 .height(height)
-                .then(modifier),
-            horizontalAlignment = Alignment.CenterHorizontally
+                .background(textColor)
+                .then(modifier)
+                .padding(1.dp)
         ) {
-            items(note.chunked(28)) { chunk ->
-                Text(
-                    text = "\"$chunk\"",
-                    style = TextStyle(fontSize = textSize, color = textColor)
-                )
+            LazyColumn(
+                modifier = GlanceModifier.fillMaxSize(),
+                horizontalAlignment = Alignment.CenterHorizontally
+            ) {
+                items(note.chunked(28)) { chunk ->
+                    Text(
+                        text = "\"$chunk\"",
+                        style = TextStyle(fontSize = textSize, color = textColor)
+                    )
+                }
             }
         }
     }
+
 
     // The widget's largest actual render size (LARGE_RECT = 200dp x 100dp) never needs
     // a source image anywhere near 1000x500px. Decoding at full resolution produces an
