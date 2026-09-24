@@ -26,6 +26,8 @@ import androidx.glance.appwidget.SizeMode
 import androidx.glance.appwidget.action.ActionCallback
 import androidx.glance.appwidget.action.actionRunCallback
 import androidx.glance.appwidget.action.actionStartActivity
+import androidx.glance.appwidget.lazy.LazyColumn
+import androidx.glance.appwidget.lazy.items
 import androidx.glance.appwidget.provideContent
 import androidx.glance.appwidget.updateAll
 import androidx.glance.background
@@ -42,6 +44,7 @@ import androidx.glance.layout.width
 import androidx.glance.text.FontWeight
 import androidx.glance.text.Text
 import androidx.glance.text.TextStyle
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.DpSize
 import androidx.compose.ui.graphics.Color
 import androidx.glance.unit.ColorProvider
@@ -178,13 +181,13 @@ class RadarWidget : GlanceAppWidget() {
                         }
                     }
                     Text(text = lastStatus, style = TextStyle(fontSize = 12.sp, color = secondaryProvider))
-                    if (lastNote.isNotEmpty()) {
-                        Text(
-                            text = "\"$lastNote\"",
-                            style = TextStyle(fontSize = 13.sp, color = primaryProvider),
-                            modifier = GlanceModifier.padding(top = 4.dp)
-                        )
-                    }
+                    NoteViewport(
+                        note = lastNote,
+                        height = 24.dp,
+                        textColor = primaryProvider,
+                        textSize = 13.sp,
+                        modifier = GlanceModifier.padding(top = 4.dp)
+                    )
                     Spacer(modifier = GlanceModifier.height(8.dp))
                     Row(modifier = GlanceModifier.fillMaxWidth()) {
                         Button(text = "Ping Target", onClick = actionRunCallback<RefreshWidgetCallback>(), modifier = GlanceModifier.defaultWeight())
@@ -214,7 +217,14 @@ class RadarWidget : GlanceAppWidget() {
                         )
                     }
                     Text(text = lastStatus, style = TextStyle(fontSize = 10.sp, color = secondaryProvider))
-                    Spacer(modifier = GlanceModifier.height(8.dp))
+                    NoteViewport(
+                        note = lastNote,
+                        height = 20.dp,
+                        textColor = primaryProvider,
+                        textSize = 11.sp,
+                        modifier = GlanceModifier.padding(top = 4.dp)
+                    )
+                    Spacer(modifier = GlanceModifier.height(4.dp))
                     Row(modifier = GlanceModifier.fillMaxWidth()) {
                         Button(text = "Ping", onClick = actionRunCallback<RefreshWidgetCallback>(), modifier = GlanceModifier.defaultWeight())
                         if (targetLat.isNotEmpty()) {
@@ -223,6 +233,33 @@ class RadarWidget : GlanceAppWidget() {
                         }
                     }
                 }
+            }
+        }
+    }
+
+    /** Keeps long notes inside a fixed, scrollable viewport above the buttons. */
+    @Composable
+    private fun NoteViewport(
+        note: String,
+        height: Dp,
+        textColor: ColorProvider,
+        textSize: androidx.compose.ui.unit.TextUnit,
+        modifier: GlanceModifier = GlanceModifier
+    ) {
+        if (note.isEmpty()) return
+
+        LazyColumn(
+            modifier = GlanceModifier
+                .fillMaxWidth()
+                .height(height)
+                .then(modifier),
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            items(note.chunked(28)) { chunk ->
+                Text(
+                    text = "\"$chunk\"",
+                    style = TextStyle(fontSize = textSize, color = textColor)
+                )
             }
         }
     }
