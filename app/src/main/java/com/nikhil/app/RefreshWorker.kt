@@ -76,22 +76,30 @@ class RefreshWorker(
         fun elapsed() = "${System.currentTimeMillis() - workStart}ms"
 
         try {
-            RadarSession.uid()
-            if (RadarSession.approvedPartner() != targetUid) {
-                RadarSession.clearPartnerCache(context)
-                return Result.success()
-            }
-            // 1. Immediate Ping — record the moment we asked, so we can tell a fresh
-            // Firestore write apart from whatever the target's doc already contained.
+            // The requestLocation function verifies mutual approval. Calling
+            // getPairingStatus first added another network round trip to every tap.
+            // Record the moment we asked so a stale location cannot satisfy this ping.
             val pingStartTime = System.currentTimeMillis()
             Log.d("RefreshWorker", "[${elapsed()}] Sending ping to target...")
             val pingSuccess = controller.requestTargetLocation(targetUid)
             Log.d("RefreshWorker", "[${elapsed()}] Ping call returned: success=$pingSuccess")
             if (!pingSuccess) {
                 updateWidgetStatus("Ping failed")
-                RadarWidget().updateAll(context)
+                // Only check approval on failure, to clear private cached data
+                // after revocation without delaying every successful refresh.
+                try {
+                    if (RadarSession.approvedPartner() != targetUid) {
+                        RadarSession.clearPartnerCache(context)
+                        return Result.failure()
+                    }
+                } catch (e: kotlinx.coroutines.CancellationException) {
+                    throw e
+                } catch (e: Exception) {
+                    Log.w("RefreshWorker", "Could not check approval after failed ping", e)
+                }
                 return Result.failure()
             }
+            if (!isPeriodic) updateWidgetStatus("Waiting for target...")
 
             // 2. Wait for target coordinates. minTimestamp guarantees we don't resolve
             // on a stale cached snapshot that predates this ping. 20s gives headroom
@@ -106,7 +114,6 @@ class RefreshWorker(
             if (targetLoc == null) {
                 Log.w("RefreshWorker", "[${elapsed()}] Timed out waiting for target's location update.")
                 updateWidgetStatus("Target timed out")
-                RadarWidget().updateAll(context)
                 return Result.failure()
             }
             Log.d("RefreshWorker", "[${elapsed()}] Target location received: lat=${targetLoc.latitude}, lng=${targetLoc.longitude}")
@@ -128,7 +135,14 @@ class RefreshWorker(
             // leaving the widget on stale status text for that whole stretch reads as
             // stuck/broken even though the ping itself already succeeded.
             Log.d("RefreshWorker", "[${elapsed()}] Requesting own lastLocation...")
-            val lastLoc = fusedClient.lastLocation.await()
+            val lastLoc = try {
+                withTimeoutOrNull(3.seconds) { fusedClient.lastLocation.await() }
+            } catch (e: kotlinx.coroutines.CancellationException) {
+                throw e
+            } catch (e: Exception) {
+                Log.w("RefreshWorker", "Could not get lastLocation; trying a fresh fix", e)
+                null
+            }
             if (lastLoc != null) {
                 Log.d("RefreshWorker", "[${elapsed()}] Using lastLocation as an immediate interim update.")
                 writeLocationPrefs(lastLoc, targetLoc)
@@ -142,7 +156,10 @@ class RefreshWorker(
             // ready. The widget already shows something useful by this point.
             Log.d("RefreshWorker", "[${elapsed()}] Requesting own fresh high-accuracy location...")
             val cts = CancellationTokenSource()
-            val myLoc = fusedClient.getCurrentLocation(Priority.PRIORITY_HIGH_ACCURACY, cts.token).await()
+            val myLoc = withTimeoutOrNull(if (lastLoc == null) 20.seconds else 8.seconds) {
+                fusedClient.getCurrentLocation(Priority.PRIORITY_HIGH_ACCURACY, cts.token).await()
+            }
+            if (myLoc == null) cts.cancel()
 
             var pushed = false
             if (myLoc != null) {
@@ -151,11 +168,13 @@ class RefreshWorker(
                 pushed = true
             } else if (lastLoc == null) {
                 Log.e("RefreshWorker", "[${elapsed()}] Both lastLocation and fresh GPS fix failed.")
-                writeStatusPrefs("GPS fix failed")
+                updateWidgetStatus("GPS fix failed")
             } else {
                 Log.d("RefreshWorker", "[${elapsed()}] Fresh fix was null; keeping the lastLocation fallback already written.")
-                // We already have lastLoc's data written to prefs; push it now since
-                // no fresher fix arrived.
+                // A second tap may have been ignored by unique-work KEEP while this
+                // fix was pending. Redraw the completed state so it never stays on
+                // "Pinging target..." after the worker has finished.
+                writeLocationPrefs(lastLoc, targetLoc)
                 pushed = true
             }
             if (pushed) RadarWidget().updateAll(context)
@@ -168,9 +187,7 @@ class RefreshWorker(
             throw e
         } catch (e: Exception) {
             Log.e("RefreshWorker", "[${elapsed()}] Error during widget refresh", e)
-            RadarSession.clearPartnerCache(context)
-            writeStatusPrefs("Refresh error")
-            RadarWidget().updateAll(context)
+            updateWidgetStatus("Refresh error")
             return Result.failure()
         }
 

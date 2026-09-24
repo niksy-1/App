@@ -1,6 +1,3 @@
-Failed to create stream fd: Operation not permitted
-Failed to create stream fd: Operation not permitted
-Failed to create stream fd: Operation not permitted
 const {test, before, after, beforeEach} = require('node:test');
 const {readFileSync} = require('node:fs');
 const {initializeTestEnvironment, assertSucceeds, assertFails} = require('@firebase/rules-unit-testing');
@@ -88,6 +85,11 @@ test('no public lists, collection group queries or unknown/legacy paths', async 
       await assertFails(getDocFromServer(doc(db(uid), path)));
       await assertFails(setDoc(doc(db(uid), path), {ownerUid: 'alice', isAdmin: true}));
     }
+    await assertFails(getDocFromServer(doc(db(uid), 'pairingRequests/alice/requesters/bob')));
+    await assertFails(setDoc(doc(db(uid), 'pairingRequests/alice/requesters/bob'), {
+      requesterUid: 'bob', targetUid: 'alice', requesterName: 'Bob',
+      createdAt: serverTimestamp(),
+    }));
     await assertFails(getDocs(query(collectionGroup(db(uid), 'entries'), limit(100))));
   }
 });

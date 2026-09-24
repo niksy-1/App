@@ -1,6 +1,3 @@
-Failed to create stream fd: Operation not permitted
-Failed to create stream fd: Operation not permitted
-Failed to create stream fd: Operation not permitted
 # Radar security and rollout
 
 Firebase project: `widget-33ff3`. These are prototype Security Rules validated

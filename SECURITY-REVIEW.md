@@ -1,6 +1,3 @@
-Failed to create stream fd: Operation not permitted
-Failed to create stream fd: Operation not permitted
-Failed to create stream fd: Operation not permitted
 # Firestore security review
 
 Project: `widget-33ff3`. Scope: the new rules, three callable handlers, and matching

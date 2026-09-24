@@ -115,6 +115,8 @@ class RadarWidget : GlanceAppWidget() {
         val targetLat = prefs.getString("last_widget_lat", "") ?: ""
         val targetLng = prefs.getString("last_widget_lng", "") ?: ""
         val lastNote = prefs.getString("last_widget_note", "") ?: ""
+        val isRefreshing = lastStatus == "Pinging target..." ||
+            lastStatus == "Waiting for target..."
         val showDist = prefs.getBoolean("show_distance", true)
         val batteryIcon = if (isCharging) "⚡" else "🔋"
         val batteryText = if (battery != -1) "$batteryIcon $battery%" else ""
@@ -146,7 +148,10 @@ class RadarWidget : GlanceAppWidget() {
                         }
                     }
                     Spacer(modifier = GlanceModifier.width(8.dp))
-                    Button(text = "Ping", onClick = actionRunCallback<RefreshWidgetCallback>())
+                    Button(
+                        text = if (isRefreshing) "Wait…" else "Ping",
+                        onClick = actionRunCallback<RefreshWidgetCallback>()
+                    )
                     if (targetLat.isNotEmpty()) {
                         Spacer(modifier = GlanceModifier.width(4.dp))
                         Button(text = "Maps", onClick = actionStartActivity(getMapsIntent(targetLat, targetLng)))
@@ -188,7 +193,11 @@ class RadarWidget : GlanceAppWidget() {
                     )
                     Spacer(modifier = GlanceModifier.height(8.dp))
                     Row(modifier = GlanceModifier.fillMaxWidth()) {
-                        Button(text = "Ping Target", onClick = actionRunCallback<RefreshWidgetCallback>(), modifier = GlanceModifier.defaultWeight())
+                        Button(
+                            text = if (isRefreshing) "Pinging…" else "Ping Target",
+                            onClick = actionRunCallback<RefreshWidgetCallback>(),
+                            modifier = GlanceModifier.defaultWeight()
+                        )
                         if (targetLat.isNotEmpty()) {
                             Spacer(modifier = GlanceModifier.width(8.dp))
                             Button(text = "Open Maps", onClick = actionStartActivity(getMapsIntent(targetLat, targetLng)), modifier = GlanceModifier.defaultWeight())
@@ -225,7 +234,11 @@ class RadarWidget : GlanceAppWidget() {
                     )
                     Spacer(modifier = GlanceModifier.height(4.dp))
                     Row(modifier = GlanceModifier.fillMaxWidth()) {
-                        Button(text = "Ping", onClick = actionRunCallback<RefreshWidgetCallback>(), modifier = GlanceModifier.defaultWeight())
+                        Button(
+                            text = if (isRefreshing) "Wait…" else "Ping",
+                            onClick = actionRunCallback<RefreshWidgetCallback>(),
+                            modifier = GlanceModifier.defaultWeight()
+                        )
                         if (targetLat.isNotEmpty()) {
                             Spacer(modifier = GlanceModifier.width(4.dp))
                             Button(text = "Maps", onClick = actionStartActivity(getMapsIntent(targetLat, targetLng)), modifier = GlanceModifier.defaultWeight())
@@ -328,19 +341,17 @@ class RefreshWidgetCallback : ActionCallback {
         val targetUid = prefs.getString("PARTNER_UID", "") ?: ""
 
         if (targetUid.isEmpty()) {
-            Log.w("RadarWidget", "No partner token found.")
+            Log.w("RadarWidget", "No connected partner found.")
             prefs.edit { putString("last_widget_status", "No target saved") }
-            RadarWidget().updateAll(context)
+            RadarWidget().update(context, glanceId)
             return
         }
 
-        // 1. Immediate UI update for feedback
+        // Queue the refresh before composing the widget so the network work can
+        // start while Glance prepares the tapped widget's visual feedback.
         prefs.edit { putString("last_widget_status", "Pinging target...") }
-        RadarWidget().updateAll(context)
-
-        // 2. Trigger Expedited Work for reliability and survival
-        // This starts almost instantly and bypasses OS throttling.
         RefreshWorker.enqueue(context)
+        RadarWidget().update(context, glanceId)
     }
 }
 
@@ -359,7 +370,7 @@ class RemindWidgetCallback : ActionCallback {
         val targetUid = prefs.getString("PARTNER_UID", "") ?: ""
 
         if (targetUid.isEmpty()) {
-            Log.w("RadarWidget", "No partner token found; can't send reminder.")
+            Log.w("RadarWidget", "No connected partner; can't send reminder.")
             prefs.edit { putString("last_widget_status", "No target saved") }
             RadarWidget().updateAll(context)
             return

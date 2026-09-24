@@ -1,6 +1,3 @@
-Failed to create stream fd: Operation not permitted
-Failed to create stream fd: Operation not permitted
-Failed to create stream fd: Operation not permitted
 const {test, before, after, beforeEach} = require('node:test');
 const assert = require('node:assert/strict');
 const admin = require('../functions/node_modules/firebase-admin');
@@ -8,6 +5,23 @@ const {createHandlers} = require('../functions/handlers');
 let app, db, handlers, sent, clock;
 const request = (uid = 'alice', data = {targetUid: 'bob'}) => ({auth: {uid}, data});
 const code = (expected) => (error) => error.code === expected;
+const users = new Map([
+  ['alice', {uid: 'alice', email: 'alice@example.com', displayName: 'Alice'}],
+  ['bob', {uid: 'bob', email: 'bob@example.com', displayName: 'Bob'}],
+  ['carol', {uid: 'carol', email: 'carol@example.com', displayName: 'Carol'}],
+]);
+const auth = {
+  getUser: async (uid) => {
+    const user = users.get(uid);
+    if (!user) throw Object.assign(new Error('Missing user'), {code: 'auth/user-not-found'});
+    return user;
+  },
+  getUserByEmail: async (email) => {
+    const user = [...users.values()].find((entry) => entry.email === email);
+    if (!user) throw Object.assign(new Error('Missing user'), {code: 'auth/user-not-found'});
+    return user;
+  },
+};
 before(() => {
   if (!process.env.FIRESTORE_EMULATOR_HOST) throw new Error('Emulator required.');
   app = admin.initializeApp({projectId: 'demo-radar-security'}, 'security-tests');
@@ -18,7 +32,9 @@ beforeEach(async () => {
   assert.equal(response.ok, true);
   sent = [];
   clock = 100000;
-  handlers = createHandlers(db, {send: async (message) => {sent.push(message); return 'message-id';}}, () => clock);
+  handlers = createHandlers(db,
+      {send: async (message) => {sent.push(message); return 'message-id';}},
+      auth, () => clock);
 });
 after(async () => app?.delete());
 async function pair() {
@@ -40,6 +56,49 @@ test('callables reject raw token targets, self-targets, invalid IDs, and one-sid
   await assert.rejects(handlers.requestLocation(request()), code('permission-denied'));
   assert.deepEqual(await handlers.getPairingStatus(request()), {approved: false});
   assert.equal(sent.length, 0);
+});
+test('email request can be reviewed and accepted without exposing a token', async () => {
+  assert.deepEqual(await handlers.requestPartnerByEmail(
+      request('alice', {email: ' BOB@EXAMPLE.COM '})),
+  {requested: true, partnerName: 'Bob'});
+  const approval = (await db.doc('pairingApprovals/alice').get()).data();
+  assert.equal(approval.partnerUid, 'bob');
+  const incoming = await handlers.getIncomingPairingRequests(request('bob', {}));
+  assert.deepEqual(incoming, {requests: [{requesterUid: 'alice',
+    displayName: 'Alice', email: 'alice@example.com'}]});
+  await handlers.respondToPairingRequest(
+      request('bob', {requesterUid: 'alice', accept: true}));
+  assert.deepEqual(await handlers.getPairingStatus(request()),
+      {approved: true, partnerUid: 'bob'});
+  assert.equal((await db.doc('pairingRequests/bob/requesters/alice').get()).exists, false);
+});
+test('declining a request removes its pending approval', async () => {
+  await handlers.requestPartnerByEmail(request('alice', {email: 'bob@example.com'}));
+  await handlers.respondToPairingRequest(
+      request('bob', {requesterUid: 'alice', accept: false}));
+  assert.equal((await db.doc('pairingApprovals/alice').get()).exists, false);
+  assert.deepEqual(await handlers.getPairingStatus(request()), {approved: false});
+});
+test('email pairing rejects invalid, unknown, self, forged, and stale requests', async () => {
+  for (const email of ['', 'bad', 'x'.repeat(250) + '@x.com']) {
+    await assert.rejects(
+        handlers.requestPartnerByEmail(request('alice', {email})),
+        code('invalid-argument'));
+  }
+  await assert.rejects(
+      handlers.requestPartnerByEmail(request('alice', {email: 'missing@example.com'})),
+      code('not-found'));
+  await assert.rejects(
+      handlers.requestPartnerByEmail(request('alice', {email: 'alice@example.com'})),
+      code('invalid-argument'));
+  await assert.rejects(
+      handlers.respondToPairingRequest(
+          request('bob', {requesterUid: '../alice', accept: true})),
+      code('invalid-argument'));
+  await assert.rejects(
+      handlers.respondToPairingRequest(
+          request('bob', {requesterUid: 'alice', accept: true})),
+      code('not-found'));
 });
 test('approved sender uses server-side token and recipient identity, then rate limit applies', async () => {
   await pair();

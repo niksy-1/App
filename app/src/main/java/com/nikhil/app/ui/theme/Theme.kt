@@ -115,7 +115,7 @@ private fun darkSchemeFor(variant: RadarThemeVariant): ColorScheme = when (varia
 }
 
 // Persistence lives in the same "RadarPrefs" SharedPreferences file the rest
-// of the app already uses (widget background, saved partner token, etc.) so
+// of the app already uses (widget background, saved partner account, etc.) so
 // there's only one prefs file to reason about.
 private const val PREFS_NAME = "RadarPrefs"
 private const val KEY_THEME_VARIANT = "app_theme_variant"

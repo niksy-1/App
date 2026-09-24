@@ -22,7 +22,6 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.foundation.text.selection.SelectionContainer
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material3.*
@@ -35,6 +34,7 @@ import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.foundation.lazy.LazyColumn
@@ -66,29 +66,123 @@ import java.util.Date
 import java.util.Locale
 import java.util.concurrent.TimeUnit
 
-private fun getDisplayName(beaconId: String): String =
-    if (beaconId == FirebaseAuth.getInstance().currentUser?.uid) "Me" else "Partner"
+private fun getDisplayName(beaconId: String): String = when (beaconId) {
+    "VG2S5glfWVbaZd2TxflIMZjcgPz1" -> "Niksy"
+    "6voEdctatob28aCJG2MQAz9SaL82" -> "Miru"
+    else -> if (beaconId == FirebaseAuth.getInstance().currentUser?.uid) "Me" else "Partner"
+}
 
 @Composable
 private fun AuthenticatedRadar(content: @Composable () -> Unit) {
+    val auth = remember { FirebaseAuth.getInstance() }
+    var user by remember { mutableStateOf(auth.currentUser) }
     var ready by remember { mutableStateOf(false) }
     var error by remember { mutableStateOf("") }
     var attempt by remember { mutableIntStateOf(0) }
-    LaunchedEffect(attempt) {
+    DisposableEffect(auth) {
+        val listener = FirebaseAuth.AuthStateListener { user = it.currentUser }
+        auth.addAuthStateListener(listener)
+        onDispose { auth.removeAuthStateListener(listener) }
+    }
+    LaunchedEffect(user?.uid, attempt) {
+        ready = false
         error = ""
+        if (user == null) return@LaunchedEffect
         try {
             RadarSession.registerDevice()
             ready = true
         } catch (e: CancellationException) { throw e }
         catch (e: Exception) { error = "Could not connect securely. Check your connection and retry." }
     }
-    if (ready) content() else Column(
+    if (user == null) {
+        AccountSignIn()
+    } else if (ready) {
+        content()
+    } else Column(
         modifier = Modifier.fillMaxSize().padding(24.dp),
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Text(if (error.isEmpty()) "Connecting securely…" else error)
         if (error.isNotEmpty()) Button(onClick = { attempt++ }) { Text("Retry") }
+    }
+}
+
+@Composable
+private fun AccountSignIn() {
+    val scope = rememberCoroutineScope()
+    var email by remember { mutableStateOf("") }
+    var password by remember { mutableStateOf("") }
+    var busy by remember { mutableStateOf(false) }
+    var message by remember { mutableStateOf("") }
+
+    Column(
+        modifier = Modifier.fillMaxSize().padding(24.dp),
+        verticalArrangement = Arrangement.Center,
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        Text("Sign in to Radar", style = MaterialTheme.typography.headlineMedium)
+        Spacer(Modifier.height(8.dp))
+        Text(
+            "Use your account to keep your notes and partner connection when you change phones or reinstall.",
+            style = MaterialTheme.typography.bodyMedium
+        )
+        Spacer(Modifier.height(24.dp))
+        OutlinedTextField(
+            value = email,
+            onValueChange = { email = it; message = "" },
+            label = { Text("Email") },
+            singleLine = true,
+            modifier = Modifier.fillMaxWidth()
+        )
+        Spacer(Modifier.height(8.dp))
+        OutlinedTextField(
+            value = password,
+            onValueChange = { password = it; message = "" },
+            label = { Text("Password") },
+            singleLine = true,
+            visualTransformation = PasswordVisualTransformation(),
+            modifier = Modifier.fillMaxWidth()
+        )
+        Spacer(Modifier.height(16.dp))
+        Button(
+            onClick = {
+                busy = true
+                scope.launch {
+                    try {
+                        RadarSession.signIn(email, password)
+                    } catch (e: CancellationException) { throw e }
+                    catch (e: Exception) {
+                        message = "Sign-in failed. Check your email and password."
+                    } finally {
+                        busy = false
+                    }
+                }
+            },
+            enabled = !busy && email.isNotBlank() && password.isNotBlank(),
+            modifier = Modifier.fillMaxWidth()
+        ) { Text(if (busy) "Signing in…" else "Sign in") }
+        TextButton(
+            onClick = {
+                busy = true
+                scope.launch {
+                    try {
+                        RadarSession.sendPasswordReset(email)
+                        message = "If this email has an account, a reset link is on its way."
+                    } catch (e: CancellationException) { throw e }
+                    catch (e: Exception) {
+                        message = "Could not send a reset link. Try again later."
+                    } finally {
+                        busy = false
+                    }
+                }
+            },
+            enabled = !busy && email.isNotBlank()
+        ) { Text("Forgot password?") }
+        if (message.isNotEmpty()) {
+            Spacer(Modifier.height(8.dp))
+            Text(message, style = MaterialTheme.typography.bodySmall)
+        }
     }
 }
 
@@ -123,6 +217,7 @@ fun MainNavigationWrapper(
     setThemeVariant: (RadarThemeVariant) -> Unit
 ) {
     val drawerState = rememberDrawerState(initialValue = DrawerValue.Closed)
+    val snackbarHostState = remember { SnackbarHostState() }
     val scope = rememberCoroutineScope()
     val context = LocalContext.current
     val sharedPrefs = context.getSharedPreferences("RadarPrefs", Context.MODE_PRIVATE)
@@ -131,7 +226,8 @@ fun MainNavigationWrapper(
     var approvedPartnerUid by remember { mutableStateOf("") }
     var pairingStatus by remember { mutableStateOf("Checking partner approval…") }
     var pairingBusy by remember { mutableStateOf(false) }
-    var partnerUidInput by remember { mutableStateOf(sharedPrefs.getString("PARTNER_UID", "") ?: "") }
+    var partnerEmailInput by remember { mutableStateOf("") }
+    var incomingRequests by remember { mutableStateOf<List<RadarSession.PairingRequest>>(emptyList()) }
     var myNote by remember { mutableStateOf(sharedPrefs.getString("MY_NOTE", "") ?: "") }
     var saveStatus by remember { mutableStateOf("") }
     var noteStatus by remember { mutableStateOf("") }
@@ -198,14 +294,22 @@ fun MainNavigationWrapper(
         while (true) {
             val partner = try { RadarSession.approvedPartner().orEmpty() }
                 catch (e: CancellationException) { throw e }
-                catch (e: Exception) { "" }
+                catch (e: Exception) {
+                    pairingStatus = "Could not check partner approval. Reconnecting…"
+                    delay(10000)
+                    continue
+                }
             if (approvedPartnerUid != partner) {
                 radarController.stopListening()
                 RadarSession.clearPartnerCache(context)
             }
             approvedPartnerUid = partner
+            sharedPrefs.edit().putString("PARTNER_UID", partner).apply()
             pairingStatus = if (partner.isNotEmpty()) "Both partners approved. Sharing is active."
-                else "Sharing is off until both partners approve each other's Beacon ID."
+                else "Sharing is off until a connection request is accepted."
+            incomingRequests = try { RadarSession.incomingRequests() }
+                catch (e: CancellationException) { throw e }
+                catch (e: Exception) { incomingRequests }
             delay(10000)
         }
     }
@@ -255,45 +359,93 @@ fun MainNavigationWrapper(
                     Spacer(modifier = Modifier.height(16.dp))
                     HorizontalDivider()
                     Text("Configuration", style = MaterialTheme.typography.titleMedium)
-                    OutlinedTextField(
-                        value = partnerUidInput,
-                        onValueChange = { partnerUidInput = it; saveStatus = "" },
-                        label = { Text("Target Beacon ID") },
-                        modifier = Modifier.fillMaxWidth(),
-                        singleLine = true
-                    )
-                    Text("Exchange the new Beacon IDs below. Each person must approve the other.")
                     Text(pairingStatus, style = MaterialTheme.typography.bodySmall)
-                    Button(
-                        enabled = !pairingBusy,
-                        onClick = {
-                            val trimmed = partnerUidInput.trim()
-                            pairingBusy = true
-                            scope.launch {
-                                try {
-                                    RadarSession.approve(trimmed)
-                                    approvedPartnerUid = ""
-                                    radarController.stopListening()
-                                    RadarSession.clearPartnerCache(context)
-                                    sharedPrefs.edit().putString("PARTNER_UID", trimmed).apply()
-                                    partnerUidInput = trimmed
-                                    saveStatus = "Approval saved. Your partner must approve your Beacon ID too."
-                                } catch (e: CancellationException) { throw e }
-                                catch (e: Exception) { saveStatus = e.message ?: "Approval failed. Try again." }
-                                finally { pairingBusy = false }
+                    if (approvedPartnerUid.isEmpty()) {
+                        OutlinedTextField(
+                            value = partnerEmailInput,
+                            onValueChange = { partnerEmailInput = it; saveStatus = "" },
+                            label = { Text("Partner email") },
+                            modifier = Modifier.fillMaxWidth(),
+                            singleLine = true
+                        )
+                        Text("Send a private connection request to your partner's Radar account.")
+                        Button(
+                            enabled = !pairingBusy && partnerEmailInput.isNotBlank(),
+                            onClick = {
+                                val email = partnerEmailInput.trim()
+                                pairingBusy = true
+                                scope.launch {
+                                    try {
+                                        val name = RadarSession.requestPartner(email)
+                                        partnerEmailInput = ""
+                                        saveStatus = "Request sent to $name. Sharing starts when they accept."
+                                    } catch (e: CancellationException) { throw e }
+                                    catch (e: Exception) {
+                                        saveStatus = e.message ?: "Could not send request. Try again."
+                                    } finally { pairingBusy = false }
+                                }
+                            },
+                            modifier = Modifier.fillMaxWidth()
+                        ) { Text("Send Connection Request") }
+                    }
+                    incomingRequests.forEach { request ->
+                        Card(modifier = Modifier.fillMaxWidth()) {
+                            Column(
+                                modifier = Modifier.padding(12.dp),
+                                verticalArrangement = Arrangement.spacedBy(8.dp)
+                            ) {
+                                Text("Connection request", style = MaterialTheme.typography.titleSmall)
+                                Text(if (request.email.isNotBlank())
+                                    "${request.displayName} (${request.email})" else request.displayName)
+                                Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                                    Button(
+                                        enabled = !pairingBusy,
+                                        onClick = {
+                                            pairingBusy = true
+                                            scope.launch {
+                                                try {
+                                                    RadarSession.respondToRequest(request.requesterUid, true)
+                                                    incomingRequests = incomingRequests.filterNot {
+                                                        it.requesterUid == request.requesterUid
+                                                    }
+                                                    saveStatus = "Connected to ${request.displayName}."
+                                                } catch (e: CancellationException) { throw e }
+                                                catch (e: Exception) {
+                                                    saveStatus = e.message ?: "Could not accept request."
+                                                } finally { pairingBusy = false }
+                                            }
+                                        }
+                                    ) { Text("Accept") }
+                                    OutlinedButton(
+                                        enabled = !pairingBusy,
+                                        onClick = {
+                                            pairingBusy = true
+                                            scope.launch {
+                                                try {
+                                                    RadarSession.respondToRequest(request.requesterUid, false)
+                                                    incomingRequests = incomingRequests.filterNot {
+                                                        it.requesterUid == request.requesterUid
+                                                    }
+                                                    saveStatus = "Request declined."
+                                                } catch (e: CancellationException) { throw e }
+                                                catch (e: Exception) {
+                                                    saveStatus = e.message ?: "Could not decline request."
+                                                } finally { pairingBusy = false }
+                                            }
+                                        }
+                                    ) { Text("Decline") }
+                                }
                             }
-                        },
-                        modifier = Modifier.fillMaxWidth()
-                    ) { Text("Approve Partner") }
+                        }
+                    }
                     OutlinedButton(
-                        enabled = !pairingBusy,
+                        enabled = !pairingBusy && approvedPartnerUid.isNotEmpty(),
                         onClick = {
                             pairingBusy = true
                             scope.launch {
                                 try {
                                     RadarSession.revoke()
                                     approvedPartnerUid = ""
-                                    partnerUidInput = ""
                                     sharedPrefs.edit().remove("PARTNER_UID").apply()
                                     radarController.stopListening()
                                     RadarSession.clearPartnerCache(context)
@@ -343,16 +495,6 @@ fun MainNavigationWrapper(
                         Text(noteStatus, style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.primary)
                     }
 
-                    Spacer(modifier = Modifier.height(8.dp))
-                    HorizontalDivider()
-                    Text("Your Beacon ID", style = MaterialTheme.typography.titleMedium)
-                    val myName = getDisplayName(myUid)
-                    if (myName.isNotEmpty()) {
-                        Text(text = "Name: $myName", style = MaterialTheme.typography.bodyMedium, color = MaterialTheme.colorScheme.primary)
-                    }
-                    SelectionContainer {
-                        Text(text = myUid, style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.secondary)
-                    }
                     Spacer(modifier = Modifier.height(16.dp))
                     HorizontalDivider()
 
@@ -469,13 +611,17 @@ fun MainNavigationWrapper(
                     Button(
                         onClick = {
                             if (approvedPartnerUid.isEmpty()) {
-                                saveStatus = "Error: Set a Target ID first."
+                                saveStatus = "Connect with your partner first."
                             } else {
-                                // 1. Immediate visual update (reflects any UI/visibility changes instantly)
-                                scope.launch { RadarWidget().updateAll(context) }
-                                // 2. Background data sync (pings target, fetches fresh location)
+                                sharedPrefs.edit()
+                                    .putString("last_widget_status", "Pinging target...")
+                                    .apply()
                                 RefreshWorker.enqueue(context)
-                                scope.launch { drawerState.close() }
+                                scope.launch { RadarWidget().updateAll(context) }
+                                scope.launch {
+                                    drawerState.close()
+                                    snackbarHostState.showSnackbar("Widget refresh started")
+                                }
                             }
                         },
                         modifier = Modifier.fillMaxWidth(),
@@ -488,11 +634,25 @@ fun MainNavigationWrapper(
                         Spacer(Modifier.width(8.dp))
                         Text("Sync Widget Now")
                     }
+                    if (FirebaseAuth.getInstance().currentUser?.isAnonymous == false) {
+                        HorizontalDivider()
+                        TextButton(onClick = {
+                            scope.launch {
+                                RadarSession.clearPartnerCache(context)
+                                sharedPrefs.edit()
+                                    .remove("PARTNER_UID")
+                                    .remove("MY_NOTE")
+                                    .apply()
+                                FirebaseAuth.getInstance().signOut()
+                            }
+                        }) { Text("Switch account") }
+                    }
                 }
             }
         }
     ) {
         Scaffold(
+            snackbarHost = { SnackbarHost(snackbarHostState) },
             topBar = {
                 CenterAlignedTopAppBar(
                     title = { Text(if (currentScreen == Screen.RADAR) "Radar" else "History") },
@@ -571,9 +731,8 @@ fun HistoryScreen(
                         modifier = Modifier.fillMaxWidth(),
                         horizontalArrangement = Arrangement.SpaceBetween
                     ) {
-                        val displayName = getDisplayName(record.senderId)
                         Text(
-                            text = displayName.ifEmpty { if (isMe) "Me" else "Partner" },
+                            text = getDisplayName(record.senderId),
                             style = MaterialTheme.typography.labelLarge,
                             color = if (isMe) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.secondary,
                             fontWeight = FontWeight.Bold
@@ -745,7 +904,7 @@ fun PairingScreen(
             TextButton(
                 onClick = {
                     if (partnerUid.isEmpty()) {
-                        reminderStatus = "Error: Set a Target ID first."
+                        reminderStatus = "Connect with your partner first."
                         return@TextButton
                     }
                     reminderStatus = "Sending..."
@@ -773,7 +932,10 @@ fun PairingScreen(
         Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(8.dp)) {
             Button(
                 onClick = {
-                    if (partnerUid.isEmpty()) { pingStatus = "Error: Open Menu to set Target ID."; return@Button }
+                    if (partnerUid.isEmpty()) {
+                        pingStatus = "Open the menu and connect with your partner first."
+                        return@Button
+                    }
                     pingStatus = "Pinging target phone..."
                     radarController.requestTargetLocation(partnerUid) { success ->
                         if (success) {

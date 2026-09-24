@@ -1,12 +1,12 @@
-Failed to create stream fd: Operation not permitted
-Failed to create stream fd: Operation not permitted
-Failed to create stream fd: Operation not permitted
 rules_version = '2';
 // Version 2 data model. Legacy token-keyed locations and notes are denied.
 // deviceAccounts/{uid}: ownerUid (immutable UID), fcmToken (1..4096 chars),
 //   updatedAt (server timestamp). Only the owner and trusted backend read this.
 // pairingApprovals/{uid}: ownerUid (immutable UID), partnerUid (1..128 chars,
 //   another UID), updatedAt (server timestamp). Each owner approves ONE partner.
+// pairingRequests/{targetUid}/requesters/{requesterUid}: backend-only pending
+//   request containing requesterUid, targetUid, requesterName, and createdAt.
+//   Callable Functions mediate all access; clients are denied by default.
 // locationsV2/{uid}: ownerUid (immutable UID), updatedAt (server timestamp),
 //   optional note (0..100 chars), optional complete location group: latitude
 //   [-90,90], longitude [-180,180], accuracy [0,100000], timestamp (server
