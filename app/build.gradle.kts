@@ -1,6 +1,3 @@
-Failed to create stream fd: Operation not permitted
-Failed to create stream fd: Operation not permitted
-Failed to create stream fd: Operation not permitted
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.compose)
