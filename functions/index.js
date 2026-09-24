@@ -12,3 +12,5 @@ exports.requestPartnerByEmail = onCall(handlers.requestPartnerByEmail);
 exports.getIncomingPairingRequests = onCall(
     handlers.getIncomingPairingRequests);
 exports.respondToPairingRequest = onCall(handlers.respondToPairingRequest);
+exports.postNote = onCall(handlers.postNote);
+exports.editNote = onCall(handlers.editNote);

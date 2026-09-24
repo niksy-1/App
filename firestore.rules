@@ -13,7 +13,10 @@ rules_version = '2';
 //   timestamp), batteryPercent (integer -1..100), isCharging (boolean).
 // pairNotes/{firstUid}/partners/{secondUid}/entries/{id}: firstUid < secondUid;
 //   senderId, targetId (pair UIDs), text (1..100 chars), timestamp (server time).
-//   Notes are immutable. Pair parent paths are namespaces, not stored documents.
+//   Callable Functions create notes and allow sender edits for the first 3 minutes.
+// pairNotes/{firstUid}/partners/{secondUid}/noteGuards/{id}: backend-only
+//   senderId, noteId, lastPostedAt. Blocks matching text for 10 minutes.
+//   Pair parent paths are namespaces, not stored documents.
 // Mutual approval grants live location/history access; revocation ends it.
 service cloud.firestore {
   match /databases/{database}/documents {
@@ -70,16 +73,6 @@ service cloud.firestore {
       return isAuthenticated() && (request.auth.uid == a || request.auth.uid == b)
         && validUid(a) && validUid(b) && a < b && mutuallyApproved(a, b);
     }
-    function isValidNote(data, a, b) {
-      return data.keys().hasAll(['senderId', 'targetId', 'text', 'timestamp'])
-        && data.keys().hasOnly(['senderId', 'targetId', 'text', 'timestamp'])
-        && validUid(data.senderId) && validUid(data.targetId)
-        && data.senderId == request.auth.uid
-        && ((data.senderId == a && data.targetId == b)
-          || (data.senderId == b && data.targetId == a))
-        && data.text is string && data.text.size() > 0 && data.text.size() <= 100
-        && data.timestamp == request.time;
-    }
     match /deviceAccounts/{uid} {
       allow get: if isOwner(uid);
       allow create: if isOwner(uid) && isValidDevice(request.resource.data);
@@ -104,8 +97,7 @@ service cloud.firestore {
     match /pairNotes/{a}/partners/{b}/entries/{noteId} {
       allow get: if pairMember(a, b);
       allow list: if pairMember(a, b) && request.query.limit != null && request.query.limit <= 100;
-      allow create: if pairMember(a, b) && isValidNote(request.resource.data, a, b);
-      allow update, delete: if false;
+      allow create, update, delete: if false;
     }
     match /{document=**} { allow read, write: if false; }
   }

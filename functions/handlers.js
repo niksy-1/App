@@ -1,9 +1,32 @@
 const {HttpsError} = require("firebase-functions/v2/https");
+const {createHash} = require("node:crypto");
 
 const validUid = (uid) => typeof uid === "string" &&
   /^[A-Za-z0-9_-]{1,128}$/.test(uid);
 const validEmail = (email) => typeof email === "string" &&
   email.length <= 254 && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+const duplicateWindowMs = 10 * 60 * 1000;
+const editWindowMs = 3 * 60 * 1000;
+
+/**
+ * Makes repeated text comparable without changing the note shown to users.
+ * @param {string} text The note text.
+ * @return {string} Canonical text.
+ */
+function canonicalNote(text) {
+  return text.trim().replace(/\s+/g, " ").toLowerCase();
+}
+
+/**
+ * Converts a Firestore timestamp or Date to milliseconds.
+ * @param {object} value Stored timestamp.
+ * @return {number} Milliseconds since epoch.
+ */
+function timestampMillis(value) {
+  if (value?.toMillis) return value.toMillis();
+  if (value instanceof Date) return value.getTime();
+  return NaN;
+}
 
 /**
  * Creates handlers with explicit authentication for Admin SDK operations.
@@ -20,6 +43,108 @@ function createHandlers(db, messaging, auth, now = Date.now) {
     }
     return request.auth.uid;
   };
+
+  const noteInput = (request) => {
+    const uid = caller(request);
+    const partnerUid = request.data?.partnerUid;
+    const text = request.data?.text;
+    if (!validUid(partnerUid) || partnerUid === uid ||
+        typeof text !== "string" || text.trim().length < 1 ||
+        text.trim().length > 100) {
+      throw new HttpsError("invalid-argument",
+          "Enter a note of 1–100 characters.");
+    }
+    const pair = [uid, partnerUid].sort();
+    const root = `pairNotes/${pair[0]}/partners/${pair[1]}`;
+    const hash = createHash("sha256")
+        .update(canonicalNote(text), "utf8").digest("hex");
+    return {uid, partnerUid, text: text.trim(), root,
+      guardRef: db.doc(`${root}/noteGuards/${uid}_${hash}`)};
+  };
+
+  const assertApproved = async (tx, uid, partnerUid) => {
+    const own = await tx.get(db.doc(`pairingApprovals/${uid}`));
+    const other = await tx.get(db.doc(`pairingApprovals/${partnerUid}`));
+    if (own.data()?.partnerUid !== partnerUid ||
+        other.data()?.partnerUid !== uid) {
+      throw new HttpsError("permission-denied",
+          "Both partners must approve sharing.");
+    }
+  };
+
+  /**
+   * Posts a note unless the sender posted the same text in the last 10 minutes.
+   * @param {object} request Authenticated callable request.
+   * @return {Promise<object>} Created note ID.
+   */
+  async function postNote(request) {
+    const {uid, partnerUid, text, root, guardRef} = noteInput(request);
+    const entryRef = db.collection(`${root}/entries`).doc();
+    await db.runTransaction(async (tx) => {
+      await assertApproved(tx, uid, partnerUid);
+      const guard = await tx.get(guardRef);
+      const time = now();
+      if (time - timestampMillis(guard.data()?.lastPostedAt) <
+          duplicateWindowMs) {
+        throw new HttpsError("already-exists",
+            "You sent this note in the last 10 minutes.");
+      }
+      const at = new Date(time);
+      tx.create(entryRef, {senderId: uid, targetId: partnerUid,
+        text, timestamp: at});
+      tx.set(guardRef, {senderId: uid, noteId: entryRef.id,
+        lastPostedAt: at});
+      tx.set(db.doc(`locationsV2/${uid}`), {ownerUid: uid, note: text,
+        updatedAt: at}, {merge: true});
+    });
+    return {noteId: entryRef.id};
+  }
+
+  /**
+   * Edits the sender's note during its first three minutes.
+   * @param {object} request Authenticated callable request.
+   * @return {Promise<object>} Edit result.
+   */
+  async function editNote(request) {
+    const {uid, partnerUid, text, root, guardRef} = noteInput(request);
+    const noteId = request.data?.noteId;
+    if (!validUid(noteId)) {
+      throw new HttpsError("invalid-argument", "Choose a valid note.");
+    }
+    const entryRef = db.doc(`${root}/entries/${noteId}`);
+    return db.runTransaction(async (tx) => {
+      await assertApproved(tx, uid, partnerUid);
+      const entry = await tx.get(entryRef);
+      const data = entry.data();
+      if (!data) throw new HttpsError("not-found", "Note not found.");
+      if (data.senderId !== uid || data.targetId !== partnerUid) {
+        throw new HttpsError("permission-denied", "Only the sender can edit.");
+      }
+      const time = now();
+      const age = time - timestampMillis(data.timestamp);
+      if (!Number.isFinite(age) || age < 0 || age >= editWindowMs) {
+        throw new HttpsError("failed-precondition",
+            "Notes can only be edited for 3 minutes after posting.");
+      }
+      if (data.text === text) return {edited: false};
+      const guard = await tx.get(guardRef);
+      if (guard.data()?.noteId !== noteId &&
+          time - timestampMillis(guard.data()?.lastPostedAt) <
+          duplicateWindowMs) {
+        throw new HttpsError("already-exists",
+            "You sent this note in the last 10 minutes.");
+      }
+      const locationRef = db.doc(`locationsV2/${uid}`);
+      const location = await tx.get(locationRef);
+      tx.update(entryRef, {text});
+      tx.set(guardRef, {senderId: uid, noteId,
+        lastPostedAt: new Date(time)});
+      if (location.data()?.note === data.text) {
+        tx.update(locationRef, {note: text, updatedAt: new Date(time)});
+      }
+      return {edited: true};
+    });
+  }
 
   /**
    * @param {object} request Authenticated callable request.
@@ -207,6 +332,8 @@ function createHandlers(db, messaging, auth, now = Date.now) {
 
   return {
     getPairingStatus,
+    postNote,
+    editNote,
     requestPartnerByEmail,
     getIncomingPairingRequests,
     respondToPairingRequest,

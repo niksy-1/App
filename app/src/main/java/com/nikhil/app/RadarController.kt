@@ -2,7 +2,6 @@ package com.nikhil.app
 import android.location.Location
 import android.util.Log
 import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.MetadataChanges
 import com.google.firebase.firestore.ListenerRegistration
 import com.google.firebase.firestore.Query
@@ -167,18 +166,16 @@ class RadarController {
 
     suspend fun updateMyNote(myUid: String, partnerUid: String, note: String) {
         val uid = RadarSession.uid()
-        require(myUid == uid && note.isNotBlank())
-        require(RadarSession.approvedPartner() == partnerUid) { "Both partners must approve sharing first." }
-        val batch = db.batch()
-        batch.set(db.collection("locationsV2").document(uid), mapOf(
-            "ownerUid" to uid, "note" to note.take(100),
-            "updatedAt" to FieldValue.serverTimestamp()
-        ), com.google.firebase.firestore.SetOptions.merge())
-        batch.set(noteCollection(uid, partnerUid).document(), mapOf(
-            "senderId" to uid, "targetId" to partnerUid,
-            "text" to note.take(100), "timestamp" to FieldValue.serverTimestamp()
-        ))
-        batch.commit().await()
+        require(myUid == uid && partnerUid.isNotBlank())
+        functions.getHttpsCallable("postNote")
+            .call(mapOf("partnerUid" to partnerUid, "text" to note.trim())).await()
+    }
+
+    suspend fun editNote(partnerUid: String, noteId: String, text: String) {
+        RadarSession.uid()
+        require(partnerUid.isNotBlank() && noteId.isNotBlank())
+        functions.getHttpsCallable("editNote")
+            .call(mapOf("partnerUid" to partnerUid, "noteId" to noteId, "text" to text.trim())).await()
     }
 
     private fun noteCollection(a: String, b: String): com.google.firebase.firestore.CollectionReference {

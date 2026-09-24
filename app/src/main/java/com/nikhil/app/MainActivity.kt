@@ -59,6 +59,7 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.flow.catch
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.functions.FirebaseFunctionsException
 import java.io.File
 import java.io.FileOutputStream
 import java.text.SimpleDateFormat
@@ -231,6 +232,7 @@ fun MainNavigationWrapper(
     var myNote by remember { mutableStateOf(sharedPrefs.getString("MY_NOTE", "") ?: "") }
     var saveStatus by remember { mutableStateOf("") }
     var noteStatus by remember { mutableStateOf("") }
+    var noteBusy by remember { mutableStateOf(false) }
     var useBgImage by remember { mutableStateOf(sharedPrefs.getBoolean("use_bg_image", false)) }
     var showDistance by remember { mutableStateOf(sharedPrefs.getBoolean("show_distance", true)) }
     val radarController = remember { RadarController() }
@@ -466,12 +468,13 @@ fun MainNavigationWrapper(
                     Text("Your Note", style = MaterialTheme.typography.titleMedium)
                     OutlinedTextField(
                         value = myNote,
-                        onValueChange = { myNote = it; noteStatus = "" },
+                        onValueChange = { myNote = it.take(100); noteStatus = "" },
                         label = { Text("Short note for partner") },
                         modifier = Modifier.fillMaxWidth(),
                         singleLine = true
                     )
                     Button(
+                        enabled = !noteBusy && myNote.isNotBlank() && approvedPartnerUid.isNotEmpty(),
                         onClick = {
                             if (myNote.isBlank()) return@Button
                             val trimmedNote = myNote.trim()
@@ -479,12 +482,19 @@ fun MainNavigationWrapper(
                             sharedPrefs.edit().putString("MY_NOTE", trimmedNote).apply()
                             myNote = trimmedNote
                             noteStatus = "Posting..."
+                            noteBusy = true
                             scope.launch {
                                 try {
                                     radarController.updateMyNote(myUid, trimmedPartner, trimmedNote)
                                     noteStatus = "Note posted!"
                                 } catch (e: CancellationException) { throw e }
-                                catch (e: Exception) { noteStatus = "Note not posted. Check partner approval and connection." }
+                                catch (e: FirebaseFunctionsException) {
+                                    noteStatus = if (e.code == FirebaseFunctionsException.Code.ALREADY_EXISTS)
+                                        "You already sent that note in the last 10 minutes."
+                                    else e.message ?: "Note not posted. Check your connection."
+                                } catch (e: Exception) {
+                                    noteStatus = "Note not posted. Check partner approval and connection."
+                                } finally { noteBusy = false }
                             }
                         },
                         modifier = Modifier.fillMaxWidth()
@@ -705,6 +715,14 @@ fun HistoryScreen(
         radarController.observeNoteHistory(myUid, partnerUid).catch { emit(emptyList()) }
     }
     val history by historyFlow.collectAsState(initial = emptyList())
+    val scope = rememberCoroutineScope()
+    var nowMillis by remember { mutableLongStateOf(System.currentTimeMillis()) }
+    LaunchedEffect(Unit) {
+        while (true) {
+            nowMillis = System.currentTimeMillis()
+            delay(1000)
+        }
+    }
 
     if (history.isEmpty()) {
         Box(modifier = modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
@@ -717,6 +735,12 @@ fun HistoryScreen(
         ) {
             items(history, key = { it.id }) { record ->
                 val isMe = record.senderId == myUid
+                val canEdit = isMe && nowMillis >= record.timestamp &&
+                    nowMillis - record.timestamp < TimeUnit.MINUTES.toMillis(3)
+                var editing by remember(record.id) { mutableStateOf(false) }
+                var draft by remember(record.id) { mutableStateOf(record.text) }
+                var editBusy by remember(record.id) { mutableStateOf(false) }
+                var editStatus by remember(record.id) { mutableStateOf("") }
                 Column(
                     modifier = Modifier
                         .fillMaxWidth()
@@ -748,6 +772,46 @@ fun HistoryScreen(
                         text = record.text,
                         style = MaterialTheme.typography.bodyMedium
                     )
+                    if (editing && canEdit) {
+                        Spacer(modifier = Modifier.height(8.dp))
+                        OutlinedTextField(
+                            value = draft,
+                            onValueChange = { draft = it.take(100); editStatus = "" },
+                            label = { Text("Edit note") },
+                            modifier = Modifier.fillMaxWidth(),
+                            enabled = !editBusy
+                        )
+                        Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                            Button(
+                                enabled = !editBusy && draft.isNotBlank(),
+                                onClick = {
+                                    editBusy = true
+                                    scope.launch {
+                                        try {
+                                            radarController.editNote(partnerUid, record.id, draft)
+                                            editing = false
+                                            editStatus = ""
+                                        } catch (e: CancellationException) { throw e }
+                                        catch (e: Exception) {
+                                            editStatus = e.message ?: "Could not edit this note."
+                                        } finally { editBusy = false }
+                                    }
+                                }
+                            ) { Text("Save") }
+                            OutlinedButton(
+                                enabled = !editBusy,
+                                onClick = { editing = false; editStatus = "" }
+                            ) { Text("Cancel") }
+                        }
+                    } else if (canEdit) {
+                        TextButton(onClick = { draft = record.text; editing = true }) {
+                            Text("Edit (first 3 minutes)")
+                        }
+                    }
+                    if (editStatus.isNotEmpty()) {
+                        Text(editStatus, style = MaterialTheme.typography.bodySmall,
+                            color = MaterialTheme.colorScheme.error)
+                    }
                 }
             }
         }

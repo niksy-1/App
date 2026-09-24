@@ -100,6 +100,78 @@ test('email pairing rejects invalid, unknown, self, forged, and stale requests',
           request('bob', {requesterUid: 'alice', accept: true})),
       code('not-found'));
 });
+test('posting a note updates location and blocks repeated text for 10 minutes', async () => {
+  await pair();
+  const first = await handlers.postNote(request('alice',
+      {partnerUid: 'bob', text: '  Hello  '}));
+  const entry = (await db.doc(`pairNotes/alice/partners/bob/entries/${first.noteId}`).get()).data();
+  assert.equal(entry.text, 'Hello');
+  assert.equal(entry.senderId, 'alice');
+  assert.equal((await db.doc('locationsV2/alice').get()).data().note, 'Hello');
+  await assert.rejects(handlers.postNote(request('alice',
+      {partnerUid: 'bob', text: 'hello'})), code('already-exists'));
+  clock += 1000;
+  await handlers.postNote(request('alice', {partnerUid: 'bob', text: 'Different'}));
+  await assert.rejects(handlers.postNote(request('alice',
+      {partnerUid: 'bob', text: 'hello'})), code('already-exists'));
+  await handlers.postNote(request('bob', {partnerUid: 'alice', text: 'Hello'}));
+  clock += 10 * 60 * 1000;
+  await handlers.postNote(request('alice', {partnerUid: 'bob', text: 'Hello'}));
+});
+test('concurrent duplicate posts create only one note', async () => {
+  await pair();
+  const data = {partnerUid: 'bob', text: 'Same text'};
+  const results = await Promise.allSettled([
+    handlers.postNote(request('alice', data)),
+    handlers.postNote(request('alice', data)),
+  ]);
+  assert.equal(results.filter((result) => result.status === 'fulfilled').length, 1);
+  const entries = await db.collection('pairNotes/alice/partners/bob/entries').get();
+  assert.equal(entries.size, 1);
+});
+test('sender can edit during first 3 minutes and displayed note follows', async () => {
+  await pair();
+  const {noteId} = await handlers.postNote(request('alice',
+      {partnerUid: 'bob', text: 'Original'}));
+  clock += 2 * 60 * 1000;
+  assert.deepEqual(await handlers.editNote(request('alice',
+      {partnerUid: 'bob', noteId, text: 'Fixed'})), {edited: true});
+  const entry = (await db.doc(`pairNotes/alice/partners/bob/entries/${noteId}`).get()).data();
+  assert.equal(entry.text, 'Fixed');
+  assert.equal(entry.timestamp.toMillis(), 100000);
+  assert.equal((await db.doc('locationsV2/alice').get()).data().note, 'Fixed');
+  await assert.rejects(handlers.editNote(request('bob',
+      {partnerUid: 'alice', noteId, text: 'Hijacked'})), code('permission-denied'));
+  clock += 60 * 1000;
+  await assert.rejects(handlers.editNote(request('alice',
+      {partnerUid: 'bob', noteId, text: 'Too late'})), code('failed-precondition'));
+});
+test('editing cannot duplicate another note or bypass pair approval', async () => {
+  await pair();
+  await handlers.postNote(request('alice', {partnerUid: 'bob', text: 'First'}));
+  clock += 1000;
+  const {noteId} = await handlers.postNote(request('alice',
+      {partnerUid: 'bob', text: 'Second'}));
+  await assert.rejects(handlers.editNote(request('alice',
+      {partnerUid: 'bob', noteId, text: 'first'})), code('already-exists'));
+  await db.doc('pairingApprovals/bob').delete();
+  await assert.rejects(handlers.editNote(request('alice',
+      {partnerUid: 'bob', noteId, text: 'Revoke bypass'})), code('permission-denied'));
+  await assert.rejects(handlers.postNote(request('alice',
+      {partnerUid: 'bob', text: 'New'})), code('permission-denied'));
+});
+test('note callables reject malformed and oversized text', async () => {
+  await pair();
+  for (const text of ['', ' ', 'x'.repeat(101), 42]) {
+    await assert.rejects(handlers.postNote(request('alice',
+        {partnerUid: 'bob', text})), code('invalid-argument'));
+  }
+  await assert.rejects(handlers.postNote(request('alice',
+      {partnerUid: '../bob', text: 'Hello'})), code('invalid-argument'));
+  await assert.rejects(handlers.editNote(request('alice',
+      {partnerUid: 'bob', noteId: '../other', text: 'Hello'})),
+  code('invalid-argument'));
+});
 test('approved sender uses server-side token and recipient identity, then rate limit applies', async () => {
   await pair();
   assert.deepEqual(await handlers.getPairingStatus(request()), {approved: true, partnerUid: 'bob'});

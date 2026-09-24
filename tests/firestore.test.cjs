@@ -2,7 +2,7 @@ const {test, before, after, beforeEach} = require('node:test');
 const {readFileSync} = require('node:fs');
 const {initializeTestEnvironment, assertSucceeds, assertFails} = require('@firebase/rules-unit-testing');
 const {doc, collection, collectionGroup, setDoc, updateDoc, deleteDoc, getDocFromServer,
-  getDocs, query, orderBy, limit, serverTimestamp, Timestamp, deleteField, writeBatch,
+  getDocs, query, orderBy, limit, serverTimestamp, Timestamp, deleteField,
   setLogLevel} = require('firebase/firestore');
 setLogLevel('silent');
 let env;
@@ -14,6 +14,8 @@ const approval = (uid, partnerUid) => ({ownerUid: uid, partnerUid, updatedAt: se
 const device = (uid) => ({ownerUid: uid, fcmToken: 'private-token', updatedAt: serverTimestamp()});
 const note = (senderId = 'alice', targetId = 'bob') => ({senderId, targetId, text: 'Hello', timestamp: serverTimestamp()});
 const notesPath = 'pairNotes/alice/partners/bob/entries';
+const seedNote = async (path, data = note()) => env.withSecurityRulesDisabled(
+    async (context) => setDoc(doc(context.firestore(), path), data));
 async function pair() {
   await setDoc(doc(db('alice'), 'pairingApprovals/alice'), approval('alice', 'bob'));
   await setDoc(doc(db('bob'), 'pairingApprovals/bob'), approval('bob', 'alice'));
@@ -157,14 +159,10 @@ test('device and approval validators run on both create and update', async () =>
     }
   }
 });
-test('actual app note batch and pair-scoped history query succeed for either partner', async () => {
+test('backend-created notes remain readable with the pair-scoped history query', async () => {
   await pair();
-  const alice = db('alice');
-  const batch = writeBatch(alice);
-  batch.set(doc(alice, 'locationsV2/alice'), {ownerUid: 'alice', note: 'Hello', updatedAt: serverTimestamp()}, {merge: true});
-  batch.set(doc(alice, `${notesPath}/one`), note());
-  await assertSucceeds(batch.commit());
-  await assertSucceeds(setDoc(doc(db('bob'), `${notesPath}/two`), note('bob', 'alice')));
+  await seedNote(`${notesPath}/one`);
+  await seedNote(`${notesPath}/two`, note('bob', 'alice'));
   for (const uid of ['alice', 'bob']) {
     await assertSucceeds(getDocs(query(collection(db(uid), notesPath), orderBy('timestamp', 'desc'), limit(100))));
     await assertSucceeds(getDocFromServer(doc(db(uid), `${notesPath}/one`)));
@@ -173,7 +171,7 @@ test('actual app note batch and pair-scoped history query succeed for either par
 test('note reads and writes fail without mutual approval, for outsiders and after revocation', async () => {
   await assertFails(setDoc(doc(db('alice'), `${notesPath}/one`), note()));
   await pair();
-  await setDoc(doc(db('alice'), `${notesPath}/one`), note());
+  await seedNote(`${notesPath}/one`);
   for (const uid of [null, 'mallory']) {
     await assertFails(getDocFromServer(doc(db(uid), `${notesPath}/one`)));
     await assertFails(getDocs(query(collection(db(uid), notesPath), limit(100))));
@@ -184,7 +182,7 @@ test('note reads and writes fail without mutual approval, for outsiders and afte
   await assertFails(getDocs(query(collection(db('alice'), notesPath), limit(100))));
   await assertFails(setDoc(doc(db('alice'), `${notesPath}/two`), note()));
 });
-test('notes enforce identities, schema, bounds, timestamp and immutability', async () => {
+test('clients cannot bypass duplicate and edit windows with direct note writes', async () => {
   await pair();
   const ref = doc(db('alice'), `${notesPath}/one`);
   for (const patch of [{senderId: 'bob'}, {targetId: 'mallory'}, {text: ''}, {text: 'x'.repeat(101)},
@@ -194,9 +192,13 @@ test('notes enforce identities, schema, bounds, timestamp and immutability', asy
   for (const key of Object.keys(note())) {
     const data = note(); delete data[key]; await assertFails(setDoc(ref, data));
   }
-  await setDoc(ref, note());
+  await assertFails(setDoc(ref, note()));
+  await seedNote(`${notesPath}/one`);
   await assertFails(updateDoc(ref, {text: 'Edited'}));
   await assertFails(deleteDoc(ref));
+  await assertFails(setDoc(doc(db('alice'),
+      'pairNotes/alice/partners/bob/noteGuards/alice_hash'),
+  {senderId: 'alice', noteId: 'one', lastPostedAt: serverTimestamp()}));
   await assertFails(setDoc(doc(db('alice'), 'pairNotes/bob/partners/alice/entries/one'), note()));
   await assertFails(getDocs(query(collection(db('alice'), notesPath), limit(101))));
   await assertFails(getDocs(collection(db('alice'), notesPath)));
