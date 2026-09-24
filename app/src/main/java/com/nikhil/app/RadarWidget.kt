@@ -182,6 +182,7 @@ class RadarWidget : GlanceAppWidget() {
                         note = lastNote,
                         height = 24.dp,
                         textColor = primaryProvider,
+                        fillColor = if (useBgImage) Color.Black.copy(alpha = 0.55f) else Color(bgColorInt),
                         textSize = 13.sp,
                         modifier = GlanceModifier.padding(top = 4.dp)
                     )
@@ -218,6 +219,7 @@ class RadarWidget : GlanceAppWidget() {
                         note = lastNote,
                         height = 20.dp,
                         textColor = primaryProvider,
+                        fillColor = if (useBgImage) Color.Black.copy(alpha = 0.55f) else Color(bgColorInt),
                         textSize = 11.sp,
                         modifier = GlanceModifier.padding(top = 4.dp)
                     )
@@ -240,6 +242,7 @@ class RadarWidget : GlanceAppWidget() {
         note: String,
         height: Dp,
         textColor: ColorProvider,
+        fillColor: Color,
         textSize: androidx.compose.ui.unit.TextUnit,
         modifier: GlanceModifier = GlanceModifier
     ) {
@@ -256,7 +259,9 @@ class RadarWidget : GlanceAppWidget() {
                 .padding(1.dp)
         ) {
             LazyColumn(
-                modifier = GlanceModifier.fillMaxSize(),
+                modifier = GlanceModifier
+                    .fillMaxSize()
+                    .background(fillColor),
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 items(note.chunked(28)) { chunk ->
