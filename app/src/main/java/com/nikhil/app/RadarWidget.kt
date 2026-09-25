@@ -187,7 +187,6 @@ class RadarWidget : GlanceAppWidget() {
                         note = lastNote,
                         height = 24.dp,
                         textColor = primaryProvider,
-                        fillColor = if (useBgImage) Color.Black.copy(alpha = 0.55f) else Color(bgColorInt),
                         textSize = 13.sp,
                         modifier = GlanceModifier.padding(top = 4.dp)
                     )
@@ -228,7 +227,6 @@ class RadarWidget : GlanceAppWidget() {
                         note = lastNote,
                         height = 20.dp,
                         textColor = primaryProvider,
-                        fillColor = if (useBgImage) Color.Black.copy(alpha = 0.55f) else Color(bgColorInt),
                         textSize = 11.sp,
                         modifier = GlanceModifier.padding(top = 4.dp)
                     )
@@ -255,34 +253,23 @@ class RadarWidget : GlanceAppWidget() {
         note: String,
         height: Dp,
         textColor: ColorProvider,
-        fillColor: Color,
         textSize: androidx.compose.ui.unit.TextUnit,
         modifier: GlanceModifier = GlanceModifier
     ) {
         if (note.isEmpty()) return
 
-        // A one-pixel contrasting inset makes the scrollable area obvious while
-        // keeping the viewport size fixed so the buttons below never move.
-        Box(
+        LazyColumn(
             modifier = GlanceModifier
                 .fillMaxWidth()
                 .height(height)
-                .background(textColor)
-                .then(modifier)
-                .padding(1.dp)
+                .then(modifier),
+            horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            LazyColumn(
-                modifier = GlanceModifier
-                    .fillMaxSize()
-                    .background(fillColor),
-                horizontalAlignment = Alignment.CenterHorizontally
-            ) {
-                items(wrapNoteAtWords("\"$note\"", 28)) { chunk ->
-                    Text(
-                        text = chunk,
-                        style = TextStyle(fontSize = textSize, color = textColor)
-                    )
-                }
+            items(wrapNoteAtWords("\"$note\"", 28)) { chunk ->
+                Text(
+                    text = chunk,
+                    style = TextStyle(fontSize = textSize, color = textColor)
+                )
             }
         }
     }
