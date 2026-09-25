@@ -277,14 +277,33 @@ class RadarWidget : GlanceAppWidget() {
                     .background(fillColor),
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
-                items(note.chunked(28)) { chunk ->
+                items(wrapNoteAtWords("\"$note\"", 28)) { chunk ->
                     Text(
-                        text = "\"$chunk\"",
+                        text = chunk,
                         style = TextStyle(fontSize = textSize, color = textColor)
                     )
                 }
             }
         }
+    }
+
+    /** Makes short scrollable rows without cutting ordinary words in half. */
+    private fun wrapNoteAtWords(note: String, maxRowLength: Int): List<String> {
+        val rows = mutableListOf<String>()
+        for (paragraph in note.lines()) {
+            val row = StringBuilder()
+            for (word in paragraph.trim().split(Regex("\\s+"))) {
+                if (word.isEmpty()) continue
+                if (row.isNotEmpty() && row.length + word.length + 1 > maxRowLength) {
+                    rows.add(row.toString())
+                    row.clear()
+                }
+                if (row.isNotEmpty()) row.append(' ')
+                row.append(word)
+            }
+            rows.add(row.toString())
+        }
+        return rows
     }
 
 

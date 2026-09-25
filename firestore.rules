@@ -8,11 +8,11 @@ rules_version = '2';
 //   request containing requesterUid, targetUid, requesterName, and createdAt.
 //   Callable Functions mediate all access; clients are denied by default.
 // locationsV2/{uid}: ownerUid (immutable UID), updatedAt (server timestamp),
-//   optional note (0..100 chars), optional complete location group: latitude
+//   optional note (0..500 chars), optional complete location group: latitude
 //   [-90,90], longitude [-180,180], accuracy [0,100000], timestamp (server
 //   timestamp), batteryPercent (integer -1..100), isCharging (boolean).
 // pairNotes/{firstUid}/partners/{secondUid}/entries/{id}: firstUid < secondUid;
-//   senderId, targetId (pair UIDs), text (1..100 chars), timestamp (server time).
+//   senderId, targetId (pair UIDs), text (1..500 chars), timestamp (server time).
 //   Callable Functions create notes and allow sender edits for the first 3 minutes.
 // pairNotes/{firstUid}/partners/{secondUid}/noteGuards/{id}: backend-only
 //   senderId, noteId, lastPostedAt. Blocks matching text for 10 minutes.
@@ -59,7 +59,7 @@ service cloud.firestore {
           'longitude', 'accuracy', 'timestamp', 'batteryPercent', 'isCharging'])
         && validUid(data.ownerUid) && uidUnchanged(data)
         && data.updatedAt == request.time
-        && (!('note' in data) || (data.note is string && data.note.size() <= 100))
+        && (!('note' in data) || (data.note is string && data.note.size() <= 500))
         && (!data.keys().hasAny(geoFields()) || (
           data.keys().hasAll(geoFields())
           && data.latitude is number && data.latitude >= -90 && data.latitude <= 90

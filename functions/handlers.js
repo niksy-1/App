@@ -50,9 +50,9 @@ function createHandlers(db, messaging, auth, now = Date.now) {
     const text = request.data?.text;
     if (!validUid(partnerUid) || partnerUid === uid ||
         typeof text !== "string" || text.trim().length < 1 ||
-        text.trim().length > 100) {
+        text.trim().length > 500) {
       throw new HttpsError("invalid-argument",
-          "Enter a note of 1–100 characters.");
+          "Enter a note of 1–500 characters.");
     }
     const pair = [uid, partnerUid].sort();
     const root = `pairNotes/${pair[0]}/partners/${pair[1]}`;

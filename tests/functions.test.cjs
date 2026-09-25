@@ -118,6 +118,19 @@ test('posting a note updates location and blocks repeated text for 10 minutes', 
   clock += 10 * 60 * 1000;
   await handlers.postNote(request('alice', {partnerUid: 'bob', text: 'Hello'}));
 });
+test('posting and editing accept 500 characters but reject 501', async () => {
+  await pair();
+  const longNote = 'a'.repeat(500);
+  const {noteId} = await handlers.postNote(request('alice',
+      {partnerUid: 'bob', text: longNote}));
+  assert.equal((await db.doc('locationsV2/alice').get()).data().note, longNote);
+  await assert.rejects(handlers.postNote(request('alice',
+      {partnerUid: 'bob', text: 'a'.repeat(501)})), code('invalid-argument'));
+  await handlers.editNote(request('alice',
+      {partnerUid: 'bob', noteId, text: 'b'.repeat(500)}));
+  await assert.rejects(handlers.editNote(request('alice',
+      {partnerUid: 'bob', noteId, text: 'b'.repeat(501)})), code('invalid-argument'));
+});
 test('concurrent duplicate posts create only one note', async () => {
   await pair();
   const data = {partnerUid: 'bob', text: 'Same text'};
@@ -162,7 +175,7 @@ test('editing cannot duplicate another note or bypass pair approval', async () =
 });
 test('note callables reject malformed and oversized text', async () => {
   await pair();
-  for (const text of ['', ' ', 'x'.repeat(101), 42]) {
+  for (const text of ['', ' ', 'x'.repeat(501), 42]) {
     await assert.rejects(handlers.postNote(request('alice',
         {partnerUid: 'bob', text})), code('invalid-argument'));
   }

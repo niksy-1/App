@@ -468,10 +468,12 @@ fun MainNavigationWrapper(
                     Text("Your Note", style = MaterialTheme.typography.titleMedium)
                     OutlinedTextField(
                         value = myNote,
-                        onValueChange = { myNote = it.take(100); noteStatus = "" },
-                        label = { Text("Short note for partner") },
+                        onValueChange = { myNote = it.take(500); noteStatus = "" },
+                        label = { Text("Note for partner") },
+                        supportingText = { Text("${myNote.length}/500") },
                         modifier = Modifier.fillMaxWidth(),
-                        singleLine = true
+                        minLines = 2,
+                        maxLines = 4
                     )
                     Button(
                         enabled = !noteBusy && myNote.isNotBlank() && approvedPartnerUid.isNotEmpty(),
@@ -776,9 +778,11 @@ fun HistoryScreen(
                         Spacer(modifier = Modifier.height(8.dp))
                         OutlinedTextField(
                             value = draft,
-                            onValueChange = { draft = it.take(100); editStatus = "" },
+                            onValueChange = { draft = it.take(500); editStatus = "" },
                             label = { Text("Edit note") },
+                            supportingText = { Text("${draft.length}/500") },
                             modifier = Modifier.fillMaxWidth(),
+                            maxLines = 4,
                             enabled = !editBusy
                         )
                         Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {

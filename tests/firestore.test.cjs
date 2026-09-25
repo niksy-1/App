@@ -42,6 +42,13 @@ test('note-only location may be created before the first location fix', async ()
   await assertSucceeds(setDoc(ref, {ownerUid: 'alice', note: 'Hi', updatedAt: serverTimestamp()}));
   await assertSucceeds(setDoc(ref, location('alice'), {merge: true}));
 });
+test('owner can create and update a 500-character note', async () => {
+  const ref = doc(db('alice'), 'locationsV2/alice');
+  await assertSucceeds(setDoc(ref, {ownerUid: 'alice', note: 'a'.repeat(500),
+    updatedAt: serverTimestamp()}));
+  await assertSucceeds(updateDoc(ref, {note: 'b'.repeat(500),
+    updatedAt: serverTimestamp()}));
+});
 test('only mutual approval permits partner location reads; revoke immediately denies reads', async () => {
   await setDoc(doc(db('bob'), 'locationsV2/bob'), location('bob'));
   await assertFails(getDocFromServer(doc(db('alice'), 'locationsV2/bob')));
@@ -99,7 +106,7 @@ const invalidLocation = {
   'ownership hijacking': {ownerUid: 'bob'},
   'privilege escalation': {isAdmin: true},
   'arbitrary schema': {extraData: 'x'},
-  'oversize note': {note: 'x'.repeat(101)},
+  'oversize note': {note: 'x'.repeat(501)},
   '1MB update bypass': {note: 'x'.repeat(1000000)},
   'note type juggling': {note: 4},
   'latitude out of range': {latitude: 91},
