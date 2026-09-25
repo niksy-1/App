@@ -51,6 +51,7 @@ import com.google.android.gms.tasks.CancellationTokenSource
 import androidx.compose.material.icons.filled.Palette
 import com.nikhil.app.ui.theme.RadarTheme
 import com.nikhil.app.ui.theme.RadarThemeVariant
+import com.nikhil.app.ui.theme.NoteTextStyle
 import com.nikhil.app.ui.theme.ThemePickerScreen
 import com.nikhil.app.ui.theme.rememberThemeVariantState
 import com.yalantis.ucrop.UCrop
@@ -471,6 +472,7 @@ fun MainNavigationWrapper(
                         onValueChange = { myNote = it.take(500); noteStatus = "" },
                         label = { Text("Note for partner") },
                         supportingText = { Text("${myNote.length}/500") },
+                        textStyle = NoteTextStyle,
                         modifier = Modifier.fillMaxWidth(),
                         minLines = 2,
                         maxLines = 4
@@ -772,7 +774,7 @@ fun HistoryScreen(
                     Spacer(modifier = Modifier.height(4.dp))
                     Text(
                         text = record.text,
-                        style = MaterialTheme.typography.bodyMedium
+                        style = NoteTextStyle
                     )
                     if (editing && canEdit) {
                         Spacer(modifier = Modifier.height(8.dp))
@@ -781,6 +783,7 @@ fun HistoryScreen(
                             onValueChange = { draft = it.take(500); editStatus = "" },
                             label = { Text("Edit note") },
                             supportingText = { Text("${draft.length}/500") },
+                            textStyle = NoteTextStyle,
                             modifier = Modifier.fillMaxWidth(),
                             maxLines = 4,
                             enabled = !editBusy
@@ -955,7 +958,7 @@ fun PairingScreen(
         if (partnerNote.isNotEmpty()) {
             Text(
                 text = "\"$partnerNote\"",
-                style = MaterialTheme.typography.titleMedium,
+                style = NoteTextStyle,
                 color = MaterialTheme.colorScheme.secondary,
                 textAlign = TextAlign.Center,
                 fontStyle = FontStyle.Italic,

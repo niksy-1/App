@@ -3,6 +3,9 @@ package com.nikhil.app
 import android.content.Context
 import android.content.Intent
 import android.util.Log
+import android.util.TypedValue
+import android.widget.RemoteViews
+import androidx.core.content.ContextCompat
 import androidx.core.content.edit
 import androidx.core.net.toUri
 import androidx.compose.runtime.Composable
@@ -19,6 +22,7 @@ import androidx.glance.LocalSize
 import androidx.glance.action.ActionParameters
 import androidx.glance.appwidget.GlanceAppWidget
 import androidx.glance.appwidget.GlanceAppWidgetReceiver
+import androidx.glance.appwidget.AndroidRemoteViews
 import androidx.glance.appwidget.SizeMode
 import androidx.glance.appwidget.action.ActionCallback
 import androidx.glance.appwidget.action.actionRunCallback
@@ -98,15 +102,14 @@ class RadarWidget : GlanceAppWidget() {
             rootModifier = GlanceModifier.fillMaxSize().background(Color(bgColorInt))
         }
 
-        // ColorProvider(color: Color) is restricted to androidx.glance's own internal
-        // use (@RestrictTo LIBRARY_GROUP) — it compiles from source but fails the
-        // RestrictedApi lint check, which AGP treats as a build error. The public,
-        // sanctioned way to get a ColorProvider for a specific fixed color is via a
-        // color resource: see res/values/colors.xml for widget_text_primary_dark /
-        // widget_text_primary_light / widget_text_secondary_dark /
-        // widget_text_secondary_light (#C97B8C / #7A2E42 / #B8A8B0 / #6B5560).
-        val primaryProvider = ColorProvider(if (isDark) R.color.widget_text_primary_dark else R.color.widget_text_primary_light)
-        val secondaryProvider = ColorProvider(if (isDark) R.color.widget_text_secondary_dark else R.color.widget_text_secondary_light)
+        val noteTextColor = ContextCompat.getColor(
+            context, if (isDark) R.color.widget_text_primary_dark else R.color.widget_text_primary_light
+        )
+        val secondaryTextColor = ContextCompat.getColor(
+            context, if (isDark) R.color.widget_text_secondary_dark else R.color.widget_text_secondary_light
+        )
+        val primaryProvider = ColorProvider(Color(noteTextColor))
+        val secondaryProvider = ColorProvider(Color(secondaryTextColor))
 
         val lastDist = prefs.getString("last_widget_distance", "-- m") ?: "-- m"
         val lastStatus = prefs.getString("last_widget_status", "Standby") ?: "Standby"
@@ -184,10 +187,11 @@ class RadarWidget : GlanceAppWidget() {
                     }
                     Text(text = lastStatus, style = TextStyle(fontSize = 12.sp, color = secondaryProvider))
                     NoteViewport(
+                        context = context,
                         note = lastNote,
                         height = 24.dp,
-                        textColor = primaryProvider,
-                        textSize = 13.sp,
+                        textColor = noteTextColor,
+                        textSizeSp = 18f,
                         modifier = GlanceModifier.padding(top = 4.dp)
                     )
                     Spacer(modifier = GlanceModifier.height(8.dp))
@@ -224,10 +228,11 @@ class RadarWidget : GlanceAppWidget() {
                     }
                     Text(text = lastStatus, style = TextStyle(fontSize = 10.sp, color = secondaryProvider))
                     NoteViewport(
+                        context = context,
                         note = lastNote,
                         height = 20.dp,
-                        textColor = primaryProvider,
-                        textSize = 11.sp,
+                        textColor = noteTextColor,
+                        textSizeSp = 16f,
                         modifier = GlanceModifier.padding(top = 4.dp)
                     )
                     Spacer(modifier = GlanceModifier.height(4.dp))
@@ -250,10 +255,11 @@ class RadarWidget : GlanceAppWidget() {
     /** Keeps long notes inside a fixed, scrollable viewport above the buttons. */
     @Composable
     private fun NoteViewport(
+        context: Context,
         note: String,
         height: Dp,
-        textColor: ColorProvider,
-        textSize: androidx.compose.ui.unit.TextUnit,
+        textColor: Int,
+        textSizeSp: Float,
         modifier: GlanceModifier = GlanceModifier
     ) {
         if (note.isEmpty()) return
@@ -266,10 +272,12 @@ class RadarWidget : GlanceAppWidget() {
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             items(wrapNoteAtWords("\"$note\"", 28)) { chunk ->
-                Text(
-                    text = chunk,
-                    style = TextStyle(fontSize = textSize, color = textColor)
-                )
+                val row = RemoteViews(context.packageName, R.layout.widget_note_row).apply {
+                    setTextViewText(R.id.widget_note_text, chunk)
+                    setTextColor(R.id.widget_note_text, textColor)
+                    setTextViewTextSize(R.id.widget_note_text, TypedValue.COMPLEX_UNIT_SP, textSizeSp)
+                }
+                AndroidRemoteViews(row, modifier = GlanceModifier.fillMaxWidth())
             }
         }
     }
